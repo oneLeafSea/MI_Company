@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="9Qs-zl-FxV" customClass="MainCVC">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XP-Ua-Kf9">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visitPlanning" translatesAutoresizingMaskIntoConstraints="NO" id="iNr-vi-Bzw">
+                                <rect key="frame" x="3" y="2" width="75" height="75"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iNr-vi-Bzw" firstAttribute="leading" secondItem="9XP-Ua-Kf9" secondAttribute="leading" constant="3" id="Adv-j3-NO5"/>
+                            <constraint firstItem="iNr-vi-Bzw" firstAttribute="centerX" secondItem="9XP-Ua-Kf9" secondAttribute="centerX" id="SOv-80-51C"/>
+                            <constraint firstAttribute="bottom" secondItem="iNr-vi-Bzw" secondAttribute="bottom" constant="3" id="fSv-5b-wBi"/>
+                            <constraint firstItem="iNr-vi-Bzw" firstAttribute="top" secondItem="9XP-Ua-Kf9" secondAttribute="top" constant="2" id="zrd-Dj-jUv"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拜访计划" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Vwr-Ip-FzZ">
+                        <rect key="frame" x="0.0" y="80" width="87" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="sdp-29-Tvd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.19393150252525249" green="0.19393150252525249" blue="0.19393150252525249" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="Vwr-Ip-FzZ" firstAttribute="top" secondItem="9XP-Ua-Kf9" secondAttribute="bottom" id="4ea-UF-OSu"/>
+                <constraint firstAttribute="trailing" secondItem="Vwr-Ip-FzZ" secondAttribute="trailing" constant="-7" id="5sB-0Z-62R"/>
+                <constraint firstItem="9XP-Ua-Kf9" firstAttribute="leading" secondItem="9Qs-zl-FxV" secondAttribute="leading" id="97u-1q-LZC"/>
+                <constraint firstItem="9XP-Ua-Kf9" firstAttribute="top" secondItem="9Qs-zl-FxV" secondAttribute="top" id="BrF-kg-bZY"/>
+                <constraint firstAttribute="trailing" secondItem="9XP-Ua-Kf9" secondAttribute="trailing" id="o5F-Hj-1zH"/>
+                <constraint firstAttribute="bottom" secondItem="Vwr-Ip-FzZ" secondAttribute="bottom" id="owu-mH-c7a"/>
+                <constraint firstItem="Vwr-Ip-FzZ" firstAttribute="leading" secondItem="9XP-Ua-Kf9" secondAttribute="leading" id="szp-G4-cgn"/>
+            </constraints>
+            <size key="customSize" width="87" height="95"/>
+            <connections>
+                <outlet property="image" destination="iNr-vi-Bzw" id="NOp-K4-XjC"/>
+                <outlet property="title" destination="Vwr-Ip-FzZ" id="ExR-TV-yLs"/>
+            </connections>
+            <point key="canvasLocation" x="112" y="196"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="visitPlanning" width="70" height="70"/>
+    </resources>
+</document>

@@ -7,6 +7,161 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C40CD07F76162109DF5D2FB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40BE4D5403D93F36B0DF123E /* libPods.a */; };
+		DCD51A6F1A22EB1D00A544B5 /* Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5191B1A22EB1D00A544B5 /* Encrypt.m */; };
+		DCD51A701A22EB1D00A544B5 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5191E1A22EB1D00A544B5 /* NSData+CommonCrypto.m */; };
+		DCD51A711A22EB1D00A544B5 /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519201A22EB1D00A544B5 /* NSDate+Common.m */; };
+		DCD51A721A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519221A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.m */; };
+		DCD51A731A22EB1D00A544B5 /* NSUUID+StringUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519241A22EB1D00A544B5 /* NSUUID+StringUUID.m */; };
+		DCD51A741A22EB1D00A544B5 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519261A22EB1D00A544B5 /* Utils.m */; };
+		DCD51A751A22EB1D00A544B5 /* Dict.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519291A22EB1D00A544B5 /* Dict.m */; };
+		DCD51A761A22EB1D00A544B5 /* DictDb.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5192B1A22EB1D00A544B5 /* DictDb.m */; };
+		DCD51A771A22EB1D00A544B5 /* DictDownloadReq.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5192D1A22EB1D00A544B5 /* DictDownloadReq.m */; };
+		DCD51A781A22EB1D00A544B5 /* dictname.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCD5192E1A22EB1D00A544B5 /* dictname.plist */; };
+		DCD51A791A22EB1D00A544B5 /* DictRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519301A22EB1D00A544B5 /* DictRequest.m */; };
+		DCD51A7A1A22EB1D00A544B5 /* DictsDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519321A22EB1D00A544B5 /* DictsDownloader.m */; };
+		DCD51A7B1A22EB1D00A544B5 /* DictsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519341A22EB1D00A544B5 /* DictsMgr.m */; };
+		DCD51A7C1A22EB1D00A544B5 /* DictsVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519361A22EB1D00A544B5 /* DictsVersion.m */; };
+		DCD51A7D1A22EB1D00A544B5 /* DictsVersionReq.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519381A22EB1D00A544B5 /* DictsVersionReq.m */; };
+		DCD51A7E1A22EB1D00A544B5 /* DictsVersionSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5193A1A22EB1D00A544B5 /* DictsVersionSync.m */; };
+		DCD51A7F1A22EB1D00A544B5 /* DictVersionResp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5193C1A22EB1D00A544B5 /* DictVersionResp.m */; };
+		DCD51A801A22EB1D00A544B5 /* JRBinResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5193F1A22EB1D00A544B5 /* JRBinResponse.m */; };
+		DCD51A811A22EB1D00A544B5 /* JRErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519411A22EB1D00A544B5 /* JRErrorResponse.m */; };
+		DCD51A821A22EB1D00A544B5 /* JRListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519431A22EB1D00A544B5 /* JRListResponse.m */; };
+		DCD51A831A22EB1D00A544B5 /* JRReqest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519451A22EB1D00A544B5 /* JRReqest.m */; };
+		DCD51A841A22EB1D00A544B5 /* JRReqMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519471A22EB1D00A544B5 /* JRReqMethod.m */; };
+		DCD51A851A22EB1D00A544B5 /* JRReqParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519491A22EB1D00A544B5 /* JRReqParam.m */; };
+		DCD51A861A22EB1D00A544B5 /* JRResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5194B1A22EB1D00A544B5 /* JRResponse.m */; };
+		DCD51A871A22EB1D00A544B5 /* JRResponseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5194D1A22EB1D00A544B5 /* JRResponseFactory.m */; };
+		DCD51A881A22EB1D00A544B5 /* JRSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519501A22EB1D00A544B5 /* JRSession.m */; };
+		DCD51A891A22EB1D00A544B5 /* JRTableResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519521A22EB1D00A544B5 /* JRTableResponse.m */; };
+		DCD51A8A1A22EB1D00A544B5 /* JRTextResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519541A22EB1D00A544B5 /* JRTextResponse.m */; };
+		DCD51A8B1A22EB1D00A544B5 /* JRReqCheckDictVersionParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519571A22EB1D00A544B5 /* JRReqCheckDictVersionParam.m */; };
+		DCD51A8C1A22EB1D00A544B5 /* JRReqCommonParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519591A22EB1D00A544B5 /* JRReqCommonParam.m */; };
+		DCD51A8D1A22EB1D00A544B5 /* JRreqFrbhParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5195B1A22EB1D00A544B5 /* JRreqFrbhParam.m */; };
+		DCD51A8E1A22EB1D00A544B5 /* JRReqFrxxDetailParam.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5195D1A22EB1D00A544B5 /* JRReqFrxxDetailParam.m */; };
+		DCD51A901A22EB1D00A544B5 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519631A22EB1D00A544B5 /* LoginRequest.m */; };
+		DCD51A911A22EB1D00A544B5 /* LoginResp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519651A22EB1D00A544B5 /* LoginResp.m */; };
+		DCD51A921A22EB1D00A544B5 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519671A22EB1D00A544B5 /* LogoutRequest.m */; };
+		DCD51A931A22EB1D00A544B5 /* RecvPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519691A22EB1D00A544B5 /* RecvPushRequest.m */; };
+		DCD51A941A22EB1D00A544B5 /* RecvPushResp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5196B1A22EB1D00A544B5 /* RecvPushResp.m */; };
+		DCD51A951A22EB1D00A544B5 /* app.xml in Resources */ = {isa = PBXBuildFile; fileRef = DCD5196E1A22EB1D00A544B5 /* app.xml */; };
+		DCD51A961A22EB1D00A544B5 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519701A22EB1D00A544B5 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DCD51A971A22EB1D00A544B5 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519721A22EB1D00A544B5 /* Module.m */; };
+		DCD51A981A22EB1D00A544B5 /* ModuleDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519751A22EB1D00A544B5 /* ModuleDefault.m */; };
+		DCD51A991A22EB1D00A544B5 /* ModuleDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519771A22EB1D00A544B5 /* ModuleDirectory.m */; };
+		DCD51A9A1A22EB1D00A544B5 /* ModuleQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519791A22EB1D00A544B5 /* ModuleQuery.m */; };
+		DCD51A9B1A22EB1D00A544B5 /* ModuleRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5197B1A22EB1D00A544B5 /* ModuleRoot.m */; };
+		DCD51A9C1A22EB1D00A544B5 /* NSString+CheckNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5197D1A22EB1D00A544B5 /* NSString+CheckNumeric.m */; };
+		DCD51A9D1A22EB1D00A544B5 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5197F1A22EB1D00A544B5 /* Page.m */; };
+		DCD51A9E1A22EB1D00A544B5 /* Pages.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519811A22EB1D00A544B5 /* Pages.m */; };
+		DCD51A9F1A22EB1D00A544B5 /* Row.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519831A22EB1D00A544B5 /* Row.m */; };
+		DCD51AA01A22EB1D00A544B5 /* RowAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519851A22EB1D00A544B5 /* RowAccount.m */; };
+		DCD51AA11A22EB1D00A544B5 /* RowBooleanCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519871A22EB1D00A544B5 /* RowBooleanCheck.m */; };
+		DCD51AA21A22EB1D00A544B5 /* RowBooleanSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519891A22EB1D00A544B5 /* RowBooleanSwitch.m */; };
+		DCD51AA31A22EB1D00A544B5 /* RowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5198B1A22EB1D00A544B5 /* RowButton.m */; };
+		DCD51AA41A22EB1D00A544B5 /* RowDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5198D1A22EB1D00A544B5 /* RowDate.m */; };
+		DCD51AA51A22EB1D00A544B5 /* RowDateInline.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5198F1A22EB1D00A544B5 /* RowDateInline.m */; };
+		DCD51AA61A22EB1D00A544B5 /* RowDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519911A22EB1D00A544B5 /* RowDatePicker.m */; };
+		DCD51AA71A22EB1D00A544B5 /* RowDatetime.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519931A22EB1D00A544B5 /* RowDatetime.m */; };
+		DCD51AA81A22EB1D00A544B5 /* RowDateTimeInline.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519951A22EB1D00A544B5 /* RowDateTimeInline.m */; };
+		DCD51AA91A22EB1D00A544B5 /* RowDecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519971A22EB1D00A544B5 /* RowDecimal.m */; };
+		DCD51AAA1A22EB1D00A544B5 /* RowEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519991A22EB1D00A544B5 /* RowEmail.m */; };
+		DCD51AAB1A22EB1D00A544B5 /* RowFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5199B1A22EB1D00A544B5 /* RowFactory.m */; };
+		DCD51AAC1A22EB1D00A544B5 /* RowInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5199D1A22EB1D00A544B5 /* RowInfo.m */; };
+		DCD51AAD1A22EB1D00A544B5 /* RowInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD5199F1A22EB1D00A544B5 /* RowInteger.m */; };
+		DCD51AAE1A22EB1D00A544B5 /* RowMultipleSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519A11A22EB1D00A544B5 /* RowMultipleSelector.m */; };
+		DCD51AAF1A22EB1D00A544B5 /* RowMultipleSelectorPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519A31A22EB1D00A544B5 /* RowMultipleSelectorPopover.m */; };
+		DCD51AB01A22EB1D00A544B5 /* RowName.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519A51A22EB1D00A544B5 /* RowName.m */; };
+		DCD51AB11A22EB1D00A544B5 /* RowNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519A71A22EB1D00A544B5 /* RowNumber.m */; };
+		DCD51AB21A22EB1D00A544B5 /* RowPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519A91A22EB1D00A544B5 /* RowPassword.m */; };
+		DCD51AB31A22EB1D00A544B5 /* RowPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519AB1A22EB1D00A544B5 /* RowPhone.m */; };
+		DCD51AB41A22EB1D00A544B5 /* RowPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519AD1A22EB1D00A544B5 /* RowPicker.m */; };
+		DCD51AB51A22EB1D00A544B5 /* RowSelectorActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519AF1A22EB1D00A544B5 /* RowSelectorActionSheet.m */; };
+		DCD51AB61A22EB1D00A544B5 /* RowSelectorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519B11A22EB1D00A544B5 /* RowSelectorAlertView.m */; };
+		DCD51AB71A22EB1D00A544B5 /* RowSelectorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519B31A22EB1D00A544B5 /* RowSelectorPickerView.m */; };
+		DCD51AB81A22EB1D00A544B5 /* RowSelectorPickerViewInline.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519B51A22EB1D00A544B5 /* RowSelectorPickerViewInline.m */; };
+		DCD51AB91A22EB1D00A544B5 /* RowSelectorPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519B71A22EB1D00A544B5 /* RowSelectorPopover.m */; };
+		DCD51ABA1A22EB1D00A544B5 /* RowSelectorPush.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519B91A22EB1D00A544B5 /* RowSelectorPush.m */; };
+		DCD51ABB1A22EB1D00A544B5 /* RowSelectorSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519BB1A22EB1D00A544B5 /* RowSelectorSegmentedControl.m */; };
+		DCD51ABC1A22EB1D00A544B5 /* RowSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519BD1A22EB1D00A544B5 /* RowSlider.m */; };
+		DCD51ABD1A22EB1D00A544B5 /* RowStepCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519BF1A22EB1D00A544B5 /* RowStepCounter.m */; };
+		DCD51ABE1A22EB1D00A544B5 /* RowText.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519C11A22EB1D00A544B5 /* RowText.m */; };
+		DCD51ABF1A22EB1D00A544B5 /* RowTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519C31A22EB1D00A544B5 /* RowTextView.m */; };
+		DCD51AC01A22EB1D00A544B5 /* RowTime.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519C51A22EB1D00A544B5 /* RowTime.m */; };
+		DCD51AC11A22EB1D00A544B5 /* RowTimeInline.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519C71A22EB1D00A544B5 /* RowTimeInline.m */; };
+		DCD51AC21A22EB1D00A544B5 /* RowTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519C91A22EB1D00A544B5 /* RowTwitter.m */; };
+		DCD51AC31A22EB1D00A544B5 /* RowUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519CB1A22EB1D00A544B5 /* RowUrl.m */; };
+		DCD51AC41A22EB1D00A544B5 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519CD1A22EB1D00A544B5 /* Section.m */; };
+		DCD51AC51A22EB1D00A544B5 /* PfjhMgrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519D01A22EB1D00A544B5 /* PfjhMgrVC.m */; };
+		DCD51AC61A22EB1D00A544B5 /* PfxxPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519D21A22EB1D00A544B5 /* PfxxPageVC.m */; };
+		DCD51AC71A22EB1D00A544B5 /* ModuleDefaultPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519D51A22EB1D00A544B5 /* ModuleDefaultPageViewController.m */; };
+		DCD51AC81A22EB1D00A544B5 /* ModuleDefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519D71A22EB1D00A544B5 /* ModuleDefaultViewController.m */; };
+		DCD51AC91A22EB1D00A544B5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519DB1A22EB1D00A544B5 /* LoginViewController.m */; };
+		DCD51ACA1A22EB1D00A544B5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD519DC1A22EB1D00A544B5 /* LoginViewController.xib */; };
+		DCD51ACB1A22EB1D00A544B5 /* LoginProcedures.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519DF1A22EB1D00A544B5 /* LoginProcedures.m */; };
+		DCD51ACC1A22EB1D00A544B5 /* MainItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519E51A22EB1D00A544B5 /* MainItemData.m */; };
+		DCD51ACD1A22EB1D00A544B5 /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519E71A22EB1D00A544B5 /* MainModel.m */; };
+		DCD51ACE1A22EB1D00A544B5 /* ModuleMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519EA1A22EB1D00A544B5 /* ModuleMgr.m */; };
+		DCD51ACF1A22EB1D00A544B5 /* Hb.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519EE1A22EB1D00A544B5 /* Hb.m */; };
+		DCD51AD01A22EB1D00A544B5 /* InputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519F01A22EB1D00A544B5 /* InputStream.m */; };
+		DCD51AD11A22EB1D00A544B5 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519F21A22EB1D00A544B5 /* Message.m */; };
+		DCD51AD21A22EB1D00A544B5 /* MessageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519F51A22EB1D00A544B5 /* MessageFactory.m */; };
+		DCD51AD31A22EB1D00A544B5 /* MessageKeeper.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519F71A22EB1D00A544B5 /* MessageKeeper.m */; };
+		DCD51AD41A22EB1D00A544B5 /* MessageParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519F91A22EB1D00A544B5 /* MessageParser.m */; };
+		DCD51AD51A22EB1D00A544B5 /* MessageQueueNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519FB1A22EB1D00A544B5 /* MessageQueueNode.m */; };
+		DCD51AD61A22EB1D00A544B5 /* NSMutableData+stream.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519FD1A22EB1D00A544B5 /* NSMutableData+stream.m */; };
+		DCD51AD71A22EB1D00A544B5 /* OutputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD519FF1A22EB1D00A544B5 /* OutputStream.m */; };
+		DCD51AD81A22EB1D00A544B5 /* Pkg.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A011A22EB1D00A544B5 /* Pkg.m */; };
+		DCD51AD91A22EB1D00A544B5 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A031A22EB1D00A544B5 /* Push.m */; };
+		DCD51ADA1A22EB1D00A544B5 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A051A22EB1D00A544B5 /* Request.m */; };
+		DCD51ADB1A22EB1D00A544B5 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A071A22EB1D00A544B5 /* Response.m */; };
+		DCD51ADC1A22EB1D00A544B5 /* ServerTimeMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A091A22EB1D00A544B5 /* ServerTimeMsg.m */; };
+		DCD51ADD1A22EB1D00A544B5 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A0B1A22EB1D00A544B5 /* session.m */; };
+		DCD51ADE1A22EB1D00A544B5 /* PagesMgrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A101A22EB1D00A544B5 /* PagesMgrViewController.m */; };
+		DCD51ADF1A22EB1D00A544B5 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A121A22EB1D00A544B5 /* PageViewController.m */; };
+		DCD51AE01A22EB1D00A544B5 /* SwipeBtnBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A141A22EB1D00A544B5 /* SwipeBtnBarView.m */; };
+		DCD51AE11A22EB1D00A544B5 /* SwipeButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A161A22EB1D00A544B5 /* SwipeButtonBarViewCell.m */; };
+		DCD51AE21A22EB1D00A544B5 /* SwipeButtonBarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD51A171A22EB1D00A544B5 /* SwipeButtonBarViewCell.xib */; };
+		DCD51AE31A22EB1D00A544B5 /* MainCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A1A1A22EB1D00A544B5 /* MainCVC.m */; };
+		DCD51AE41A22EB1D00A544B5 /* MainCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD51A1B1A22EB1D00A544B5 /* MainCVC.xib */; };
+		DCD51AE51A22EB1D00A544B5 /* WaitingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A1E1A22EB1D00A544B5 /* WaitingViewController.m */; };
+		DCD51AE61A22EB1D00A544B5 /* WaitingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD51A1F1A22EB1D00A544B5 /* WaitingViewController.xib */; };
+		DCD51AE71A22EB1D00A544B5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DCD51A211A22EB1D00A544B5 /* LICENSE */; };
+		DCD51AE81A22EB1D00A544B5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A221A22EB1D00A544B5 /* README.md */; };
+		DCD51AE91A22EB1D00A544B5 /* XLFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A271A22EB1D00A544B5 /* XLFormBaseCell.m */; };
+		DCD51AEA1A22EB1D00A544B5 /* XLFormButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A291A22EB1D00A544B5 /* XLFormButtonCell.m */; };
+		DCD51AEB1A22EB1D00A544B5 /* XLFormCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A2B1A22EB1D00A544B5 /* XLFormCheckCell.m */; };
+		DCD51AEC1A22EB1D00A544B5 /* XLFormDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A2D1A22EB1D00A544B5 /* XLFormDateCell.m */; };
+		DCD51AED1A22EB1D00A544B5 /* XLFormDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A2F1A22EB1D00A544B5 /* XLFormDatePickerCell.m */; };
+		DCD51AEE1A22EB1D00A544B5 /* XLFormInlineSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A331A22EB1D00A544B5 /* XLFormInlineSelectorCell.m */; };
+		DCD51AEF1A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A351A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.m */; };
+		DCD51AF01A22EB1D00A544B5 /* XLFormPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A371A22EB1D00A544B5 /* XLFormPickerCell.m */; };
+		DCD51AF11A22EB1D00A544B5 /* XLFormSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A391A22EB1D00A544B5 /* XLFormSegmentedCell.m */; };
+		DCD51AF21A22EB1D00A544B5 /* XLFormSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A3B1A22EB1D00A544B5 /* XLFormSelectorCell.m */; };
+		DCD51AF31A22EB1D00A544B5 /* XLFormSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A3D1A22EB1D00A544B5 /* XLFormSliderCell.m */; };
+		DCD51AF41A22EB1D00A544B5 /* XLFormStepCounterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A3F1A22EB1D00A544B5 /* XLFormStepCounterCell.m */; };
+		DCD51AF51A22EB1D00A544B5 /* XLFormSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A411A22EB1D00A544B5 /* XLFormSwitchCell.m */; };
+		DCD51AF61A22EB1D00A544B5 /* XLFormTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A431A22EB1D00A544B5 /* XLFormTextFieldCell.m */; };
+		DCD51AF71A22EB1D00A544B5 /* XLFormTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A451A22EB1D00A544B5 /* XLFormTextViewCell.m */; };
+		DCD51AF81A22EB1D00A544B5 /* XLFormOptionsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A481A22EB1D00A544B5 /* XLFormOptionsObject.m */; };
+		DCD51AF91A22EB1D00A544B5 /* XLFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A4A1A22EB1D00A544B5 /* XLFormOptionsViewController.m */; };
+		DCD51AFA1A22EB1D00A544B5 /* XLFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A4D1A22EB1D00A544B5 /* XLFormViewController.m */; };
+		DCD51AFB1A22EB1D00A544B5 /* XLFormDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A501A22EB1D00A544B5 /* XLFormDescriptor.m */; };
+		DCD51AFC1A22EB1D00A544B5 /* XLFormRowDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A531A22EB1D00A544B5 /* XLFormRowDescriptor.m */; };
+		DCD51AFD1A22EB1D00A544B5 /* XLFormSectionDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A551A22EB1D00A544B5 /* XLFormSectionDescriptor.m */; };
+		DCD51AFE1A22EB1D00A544B5 /* NSArray+XLFormAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A581A22EB1D00A544B5 /* NSArray+XLFormAdditions.m */; };
+		DCD51AFF1A22EB1D00A544B5 /* NSObject+XLFormAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A5A1A22EB1D00A544B5 /* NSObject+XLFormAdditions.m */; };
+		DCD51B001A22EB1D00A544B5 /* UIView+XLFormAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A5C1A22EB1D00A544B5 /* UIView+XLFormAdditions.m */; };
+		DCD51B011A22EB1D00A544B5 /* XLFormRightDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A5F1A22EB1D00A544B5 /* XLFormRightDetailCell.m */; };
+		DCD51B021A22EB1D00A544B5 /* XLFormRightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A611A22EB1D00A544B5 /* XLFormRightImageButton.m */; };
+		DCD51B031A22EB1D00A544B5 /* XLFormTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A631A22EB1D00A544B5 /* XLFormTextView.m */; };
+		DCD51B041A22EB1D00A544B5 /* XLFormRegexValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A661A22EB1D00A544B5 /* XLFormRegexValidator.m */; };
+		DCD51B051A22EB1D00A544B5 /* XLFormValidationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A681A22EB1D00A544B5 /* XLFormValidationStatus.m */; };
+		DCD51B061A22EB1D00A544B5 /* XLFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A6A1A22EB1D00A544B5 /* XLFormValidator.m */; };
+		DCD51B071A22EB1D00A544B5 /* XLForm.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD51A6D1A22EB1D00A544B5 /* XLForm.m */; };
+		DCD51B081A22EB1D00A544B5 /* XLForm.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DCD51A6E1A22EB1D00A544B5 /* XLForm.bundle */; };
+		DCD51B0A1A22EB9900A544B5 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD51B091A22EB9900A544B5 /* libxml2.dylib */; };
 		DCF83DAD1A22E47F00F3DF48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF83DAC1A22E47F00F3DF48 /* main.m */; };
 		DCF83DB01A22E47F00F3DF48 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF83DAF1A22E47F00F3DF48 /* AppDelegate.m */; };
 		DCF83DB31A22E47F00F3DF48 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF83DB21A22E47F00F3DF48 /* ViewController.m */; };
@@ -27,6 +182,318 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		014F78F73053B6554412BF72 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		40BE4D5403D93F36B0DF123E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC16DFAECC0724E1665B1CA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DCD5191A1A22EB1D00A544B5 /* Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encrypt.h; sourceTree = "<group>"; };
+		DCD5191B1A22EB1D00A544B5 /* Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Encrypt.m; sourceTree = "<group>"; };
+		DCD5191C1A22EB1D00A544B5 /* LogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogLevel.h; sourceTree = "<group>"; };
+		DCD5191D1A22EB1D00A544B5 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		DCD5191E1A22EB1D00A544B5 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		DCD5191F1A22EB1D00A544B5 /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
+		DCD519201A22EB1D00A544B5 /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
+		DCD519211A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+StrDictConverter.h"; sourceTree = "<group>"; };
+		DCD519221A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+StrDictConverter.m"; sourceTree = "<group>"; };
+		DCD519231A22EB1D00A544B5 /* NSUUID+StringUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUUID+StringUUID.h"; sourceTree = "<group>"; };
+		DCD519241A22EB1D00A544B5 /* NSUUID+StringUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUUID+StringUUID.m"; sourceTree = "<group>"; };
+		DCD519251A22EB1D00A544B5 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		DCD519261A22EB1D00A544B5 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		DCD519281A22EB1D00A544B5 /* Dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dict.h; sourceTree = "<group>"; };
+		DCD519291A22EB1D00A544B5 /* Dict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dict.m; sourceTree = "<group>"; };
+		DCD5192A1A22EB1D00A544B5 /* DictDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictDb.h; sourceTree = "<group>"; };
+		DCD5192B1A22EB1D00A544B5 /* DictDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictDb.m; sourceTree = "<group>"; };
+		DCD5192C1A22EB1D00A544B5 /* DictDownloadReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictDownloadReq.h; sourceTree = "<group>"; };
+		DCD5192D1A22EB1D00A544B5 /* DictDownloadReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictDownloadReq.m; sourceTree = "<group>"; };
+		DCD5192E1A22EB1D00A544B5 /* dictname.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dictname.plist; sourceTree = "<group>"; };
+		DCD5192F1A22EB1D00A544B5 /* DictRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictRequest.h; sourceTree = "<group>"; };
+		DCD519301A22EB1D00A544B5 /* DictRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictRequest.m; sourceTree = "<group>"; };
+		DCD519311A22EB1D00A544B5 /* DictsDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictsDownloader.h; sourceTree = "<group>"; };
+		DCD519321A22EB1D00A544B5 /* DictsDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictsDownloader.m; sourceTree = "<group>"; };
+		DCD519331A22EB1D00A544B5 /* DictsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictsMgr.h; sourceTree = "<group>"; };
+		DCD519341A22EB1D00A544B5 /* DictsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictsMgr.m; sourceTree = "<group>"; };
+		DCD519351A22EB1D00A544B5 /* DictsVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictsVersion.h; sourceTree = "<group>"; };
+		DCD519361A22EB1D00A544B5 /* DictsVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictsVersion.m; sourceTree = "<group>"; };
+		DCD519371A22EB1D00A544B5 /* DictsVersionReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictsVersionReq.h; sourceTree = "<group>"; };
+		DCD519381A22EB1D00A544B5 /* DictsVersionReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictsVersionReq.m; sourceTree = "<group>"; };
+		DCD519391A22EB1D00A544B5 /* DictsVersionSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictsVersionSync.h; sourceTree = "<group>"; };
+		DCD5193A1A22EB1D00A544B5 /* DictsVersionSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictsVersionSync.m; sourceTree = "<group>"; };
+		DCD5193B1A22EB1D00A544B5 /* DictVersionResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictVersionResp.h; sourceTree = "<group>"; };
+		DCD5193C1A22EB1D00A544B5 /* DictVersionResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictVersionResp.m; sourceTree = "<group>"; };
+		DCD5193E1A22EB1D00A544B5 /* JRBinResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBinResponse.h; sourceTree = "<group>"; };
+		DCD5193F1A22EB1D00A544B5 /* JRBinResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBinResponse.m; sourceTree = "<group>"; };
+		DCD519401A22EB1D00A544B5 /* JRErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRErrorResponse.h; sourceTree = "<group>"; };
+		DCD519411A22EB1D00A544B5 /* JRErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRErrorResponse.m; sourceTree = "<group>"; };
+		DCD519421A22EB1D00A544B5 /* JRListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRListResponse.h; sourceTree = "<group>"; };
+		DCD519431A22EB1D00A544B5 /* JRListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRListResponse.m; sourceTree = "<group>"; };
+		DCD519441A22EB1D00A544B5 /* JRReqest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqest.h; sourceTree = "<group>"; };
+		DCD519451A22EB1D00A544B5 /* JRReqest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqest.m; sourceTree = "<group>"; };
+		DCD519461A22EB1D00A544B5 /* JRReqMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqMethod.h; sourceTree = "<group>"; };
+		DCD519471A22EB1D00A544B5 /* JRReqMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqMethod.m; sourceTree = "<group>"; };
+		DCD519481A22EB1D00A544B5 /* JRReqParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqParam.h; sourceTree = "<group>"; };
+		DCD519491A22EB1D00A544B5 /* JRReqParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqParam.m; sourceTree = "<group>"; };
+		DCD5194A1A22EB1D00A544B5 /* JRResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRResponse.h; sourceTree = "<group>"; };
+		DCD5194B1A22EB1D00A544B5 /* JRResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRResponse.m; sourceTree = "<group>"; };
+		DCD5194C1A22EB1D00A544B5 /* JRResponseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRResponseFactory.h; sourceTree = "<group>"; };
+		DCD5194D1A22EB1D00A544B5 /* JRResponseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRResponseFactory.m; sourceTree = "<group>"; };
+		DCD5194E1A22EB1D00A544B5 /* JRServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRServices.h; sourceTree = "<group>"; };
+		DCD5194F1A22EB1D00A544B5 /* JRSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSession.h; sourceTree = "<group>"; };
+		DCD519501A22EB1D00A544B5 /* JRSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSession.m; sourceTree = "<group>"; };
+		DCD519511A22EB1D00A544B5 /* JRTableResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRTableResponse.h; sourceTree = "<group>"; };
+		DCD519521A22EB1D00A544B5 /* JRTableResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRTableResponse.m; sourceTree = "<group>"; };
+		DCD519531A22EB1D00A544B5 /* JRTextResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRTextResponse.h; sourceTree = "<group>"; };
+		DCD519541A22EB1D00A544B5 /* JRTextResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRTextResponse.m; sourceTree = "<group>"; };
+		DCD519561A22EB1D00A544B5 /* JRReqCheckDictVersionParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqCheckDictVersionParam.h; sourceTree = "<group>"; };
+		DCD519571A22EB1D00A544B5 /* JRReqCheckDictVersionParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqCheckDictVersionParam.m; sourceTree = "<group>"; };
+		DCD519581A22EB1D00A544B5 /* JRReqCommonParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqCommonParam.h; sourceTree = "<group>"; };
+		DCD519591A22EB1D00A544B5 /* JRReqCommonParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqCommonParam.m; sourceTree = "<group>"; };
+		DCD5195A1A22EB1D00A544B5 /* JRreqFrbhParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRreqFrbhParam.h; sourceTree = "<group>"; };
+		DCD5195B1A22EB1D00A544B5 /* JRreqFrbhParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRreqFrbhParam.m; sourceTree = "<group>"; };
+		DCD5195C1A22EB1D00A544B5 /* JRReqFrxxDetailParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRReqFrxxDetailParam.h; sourceTree = "<group>"; };
+		DCD5195D1A22EB1D00A544B5 /* JRReqFrxxDetailParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRReqFrxxDetailParam.m; sourceTree = "<group>"; };
+		DCD519621A22EB1D00A544B5 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		DCD519631A22EB1D00A544B5 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		DCD519641A22EB1D00A544B5 /* LoginResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResp.h; sourceTree = "<group>"; };
+		DCD519651A22EB1D00A544B5 /* LoginResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResp.m; sourceTree = "<group>"; };
+		DCD519661A22EB1D00A544B5 /* LogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutRequest.h; sourceTree = "<group>"; };
+		DCD519671A22EB1D00A544B5 /* LogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutRequest.m; sourceTree = "<group>"; };
+		DCD519681A22EB1D00A544B5 /* RecvPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecvPushRequest.h; sourceTree = "<group>"; };
+		DCD519691A22EB1D00A544B5 /* RecvPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecvPushRequest.m; sourceTree = "<group>"; };
+		DCD5196A1A22EB1D00A544B5 /* RecvPushResp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecvPushResp.h; sourceTree = "<group>"; };
+		DCD5196B1A22EB1D00A544B5 /* RecvPushResp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecvPushResp.m; sourceTree = "<group>"; };
+		DCD5196E1A22EB1D00A544B5 /* app.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = app.xml; sourceTree = "<group>"; };
+		DCD5196F1A22EB1D00A544B5 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		DCD519701A22EB1D00A544B5 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		DCD519711A22EB1D00A544B5 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
+		DCD519721A22EB1D00A544B5 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module.m; sourceTree = "<group>"; };
+		DCD519731A22EB1D00A544B5 /* ModuleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleConstants.h; sourceTree = "<group>"; };
+		DCD519741A22EB1D00A544B5 /* ModuleDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDefault.h; sourceTree = "<group>"; };
+		DCD519751A22EB1D00A544B5 /* ModuleDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDefault.m; sourceTree = "<group>"; };
+		DCD519761A22EB1D00A544B5 /* ModuleDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDirectory.h; sourceTree = "<group>"; };
+		DCD519771A22EB1D00A544B5 /* ModuleDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDirectory.m; sourceTree = "<group>"; };
+		DCD519781A22EB1D00A544B5 /* ModuleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleQuery.h; sourceTree = "<group>"; };
+		DCD519791A22EB1D00A544B5 /* ModuleQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleQuery.m; sourceTree = "<group>"; };
+		DCD5197A1A22EB1D00A544B5 /* ModuleRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleRoot.h; sourceTree = "<group>"; };
+		DCD5197B1A22EB1D00A544B5 /* ModuleRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleRoot.m; sourceTree = "<group>"; };
+		DCD5197C1A22EB1D00A544B5 /* NSString+CheckNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CheckNumeric.h"; sourceTree = "<group>"; };
+		DCD5197D1A22EB1D00A544B5 /* NSString+CheckNumeric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CheckNumeric.m"; sourceTree = "<group>"; };
+		DCD5197E1A22EB1D00A544B5 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		DCD5197F1A22EB1D00A544B5 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
+		DCD519801A22EB1D00A544B5 /* Pages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pages.h; sourceTree = "<group>"; };
+		DCD519811A22EB1D00A544B5 /* Pages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pages.m; sourceTree = "<group>"; };
+		DCD519821A22EB1D00A544B5 /* Row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Row.h; sourceTree = "<group>"; };
+		DCD519831A22EB1D00A544B5 /* Row.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Row.m; sourceTree = "<group>"; };
+		DCD519841A22EB1D00A544B5 /* RowAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowAccount.h; sourceTree = "<group>"; };
+		DCD519851A22EB1D00A544B5 /* RowAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowAccount.m; sourceTree = "<group>"; };
+		DCD519861A22EB1D00A544B5 /* RowBooleanCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowBooleanCheck.h; sourceTree = "<group>"; };
+		DCD519871A22EB1D00A544B5 /* RowBooleanCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowBooleanCheck.m; sourceTree = "<group>"; };
+		DCD519881A22EB1D00A544B5 /* RowBooleanSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowBooleanSwitch.h; sourceTree = "<group>"; };
+		DCD519891A22EB1D00A544B5 /* RowBooleanSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowBooleanSwitch.m; sourceTree = "<group>"; };
+		DCD5198A1A22EB1D00A544B5 /* RowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowButton.h; sourceTree = "<group>"; };
+		DCD5198B1A22EB1D00A544B5 /* RowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowButton.m; sourceTree = "<group>"; };
+		DCD5198C1A22EB1D00A544B5 /* RowDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDate.h; sourceTree = "<group>"; };
+		DCD5198D1A22EB1D00A544B5 /* RowDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDate.m; sourceTree = "<group>"; };
+		DCD5198E1A22EB1D00A544B5 /* RowDateInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDateInline.h; sourceTree = "<group>"; };
+		DCD5198F1A22EB1D00A544B5 /* RowDateInline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDateInline.m; sourceTree = "<group>"; };
+		DCD519901A22EB1D00A544B5 /* RowDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDatePicker.h; sourceTree = "<group>"; };
+		DCD519911A22EB1D00A544B5 /* RowDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDatePicker.m; sourceTree = "<group>"; };
+		DCD519921A22EB1D00A544B5 /* RowDatetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDatetime.h; sourceTree = "<group>"; };
+		DCD519931A22EB1D00A544B5 /* RowDatetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDatetime.m; sourceTree = "<group>"; };
+		DCD519941A22EB1D00A544B5 /* RowDateTimeInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDateTimeInline.h; sourceTree = "<group>"; };
+		DCD519951A22EB1D00A544B5 /* RowDateTimeInline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDateTimeInline.m; sourceTree = "<group>"; };
+		DCD519961A22EB1D00A544B5 /* RowDecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowDecimal.h; sourceTree = "<group>"; };
+		DCD519971A22EB1D00A544B5 /* RowDecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowDecimal.m; sourceTree = "<group>"; };
+		DCD519981A22EB1D00A544B5 /* RowEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowEmail.h; sourceTree = "<group>"; };
+		DCD519991A22EB1D00A544B5 /* RowEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowEmail.m; sourceTree = "<group>"; };
+		DCD5199A1A22EB1D00A544B5 /* RowFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowFactory.h; sourceTree = "<group>"; };
+		DCD5199B1A22EB1D00A544B5 /* RowFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowFactory.m; sourceTree = "<group>"; };
+		DCD5199C1A22EB1D00A544B5 /* RowInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowInfo.h; sourceTree = "<group>"; };
+		DCD5199D1A22EB1D00A544B5 /* RowInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowInfo.m; sourceTree = "<group>"; };
+		DCD5199E1A22EB1D00A544B5 /* RowInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowInteger.h; sourceTree = "<group>"; };
+		DCD5199F1A22EB1D00A544B5 /* RowInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowInteger.m; sourceTree = "<group>"; };
+		DCD519A01A22EB1D00A544B5 /* RowMultipleSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowMultipleSelector.h; sourceTree = "<group>"; };
+		DCD519A11A22EB1D00A544B5 /* RowMultipleSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowMultipleSelector.m; sourceTree = "<group>"; };
+		DCD519A21A22EB1D00A544B5 /* RowMultipleSelectorPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowMultipleSelectorPopover.h; sourceTree = "<group>"; };
+		DCD519A31A22EB1D00A544B5 /* RowMultipleSelectorPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowMultipleSelectorPopover.m; sourceTree = "<group>"; };
+		DCD519A41A22EB1D00A544B5 /* RowName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowName.h; sourceTree = "<group>"; };
+		DCD519A51A22EB1D00A544B5 /* RowName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowName.m; sourceTree = "<group>"; };
+		DCD519A61A22EB1D00A544B5 /* RowNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowNumber.h; sourceTree = "<group>"; };
+		DCD519A71A22EB1D00A544B5 /* RowNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowNumber.m; sourceTree = "<group>"; };
+		DCD519A81A22EB1D00A544B5 /* RowPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowPassword.h; sourceTree = "<group>"; };
+		DCD519A91A22EB1D00A544B5 /* RowPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowPassword.m; sourceTree = "<group>"; };
+		DCD519AA1A22EB1D00A544B5 /* RowPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowPhone.h; sourceTree = "<group>"; };
+		DCD519AB1A22EB1D00A544B5 /* RowPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowPhone.m; sourceTree = "<group>"; };
+		DCD519AC1A22EB1D00A544B5 /* RowPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowPicker.h; sourceTree = "<group>"; };
+		DCD519AD1A22EB1D00A544B5 /* RowPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowPicker.m; sourceTree = "<group>"; };
+		DCD519AE1A22EB1D00A544B5 /* RowSelectorActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorActionSheet.h; sourceTree = "<group>"; };
+		DCD519AF1A22EB1D00A544B5 /* RowSelectorActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorActionSheet.m; sourceTree = "<group>"; };
+		DCD519B01A22EB1D00A544B5 /* RowSelectorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorAlertView.h; sourceTree = "<group>"; };
+		DCD519B11A22EB1D00A544B5 /* RowSelectorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorAlertView.m; sourceTree = "<group>"; };
+		DCD519B21A22EB1D00A544B5 /* RowSelectorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorPickerView.h; sourceTree = "<group>"; };
+		DCD519B31A22EB1D00A544B5 /* RowSelectorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorPickerView.m; sourceTree = "<group>"; };
+		DCD519B41A22EB1D00A544B5 /* RowSelectorPickerViewInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorPickerViewInline.h; sourceTree = "<group>"; };
+		DCD519B51A22EB1D00A544B5 /* RowSelectorPickerViewInline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorPickerViewInline.m; sourceTree = "<group>"; };
+		DCD519B61A22EB1D00A544B5 /* RowSelectorPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorPopover.h; sourceTree = "<group>"; };
+		DCD519B71A22EB1D00A544B5 /* RowSelectorPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorPopover.m; sourceTree = "<group>"; };
+		DCD519B81A22EB1D00A544B5 /* RowSelectorPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorPush.h; sourceTree = "<group>"; };
+		DCD519B91A22EB1D00A544B5 /* RowSelectorPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorPush.m; sourceTree = "<group>"; };
+		DCD519BA1A22EB1D00A544B5 /* RowSelectorSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSelectorSegmentedControl.h; sourceTree = "<group>"; };
+		DCD519BB1A22EB1D00A544B5 /* RowSelectorSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSelectorSegmentedControl.m; sourceTree = "<group>"; };
+		DCD519BC1A22EB1D00A544B5 /* RowSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowSlider.h; sourceTree = "<group>"; };
+		DCD519BD1A22EB1D00A544B5 /* RowSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowSlider.m; sourceTree = "<group>"; };
+		DCD519BE1A22EB1D00A544B5 /* RowStepCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowStepCounter.h; sourceTree = "<group>"; };
+		DCD519BF1A22EB1D00A544B5 /* RowStepCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowStepCounter.m; sourceTree = "<group>"; };
+		DCD519C01A22EB1D00A544B5 /* RowText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowText.h; sourceTree = "<group>"; };
+		DCD519C11A22EB1D00A544B5 /* RowText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowText.m; sourceTree = "<group>"; };
+		DCD519C21A22EB1D00A544B5 /* RowTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowTextView.h; sourceTree = "<group>"; };
+		DCD519C31A22EB1D00A544B5 /* RowTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowTextView.m; sourceTree = "<group>"; };
+		DCD519C41A22EB1D00A544B5 /* RowTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowTime.h; sourceTree = "<group>"; };
+		DCD519C51A22EB1D00A544B5 /* RowTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowTime.m; sourceTree = "<group>"; };
+		DCD519C61A22EB1D00A544B5 /* RowTimeInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowTimeInline.h; sourceTree = "<group>"; };
+		DCD519C71A22EB1D00A544B5 /* RowTimeInline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowTimeInline.m; sourceTree = "<group>"; };
+		DCD519C81A22EB1D00A544B5 /* RowTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowTwitter.h; sourceTree = "<group>"; };
+		DCD519C91A22EB1D00A544B5 /* RowTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowTwitter.m; sourceTree = "<group>"; };
+		DCD519CA1A22EB1D00A544B5 /* RowUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowUrl.h; sourceTree = "<group>"; };
+		DCD519CB1A22EB1D00A544B5 /* RowUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowUrl.m; sourceTree = "<group>"; };
+		DCD519CC1A22EB1D00A544B5 /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		DCD519CD1A22EB1D00A544B5 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		DCD519CF1A22EB1D00A544B5 /* PfjhMgrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfjhMgrVC.h; sourceTree = "<group>"; };
+		DCD519D01A22EB1D00A544B5 /* PfjhMgrVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PfjhMgrVC.m; sourceTree = "<group>"; };
+		DCD519D11A22EB1D00A544B5 /* PfxxPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PfxxPageVC.h; sourceTree = "<group>"; };
+		DCD519D21A22EB1D00A544B5 /* PfxxPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PfxxPageVC.m; sourceTree = "<group>"; };
+		DCD519D41A22EB1D00A544B5 /* ModuleDefaultPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDefaultPageViewController.h; sourceTree = "<group>"; };
+		DCD519D51A22EB1D00A544B5 /* ModuleDefaultPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDefaultPageViewController.m; sourceTree = "<group>"; };
+		DCD519D61A22EB1D00A544B5 /* ModuleDefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDefaultViewController.h; sourceTree = "<group>"; };
+		DCD519D71A22EB1D00A544B5 /* ModuleDefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDefaultViewController.m; sourceTree = "<group>"; };
+		DCD519DA1A22EB1D00A544B5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		DCD519DB1A22EB1D00A544B5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		DCD519DC1A22EB1D00A544B5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		DCD519DE1A22EB1D00A544B5 /* LoginProcedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProcedures.h; sourceTree = "<group>"; };
+		DCD519DF1A22EB1D00A544B5 /* LoginProcedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginProcedures.m; sourceTree = "<group>"; };
+		DCD519E41A22EB1D00A544B5 /* MainItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainItemData.h; sourceTree = "<group>"; };
+		DCD519E51A22EB1D00A544B5 /* MainItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainItemData.m; sourceTree = "<group>"; };
+		DCD519E61A22EB1D00A544B5 /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
+		DCD519E71A22EB1D00A544B5 /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
+		DCD519E91A22EB1D00A544B5 /* ModuleMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleMgr.h; sourceTree = "<group>"; };
+		DCD519EA1A22EB1D00A544B5 /* ModuleMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleMgr.m; sourceTree = "<group>"; };
+		DCD519EC1A22EB1D00A544B5 /* DataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
+		DCD519ED1A22EB1D00A544B5 /* Hb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hb.h; sourceTree = "<group>"; };
+		DCD519EE1A22EB1D00A544B5 /* Hb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hb.m; sourceTree = "<group>"; };
+		DCD519EF1A22EB1D00A544B5 /* InputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputStream.h; sourceTree = "<group>"; };
+		DCD519F01A22EB1D00A544B5 /* InputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputStream.m; sourceTree = "<group>"; };
+		DCD519F11A22EB1D00A544B5 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		DCD519F21A22EB1D00A544B5 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		DCD519F31A22EB1D00A544B5 /* MessageConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageConstants.h; sourceTree = "<group>"; };
+		DCD519F41A22EB1D00A544B5 /* MessageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFactory.h; sourceTree = "<group>"; };
+		DCD519F51A22EB1D00A544B5 /* MessageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFactory.m; sourceTree = "<group>"; };
+		DCD519F61A22EB1D00A544B5 /* MessageKeeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageKeeper.h; sourceTree = "<group>"; };
+		DCD519F71A22EB1D00A544B5 /* MessageKeeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageKeeper.m; sourceTree = "<group>"; };
+		DCD519F81A22EB1D00A544B5 /* MessageParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageParser.h; sourceTree = "<group>"; };
+		DCD519F91A22EB1D00A544B5 /* MessageParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageParser.m; sourceTree = "<group>"; };
+		DCD519FA1A22EB1D00A544B5 /* MessageQueueNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageQueueNode.h; sourceTree = "<group>"; };
+		DCD519FB1A22EB1D00A544B5 /* MessageQueueNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageQueueNode.m; sourceTree = "<group>"; };
+		DCD519FC1A22EB1D00A544B5 /* NSMutableData+stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+stream.h"; sourceTree = "<group>"; };
+		DCD519FD1A22EB1D00A544B5 /* NSMutableData+stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+stream.m"; sourceTree = "<group>"; };
+		DCD519FE1A22EB1D00A544B5 /* OutputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputStream.h; sourceTree = "<group>"; };
+		DCD519FF1A22EB1D00A544B5 /* OutputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputStream.m; sourceTree = "<group>"; };
+		DCD51A001A22EB1D00A544B5 /* Pkg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkg.h; sourceTree = "<group>"; };
+		DCD51A011A22EB1D00A544B5 /* Pkg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkg.m; sourceTree = "<group>"; };
+		DCD51A021A22EB1D00A544B5 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
+		DCD51A031A22EB1D00A544B5 /* Push.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Push.m; sourceTree = "<group>"; };
+		DCD51A041A22EB1D00A544B5 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		DCD51A051A22EB1D00A544B5 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		DCD51A061A22EB1D00A544B5 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		DCD51A071A22EB1D00A544B5 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		DCD51A081A22EB1D00A544B5 /* ServerTimeMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerTimeMsg.h; sourceTree = "<group>"; };
+		DCD51A091A22EB1D00A544B5 /* ServerTimeMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerTimeMsg.m; sourceTree = "<group>"; };
+		DCD51A0A1A22EB1D00A544B5 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
+		DCD51A0B1A22EB1D00A544B5 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
+		DCD51A0C1A22EB1D00A544B5 /* SessionConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionConstants.h; sourceTree = "<group>"; };
+		DCD51A0F1A22EB1D00A544B5 /* PagesMgrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagesMgrViewController.h; sourceTree = "<group>"; };
+		DCD51A101A22EB1D00A544B5 /* PagesMgrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagesMgrViewController.m; sourceTree = "<group>"; };
+		DCD51A111A22EB1D00A544B5 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
+		DCD51A121A22EB1D00A544B5 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
+		DCD51A131A22EB1D00A544B5 /* SwipeBtnBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeBtnBarView.h; sourceTree = "<group>"; };
+		DCD51A141A22EB1D00A544B5 /* SwipeBtnBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeBtnBarView.m; sourceTree = "<group>"; };
+		DCD51A151A22EB1D00A544B5 /* SwipeButtonBarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeButtonBarViewCell.h; sourceTree = "<group>"; };
+		DCD51A161A22EB1D00A544B5 /* SwipeButtonBarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeButtonBarViewCell.m; sourceTree = "<group>"; };
+		DCD51A171A22EB1D00A544B5 /* SwipeButtonBarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeButtonBarViewCell.xib; sourceTree = "<group>"; };
+		DCD51A191A22EB1D00A544B5 /* MainCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCVC.h; sourceTree = "<group>"; };
+		DCD51A1A1A22EB1D00A544B5 /* MainCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCVC.m; sourceTree = "<group>"; };
+		DCD51A1B1A22EB1D00A544B5 /* MainCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCVC.xib; sourceTree = "<group>"; };
+		DCD51A1D1A22EB1D00A544B5 /* WaitingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitingViewController.h; sourceTree = "<group>"; };
+		DCD51A1E1A22EB1D00A544B5 /* WaitingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitingViewController.m; sourceTree = "<group>"; };
+		DCD51A1F1A22EB1D00A544B5 /* WaitingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitingViewController.xib; sourceTree = "<group>"; };
+		DCD51A211A22EB1D00A544B5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		DCD51A221A22EB1D00A544B5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DCD51A261A22EB1D00A544B5 /* XLFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormBaseCell.h; sourceTree = "<group>"; };
+		DCD51A271A22EB1D00A544B5 /* XLFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormBaseCell.m; sourceTree = "<group>"; };
+		DCD51A281A22EB1D00A544B5 /* XLFormButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormButtonCell.h; sourceTree = "<group>"; };
+		DCD51A291A22EB1D00A544B5 /* XLFormButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormButtonCell.m; sourceTree = "<group>"; };
+		DCD51A2A1A22EB1D00A544B5 /* XLFormCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormCheckCell.h; sourceTree = "<group>"; };
+		DCD51A2B1A22EB1D00A544B5 /* XLFormCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormCheckCell.m; sourceTree = "<group>"; };
+		DCD51A2C1A22EB1D00A544B5 /* XLFormDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormDateCell.h; sourceTree = "<group>"; };
+		DCD51A2D1A22EB1D00A544B5 /* XLFormDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormDateCell.m; sourceTree = "<group>"; };
+		DCD51A2E1A22EB1D00A544B5 /* XLFormDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormDatePickerCell.h; sourceTree = "<group>"; };
+		DCD51A2F1A22EB1D00A544B5 /* XLFormDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormDatePickerCell.m; sourceTree = "<group>"; };
+		DCD51A301A22EB1D00A544B5 /* XLFormDescriptorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormDescriptorCell.h; sourceTree = "<group>"; };
+		DCD51A311A22EB1D00A544B5 /* XLFormInlineRowDescriptorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormInlineRowDescriptorCell.h; sourceTree = "<group>"; };
+		DCD51A321A22EB1D00A544B5 /* XLFormInlineSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormInlineSelectorCell.h; sourceTree = "<group>"; };
+		DCD51A331A22EB1D00A544B5 /* XLFormInlineSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormInlineSelectorCell.m; sourceTree = "<group>"; };
+		DCD51A341A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormLeftRightSelectorCell.h; sourceTree = "<group>"; };
+		DCD51A351A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormLeftRightSelectorCell.m; sourceTree = "<group>"; };
+		DCD51A361A22EB1D00A544B5 /* XLFormPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormPickerCell.h; sourceTree = "<group>"; };
+		DCD51A371A22EB1D00A544B5 /* XLFormPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormPickerCell.m; sourceTree = "<group>"; };
+		DCD51A381A22EB1D00A544B5 /* XLFormSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormSegmentedCell.h; sourceTree = "<group>"; };
+		DCD51A391A22EB1D00A544B5 /* XLFormSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormSegmentedCell.m; sourceTree = "<group>"; };
+		DCD51A3A1A22EB1D00A544B5 /* XLFormSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormSelectorCell.h; sourceTree = "<group>"; };
+		DCD51A3B1A22EB1D00A544B5 /* XLFormSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormSelectorCell.m; sourceTree = "<group>"; };
+		DCD51A3C1A22EB1D00A544B5 /* XLFormSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormSliderCell.h; sourceTree = "<group>"; };
+		DCD51A3D1A22EB1D00A544B5 /* XLFormSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormSliderCell.m; sourceTree = "<group>"; };
+		DCD51A3E1A22EB1D00A544B5 /* XLFormStepCounterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormStepCounterCell.h; sourceTree = "<group>"; };
+		DCD51A3F1A22EB1D00A544B5 /* XLFormStepCounterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormStepCounterCell.m; sourceTree = "<group>"; };
+		DCD51A401A22EB1D00A544B5 /* XLFormSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormSwitchCell.h; sourceTree = "<group>"; };
+		DCD51A411A22EB1D00A544B5 /* XLFormSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormSwitchCell.m; sourceTree = "<group>"; };
+		DCD51A421A22EB1D00A544B5 /* XLFormTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormTextFieldCell.h; sourceTree = "<group>"; };
+		DCD51A431A22EB1D00A544B5 /* XLFormTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormTextFieldCell.m; sourceTree = "<group>"; };
+		DCD51A441A22EB1D00A544B5 /* XLFormTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormTextViewCell.h; sourceTree = "<group>"; };
+		DCD51A451A22EB1D00A544B5 /* XLFormTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormTextViewCell.m; sourceTree = "<group>"; };
+		DCD51A471A22EB1D00A544B5 /* XLFormOptionsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormOptionsObject.h; sourceTree = "<group>"; };
+		DCD51A481A22EB1D00A544B5 /* XLFormOptionsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormOptionsObject.m; sourceTree = "<group>"; };
+		DCD51A491A22EB1D00A544B5 /* XLFormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormOptionsViewController.h; sourceTree = "<group>"; };
+		DCD51A4A1A22EB1D00A544B5 /* XLFormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormOptionsViewController.m; sourceTree = "<group>"; };
+		DCD51A4B1A22EB1D00A544B5 /* XLFormRowDescriptorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormRowDescriptorViewController.h; sourceTree = "<group>"; };
+		DCD51A4C1A22EB1D00A544B5 /* XLFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormViewController.h; sourceTree = "<group>"; };
+		DCD51A4D1A22EB1D00A544B5 /* XLFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormViewController.m; sourceTree = "<group>"; };
+		DCD51A4F1A22EB1D00A544B5 /* XLFormDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormDescriptor.h; sourceTree = "<group>"; };
+		DCD51A501A22EB1D00A544B5 /* XLFormDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormDescriptor.m; sourceTree = "<group>"; };
+		DCD51A511A22EB1D00A544B5 /* XLFormDescriptorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormDescriptorDelegate.h; sourceTree = "<group>"; };
+		DCD51A521A22EB1D00A544B5 /* XLFormRowDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormRowDescriptor.h; sourceTree = "<group>"; };
+		DCD51A531A22EB1D00A544B5 /* XLFormRowDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormRowDescriptor.m; sourceTree = "<group>"; };
+		DCD51A541A22EB1D00A544B5 /* XLFormSectionDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormSectionDescriptor.h; sourceTree = "<group>"; };
+		DCD51A551A22EB1D00A544B5 /* XLFormSectionDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormSectionDescriptor.m; sourceTree = "<group>"; };
+		DCD51A571A22EB1D00A544B5 /* NSArray+XLFormAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+XLFormAdditions.h"; sourceTree = "<group>"; };
+		DCD51A581A22EB1D00A544B5 /* NSArray+XLFormAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+XLFormAdditions.m"; sourceTree = "<group>"; };
+		DCD51A591A22EB1D00A544B5 /* NSObject+XLFormAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+XLFormAdditions.h"; sourceTree = "<group>"; };
+		DCD51A5A1A22EB1D00A544B5 /* NSObject+XLFormAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+XLFormAdditions.m"; sourceTree = "<group>"; };
+		DCD51A5B1A22EB1D00A544B5 /* UIView+XLFormAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLFormAdditions.h"; sourceTree = "<group>"; };
+		DCD51A5C1A22EB1D00A544B5 /* UIView+XLFormAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XLFormAdditions.m"; sourceTree = "<group>"; };
+		DCD51A5E1A22EB1D00A544B5 /* XLFormRightDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormRightDetailCell.h; sourceTree = "<group>"; };
+		DCD51A5F1A22EB1D00A544B5 /* XLFormRightDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormRightDetailCell.m; sourceTree = "<group>"; };
+		DCD51A601A22EB1D00A544B5 /* XLFormRightImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormRightImageButton.h; sourceTree = "<group>"; };
+		DCD51A611A22EB1D00A544B5 /* XLFormRightImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormRightImageButton.m; sourceTree = "<group>"; };
+		DCD51A621A22EB1D00A544B5 /* XLFormTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormTextView.h; sourceTree = "<group>"; };
+		DCD51A631A22EB1D00A544B5 /* XLFormTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormTextView.m; sourceTree = "<group>"; };
+		DCD51A651A22EB1D00A544B5 /* XLFormRegexValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormRegexValidator.h; sourceTree = "<group>"; };
+		DCD51A661A22EB1D00A544B5 /* XLFormRegexValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormRegexValidator.m; sourceTree = "<group>"; };
+		DCD51A671A22EB1D00A544B5 /* XLFormValidationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormValidationStatus.h; sourceTree = "<group>"; };
+		DCD51A681A22EB1D00A544B5 /* XLFormValidationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormValidationStatus.m; sourceTree = "<group>"; };
+		DCD51A691A22EB1D00A544B5 /* XLFormValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormValidator.h; sourceTree = "<group>"; };
+		DCD51A6A1A22EB1D00A544B5 /* XLFormValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormValidator.m; sourceTree = "<group>"; };
+		DCD51A6B1A22EB1D00A544B5 /* XLFormValidatorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormValidatorProtocol.h; sourceTree = "<group>"; };
+		DCD51A6C1A22EB1D00A544B5 /* XLForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLForm.h; sourceTree = "<group>"; };
+		DCD51A6D1A22EB1D00A544B5 /* XLForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLForm.m; sourceTree = "<group>"; };
+		DCD51A6E1A22EB1D00A544B5 /* XLForm.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XLForm.bundle; sourceTree = "<group>"; };
+		DCD51B091A22EB9900A544B5 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		DCF83DA71A22E47F00F3DF48 /* IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF83DAB1A22E47F00F3DF48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCF83DAC1A22E47F00F3DF48 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,6 +514,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD51B0A1A22EB9900A544B5 /* libxml2.dylib in Frameworks */,
+				4C40CD07F76162109DF5D2FB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +529,587 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		033AD154D64336DEFF1A4323 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51B091A22EB9900A544B5 /* libxml2.dylib */,
+				40BE4D5403D93F36B0DF123E /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB3971B178DDF794D17AABB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC16DFAECC0724E1665B1CA9 /* Pods.debug.xcconfig */,
+				014F78F73053B6554412BF72 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DCD519191A22EB1D00A544B5 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				DCD5191A1A22EB1D00A544B5 /* Encrypt.h */,
+				DCD5191B1A22EB1D00A544B5 /* Encrypt.m */,
+				DCD5191C1A22EB1D00A544B5 /* LogLevel.h */,
+				DCD5191D1A22EB1D00A544B5 /* NSData+CommonCrypto.h */,
+				DCD5191E1A22EB1D00A544B5 /* NSData+CommonCrypto.m */,
+				DCD5191F1A22EB1D00A544B5 /* NSDate+Common.h */,
+				DCD519201A22EB1D00A544B5 /* NSDate+Common.m */,
+				DCD519211A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.h */,
+				DCD519221A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.m */,
+				DCD519231A22EB1D00A544B5 /* NSUUID+StringUUID.h */,
+				DCD519241A22EB1D00A544B5 /* NSUUID+StringUUID.m */,
+				DCD519251A22EB1D00A544B5 /* Utils.h */,
+				DCD519261A22EB1D00A544B5 /* Utils.m */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		DCD519271A22EB1D00A544B5 /* dict */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519281A22EB1D00A544B5 /* Dict.h */,
+				DCD519291A22EB1D00A544B5 /* Dict.m */,
+				DCD5192A1A22EB1D00A544B5 /* DictDb.h */,
+				DCD5192B1A22EB1D00A544B5 /* DictDb.m */,
+				DCD5192C1A22EB1D00A544B5 /* DictDownloadReq.h */,
+				DCD5192D1A22EB1D00A544B5 /* DictDownloadReq.m */,
+				DCD5192E1A22EB1D00A544B5 /* dictname.plist */,
+				DCD5192F1A22EB1D00A544B5 /* DictRequest.h */,
+				DCD519301A22EB1D00A544B5 /* DictRequest.m */,
+				DCD519311A22EB1D00A544B5 /* DictsDownloader.h */,
+				DCD519321A22EB1D00A544B5 /* DictsDownloader.m */,
+				DCD519331A22EB1D00A544B5 /* DictsMgr.h */,
+				DCD519341A22EB1D00A544B5 /* DictsMgr.m */,
+				DCD519351A22EB1D00A544B5 /* DictsVersion.h */,
+				DCD519361A22EB1D00A544B5 /* DictsVersion.m */,
+				DCD519371A22EB1D00A544B5 /* DictsVersionReq.h */,
+				DCD519381A22EB1D00A544B5 /* DictsVersionReq.m */,
+				DCD519391A22EB1D00A544B5 /* DictsVersionSync.h */,
+				DCD5193A1A22EB1D00A544B5 /* DictsVersionSync.m */,
+				DCD5193B1A22EB1D00A544B5 /* DictVersionResp.h */,
+				DCD5193C1A22EB1D00A544B5 /* DictVersionResp.m */,
+			);
+			path = dict;
+			sourceTree = "<group>";
+		};
+		DCD5193D1A22EB1D00A544B5 /* jsonrpc */ = {
+			isa = PBXGroup;
+			children = (
+				DCD5193E1A22EB1D00A544B5 /* JRBinResponse.h */,
+				DCD5193F1A22EB1D00A544B5 /* JRBinResponse.m */,
+				DCD519401A22EB1D00A544B5 /* JRErrorResponse.h */,
+				DCD519411A22EB1D00A544B5 /* JRErrorResponse.m */,
+				DCD519421A22EB1D00A544B5 /* JRListResponse.h */,
+				DCD519431A22EB1D00A544B5 /* JRListResponse.m */,
+				DCD519441A22EB1D00A544B5 /* JRReqest.h */,
+				DCD519451A22EB1D00A544B5 /* JRReqest.m */,
+				DCD519461A22EB1D00A544B5 /* JRReqMethod.h */,
+				DCD519471A22EB1D00A544B5 /* JRReqMethod.m */,
+				DCD519481A22EB1D00A544B5 /* JRReqParam.h */,
+				DCD519491A22EB1D00A544B5 /* JRReqParam.m */,
+				DCD5194A1A22EB1D00A544B5 /* JRResponse.h */,
+				DCD5194B1A22EB1D00A544B5 /* JRResponse.m */,
+				DCD5194C1A22EB1D00A544B5 /* JRResponseFactory.h */,
+				DCD5194D1A22EB1D00A544B5 /* JRResponseFactory.m */,
+				DCD5194E1A22EB1D00A544B5 /* JRServices.h */,
+				DCD5194F1A22EB1D00A544B5 /* JRSession.h */,
+				DCD519501A22EB1D00A544B5 /* JRSession.m */,
+				DCD519511A22EB1D00A544B5 /* JRTableResponse.h */,
+				DCD519521A22EB1D00A544B5 /* JRTableResponse.m */,
+				DCD519531A22EB1D00A544B5 /* JRTextResponse.h */,
+				DCD519541A22EB1D00A544B5 /* JRTextResponse.m */,
+			);
+			path = jsonrpc;
+			sourceTree = "<group>";
+		};
+		DCD519551A22EB1D00A544B5 /* jsonrpcParam */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519561A22EB1D00A544B5 /* JRReqCheckDictVersionParam.h */,
+				DCD519571A22EB1D00A544B5 /* JRReqCheckDictVersionParam.m */,
+				DCD519581A22EB1D00A544B5 /* JRReqCommonParam.h */,
+				DCD519591A22EB1D00A544B5 /* JRReqCommonParam.m */,
+				DCD5195A1A22EB1D00A544B5 /* JRreqFrbhParam.h */,
+				DCD5195B1A22EB1D00A544B5 /* JRreqFrbhParam.m */,
+				DCD5195C1A22EB1D00A544B5 /* JRReqFrxxDetailParam.h */,
+				DCD5195D1A22EB1D00A544B5 /* JRReqFrxxDetailParam.m */,
+			);
+			path = jsonrpcParam;
+			sourceTree = "<group>";
+		};
+		DCD5195E1A22EB1D00A544B5 /* logs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = logs;
+			sourceTree = "<group>";
+		};
+		DCD519611A22EB1D00A544B5 /* messages */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519621A22EB1D00A544B5 /* LoginRequest.h */,
+				DCD519631A22EB1D00A544B5 /* LoginRequest.m */,
+				DCD519641A22EB1D00A544B5 /* LoginResp.h */,
+				DCD519651A22EB1D00A544B5 /* LoginResp.m */,
+				DCD519661A22EB1D00A544B5 /* LogoutRequest.h */,
+				DCD519671A22EB1D00A544B5 /* LogoutRequest.m */,
+				DCD519681A22EB1D00A544B5 /* RecvPushRequest.h */,
+				DCD519691A22EB1D00A544B5 /* RecvPushRequest.m */,
+				DCD5196A1A22EB1D00A544B5 /* RecvPushResp.h */,
+				DCD5196B1A22EB1D00A544B5 /* RecvPushResp.m */,
+			);
+			path = messages;
+			sourceTree = "<group>";
+		};
+		DCD5196C1A22EB1D00A544B5 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				DCD5196D1A22EB1D00A544B5 /* base */,
+				DCD519CE1A22EB1D00A544B5 /* bfjh */,
+				DCD519D31A22EB1D00A544B5 /* default */,
+				DCD519D81A22EB1D00A544B5 /* login */,
+				DCD519E11A22EB1D00A544B5 /* main */,
+				DCD519E91A22EB1D00A544B5 /* ModuleMgr.h */,
+				DCD519EA1A22EB1D00A544B5 /* ModuleMgr.m */,
+			);
+			path = modules;
+			sourceTree = "<group>";
+		};
+		DCD5196D1A22EB1D00A544B5 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				DCD5196E1A22EB1D00A544B5 /* app.xml */,
+				DCD5196F1A22EB1D00A544B5 /* GDataXMLNode.h */,
+				DCD519701A22EB1D00A544B5 /* GDataXMLNode.m */,
+				DCD519711A22EB1D00A544B5 /* Module.h */,
+				DCD519721A22EB1D00A544B5 /* Module.m */,
+				DCD519731A22EB1D00A544B5 /* ModuleConstants.h */,
+				DCD519741A22EB1D00A544B5 /* ModuleDefault.h */,
+				DCD519751A22EB1D00A544B5 /* ModuleDefault.m */,
+				DCD519761A22EB1D00A544B5 /* ModuleDirectory.h */,
+				DCD519771A22EB1D00A544B5 /* ModuleDirectory.m */,
+				DCD519781A22EB1D00A544B5 /* ModuleQuery.h */,
+				DCD519791A22EB1D00A544B5 /* ModuleQuery.m */,
+				DCD5197A1A22EB1D00A544B5 /* ModuleRoot.h */,
+				DCD5197B1A22EB1D00A544B5 /* ModuleRoot.m */,
+				DCD5197C1A22EB1D00A544B5 /* NSString+CheckNumeric.h */,
+				DCD5197D1A22EB1D00A544B5 /* NSString+CheckNumeric.m */,
+				DCD5197E1A22EB1D00A544B5 /* Page.h */,
+				DCD5197F1A22EB1D00A544B5 /* Page.m */,
+				DCD519801A22EB1D00A544B5 /* Pages.h */,
+				DCD519811A22EB1D00A544B5 /* Pages.m */,
+				DCD519821A22EB1D00A544B5 /* Row.h */,
+				DCD519831A22EB1D00A544B5 /* Row.m */,
+				DCD519841A22EB1D00A544B5 /* RowAccount.h */,
+				DCD519851A22EB1D00A544B5 /* RowAccount.m */,
+				DCD519861A22EB1D00A544B5 /* RowBooleanCheck.h */,
+				DCD519871A22EB1D00A544B5 /* RowBooleanCheck.m */,
+				DCD519881A22EB1D00A544B5 /* RowBooleanSwitch.h */,
+				DCD519891A22EB1D00A544B5 /* RowBooleanSwitch.m */,
+				DCD5198A1A22EB1D00A544B5 /* RowButton.h */,
+				DCD5198B1A22EB1D00A544B5 /* RowButton.m */,
+				DCD5198C1A22EB1D00A544B5 /* RowDate.h */,
+				DCD5198D1A22EB1D00A544B5 /* RowDate.m */,
+				DCD5198E1A22EB1D00A544B5 /* RowDateInline.h */,
+				DCD5198F1A22EB1D00A544B5 /* RowDateInline.m */,
+				DCD519901A22EB1D00A544B5 /* RowDatePicker.h */,
+				DCD519911A22EB1D00A544B5 /* RowDatePicker.m */,
+				DCD519921A22EB1D00A544B5 /* RowDatetime.h */,
+				DCD519931A22EB1D00A544B5 /* RowDatetime.m */,
+				DCD519941A22EB1D00A544B5 /* RowDateTimeInline.h */,
+				DCD519951A22EB1D00A544B5 /* RowDateTimeInline.m */,
+				DCD519961A22EB1D00A544B5 /* RowDecimal.h */,
+				DCD519971A22EB1D00A544B5 /* RowDecimal.m */,
+				DCD519981A22EB1D00A544B5 /* RowEmail.h */,
+				DCD519991A22EB1D00A544B5 /* RowEmail.m */,
+				DCD5199A1A22EB1D00A544B5 /* RowFactory.h */,
+				DCD5199B1A22EB1D00A544B5 /* RowFactory.m */,
+				DCD5199C1A22EB1D00A544B5 /* RowInfo.h */,
+				DCD5199D1A22EB1D00A544B5 /* RowInfo.m */,
+				DCD5199E1A22EB1D00A544B5 /* RowInteger.h */,
+				DCD5199F1A22EB1D00A544B5 /* RowInteger.m */,
+				DCD519A01A22EB1D00A544B5 /* RowMultipleSelector.h */,
+				DCD519A11A22EB1D00A544B5 /* RowMultipleSelector.m */,
+				DCD519A21A22EB1D00A544B5 /* RowMultipleSelectorPopover.h */,
+				DCD519A31A22EB1D00A544B5 /* RowMultipleSelectorPopover.m */,
+				DCD519A41A22EB1D00A544B5 /* RowName.h */,
+				DCD519A51A22EB1D00A544B5 /* RowName.m */,
+				DCD519A61A22EB1D00A544B5 /* RowNumber.h */,
+				DCD519A71A22EB1D00A544B5 /* RowNumber.m */,
+				DCD519A81A22EB1D00A544B5 /* RowPassword.h */,
+				DCD519A91A22EB1D00A544B5 /* RowPassword.m */,
+				DCD519AA1A22EB1D00A544B5 /* RowPhone.h */,
+				DCD519AB1A22EB1D00A544B5 /* RowPhone.m */,
+				DCD519AC1A22EB1D00A544B5 /* RowPicker.h */,
+				DCD519AD1A22EB1D00A544B5 /* RowPicker.m */,
+				DCD519AE1A22EB1D00A544B5 /* RowSelectorActionSheet.h */,
+				DCD519AF1A22EB1D00A544B5 /* RowSelectorActionSheet.m */,
+				DCD519B01A22EB1D00A544B5 /* RowSelectorAlertView.h */,
+				DCD519B11A22EB1D00A544B5 /* RowSelectorAlertView.m */,
+				DCD519B21A22EB1D00A544B5 /* RowSelectorPickerView.h */,
+				DCD519B31A22EB1D00A544B5 /* RowSelectorPickerView.m */,
+				DCD519B41A22EB1D00A544B5 /* RowSelectorPickerViewInline.h */,
+				DCD519B51A22EB1D00A544B5 /* RowSelectorPickerViewInline.m */,
+				DCD519B61A22EB1D00A544B5 /* RowSelectorPopover.h */,
+				DCD519B71A22EB1D00A544B5 /* RowSelectorPopover.m */,
+				DCD519B81A22EB1D00A544B5 /* RowSelectorPush.h */,
+				DCD519B91A22EB1D00A544B5 /* RowSelectorPush.m */,
+				DCD519BA1A22EB1D00A544B5 /* RowSelectorSegmentedControl.h */,
+				DCD519BB1A22EB1D00A544B5 /* RowSelectorSegmentedControl.m */,
+				DCD519BC1A22EB1D00A544B5 /* RowSlider.h */,
+				DCD519BD1A22EB1D00A544B5 /* RowSlider.m */,
+				DCD519BE1A22EB1D00A544B5 /* RowStepCounter.h */,
+				DCD519BF1A22EB1D00A544B5 /* RowStepCounter.m */,
+				DCD519C01A22EB1D00A544B5 /* RowText.h */,
+				DCD519C11A22EB1D00A544B5 /* RowText.m */,
+				DCD519C21A22EB1D00A544B5 /* RowTextView.h */,
+				DCD519C31A22EB1D00A544B5 /* RowTextView.m */,
+				DCD519C41A22EB1D00A544B5 /* RowTime.h */,
+				DCD519C51A22EB1D00A544B5 /* RowTime.m */,
+				DCD519C61A22EB1D00A544B5 /* RowTimeInline.h */,
+				DCD519C71A22EB1D00A544B5 /* RowTimeInline.m */,
+				DCD519C81A22EB1D00A544B5 /* RowTwitter.h */,
+				DCD519C91A22EB1D00A544B5 /* RowTwitter.m */,
+				DCD519CA1A22EB1D00A544B5 /* RowUrl.h */,
+				DCD519CB1A22EB1D00A544B5 /* RowUrl.m */,
+				DCD519CC1A22EB1D00A544B5 /* Section.h */,
+				DCD519CD1A22EB1D00A544B5 /* Section.m */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		DCD519CE1A22EB1D00A544B5 /* bfjh */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519CF1A22EB1D00A544B5 /* PfjhMgrVC.h */,
+				DCD519D01A22EB1D00A544B5 /* PfjhMgrVC.m */,
+				DCD519D11A22EB1D00A544B5 /* PfxxPageVC.h */,
+				DCD519D21A22EB1D00A544B5 /* PfxxPageVC.m */,
+			);
+			path = bfjh;
+			sourceTree = "<group>";
+		};
+		DCD519D31A22EB1D00A544B5 /* default */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519D41A22EB1D00A544B5 /* ModuleDefaultPageViewController.h */,
+				DCD519D51A22EB1D00A544B5 /* ModuleDefaultPageViewController.m */,
+				DCD519D61A22EB1D00A544B5 /* ModuleDefaultViewController.h */,
+				DCD519D71A22EB1D00A544B5 /* ModuleDefaultViewController.m */,
+			);
+			path = default;
+			sourceTree = "<group>";
+		};
+		DCD519D81A22EB1D00A544B5 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519D91A22EB1D00A544B5 /* controller */,
+				DCD519DD1A22EB1D00A544B5 /* model */,
+				DCD519E01A22EB1D00A544B5 /* view */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		DCD519D91A22EB1D00A544B5 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519DA1A22EB1D00A544B5 /* LoginViewController.h */,
+				DCD519DB1A22EB1D00A544B5 /* LoginViewController.m */,
+				DCD519DC1A22EB1D00A544B5 /* LoginViewController.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		DCD519DD1A22EB1D00A544B5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519DE1A22EB1D00A544B5 /* LoginProcedures.h */,
+				DCD519DF1A22EB1D00A544B5 /* LoginProcedures.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DCD519E01A22EB1D00A544B5 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		DCD519E11A22EB1D00A544B5 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519E21A22EB1D00A544B5 /* controller */,
+				DCD519E31A22EB1D00A544B5 /* model */,
+				DCD519E81A22EB1D00A544B5 /* view */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		DCD519E21A22EB1D00A544B5 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		DCD519E31A22EB1D00A544B5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519E41A22EB1D00A544B5 /* MainItemData.h */,
+				DCD519E51A22EB1D00A544B5 /* MainItemData.m */,
+				DCD519E61A22EB1D00A544B5 /* MainModel.h */,
+				DCD519E71A22EB1D00A544B5 /* MainModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DCD519E81A22EB1D00A544B5 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		DCD519EB1A22EB1D00A544B5 /* session */ = {
+			isa = PBXGroup;
+			children = (
+				DCD519EC1A22EB1D00A544B5 /* DataConstants.h */,
+				DCD519ED1A22EB1D00A544B5 /* Hb.h */,
+				DCD519EE1A22EB1D00A544B5 /* Hb.m */,
+				DCD519EF1A22EB1D00A544B5 /* InputStream.h */,
+				DCD519F01A22EB1D00A544B5 /* InputStream.m */,
+				DCD519F11A22EB1D00A544B5 /* Message.h */,
+				DCD519F21A22EB1D00A544B5 /* Message.m */,
+				DCD519F31A22EB1D00A544B5 /* MessageConstants.h */,
+				DCD519F41A22EB1D00A544B5 /* MessageFactory.h */,
+				DCD519F51A22EB1D00A544B5 /* MessageFactory.m */,
+				DCD519F61A22EB1D00A544B5 /* MessageKeeper.h */,
+				DCD519F71A22EB1D00A544B5 /* MessageKeeper.m */,
+				DCD519F81A22EB1D00A544B5 /* MessageParser.h */,
+				DCD519F91A22EB1D00A544B5 /* MessageParser.m */,
+				DCD519FA1A22EB1D00A544B5 /* MessageQueueNode.h */,
+				DCD519FB1A22EB1D00A544B5 /* MessageQueueNode.m */,
+				DCD519FC1A22EB1D00A544B5 /* NSMutableData+stream.h */,
+				DCD519FD1A22EB1D00A544B5 /* NSMutableData+stream.m */,
+				DCD519FE1A22EB1D00A544B5 /* OutputStream.h */,
+				DCD519FF1A22EB1D00A544B5 /* OutputStream.m */,
+				DCD51A001A22EB1D00A544B5 /* Pkg.h */,
+				DCD51A011A22EB1D00A544B5 /* Pkg.m */,
+				DCD51A021A22EB1D00A544B5 /* Push.h */,
+				DCD51A031A22EB1D00A544B5 /* Push.m */,
+				DCD51A041A22EB1D00A544B5 /* Request.h */,
+				DCD51A051A22EB1D00A544B5 /* Request.m */,
+				DCD51A061A22EB1D00A544B5 /* Response.h */,
+				DCD51A071A22EB1D00A544B5 /* Response.m */,
+				DCD51A081A22EB1D00A544B5 /* ServerTimeMsg.h */,
+				DCD51A091A22EB1D00A544B5 /* ServerTimeMsg.m */,
+				DCD51A0A1A22EB1D00A544B5 /* session.h */,
+				DCD51A0B1A22EB1D00A544B5 /* session.m */,
+				DCD51A0C1A22EB1D00A544B5 /* SessionConstants.h */,
+			);
+			path = session;
+			sourceTree = "<group>";
+		};
+		DCD51A0D1A22EB1D00A544B5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A0E1A22EB1D00A544B5 /* base */,
+				DCD51A181A22EB1D00A544B5 /* main */,
+				DCD51A1C1A22EB1D00A544B5 /* waiting */,
+				DCD51A201A22EB1D00A544B5 /* XLForm */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DCD51A0E1A22EB1D00A544B5 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A0F1A22EB1D00A544B5 /* PagesMgrViewController.h */,
+				DCD51A101A22EB1D00A544B5 /* PagesMgrViewController.m */,
+				DCD51A111A22EB1D00A544B5 /* PageViewController.h */,
+				DCD51A121A22EB1D00A544B5 /* PageViewController.m */,
+				DCD51A131A22EB1D00A544B5 /* SwipeBtnBarView.h */,
+				DCD51A141A22EB1D00A544B5 /* SwipeBtnBarView.m */,
+				DCD51A151A22EB1D00A544B5 /* SwipeButtonBarViewCell.h */,
+				DCD51A161A22EB1D00A544B5 /* SwipeButtonBarViewCell.m */,
+				DCD51A171A22EB1D00A544B5 /* SwipeButtonBarViewCell.xib */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		DCD51A181A22EB1D00A544B5 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A191A22EB1D00A544B5 /* MainCVC.h */,
+				DCD51A1A1A22EB1D00A544B5 /* MainCVC.m */,
+				DCD51A1B1A22EB1D00A544B5 /* MainCVC.xib */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		DCD51A1C1A22EB1D00A544B5 /* waiting */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A1D1A22EB1D00A544B5 /* WaitingViewController.h */,
+				DCD51A1E1A22EB1D00A544B5 /* WaitingViewController.m */,
+				DCD51A1F1A22EB1D00A544B5 /* WaitingViewController.xib */,
+			);
+			path = waiting;
+			sourceTree = "<group>";
+		};
+		DCD51A201A22EB1D00A544B5 /* XLForm */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A211A22EB1D00A544B5 /* LICENSE */,
+				DCD51A221A22EB1D00A544B5 /* README.md */,
+				DCD51A231A22EB1D00A544B5 /* XLForm */,
+			);
+			path = XLForm;
+			sourceTree = "<group>";
+		};
+		DCD51A231A22EB1D00A544B5 /* XLForm */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A241A22EB1D00A544B5 /* XL */,
+				DCD51A6E1A22EB1D00A544B5 /* XLForm.bundle */,
+			);
+			path = XLForm;
+			sourceTree = "<group>";
+		};
+		DCD51A241A22EB1D00A544B5 /* XL */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A251A22EB1D00A544B5 /* Cell */,
+				DCD51A461A22EB1D00A544B5 /* Controllers */,
+				DCD51A4E1A22EB1D00A544B5 /* Descriptors */,
+				DCD51A561A22EB1D00A544B5 /* Helpers */,
+				DCD51A641A22EB1D00A544B5 /* Validation */,
+				DCD51A6C1A22EB1D00A544B5 /* XLForm.h */,
+				DCD51A6D1A22EB1D00A544B5 /* XLForm.m */,
+			);
+			path = XL;
+			sourceTree = "<group>";
+		};
+		DCD51A251A22EB1D00A544B5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A261A22EB1D00A544B5 /* XLFormBaseCell.h */,
+				DCD51A271A22EB1D00A544B5 /* XLFormBaseCell.m */,
+				DCD51A281A22EB1D00A544B5 /* XLFormButtonCell.h */,
+				DCD51A291A22EB1D00A544B5 /* XLFormButtonCell.m */,
+				DCD51A2A1A22EB1D00A544B5 /* XLFormCheckCell.h */,
+				DCD51A2B1A22EB1D00A544B5 /* XLFormCheckCell.m */,
+				DCD51A2C1A22EB1D00A544B5 /* XLFormDateCell.h */,
+				DCD51A2D1A22EB1D00A544B5 /* XLFormDateCell.m */,
+				DCD51A2E1A22EB1D00A544B5 /* XLFormDatePickerCell.h */,
+				DCD51A2F1A22EB1D00A544B5 /* XLFormDatePickerCell.m */,
+				DCD51A301A22EB1D00A544B5 /* XLFormDescriptorCell.h */,
+				DCD51A311A22EB1D00A544B5 /* XLFormInlineRowDescriptorCell.h */,
+				DCD51A321A22EB1D00A544B5 /* XLFormInlineSelectorCell.h */,
+				DCD51A331A22EB1D00A544B5 /* XLFormInlineSelectorCell.m */,
+				DCD51A341A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.h */,
+				DCD51A351A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.m */,
+				DCD51A361A22EB1D00A544B5 /* XLFormPickerCell.h */,
+				DCD51A371A22EB1D00A544B5 /* XLFormPickerCell.m */,
+				DCD51A381A22EB1D00A544B5 /* XLFormSegmentedCell.h */,
+				DCD51A391A22EB1D00A544B5 /* XLFormSegmentedCell.m */,
+				DCD51A3A1A22EB1D00A544B5 /* XLFormSelectorCell.h */,
+				DCD51A3B1A22EB1D00A544B5 /* XLFormSelectorCell.m */,
+				DCD51A3C1A22EB1D00A544B5 /* XLFormSliderCell.h */,
+				DCD51A3D1A22EB1D00A544B5 /* XLFormSliderCell.m */,
+				DCD51A3E1A22EB1D00A544B5 /* XLFormStepCounterCell.h */,
+				DCD51A3F1A22EB1D00A544B5 /* XLFormStepCounterCell.m */,
+				DCD51A401A22EB1D00A544B5 /* XLFormSwitchCell.h */,
+				DCD51A411A22EB1D00A544B5 /* XLFormSwitchCell.m */,
+				DCD51A421A22EB1D00A544B5 /* XLFormTextFieldCell.h */,
+				DCD51A431A22EB1D00A544B5 /* XLFormTextFieldCell.m */,
+				DCD51A441A22EB1D00A544B5 /* XLFormTextViewCell.h */,
+				DCD51A451A22EB1D00A544B5 /* XLFormTextViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DCD51A461A22EB1D00A544B5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A471A22EB1D00A544B5 /* XLFormOptionsObject.h */,
+				DCD51A481A22EB1D00A544B5 /* XLFormOptionsObject.m */,
+				DCD51A491A22EB1D00A544B5 /* XLFormOptionsViewController.h */,
+				DCD51A4A1A22EB1D00A544B5 /* XLFormOptionsViewController.m */,
+				DCD51A4B1A22EB1D00A544B5 /* XLFormRowDescriptorViewController.h */,
+				DCD51A4C1A22EB1D00A544B5 /* XLFormViewController.h */,
+				DCD51A4D1A22EB1D00A544B5 /* XLFormViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DCD51A4E1A22EB1D00A544B5 /* Descriptors */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A4F1A22EB1D00A544B5 /* XLFormDescriptor.h */,
+				DCD51A501A22EB1D00A544B5 /* XLFormDescriptor.m */,
+				DCD51A511A22EB1D00A544B5 /* XLFormDescriptorDelegate.h */,
+				DCD51A521A22EB1D00A544B5 /* XLFormRowDescriptor.h */,
+				DCD51A531A22EB1D00A544B5 /* XLFormRowDescriptor.m */,
+				DCD51A541A22EB1D00A544B5 /* XLFormSectionDescriptor.h */,
+				DCD51A551A22EB1D00A544B5 /* XLFormSectionDescriptor.m */,
+			);
+			path = Descriptors;
+			sourceTree = "<group>";
+		};
+		DCD51A561A22EB1D00A544B5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A571A22EB1D00A544B5 /* NSArray+XLFormAdditions.h */,
+				DCD51A581A22EB1D00A544B5 /* NSArray+XLFormAdditions.m */,
+				DCD51A591A22EB1D00A544B5 /* NSObject+XLFormAdditions.h */,
+				DCD51A5A1A22EB1D00A544B5 /* NSObject+XLFormAdditions.m */,
+				DCD51A5B1A22EB1D00A544B5 /* UIView+XLFormAdditions.h */,
+				DCD51A5C1A22EB1D00A544B5 /* UIView+XLFormAdditions.m */,
+				DCD51A5D1A22EB1D00A544B5 /* Views */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DCD51A5D1A22EB1D00A544B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A5E1A22EB1D00A544B5 /* XLFormRightDetailCell.h */,
+				DCD51A5F1A22EB1D00A544B5 /* XLFormRightDetailCell.m */,
+				DCD51A601A22EB1D00A544B5 /* XLFormRightImageButton.h */,
+				DCD51A611A22EB1D00A544B5 /* XLFormRightImageButton.m */,
+				DCD51A621A22EB1D00A544B5 /* XLFormTextView.h */,
+				DCD51A631A22EB1D00A544B5 /* XLFormTextView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DCD51A641A22EB1D00A544B5 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				DCD51A651A22EB1D00A544B5 /* XLFormRegexValidator.h */,
+				DCD51A661A22EB1D00A544B5 /* XLFormRegexValidator.m */,
+				DCD51A671A22EB1D00A544B5 /* XLFormValidationStatus.h */,
+				DCD51A681A22EB1D00A544B5 /* XLFormValidationStatus.m */,
+				DCD51A691A22EB1D00A544B5 /* XLFormValidator.h */,
+				DCD51A6A1A22EB1D00A544B5 /* XLFormValidator.m */,
+				DCD51A6B1A22EB1D00A544B5 /* XLFormValidatorProtocol.h */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
 		DCF83D9E1A22E47E00F3DF48 = {
 			isa = PBXGroup;
 			children = (
 				DCF83DA91A22E47F00F3DF48 /* IM */,
 				DCF83DC31A22E47F00F3DF48 /* IMTests */,
 				DCF83DA81A22E47F00F3DF48 /* Products */,
+				CB3971B178DDF794D17AABB2 /* Pods */,
+				033AD154D64336DEFF1A4323 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +1125,15 @@
 		DCF83DA91A22E47F00F3DF48 /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				DCD519191A22EB1D00A544B5 /* common */,
+				DCD519271A22EB1D00A544B5 /* dict */,
+				DCD5193D1A22EB1D00A544B5 /* jsonrpc */,
+				DCD519551A22EB1D00A544B5 /* jsonrpcParam */,
+				DCD5195E1A22EB1D00A544B5 /* logs */,
+				DCD519611A22EB1D00A544B5 /* messages */,
+				DCD5196C1A22EB1D00A544B5 /* modules */,
+				DCD519EB1A22EB1D00A544B5 /* session */,
+				DCD51A0D1A22EB1D00A544B5 /* UI */,
 				DCF83DAE1A22E47F00F3DF48 /* AppDelegate.h */,
 				DCF83DAF1A22E47F00F3DF48 /* AppDelegate.m */,
 				DCF83DB11A22E47F00F3DF48 /* ViewController.h */,
@@ -126,9 +1179,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCF83DCA1A22E47F00F3DF48 /* Build configuration list for PBXNativeTarget "IM" */;
 			buildPhases = (
+				D7828E703B38A5505C9444C2 /* Check Pods Manifest.lock */,
 				DCF83DA31A22E47E00F3DF48 /* Sources */,
 				DCF83DA41A22E47E00F3DF48 /* Frameworks */,
 				DCF83DA51A22E47E00F3DF48 /* Resources */,
+				D40C1B4FBB5CDD2CBE88779F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +1255,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCF83DB61A22E47F00F3DF48 /* Main.storyboard in Resources */,
+				DCD51A781A22EB1D00A544B5 /* dictname.plist in Resources */,
+				DCD51ACA1A22EB1D00A544B5 /* LoginViewController.xib in Resources */,
+				DCD51A951A22EB1D00A544B5 /* app.xml in Resources */,
+				DCD51AE71A22EB1D00A544B5 /* LICENSE in Resources */,
+				DCD51B081A22EB1D00A544B5 /* XLForm.bundle in Resources */,
 				DCF83DBB1A22E47F00F3DF48 /* LaunchScreen.xib in Resources */,
+				DCD51AE41A22EB1D00A544B5 /* MainCVC.xib in Resources */,
+				DCD51AE21A22EB1D00A544B5 /* SwipeButtonBarViewCell.xib in Resources */,
+				DCD51AE61A22EB1D00A544B5 /* WaitingViewController.xib in Resources */,
 				DCF83DB81A22E47F00F3DF48 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,14 +1277,192 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D40C1B4FBB5CDD2CBE88779F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7828E703B38A5505C9444C2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DCF83DA31A22E47E00F3DF48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD51AF11A22EB1D00A544B5 /* XLFormSegmentedCell.m in Sources */,
+				DCD51AB01A22EB1D00A544B5 /* RowName.m in Sources */,
+				DCD51A741A22EB1D00A544B5 /* Utils.m in Sources */,
+				DCD51B011A22EB1D00A544B5 /* XLFormRightDetailCell.m in Sources */,
+				DCD51ACD1A22EB1D00A544B5 /* MainModel.m in Sources */,
+				DCD51AA01A22EB1D00A544B5 /* RowAccount.m in Sources */,
+				DCD51AB91A22EB1D00A544B5 /* RowSelectorPopover.m in Sources */,
+				DCD51AEE1A22EB1D00A544B5 /* XLFormInlineSelectorCell.m in Sources */,
+				DCD51AED1A22EB1D00A544B5 /* XLFormDatePickerCell.m in Sources */,
+				DCD51AB31A22EB1D00A544B5 /* RowPhone.m in Sources */,
+				DCD51AB11A22EB1D00A544B5 /* RowNumber.m in Sources */,
+				DCD51AFE1A22EB1D00A544B5 /* NSArray+XLFormAdditions.m in Sources */,
+				DCD51AC81A22EB1D00A544B5 /* ModuleDefaultViewController.m in Sources */,
+				DCD51A761A22EB1D00A544B5 /* DictDb.m in Sources */,
+				DCD51A9E1A22EB1D00A544B5 /* Pages.m in Sources */,
+				DCD51AB61A22EB1D00A544B5 /* RowSelectorAlertView.m in Sources */,
+				DCD51B001A22EB1D00A544B5 /* UIView+XLFormAdditions.m in Sources */,
+				DCD51AAE1A22EB1D00A544B5 /* RowMultipleSelector.m in Sources */,
+				DCD51AF01A22EB1D00A544B5 /* XLFormPickerCell.m in Sources */,
+				DCD51AC21A22EB1D00A544B5 /* RowTwitter.m in Sources */,
+				DCD51A971A22EB1D00A544B5 /* Module.m in Sources */,
+				DCD51A961A22EB1D00A544B5 /* GDataXMLNode.m in Sources */,
+				DCD51AD41A22EB1D00A544B5 /* MessageParser.m in Sources */,
+				DCD51AE31A22EB1D00A544B5 /* MainCVC.m in Sources */,
+				DCD51ADA1A22EB1D00A544B5 /* Request.m in Sources */,
+				DCD51ACC1A22EB1D00A544B5 /* MainItemData.m in Sources */,
+				DCD51AFA1A22EB1D00A544B5 /* XLFormViewController.m in Sources */,
+				DCD51ACF1A22EB1D00A544B5 /* Hb.m in Sources */,
+				DCD51AB81A22EB1D00A544B5 /* RowSelectorPickerViewInline.m in Sources */,
+				DCD51A941A22EB1D00A544B5 /* RecvPushResp.m in Sources */,
+				DCD51AF81A22EB1D00A544B5 /* XLFormOptionsObject.m in Sources */,
+				DCD51AA21A22EB1D00A544B5 /* RowBooleanSwitch.m in Sources */,
+				DCD51AE81A22EB1D00A544B5 /* README.md in Sources */,
+				DCD51A881A22EB1D00A544B5 /* JRSession.m in Sources */,
+				DCD51AAC1A22EB1D00A544B5 /* RowInfo.m in Sources */,
+				DCD51A8E1A22EB1D00A544B5 /* JRReqFrxxDetailParam.m in Sources */,
+				DCD51AAA1A22EB1D00A544B5 /* RowEmail.m in Sources */,
+				DCD51A8A1A22EB1D00A544B5 /* JRTextResponse.m in Sources */,
+				DCD51ABA1A22EB1D00A544B5 /* RowSelectorPush.m in Sources */,
+				DCD51AC91A22EB1D00A544B5 /* LoginViewController.m in Sources */,
+				DCD51B071A22EB1D00A544B5 /* XLForm.m in Sources */,
+				DCD51AA31A22EB1D00A544B5 /* RowButton.m in Sources */,
+				DCD51A871A22EB1D00A544B5 /* JRResponseFactory.m in Sources */,
+				DCD51ADF1A22EB1D00A544B5 /* PageViewController.m in Sources */,
+				DCD51AF71A22EB1D00A544B5 /* XLFormTextViewCell.m in Sources */,
+				DCD51AD31A22EB1D00A544B5 /* MessageKeeper.m in Sources */,
+				DCD51AF21A22EB1D00A544B5 /* XLFormSelectorCell.m in Sources */,
+				DCD51A721A22EB1D00A544B5 /* NSJSONSerialization+StrDictConverter.m in Sources */,
+				DCD51AA51A22EB1D00A544B5 /* RowDateInline.m in Sources */,
+				DCD51A991A22EB1D00A544B5 /* ModuleDirectory.m in Sources */,
+				DCD51AC61A22EB1D00A544B5 /* PfxxPageVC.m in Sources */,
+				DCD51ADB1A22EB1D00A544B5 /* Response.m in Sources */,
+				DCD51AE91A22EB1D00A544B5 /* XLFormBaseCell.m in Sources */,
 				DCF83DB31A22E47F00F3DF48 /* ViewController.m in Sources */,
+				DCD51ABC1A22EB1D00A544B5 /* RowSlider.m in Sources */,
+				DCD51A8D1A22EB1D00A544B5 /* JRreqFrbhParam.m in Sources */,
+				DCD51A6F1A22EB1D00A544B5 /* Encrypt.m in Sources */,
+				DCD51A841A22EB1D00A544B5 /* JRReqMethod.m in Sources */,
+				DCD51A831A22EB1D00A544B5 /* JRReqest.m in Sources */,
+				DCD51A701A22EB1D00A544B5 /* NSData+CommonCrypto.m in Sources */,
+				DCD51AC41A22EB1D00A544B5 /* Section.m in Sources */,
+				DCD51AD71A22EB1D00A544B5 /* OutputStream.m in Sources */,
+				DCD51ABF1A22EB1D00A544B5 /* RowTextView.m in Sources */,
+				DCD51AE11A22EB1D00A544B5 /* SwipeButtonBarViewCell.m in Sources */,
+				DCD51B041A22EB1D00A544B5 /* XLFormRegexValidator.m in Sources */,
+				DCD51AD91A22EB1D00A544B5 /* Push.m in Sources */,
+				DCD51ACB1A22EB1D00A544B5 /* LoginProcedures.m in Sources */,
+				DCD51A8C1A22EB1D00A544B5 /* JRReqCommonParam.m in Sources */,
+				DCD51A981A22EB1D00A544B5 /* ModuleDefault.m in Sources */,
+				DCD51AA71A22EB1D00A544B5 /* RowDatetime.m in Sources */,
+				DCD51A911A22EB1D00A544B5 /* LoginResp.m in Sources */,
+				DCD51A901A22EB1D00A544B5 /* LoginRequest.m in Sources */,
+				DCD51A801A22EB1D00A544B5 /* JRBinResponse.m in Sources */,
+				DCD51A9B1A22EB1D00A544B5 /* ModuleRoot.m in Sources */,
+				DCD51AD81A22EB1D00A544B5 /* Pkg.m in Sources */,
+				DCD51A7C1A22EB1D00A544B5 /* DictsVersion.m in Sources */,
+				DCD51A791A22EB1D00A544B5 /* DictRequest.m in Sources */,
+				DCD51AAF1A22EB1D00A544B5 /* RowMultipleSelectorPopover.m in Sources */,
+				DCD51A851A22EB1D00A544B5 /* JRReqParam.m in Sources */,
+				DCD51AB21A22EB1D00A544B5 /* RowPassword.m in Sources */,
+				DCD51AC31A22EB1D00A544B5 /* RowUrl.m in Sources */,
+				DCD51AC01A22EB1D00A544B5 /* RowTime.m in Sources */,
+				DCD51AD01A22EB1D00A544B5 /* InputStream.m in Sources */,
+				DCD51A921A22EB1D00A544B5 /* LogoutRequest.m in Sources */,
+				DCD51A9C1A22EB1D00A544B5 /* NSString+CheckNumeric.m in Sources */,
+				DCD51AFB1A22EB1D00A544B5 /* XLFormDescriptor.m in Sources */,
+				DCD51B031A22EB1D00A544B5 /* XLFormTextView.m in Sources */,
+				DCD51A7B1A22EB1D00A544B5 /* DictsMgr.m in Sources */,
+				DCD51A9D1A22EB1D00A544B5 /* Page.m in Sources */,
+				DCD51AB71A22EB1D00A544B5 /* RowSelectorPickerView.m in Sources */,
+				DCD51ADC1A22EB1D00A544B5 /* ServerTimeMsg.m in Sources */,
+				DCD51AC71A22EB1D00A544B5 /* ModuleDefaultPageViewController.m in Sources */,
+				DCD51A751A22EB1D00A544B5 /* Dict.m in Sources */,
+				DCD51A811A22EB1D00A544B5 /* JRErrorResponse.m in Sources */,
+				DCD51A931A22EB1D00A544B5 /* RecvPushRequest.m in Sources */,
+				DCD51AC11A22EB1D00A544B5 /* RowTimeInline.m in Sources */,
+				DCD51AF91A22EB1D00A544B5 /* XLFormOptionsViewController.m in Sources */,
+				DCD51B051A22EB1D00A544B5 /* XLFormValidationStatus.m in Sources */,
+				DCD51AB41A22EB1D00A544B5 /* RowPicker.m in Sources */,
 				DCF83DB01A22E47F00F3DF48 /* AppDelegate.m in Sources */,
+				DCD51A9F1A22EB1D00A544B5 /* Row.m in Sources */,
+				DCD51A771A22EB1D00A544B5 /* DictDownloadReq.m in Sources */,
+				DCD51AD51A22EB1D00A544B5 /* MessageQueueNode.m in Sources */,
+				DCD51AAD1A22EB1D00A544B5 /* RowInteger.m in Sources */,
+				DCD51A7D1A22EB1D00A544B5 /* DictsVersionReq.m in Sources */,
+				DCD51AEA1A22EB1D00A544B5 /* XLFormButtonCell.m in Sources */,
+				DCD51A9A1A22EB1D00A544B5 /* ModuleQuery.m in Sources */,
+				DCD51AD21A22EB1D00A544B5 /* MessageFactory.m in Sources */,
+				DCD51A861A22EB1D00A544B5 /* JRResponse.m in Sources */,
+				DCD51AFC1A22EB1D00A544B5 /* XLFormRowDescriptor.m in Sources */,
+				DCD51A7E1A22EB1D00A544B5 /* DictsVersionSync.m in Sources */,
+				DCD51ADE1A22EB1D00A544B5 /* PagesMgrViewController.m in Sources */,
+				DCD51AEC1A22EB1D00A544B5 /* XLFormDateCell.m in Sources */,
+				DCD51AFD1A22EB1D00A544B5 /* XLFormSectionDescriptor.m in Sources */,
+				DCD51AE01A22EB1D00A544B5 /* SwipeBtnBarView.m in Sources */,
+				DCD51AC51A22EB1D00A544B5 /* PfjhMgrVC.m in Sources */,
+				DCD51AF31A22EB1D00A544B5 /* XLFormSliderCell.m in Sources */,
 				DCF83DAD1A22E47F00F3DF48 /* main.m in Sources */,
+				DCD51A891A22EB1D00A544B5 /* JRTableResponse.m in Sources */,
+				DCD51AB51A22EB1D00A544B5 /* RowSelectorActionSheet.m in Sources */,
+				DCD51AA41A22EB1D00A544B5 /* RowDate.m in Sources */,
+				DCD51AA91A22EB1D00A544B5 /* RowDecimal.m in Sources */,
+				DCD51ACE1A22EB1D00A544B5 /* ModuleMgr.m in Sources */,
+				DCD51B021A22EB1D00A544B5 /* XLFormRightImageButton.m in Sources */,
+				DCD51A711A22EB1D00A544B5 /* NSDate+Common.m in Sources */,
+				DCD51AE51A22EB1D00A544B5 /* WaitingViewController.m in Sources */,
+				DCD51AA11A22EB1D00A544B5 /* RowBooleanCheck.m in Sources */,
+				DCD51A7A1A22EB1D00A544B5 /* DictsDownloader.m in Sources */,
+				DCD51AF41A22EB1D00A544B5 /* XLFormStepCounterCell.m in Sources */,
+				DCD51AA61A22EB1D00A544B5 /* RowDatePicker.m in Sources */,
+				DCD51AEF1A22EB1D00A544B5 /* XLFormLeftRightSelectorCell.m in Sources */,
+				DCD51AEB1A22EB1D00A544B5 /* XLFormCheckCell.m in Sources */,
+				DCD51AD61A22EB1D00A544B5 /* NSMutableData+stream.m in Sources */,
+				DCD51A7F1A22EB1D00A544B5 /* DictVersionResp.m in Sources */,
+				DCD51ABE1A22EB1D00A544B5 /* RowText.m in Sources */,
+				DCD51A821A22EB1D00A544B5 /* JRListResponse.m in Sources */,
+				DCD51AA81A22EB1D00A544B5 /* RowDateTimeInline.m in Sources */,
+				DCD51ABB1A22EB1D00A544B5 /* RowSelectorSegmentedControl.m in Sources */,
+				DCD51B061A22EB1D00A544B5 /* XLFormValidator.m in Sources */,
+				DCD51A8B1A22EB1D00A544B5 /* JRReqCheckDictVersionParam.m in Sources */,
+				DCD51AF51A22EB1D00A544B5 /* XLFormSwitchCell.m in Sources */,
+				DCD51ADD1A22EB1D00A544B5 /* session.m in Sources */,
+				DCD51AFF1A22EB1D00A544B5 /* NSObject+XLFormAdditions.m in Sources */,
+				DCD51A731A22EB1D00A544B5 /* NSUUID+StringUUID.m in Sources */,
+				DCD51AAB1A22EB1D00A544B5 /* RowFactory.m in Sources */,
+				DCD51AF61A22EB1D00A544B5 /* XLFormTextFieldCell.m in Sources */,
+				DCD51AD11A22EB1D00A544B5 /* Message.m in Sources */,
+				DCD51ABD1A22EB1D00A544B5 /* RowStepCounter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,8 +1582,23 @@
 		};
 		DCF83DCB1A22E47F00F3DF48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC16DFAECC0724E1665B1CA9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFJSONRPCClient\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/GZIP\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MagicalRecord\"",
+					"\"${PODS_ROOT}/Headers/Public/ObjCMongoDB\"",
+					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
+					"\"${PODS_ROOT}/Headers/Public/mongo-c-driver\"",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = IM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -351,8 +1607,23 @@
 		};
 		DCF83DCC1A22E47F00F3DF48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 014F78F73053B6554412BF72 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFJSONRPCClient\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaLumberjack\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/GZIP\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MagicalRecord\"",
+					"\"${PODS_ROOT}/Headers/Public/ObjCMongoDB\"",
+					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
+					"\"${PODS_ROOT}/Headers/Public/mongo-c-driver\"",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = IM/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,6 +1683,7 @@
 				DCF83DCC1A22E47F00F3DF48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCF83DCD1A22E47F00F3DF48 /* Build configuration list for PBXNativeTarget "IMTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +1692,7 @@
 				DCF83DCF1A22E47F00F3DF48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
