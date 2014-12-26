@@ -34,7 +34,7 @@ static const NSString *kKeyParam     = @"params";
     return self;
 }
 
-- (NSDictionary *)package {
+- (NSDictionary *) package {
     
     NSDictionary *dictParams = [self packDictParam];
     if (!dictParams) {
