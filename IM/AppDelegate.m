@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LogLevel.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self initIPAndPort];
+    [self initLogger];
     return YES;
 }
 
@@ -40,6 +42,19 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)initLogger {
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    UIColor *pink = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:LOG_FLAG_INFO];
+}
+
+- (void)initIPAndPort {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:@"127.0.0.1" forKey:@"IP"];
+    [ud setObject:@8000 forKey:@"port"];
 }
 
 @end
