@@ -14,7 +14,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.type = self.type = MSG_LOGOUT;
+        self.type = MSG_LOGOUT;
     }
     return self;
 }

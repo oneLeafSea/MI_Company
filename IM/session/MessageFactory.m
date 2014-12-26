@@ -19,6 +19,8 @@
 #import "LogLevel.h"
 #import "Push.h"
 #import "MessageConstants.h"
+#import "RosterItemAddRequest.h"
+#import "RosterItemAddResult.h"
 
 @interface MessageFactory()
 @end
@@ -58,6 +60,17 @@
         }
             break;
             
+        case MSG_ROSTER_ITEM_ADD_REQUEST:
+        {
+            RosterItemAddRequest *riar = [[RosterItemAddRequest alloc] initWithData:data];
+            
+        }
+            break;
+            
+        case MSG_ROSTER_ITME_ADD_RESULT:
+        {
+            RosterItemAddResult *result = [[RosterItemAddResult alloc] initWithData:data];
+        }
         default:
             break;
     }

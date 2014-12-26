@@ -11,13 +11,15 @@
 
 
 typedef NS_ENUM(UInt32, MSG) {
-    MSG_SVR_TIME 	   = 0x00010000,
-    MSG_LOGIN          = 0x00010001,
-    MSG_LOGOUT         = 0x00010002,
-    MSG_APP_CHECK 	   = 0x00010003,
-    MSG_DICT_CHECK 	   = 0x00010004,
-    MSG_RECEIVE_PUSH   = 0x00010005,
-    MSG_RECEIPT 	   = 0x00010006,
+    MSG_SVR_TIME                 = 0x00010000,
+    MSG_LOGIN                    = 0x00010001,
+    MSG_LOGOUT                   = 0x00010002,
+    MSG_APP_CHECK                = 0x00010003,
+    MSG_DICT_CHECK               = 0x00010004,
+    MSG_RECEIVE_PUSH             = 0x00010005,
+    MSG_RECEIPT                  = 0x00010006,
+    MSG_ROSTER_ITEM_ADD_REQUEST  = 0x00010007,
+    MSG_ROSTER_ITME_ADD_RESULT = 0x00010008,
     
     MSG_MAX 	       = 0x0001FFFF
 };

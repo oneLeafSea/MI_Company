@@ -62,7 +62,7 @@ static const NSUInteger kTimeoutDefault  = 120;
 
 #if DEBUG
 - (void)dealloc {
-    DDLogVerbose(@"%@ dealloc", NSStringFromClass([self class]));
+    DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
 }
 #endif
 
@@ -276,6 +276,9 @@ static const NSUInteger kTimeoutDefault  = 120;
             [self stop];
             for (MessageQueueNode *node in m_msgQueue) {
                 [self tellDelegateMsg:node.msg sent:NO error:[self msgErrorStreamClose]];
+            }
+            if ([self.delegate respondsToSelector:@selector(OutputStream:closed:)]) {
+                [self.delegate OutputStream:self closed:YES];
             }
             DDLogInfo(@"NSStreamEventEndEncountered in OutputStream!");
             m_end = YES;

@@ -26,7 +26,7 @@ const NSUInteger        kMkTimerInterval = 1;
 
 #if DEBUG
 - (void)dealloc {
-    DDLogVerbose(@"%@ dealloc", NSStringFromClass([self class]));
+    DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
 }
 #endif
 

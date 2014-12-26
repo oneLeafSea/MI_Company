@@ -12,4 +12,7 @@
 
 + (NSString *)documentPath;
 
+
++ (BOOL)EnsureDirExists:(NSString *)path;
+
 @end

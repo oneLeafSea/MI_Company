@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCF83DA61A22E47E00F3DF48"
+               BlueprintIdentifier = "7DB156B31A42DC0C00287BBE"
                BuildableName = "IM.app"
                BlueprintName = "IM"
                ReferencedContainer = "container:IM.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCF83DBF1A22E47F00F3DF48"
+               BlueprintIdentifier = "7DB156CF1A42DC0C00287BBE"
                BuildableName = "IMTests.xctest"
                BlueprintName = "IMTests"
                ReferencedContainer = "container:IM.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCF83DBF1A22E47F00F3DF48"
+               BlueprintIdentifier = "7DB156CF1A42DC0C00287BBE"
                BuildableName = "IMTests.xctest"
                BlueprintName = "IMTests"
                ReferencedContainer = "container:IM.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCF83DA61A22E47E00F3DF48"
+            BlueprintIdentifier = "7DB156B31A42DC0C00287BBE"
             BuildableName = "IM.app"
             BlueprintName = "IM"
             ReferencedContainer = "container:IM.xcodeproj">
@@ -75,12 +75,19 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCF83DA61A22E47E00F3DF48"
+            BlueprintIdentifier = "7DB156B31A42DC0C00287BBE"
             BuildableName = "IM.app"
             BlueprintName = "IM"
             ReferencedContainer = "container:IM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "XcodeColors"
+            value = "YES"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -93,7 +100,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCF83DA61A22E47E00F3DF48"
+            BlueprintIdentifier = "7DB156B31A42DC0C00287BBE"
             BuildableName = "IM.app"
             BlueprintName = "IM"
             ReferencedContainer = "container:IM.xcodeproj">

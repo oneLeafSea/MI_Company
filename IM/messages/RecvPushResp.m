@@ -12,9 +12,10 @@
 @implementation RecvPushResp
 
 - (BOOL)parseData:(UInt32)type data:(NSData *)data {
+     _respData = [self dictFromJsonData:data];
     self.qid = [_respData objectForKey:@"qid"];
     self.type = type;
-    _respData = [self dictFromJsonData:data];
+   
     DDLogInfo(@"<-- %@", _respData);
     return YES;
 }

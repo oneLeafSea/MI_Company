@@ -35,7 +35,7 @@
                      pwd:(NSString *)pwd
                  timeout:(NSTimeInterval)timeout {
     if (!sess) {
-        DDLogError(@"session is nil.");
+        DDLogError(@"ERROR: session is nil.");
         return NO;
     }
     m_sess = sess;
@@ -47,7 +47,7 @@
     NSString *IP = [ud objectForKey:@"IP"];
     NSNumber *port = [ud objectForKey:@"port"];
     if (!IP || !port) {
-        DDLogError(@"ERROR: IP or port is nil");
+        DDLogError(@"ERROR: IP or port is nil.");
         return NO;
     }
     return [sess connectToIP:IP port:[port unsignedIntValue]  TLS:YES timeout:timeout];
@@ -92,7 +92,7 @@
                 [self.delegate loginProcedures:self recvPush:YES];
             }
         }
-            
+            break;
         default:
             break;
     }

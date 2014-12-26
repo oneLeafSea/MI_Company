@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Roster" representedClassName="Roster" syncable="YES">
+        <attribute name="des" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="items" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ver" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Roster" positionX="-6444" positionY="-2628" width="128" height="118"/>
+    </elements>
+</model>

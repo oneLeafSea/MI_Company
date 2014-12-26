@@ -2,7 +2,7 @@
 //  IMTests.m
 //  IMTests
 //
-//  Created by guozw on 14/11/24.
+//  Created by 郭志伟 on 14-12-18.
 //  Copyright (c) 2014年 rooten. All rights reserved.
 //
 

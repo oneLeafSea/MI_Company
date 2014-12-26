@@ -22,7 +22,6 @@ typedef NSMutableDictionary RequestMap;
 @interface Session() <InputStreamDelegate, OutputStreamDelegate> {
     InputStream     *m_is;
     OutputStream    *m_os;
-    NSThread        *m_t;
     BOOL            m_end;
     NSString        *m_IP;
     UInt32          m_port;
@@ -46,11 +45,11 @@ typedef NSMutableDictionary RequestMap;
     return self;
 }
 
-#if DEBUG
 - (void)dealloc {
-    DDLogVerbose(@"%@ dealloc", NSStringFromClass([self class]));
+    DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
+    [m_is close];
+    [m_os close];
 }
-#endif
 
 - (BOOL)setup {
     BOOL ret = YES;

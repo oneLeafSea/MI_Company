@@ -12,14 +12,11 @@
 
 @protocol RequestDelegate;
 
-
-
 @interface Request : Message
 
 - (NSData *)pkgData;
 
-
-@property(nonatomic,readonly) NSString *qid;
+@property(nonatomic) NSString *qid;
 @property(weak) id<RequestDelegate> delegate;
 
 @end

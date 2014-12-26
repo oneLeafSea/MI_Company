@@ -41,7 +41,7 @@ static const NSUInteger kRunLoopInterval = 1;
 
 #if DEBUG
 - (void)dealloc {
-    DDLogVerbose(@"%@ dealloc", NSStringFromClass([self class]));
+    DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
 }
 #endif
 
@@ -116,7 +116,7 @@ static const NSUInteger kRunLoopInterval = 1;
             }
             break;
         case NSStreamEventEndEncountered:
-            DDLogInfo(@"NSStreamEventEndEncountered in OutputStream!");
+            DDLogInfo(@"NSStreamEventEndEncountered in InputStream!");
             if ([self.delegate respondsToSelector:@selector(InputStream:closed:)]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.delegate InputStream:self closed:YES];
@@ -136,7 +136,7 @@ static const NSUInteger kRunLoopInterval = 1;
             NSInteger read = [m_is read:buf maxLength:sizeof(buf)];
             if (read <= 0) {
 //                m_end = YES;
-                DDLogError(@"read val is %ld", (long)read);
+                DDLogWarn(@"read val is %ld", (long)read);
                 return;
             }
             [m_parser parseBuf:buf len:read];

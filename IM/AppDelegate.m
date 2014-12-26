@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "LogLevel.h"
+#import "Roster.h"
+#import "NSUUID+StringUUID.h"
+#import "IMConf.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self initIPAndPort];
+    [IMConf setIPAndPort:@"10.22.1.192" port:8000];
     [self initLogger];
     return YES;
 }
@@ -47,14 +50,11 @@
 - (void)initLogger {
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    UIColor *pink = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
-    [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:LOG_FLAG_INFO];
+    UIColor *green = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:LOG_FLAG_INFO];
 }
 
-- (void)initIPAndPort {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:@"127.0.0.1" forKey:@"IP"];
-    [ud setObject:@8000 forKey:@"port"];
-}
+
+
 
 @end
