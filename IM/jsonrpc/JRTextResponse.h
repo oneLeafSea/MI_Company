@@ -10,8 +10,6 @@
 
 @interface JRTextResponse : JRResponse
 
-- (BOOL)handleResult:(NSString *) result;
-
-@property(readonly) NSString *text;
+@property(strong) NSString *text;
 
 @end

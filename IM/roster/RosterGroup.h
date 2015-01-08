@@ -10,8 +10,8 @@
 
 @interface RosterGroup : NSObject
 
-@property NSString       *gid;
-@property NSMutableArray *items;
-@property NSString       *name;
+@property(copy) NSString       *gid;
+@property NSMutableArray       *items;
+@property(copy) NSString       *name;
 
 @end

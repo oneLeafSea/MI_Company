@@ -45,6 +45,7 @@
 - (BOOL)setup {
     if (![self createTable]) {
         DDLogError(@"ERROR: creat %@ roster table!", self.uid);
+        return NO;
     }
     return YES;
 }
@@ -123,7 +124,14 @@
 }
 
 - (BOOL)delRoster:(Roster *)roster {
-    return YES;
+    __block BOOL ret = YES;
+    [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeQuery:kSQLRosterDel, roster.uid];
+        if (!ret) {
+            *rollback = YES;
+        }
+    }];
+    return ret;
 }
 
 @end

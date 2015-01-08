@@ -8,62 +8,44 @@
 
 #import "Roster.h"
 #import "RosterConstants.h"
+#import "Utils.h"
+#import "LogLevel.h"
 
 @interface Roster() {
     NSMutableDictionary *m_dict;
+    NSDictionary *m_retDict;
+    NSDictionary *m_extDict;
 }
 @end
 
 @implementation Roster
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        m_dict = [[NSMutableDictionary alloc] initWithCapacity:32];
+- (instancetype) initWithResult:(NSString *)result ext:(NSDictionary *)ext {
+    if (self = [super init]) {
+        if (![self setup:result ext:ext]) {
+            self = nil;
+        }
     }
     return self;
 }
 
-- (NSString *)uid {
-   return [m_dict valueForKey:kRosterTableUid];
+- (BOOL)setup:(NSString *)ret ext:(NSDictionary *)ext {
+    if (ret == nil || ext == nil) {
+        return NO;
+    }
+    m_retDict = [Utils dictFromJsonData:[ret dataUsingEncoding:NSUTF8StringEncoding]];
+    if (!m_retDict) {
+        DDLogWarn(@"WARN: m_retDict is nil.");
+    }
+    
+    m_extDict = ext;
+    return YES;
 }
 
-- (void)setUid:(NSString *)uid {
-    [m_dict setValue:uid forKey:kRosterTableUid];
+- (NSString*)grp {
+    return [m_extDict objectForKey:@"grp"];
 }
 
-- (NSString *)desc {
-    return [m_dict valueForKey:kRosterTableDesc];
-}
-
-- (void)setDesc:(NSString *)desc {
-    [m_dict setValue:desc forKey:kRosterTableDesc];
-}
-
-- (NSString *)grp {
-    return [m_dict valueForKey:kRosterTableGrp];
-}
-
-- (void)setGrp:(NSString *)grp {
-    [m_dict setValue:grp forKey:kRosterTableGrp];
-}
-
-- (NSString *)items {
-    return [m_dict valueForKey:kRosterTableItems];
-}
-
-- (void)setItems:(NSString *)items {
-    [m_dict setValue:items forKey:kRosterTableItems];
-}
-
-- (NSString *)ver {
-    return [m_dict valueForKey:kRosterTableVer];
-}
-
-- (void)setVer:(NSString *)ver {
-    [m_dict setValue:ver forKey:kRosterTableVer];
-}
 
 
 @end

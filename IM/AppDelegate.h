@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IM.h"
+#import "User.h"
 
-#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property(nonatomic, strong) IM *im;
+@property (strong, nonatomic) User *user;
 
 @end
 
+
+#define APP_DELEGATE ((AppDelegate*)[[UIApplication sharedApplication] delegate])

@@ -7,6 +7,9 @@
 //
 
 #import "Utils.h"
+#import "ObjCMongoDB.h"
+#import "NSJSONSerialization+StrDictConverter.h"
+#import "LogLevel.h"
 
 @implementation Utils
 
@@ -47,5 +50,60 @@
     }
     return ret;
 }
+
+
+
++ (NSData *)bsonData:(NSDictionary *)dict {
+    NSData *data = [[dict BSONDocument] dataValue];
+    return data;
+}
+
++ (NSDictionary *)decodeBsonData:(NSData *)bsonData {
+    NSDictionary *dict = [BSONDecoder decodeDictionaryWithData:bsonData];
+    return dict;
+}
+
++ (id)jsonCollectionFromString:(NSString *)jsonString {
+    NSError *e = nil;
+    NSDictionary *JSON =
+    [NSJSONSerialization JSONObjectWithData: [jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &e];
+    if (e) {
+        DDLogWarn(@"parse json string err %@", e);
+    }
+    return JSON;
+}
+
++ (NSData *)jsonDataFromDict:(NSDictionary *)dict {
+    NSString *str = [NSJSONSerialization jsonStringFromDict:dict];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    return data;
+    
+}
++ (NSData *)jsonDataFromArray:(NSArray *)array {
+    NSString *str = [NSJSONSerialization jsonStringFromArray:array];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    return data;
+}
+
++ (NSDictionary *)dictFromJsonData:(NSData *)data {
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [self jsonCollectionFromString:str];
+    return dict;
+}
+
++ (NSArray *)arrayFromJsonData:(NSData *)data {
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSArray *arr = [self jsonCollectionFromString:str];
+    return arr;
+}
+
++ (NSString *)uuid {
+    NSUUID *uuid = [NSUUID UUID];
+    NSString *ret = [uuid UUIDString];
+    return ret;
+}
+
 
 @end

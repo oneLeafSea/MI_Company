@@ -19,6 +19,8 @@
 
 NSString *kSessionConnected = @"cn.com.rooten.net.session.connected";
 NSString *kSessionDied = @"cn.com.rooten.net.session.died";
+NSString *kSessionTimeout = @"cn.com.rooten.net.session.timeout";
+NSString *kSessionServerTime = @"cn.com.rooten.net.sesion.servertime";
 
 typedef NSMutableDictionary RequestMap;
 
@@ -84,6 +86,7 @@ typedef NSMutableDictionary RequestMap;
     if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
         [self.delegate session:self connected:NO timeout:YES error:nil];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionTimeout object:self];
 }
 
 - (void)connect {
@@ -162,10 +165,11 @@ typedef NSMutableDictionary RequestMap;
         case MessageTypeMessage:
         {
             if (newMsg.type == MSG_SVR_TIME) {
+                ServerTimeMsg * timeMsg = (ServerTimeMsg *)newMsg;
                 if ([self.delegate respondsToSelector:@selector(session:serverTime:)]) {
-                    ServerTimeMsg * timeMsg = (ServerTimeMsg *)newMsg;
                     [self.delegate session:self serverTime:[timeMsg.svrTime copy]];
                 }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSessionServerTime object:[timeMsg.svrTime copy]];
             }
         }
             break;
@@ -193,11 +197,14 @@ typedef NSMutableDictionary RequestMap;
         if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
             [self.delegate session:self connected:NO timeout:NO error:err];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionTimeout object:self];
         return;
     }
     if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
         [self.delegate sessionDied:self error:err];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
+    
 }
 
 
@@ -210,9 +217,10 @@ typedef NSMutableDictionary RequestMap;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [m_timerout invalidate];
                         [self.delegate session:self connected:YES timeout:NO error:nil];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnected object:self];
+                       
                     });
                 }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnected object:self];
             }
         }
     } else {
@@ -224,6 +232,7 @@ typedef NSMutableDictionary RequestMap;
         }
     }
 }
+
 
 #pragma -mark OutputStreamDelegate
 - (void)OutputStream:(OutputStream *)outputStream openCompletion:(BOOL)completion {
@@ -239,8 +248,8 @@ typedef NSMutableDictionary RequestMap;
 - (void)OutputStream:(OutputStream *)outputStream error:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
         [self.delegate sessionDied:self error:error];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
 }
 
 - (void)OutputStream:(OutputStream *)outputStream message:(Message *)message sent:(BOOL)sent error:(NSError *)error {

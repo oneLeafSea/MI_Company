@@ -14,6 +14,7 @@
 #import "Roster.h"
 #import "RosterItem.h"
 #import "FMDB.h"
+#import "RosterGroupContainer.h"
 
 @protocol RosterMgrDelgate;
 
@@ -25,41 +26,74 @@
  * @param sess The session which connected to sersver.
  * @return RosterMgr instance
  **/
-- (instancetype)initWithSelfId:(NSString *)sid dbq:(FMDatabaseQueue *)dbq;
+- (instancetype)initWithSelfId:(NSString *)sid dbq:(FMDatabaseQueue *)dbq session:(Session *)session;
 
 /**
  * add a roster item.
- * It will call delegate's method.
  * @param uid which is beiing added.
  **/
-- (void)addItemWithTo:(NSString *)to
+- (BOOL)addItemWithTo:(NSString *)to
               groupId:(NSString *)gid
                reqmsg:(NSString *)reqmsg
-              session:(Session *)session;
+             selfName:(NSString *)selfName;
 
 
 /**
  * Accept roster item.
  **/
-- (void)acceptRosterItemId:(NSString *)uid
-                    grouId:(NSString *)gid
-                    accept:(BOOL) accept
-                    session:(Session *)session;
+//- (BOOL)acceptRosterItemId:(NSString *)uid
+//                    grouId:(NSString *)gid
+//                      name:(NSString *)name
+//                       msg:(NSString *)msg
+//                    accept:(BOOL)accept;
+// 还没有测试
+- (BOOL)acceptRosterItemWithMsgid:(NSString *)msgid
+                          groupId:(NSString *)gid
+                             name:(NSString *)name
+                           accept:(BOOL)accept;
 
 /**
  * delete a roster item.
  * It will call delegate's method.
  * @param uid which is beiing added.
  **/
-- (void)delItemWithUid:(NSString *)uid session:(Session *)session;
+- (BOOL)delItemWithUid:(NSString *)uid;
 
 
 /**
  * request for the server to return the roster.
  * It will call delegate's method.
  **/
-- (void)getWithSession:(Session *)session;
+- (void)getRosterWithKey:(NSString *)key
+                iv:(NSString *)iv
+               url:(NSString *)url
+             token:(NSString *)token;
 
+
+- (void)setRosterGrpWithKey:(NSString *)key
+                         iv:(NSString *)iv
+                        url:(NSString *)url
+                      token:(NSString *)token;
+
+- (void)setRosterSignatureWithKey:(NSString *)key
+                         iv:(NSString *)iv
+                        url:(NSString *)url
+                      token:(NSString *)token;
+
+- (void)setRosterAvatarWithKey:(NSString *)key
+                            iv:(NSString *)iv
+                           url:(NSString *)url
+                         token:(NSString *)token;
+
+- (void)setRosterItemNameWithKey:(NSString *)key
+                              iv:(NSString *)iv
+                             url:(NSString *)url
+                           token:(NSString *)token;
+
+- (void)setRosterItemGidWithKey:(NSString *)key
+                              iv:(NSString *)iv
+                             url:(NSString *)url
+                          token:(NSString *)token;
 /**
  * return the roster version
  **/
@@ -76,8 +110,19 @@
  **/
 //- (void)handleRosterItemAddResult:(RosterItemAddResult *)result;
 
+/**
+ * parse roster.
+ **/
+- (BOOL)parseRoster:(Roster *)roster;
+
+/**
+ * reset roster.
+ */
+
+- (void)reset;
 
 @property(weak) id<RosterMgrDelgate> delegate;
+@property(readonly) RosterGroupContainer *rosterGroupContainer;
 
 @end
 

@@ -23,6 +23,15 @@
     return self;
 }
 
+- (instancetype)initWithLoginresp:(LoginResp *)resp session:(Session *)session {
+    NSString *uid = [resp.respData objectForKey:@"user"];
+    _session = session;
+    if (self = [self initWithUid:uid]) {
+        _cfg = [[NSDictionary alloc] initWithDictionary:resp.respData copyItems:YES];
+    }
+    return self;
+}
+
 - (BOOL)setup {
     if (![self setupDb]) {
         DDLogError(@"ERROR: setup database");
@@ -44,6 +53,7 @@
         return NO;
     }
     NSString *dbPath = [userDir stringByAppendingPathComponent:kUserDbName];
+    DDLogInfo(@"INFO: userDb path: %@", dbPath);
     _dbq = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     if (!self.dbq) {
         DDLogError(@"ERROR: create dbq.");
@@ -53,12 +63,26 @@
 }
 
 - (BOOL)setupRoster {
-    RosterMgr *rm = [[RosterMgr alloc] initWithSelfId:self.uid dbq:self.dbq];
-    if (!rm) {
+    _rosterMgr = [[RosterMgr alloc] initWithSelfId:self.uid dbq:self.dbq session:self.session];
+    if (!_rosterMgr) {
         return NO;
     }
     return YES;
 }
 
+- (void)reset {
+    [self.rosterMgr reset];
+}
 
+- (NSString *)key {
+    return [self.cfg objectForKey:@"key"];
+}
+
+- (NSString *)iv {
+   return [self.cfg objectForKey:@"iv"];
+}
+
+- (NSString *)token {
+    return [self.cfg objectForKey:@"token"];
+}
 @end

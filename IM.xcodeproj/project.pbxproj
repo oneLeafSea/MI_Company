@@ -12,10 +12,14 @@
 		7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D94991A4BDFBD00B6588D /* RosterConstants.m */; };
 		7D0D949D1A4BE00900B6588D /* RosterTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949C1A4BE00900B6588D /* RosterTb.m */; };
 		7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949F1A4BE05D00B6588D /* RosterSql.m */; };
-		7D2930861A4D1FEC003A7004 /* IM.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930851A4D1FEC003A7004 /* IM.m */; };
 		7D2930891A4D209D003A7004 /* IMConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930881A4D209D003A7004 /* IMConf.m */; };
+		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
 		7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */; };
 		7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */; };
+		7D74B1231A5A362600CE9A66 /* RosterItemAddReqTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1221A5A362600CE9A66 /* RosterItemAddReqTb.m */; };
+		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
+		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
+		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
 		7DB156BA1A42DC0C00287BBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156B91A42DC0C00287BBE /* main.m */; };
 		7DB156BD1A42DC0C00287BBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156BC1A42DC0C00287BBE /* AppDelegate.m */; };
 		7DB156C31A42DC0C00287BBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156C21A42DC0C00287BBE /* ViewController.m */; };
@@ -179,8 +183,11 @@
 		7DB158D81A42DD5600287BBE /* XLForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1583A1A42DD5600287BBE /* XLForm.m */; };
 		7DB158D91A42DD5600287BBE /* XLForm.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1583B1A42DD5600287BBE /* XLForm.bundle */; };
 		7DB158DB1A42DDFA00287BBE /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB158DA1A42DDFA00287BBE /* libxml2.2.dylib */; };
+		7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */; };
 		7DD278431A4AC0940012D1F5 /* Roster.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278421A4AC0940012D1F5 /* Roster.m */; };
 		7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278451A4AC1490012D1F5 /* RosterItem.m */; };
+		7DD561E91A5B9FF400106D2C /* RosterItemDelReqTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD561E81A5B9FF400106D2C /* RosterItemDelReqTb.m */; };
+		7DD561EC1A5BBC2600106D2C /* RosterItemAddResultTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD561EB1A5BBC2600106D2C /* RosterItemAddResultTb.m */; };
 		7DFEE9A21A4CF819009967E8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A11A4CF819009967E8 /* User.m */; };
 		7DFEE9A51A4CF924009967E8 /* UserConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A41A4CF924009967E8 /* UserConstants.m */; };
 		7DFEE9A71A4CFA38009967E8 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A61A4CFA38009967E8 /* UserTests.m */; };
@@ -206,13 +213,21 @@
 		7D0D949C1A4BE00900B6588D /* RosterTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterTb.m; sourceTree = "<group>"; };
 		7D0D949E1A4BE05D00B6588D /* RosterSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSql.h; sourceTree = "<group>"; };
 		7D0D949F1A4BE05D00B6588D /* RosterSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSql.m; sourceTree = "<group>"; };
-		7D2930841A4D1FEC003A7004 /* IM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IM.h; sourceTree = "<group>"; };
-		7D2930851A4D1FEC003A7004 /* IM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IM.m; sourceTree = "<group>"; };
 		7D2930871A4D209D003A7004 /* IMConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConf.h; sourceTree = "<group>"; };
 		7D2930881A4D209D003A7004 /* IMConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConf.m; sourceTree = "<group>"; };
+		7D6010D01A5B7AAA006B189A /* RosterItemDelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemDelRequest.h; sourceTree = "<group>"; };
+		7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemDelRequest.m; sourceTree = "<group>"; };
 		7D60EEB01A4C13EC003DA458 /* RosterGroupContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterGroupContainer.h; sourceTree = "<group>"; };
 		7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterGroupContainer.m; sourceTree = "<group>"; };
 		7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterTests.m; sourceTree = "<group>"; };
+		7D74B1211A5A362600CE9A66 /* RosterItemAddReqTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqTb.h; sourceTree = "<group>"; };
+		7D74B1221A5A362600CE9A66 /* RosterItemAddReqTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddReqTb.m; sourceTree = "<group>"; };
+		7D74B1241A5A5E9900CE9A66 /* IMAck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAck.h; sourceTree = "<group>"; };
+		7D74B1251A5A5E9900CE9A66 /* IMAck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAck.m; sourceTree = "<group>"; };
+		7D76AB2C1A5CC05400901AD0 /* RosterItemNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemNotification.h; sourceTree = "<group>"; };
+		7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemNotification.m; sourceTree = "<group>"; };
+		7D76AB331A5E162000901AD0 /* RosterQid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterQid.h; sourceTree = "<group>"; };
+		7D76AB341A5E162000901AD0 /* RosterQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterQid.m; sourceTree = "<group>"; };
 		7DABB7121A496A7F002D5675 /* 消息.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "消息.md"; sourceTree = "<group>"; };
 		7DABB7131A496A7F002D5675 /* 管理名册.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "管理名册.md"; sourceTree = "<group>"; };
 		7DB156B41A42DC0C00287BBE /* IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -544,10 +559,16 @@
 		7DB1583A1A42DD5600287BBE /* XLForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLForm.m; sourceTree = "<group>"; };
 		7DB1583B1A42DD5600287BBE /* XLForm.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XLForm.bundle; sourceTree = "<group>"; };
 		7DB158DA1A42DDFA00287BBE /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		7DBE4FC81A523FCB0002B5BE /* RosterNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterNotification.h; sourceTree = "<group>"; };
+		7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterNotification.m; sourceTree = "<group>"; };
 		7DD278411A4AC0940012D1F5 /* Roster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roster.h; sourceTree = "<group>"; };
 		7DD278421A4AC0940012D1F5 /* Roster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Roster.m; sourceTree = "<group>"; };
 		7DD278441A4AC1490012D1F5 /* RosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItem.h; sourceTree = "<group>"; };
 		7DD278451A4AC1490012D1F5 /* RosterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItem.m; sourceTree = "<group>"; };
+		7DD561E71A5B9FF400106D2C /* RosterItemDelReqTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemDelReqTb.h; sourceTree = "<group>"; };
+		7DD561E81A5B9FF400106D2C /* RosterItemDelReqTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemDelReqTb.m; sourceTree = "<group>"; };
+		7DD561EA1A5BBC2600106D2C /* RosterItemAddResultTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddResultTb.h; sourceTree = "<group>"; };
+		7DD561EB1A5BBC2600106D2C /* RosterItemAddResultTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddResultTb.m; sourceTree = "<group>"; };
 		7DFEE9A01A4CF819009967E8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		7DFEE9A11A4CF819009967E8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		7DFEE9A31A4CF924009967E8 /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
@@ -631,8 +652,6 @@
 				7DB157DA1A42DD5600287BBE /* UI */,
 				7DB156BB1A42DC0C00287BBE /* AppDelegate.h */,
 				7DB156BC1A42DC0C00287BBE /* AppDelegate.m */,
-				7D2930841A4D1FEC003A7004 /* IM.h */,
-				7D2930851A4D1FEC003A7004 /* IM.m */,
 				7D2930871A4D209D003A7004 /* IMConf.h */,
 				7D2930881A4D209D003A7004 /* IMConf.m */,
 				7DB156C11A42DC0C00287BBE /* ViewController.h */,
@@ -780,6 +799,8 @@
 				7DB1572D1A42DD5500287BBE /* RecvPushRequest.m */,
 				7DB1572E1A42DD5500287BBE /* RecvPushResp.h */,
 				7DB1572F1A42DD5500287BBE /* RecvPushResp.m */,
+				7D74B1241A5A5E9900CE9A66 /* IMAck.h */,
+				7D74B1251A5A5E9900CE9A66 /* IMAck.m */,
 			);
 			path = messages;
 			sourceTree = "<group>";
@@ -986,10 +1007,22 @@
 				7D0D94991A4BDFBD00B6588D /* RosterConstants.m */,
 				7D0D949B1A4BE00900B6588D /* RosterTb.h */,
 				7D0D949C1A4BE00900B6588D /* RosterTb.m */,
+				7D74B1211A5A362600CE9A66 /* RosterItemAddReqTb.h */,
+				7D74B1221A5A362600CE9A66 /* RosterItemAddReqTb.m */,
+				7DD561E71A5B9FF400106D2C /* RosterItemDelReqTb.h */,
+				7DD561E81A5B9FF400106D2C /* RosterItemDelReqTb.m */,
+				7DD561EA1A5BBC2600106D2C /* RosterItemAddResultTb.h */,
+				7DD561EB1A5BBC2600106D2C /* RosterItemAddResultTb.m */,
 				7D0D949E1A4BE05D00B6588D /* RosterSql.h */,
 				7D0D949F1A4BE05D00B6588D /* RosterSql.m */,
 				7D60EEB01A4C13EC003DA458 /* RosterGroupContainer.h */,
 				7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */,
+				7DBE4FC81A523FCB0002B5BE /* RosterNotification.h */,
+				7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */,
+				7D76AB2C1A5CC05400901AD0 /* RosterItemNotification.h */,
+				7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */,
+				7D76AB331A5E162000901AD0 /* RosterQid.h */,
+				7D76AB341A5E162000901AD0 /* RosterQid.m */,
 			);
 			path = roster;
 			sourceTree = "<group>";
@@ -1001,6 +1034,8 @@
 				7DB157AF1A42DD5600287BBE /* RosterItemAddRequest.m */,
 				7DB157B01A42DD5600287BBE /* RosterItemAddResult.h */,
 				7DB157B11A42DD5600287BBE /* RosterItemAddResult.m */,
+				7D6010D01A5B7AAA006B189A /* RosterItemDelRequest.h */,
+				7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */,
 			);
 			path = requests;
 			sourceTree = "<group>";
@@ -1402,6 +1437,7 @@
 				7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */,
 				7DB158991A42DD5600287BBE /* MainModel.m in Sources */,
 				7DB1586C1A42DD5600287BBE /* RowAccount.m in Sources */,
+				7DD561EC1A5BBC2600106D2C /* RosterItemAddResultTb.m in Sources */,
 				7DB158851A42DD5600287BBE /* RowSelectorPopover.m in Sources */,
 				7DB1587F1A42DD5600287BBE /* RowPhone.m in Sources */,
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
@@ -1409,10 +1445,12 @@
 				7DB1587D1A42DD5600287BBE /* RowNumber.m in Sources */,
 				7DB158941A42DD5600287BBE /* ModuleDefaultViewController.m in Sources */,
 				7DB1583C1A42DD5600287BBE /* Encrypt.m in Sources */,
+				7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */,
 				7DB156BD1A42DC0C00287BBE /* AppDelegate.m in Sources */,
 				7DB1586A1A42DD5600287BBE /* Pages.m in Sources */,
 				7DB158821A42DD5600287BBE /* RowSelectorAlertView.m in Sources */,
 				7DB1587A1A42DD5600287BBE /* RowMultipleSelector.m in Sources */,
+				7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */,
 				7DB1588E1A42DD5600287BBE /* RowTwitter.m in Sources */,
 				7DB158D01A42DD5600287BBE /* NSObject+XLFormAdditions.m in Sources */,
 				7DB158631A42DD5600287BBE /* Module.m in Sources */,
@@ -1420,6 +1458,7 @@
 				7DB158CA1A42DD5600287BBE /* XLFormOptionsViewController.m in Sources */,
 				7DB158981A42DD5600287BBE /* MainItemData.m in Sources */,
 				7DB158841A42DD5600287BBE /* RowSelectorPickerViewInline.m in Sources */,
+				7D74B1231A5A362600CE9A66 /* RosterItemAddReqTb.m in Sources */,
 				7DB158C21A42DD5600287BBE /* XLFormSegmentedCell.m in Sources */,
 				7DB158601A42DD5600287BBE /* RecvPushResp.m in Sources */,
 				7DB158D41A42DD5600287BBE /* XLFormTextView.m in Sources */,
@@ -1437,6 +1476,7 @@
 				7DB158471A42DD5600287BBE /* DictsDownloader.m in Sources */,
 				7DB158C61A42DD5600287BBE /* XLFormSwitchCell.m in Sources */,
 				7DB158861A42DD5600287BBE /* RowSelectorPush.m in Sources */,
+				7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */,
 				7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */,
 				7DFEE9A21A4CF819009967E8 /* User.m in Sources */,
 				7DB158951A42DD5600287BBE /* LoginViewController.m in Sources */,
@@ -1457,6 +1497,7 @@
 				7DB158A61A42DD5600287BBE /* MessageQueueNode.m in Sources */,
 				7DB158881A42DD5600287BBE /* RowSlider.m in Sources */,
 				7DB158CC1A42DD5600287BBE /* XLFormDescriptor.m in Sources */,
+				7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */,
 				7DB158541A42DD5600287BBE /* JRResponseFactory.m in Sources */,
 				7DB158411A42DD5600287BBE /* Utils.m in Sources */,
 				7DB158D21A42DD5600287BBE /* XLFormRightDetailCell.m in Sources */,
@@ -1497,7 +1538,6 @@
 				7DB158831A42DD5600287BBE /* RowSelectorPickerView.m in Sources */,
 				7DB158931A42DD5600287BBE /* ModuleDefaultPageViewController.m in Sources */,
 				7DB158421A42DD5600287BBE /* Dict.m in Sources */,
-				7D2930861A4D1FEC003A7004 /* IM.m in Sources */,
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
 				7DB158BB1A42DD5600287BBE /* XLFormButtonCell.m in Sources */,
 				7DB1585B1A42DD5600287BBE /* JRReqFrxxDetailParam.m in Sources */,
@@ -1536,6 +1576,7 @@
 				7DB158BF1A42DD5600287BBE /* XLFormInlineSelectorCell.m in Sources */,
 				7DB1589A1A42DD5600287BBE /* ModuleMgr.m in Sources */,
 				7DB158A81A42DD5600287BBE /* OutputStream.m in Sources */,
+				7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */,
 				7DB158A21A42DD5600287BBE /* Message.m in Sources */,
 				7DB158D31A42DD5600287BBE /* XLFormRightImageButton.m in Sources */,
 				7DB156C31A42DC0C00287BBE /* ViewController.m in Sources */,
@@ -1557,6 +1598,7 @@
 				7DB1583E1A42DD5600287BBE /* NSDate+Common.m in Sources */,
 				7DB158771A42DD5600287BBE /* RowFactory.m in Sources */,
 				7DB158891A42DD5600287BBE /* RowStepCounter.m in Sources */,
+				7DD561E91A5B9FF400106D2C /* RosterItemDelReqTb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

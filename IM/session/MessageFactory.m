@@ -21,6 +21,9 @@
 #import "MessageConstants.h"
 #import "RosterItemAddRequest.h"
 #import "RosterItemAddResult.h"
+#import "RosterNotification.h"
+#import "IMAck.h"
+#import "RosterItemNotification.h"
 
 @interface MessageFactory()
 @end
@@ -33,7 +36,6 @@
         case MSG_SVR_TIME:
         {
             NSString *time = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-//            msg = [[Message alloc]init];
             ServerTimeMsg *svrMsg = [[ServerTimeMsg alloc]initWithTime:time];
             DDLogInfo(@"<-- %@", time);
             msg = svrMsg;
@@ -60,21 +62,38 @@
         }
             break;
             
-        case MSG_ROSTER_ITEM_ADD_REQUEST:
+        case IM_ROSTER_ITEM_ADD_REQUEST:
         {
             RosterItemAddRequest *riar = [[RosterItemAddRequest alloc] initWithData:data];
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterItemAddRequest object:riar];
+        }
+            break;
+        case IM_MESSAGE_ACK:
+        {
+            IMAck *ack = [[IMAck alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kIMAckNotification object:ack];
         }
             break;
             
-        case MSG_ROSTER_ITME_ADD_RESULT:
+        case IM_NOTIFY_ROSTER_ADD:
         {
-            RosterItemAddResult *result = [[RosterItemAddResult alloc] initWithData:data];
+            RosterItemNotification *n = [[RosterItemNotification alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterItemAddNotification object:n];
+            DDLogInfo(@"INFO: IM_NOTIFY_ROSTER_ADD.");
         }
+            break;
+        case IM_NOTIFY_ROSTER_DEL:
+        {
+            RosterItemNotification *n = [[RosterItemNotification alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterItemDelNotification object:n];
+            DDLogInfo(@"INFO: IM_NOTIFY_ROSTER_DEL.");
+        }
+            break;
         default:
             break;
     }
     return msg;
 }
+
 
 @end

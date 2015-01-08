@@ -10,4 +10,10 @@
 
 @interface RosterGroupContainer : NSObject
 
+- (instancetype) initWithItems:(NSArray *)items
+                           grps:(NSArray *)grps
+                          desc:(NSDictionary *)desc;
+
+
+@property(readonly) NSDictionary *groups;
 @end

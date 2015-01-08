@@ -12,11 +12,6 @@
 
 @interface RosterItemAddRequest()
 
-@property(copy) NSString *from;
-@property(copy) NSString *to;
-@property(copy) NSString *gid;
-@property(copy) NSString *reqmsg;
-
 
 @end
 
@@ -24,7 +19,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.type = MSG_ROSTER_ITEM_ADD_REQUEST;
+        self.type = IM_ROSTER_ITEM_ADD_REQUEST;
     }
     return self;
 }
@@ -34,12 +29,15 @@
 - (instancetype)initWithFrom:(NSString *)from
                           to:(NSString *)to
                      groupId:(NSString *)gid
-                      reqmsg:(NSString *)reqmsg {
+                      reqmsg:(NSString *)reqmsg
+                    selfName:(NSString *)selfName{
     if (self = [self init]) {
-        self.from = from;
-        self.gid = gid;
-        self.to = to;
-        self.reqmsg = reqmsg;
+        _from = from;
+        _gid = gid;
+        _to = to;
+        _reqmsg = reqmsg;
+        _selfName = selfName;
+        _status = RosterItemAddReqStatusUnkown;
     }
     return self;
 }
@@ -48,12 +46,15 @@
     if (self = [self init]) {
         NSDictionary *dict = [self dictFromJsonData:data];
         DDLogInfo(@"<-- %@", dict);
-        self.from = [dict objectForKey:@"from"];
-        self.to = [dict objectForKey:@"to"];
-        self.qid = [dict objectForKey:@"qid"];
-        NSDictionary *params = [dict objectForKey:@"params"];
-        self.reqmsg = [params objectForKey:@"reqmsg"];
-        self.gid = [params objectForKey:@"gid"];
+        _from = [dict objectForKey:@"from"];
+        _to = [dict objectForKey:@"to"];
+        self.qid = [dict objectForKey:@"msgid"];
+        NSString *msg = [dict objectForKey:@"msg"];
+
+        NSDictionary *msgDict = [self dictFromJsonData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
+        _reqmsg = [msgDict objectForKey:@"req_msg"];
+        _gid = [msgDict objectForKey:@"req_gid"];
+        _selfName = [msgDict objectForKey:@"req_name"];
     }
     return self;
 }
@@ -61,19 +62,43 @@
 
 - (NSData *)pkgData {
     NSDictionary *rard = @{
-                          @"qid" : self.qid,
-                          @"from": self.from,
-                          @"to"  : self.to,
+                          @"msgid" : self.qid,
+                          @"from"  : self.from,
+                          @"to"    : self.to,
                           };
     NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] initWithDictionary:rard];
-    NSDictionary *param = @{
-                            @"reqmsg" : self.reqmsg,
-                            @"gid"    : self.gid
-                            };
-    [mutableDict setValue:param forKey:@"params"];
+    [mutableDict setValue:self.msg forKey:@"msg"];
     DDLogInfo(@"--> %@", mutableDict);
     NSData *data = [self jsonDataFromDict:mutableDict];
     return data;
+}
+
+- (NSString *)msg {
+    NSDictionary *msg = @{
+                          @"req_gid"  : self.gid,
+                          @"req_name" : self.selfName,
+                          @"req_msg"    : self.reqmsg
+                          };
+    NSString *str = [[NSString alloc] initWithData:[self jsonDataFromDict:msg] encoding:NSUTF8StringEncoding];
+    return str;
+}
+
+- (instancetype)initWithFrom:(NSString *)from
+                          to:(NSString *)to
+                       msgid:(NSString *)msgid
+                         msg:(NSString *)msg
+                      status:(NSNumber *)status{
+    if (self = [self init]) {
+        _from = [from copy];
+        _to = [to copy];
+        _status = [status unsignedIntValue];
+        self.qid = msgid;
+        NSDictionary *dict = [self dictFromJsonData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
+        _gid = [[dict objectForKey:@"req_gid"] copy];
+        _selfName = [[dict objectForKey:@"req_name"] copy];
+        _reqmsg = [[dict objectForKey:@"req_msg"] copy];
+    }
+    return self;
 }
 
 @end

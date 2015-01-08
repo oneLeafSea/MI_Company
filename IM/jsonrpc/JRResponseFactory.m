@@ -37,8 +37,6 @@ static const NSString *kTypeBin           = @"bin";
     
     JRResponse *resp = nil;
     
-    DDLogInfo(@"%@", respData);
-    
     NSString *timestamp = respData[kKeyTimestamp];
     NSString *result = respData[kKeyResult];
     
@@ -59,6 +57,7 @@ static const NSString *kTypeBin           = @"bin";
     }
     
     NSString *decStr = [[NSString alloc]initWithData:decRes encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", decStr);
     NSDictionary *dictRes = [NSJSONSerialization objFromJsonString:decStr];
     JRResponseType type = [JRResponseFactory covertFromStr:dictRes[kKeyType]];
     NSDictionary *ext = dictRes[kKeyExt];
@@ -72,17 +71,11 @@ static const NSString *kTypeBin           = @"bin";
             JRTextResponse *txtResp = [[JRTextResponse alloc] initWithType:JRResponseTypeText ext:ext timestamp:timestamp];
             if ([resultInResult isKindOfClass:[NSString class]]) {
                 NSString *ret = (NSString *)resultInResult;
-                BOOL suc = [txtResp handleResult:ret];
-                if (suc) {
-                    resp = txtResp;
-                } else {
-                    *error = [JRResponseFactory genError:JRResponseFactoryParseErrorTextResp description:@"parse text response error"];
-                }
+                txtResp.text = ret;
+                resp = txtResp;
             } else {
                 *error = [JRResponseFactory genError:JRResponseFactoryParseErrorTextResp description:@"parse text response error not NSString class"];
             }
-            
-            
         }
             break;
         case JRResponseTypeBin:
@@ -125,13 +118,8 @@ static const NSString *kTypeBin           = @"bin";
             JRTableResponse *tableResp = [[JRTableResponse alloc] initWithType:JRResponseTypeTable ext:ext timestamp:timestamp];
             if ([resultInResult isKindOfClass:[NSArray class]]) {
                 NSArray *ret = (NSArray *)resultInResult;
-                NSLog(@"%@", ret);
-                BOOL suc = [tableResp handleResult:ret];
-                if (suc) {
-                    resp = tableResp;
-                } else {
-                    *error = [JRResponseFactory genError:JRResponseFactoryParseErrorTableResp description:@"parse table response error"];
-                }
+                tableResp.result = ret;
+                resp = tableResp;
             } else {
                 *error = [JRResponseFactory genError:JRResponseFactoryParseErrorTableResp description:@"parse table response error not NSArray class"];
             }

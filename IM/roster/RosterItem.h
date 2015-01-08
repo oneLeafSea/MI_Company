@@ -10,4 +10,9 @@
 
 @interface RosterItem : NSObject
 
+-(instancetype) initWithDict:(NSDictionary *)item;
+
+@property(readonly) NSString *name;
+@property(readonly) NSString *uid;
+
 @end

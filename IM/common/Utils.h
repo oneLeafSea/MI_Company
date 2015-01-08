@@ -15,4 +15,17 @@
 
 + (BOOL)EnsureDirExists:(NSString *)path;
 
++ (NSData *)bsonData:(NSDictionary *)dict;
++ (NSDictionary *)decodeBsonData:(NSData *)bsonData;
+
++ (id)jsonCollectionFromString:(NSString *)jsonString;
+
++ (NSData *)jsonDataFromDict:(NSDictionary *)dict;
++ (NSData *)jsonDataFromArray:(NSArray *)array;
+
++ (NSDictionary*)dictFromJsonData:(NSData *)data;
++ (NSArray *)arrayFromJsonData:(NSData *)data;
+
++ (NSString *)uuid;
+
 @end

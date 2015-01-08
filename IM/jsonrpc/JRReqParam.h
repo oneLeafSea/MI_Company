@@ -29,5 +29,7 @@
 @property(readonly)                 NSString *key;
 @property(readonly)                 NSString *iv;
 
+@property(strong)                   NSMutableDictionary *params;
+
 
 @end

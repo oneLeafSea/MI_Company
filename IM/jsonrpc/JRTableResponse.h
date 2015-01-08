@@ -12,4 +12,5 @@
 
 - (BOOL)handleResult:(NSArray *) result;
 
+@property(strong) NSArray *result;
 @end

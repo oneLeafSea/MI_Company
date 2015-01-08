@@ -18,10 +18,22 @@ typedef NS_ENUM(UInt32, MSG) {
     MSG_DICT_CHECK               = 0x00010004,
     MSG_RECEIVE_PUSH             = 0x00010005,
     MSG_RECEIPT                  = 0x00010006,
-    MSG_ROSTER_ITEM_ADD_REQUEST  = 0x00010007,
-    MSG_ROSTER_ITME_ADD_RESULT = 0x00010008,
+
     
     MSG_MAX 	       = 0x0001FFFF
+};
+
+typedef NS_ENUM(UInt32, IM) {
+    IM_MESSAGE_ACK               = 0x00030000,
+    IM_MESSAGE,
+    IM_PRESENCE,
+    IM_MESSAGE_IQ                = 0x00031000, // IM消息ACK
+    IM_ROSTER_ITEM_ADD_REQUEST,
+    IM_ROSTER_ITEM_ADD_RESULT,
+    IM_ROSTER_ITEM_DEL_REQUEST,
+    
+    IM_NOTIFY_ROSTER_ADD         = 0x00040000,      // 加好友成功通知
+    IM_NOTIFY_ROSTER_DEL                            // 删除好友通知
 };
 
 typedef NS_ENUM(UInt32, PUSH) {

@@ -15,3 +15,12 @@ NSString *kRosterTableDesc = @"desc";
 NSString *kRosterTableGrp  = @"grp";
 NSString *kRosterTableItems= @"items";
 NSString *kRosterTableVer  = @"ver";
+
+
+
+
+NSString *kRosterKeyGid = @"gid";
+NSString *kRosterKeyGName = @"name";
+
+NSString *kRosterKeyUid = @"uid";
+NSString *kRosterKeyUName = @"name";

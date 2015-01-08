@@ -20,9 +20,9 @@
 #import "AppDelegate.h"
 
 
-@interface LoginProcedures() <RequestDelegate, SessionDelegate>
+@interface LoginProcedures() <RequestDelegate>
 {
-    __weak Session *m_sess;
+    Session *m_sess;
     BOOL            m_stop;
 }
 
@@ -30,16 +30,10 @@
 
 @implementation LoginProcedures
 
-- (BOOL)loginWithSession:(Session *)sess
-                  UserId:(NSString *)userId
+- (BOOL)loginWithUserId:(NSString *)userId
                      pwd:(NSString *)pwd
                  timeout:(NSTimeInterval)timeout {
-    if (!sess) {
-        DDLogError(@"ERROR: session is nil.");
-        return NO;
-    }
-    m_sess = sess;
-    sess.delegate = self;
+    m_sess = [[Session alloc] init];
     m_stop = NO;
     _userId = userId;
     _pwd = pwd;
@@ -50,7 +44,8 @@
         DDLogError(@"ERROR: IP or port is nil.");
         return NO;
     }
-    return [sess connectToIP:IP port:[port unsignedIntValue]  TLS:YES timeout:timeout];
+    [self addObservers];
+    return [m_sess connectToIP:IP port:[port unsignedIntValue]  TLS:YES timeout:timeout];
 }
 
 - (void)sendRecvPushRequest {
@@ -62,7 +57,22 @@
 
 - (void)stop {
     m_stop = YES;
+    [self removeObservers];
     [m_sess disconnect];
+}
+
+- (void)addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionConneted:) name:kSessionConnected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionServerTime:) name:kSessionServerTime object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionDied:) name:kSessionDied object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionTimeout:) name:kSessionTimeout object:nil];
+}
+
+- (void)removeObservers {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionConnected object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionServerTime object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionTimeout object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionDied object:nil];
 }
 
 
@@ -73,13 +83,12 @@
     switch (resp.type) {
         case MSG_LOGIN:
         {
-//            LoginResp *loginResp = (LoginResp *)resp;
-            
+            LoginResp *loginResp = (LoginResp *)resp;
+            AppDelegate *dgt = [UIApplication sharedApplication].delegate;
+            dgt.user = [[User alloc] initWithLoginresp:loginResp session:m_sess];
             if ([self.delegate respondsToSelector:@selector(loginProcedures:login:)]) {
                 [self.delegate loginProcedures:self login:YES];
             }
-//            AppDelegate *dlgt = [[UIApplication sharedApplication] delegate];
-//            dlgt.userInfo = loginResp.respData;
             [self sendRecvPushRequest];
         }
             break;
@@ -87,10 +96,10 @@
         case MSG_RECEIVE_PUSH:
         {
             RecvPushResp *pushResp = (RecvPushResp *)resp;
-            DDLogInfo(@"<-- %@", pushResp.respData);
             if ([self.delegate respondsToSelector:@selector(loginProcedures:recvPush:)]) {
                 [self.delegate loginProcedures:self recvPush:YES];
             }
+            [self removeObservers];
         }
             break;
         default:
@@ -103,27 +112,27 @@
     
 }
 
-#pragma mark - sessiondelegate
-- (void)session:(Session *)sess connected:(BOOL)connected timeout:(BOOL)timeout error:(NSError *)error {
-    if (connected) {
-        if ([self.delegate respondsToSelector:@selector(loginProceduresWaitingSvrTime:)]) {
-            [self.delegate loginProceduresWaitingSvrTime:self];
-        }
-    } else {
-        if ([self.delegate respondsToSelector:@selector(loginProceduresConnectFail:timeout:error:)]) {
-            [self.delegate loginProceduresConnectFail:self timeout:timeout error:error];
-        }
+
+
+#pragma mark - session notification.
+- (void)handleSessionConneted: (NSNotification *)notification {
+    if ([self.delegate respondsToSelector:@selector(loginProceduresWaitingSvrTime:)]) {
+        [self.delegate loginProceduresWaitingSvrTime:self];
     }
 }
 
-- (void)session:(Session *)sess serverTime:(NSString *)serverTime {
+- (void)handleSessionServerTime: (NSNotification *)notification {
     LoginRequest *req = [[LoginRequest alloc]initWithUserId:self.userId pwd:self.pwd];
     req.delegate = self;
-    [sess request:req];
+    [m_sess request:req];
 }
 
-- (void)sessionDied:(Session *)sess error:(NSError *)err {
+- (void)handleSessionDied:(NSNotification *)notification {
+    [self removeObservers];
+}
 
+- (void)handleSessionTimeout:(NSNotification *)notification {
+    
 }
 
 @end

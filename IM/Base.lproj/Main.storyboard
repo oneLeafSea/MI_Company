@@ -52,6 +52,69 @@
                                     <action selector="rejectAddRosteritem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LAH-ZF-l02"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-Q5-JRB">
+                                <rect key="frame" x="16" y="191" width="77" height="30"/>
+                                <state key="normal" title="删除好友">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="delRosterItem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="an8-6g-uG1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwe-LH-8no">
+                                <rect key="frame" x="16" y="229" width="60" height="30"/>
+                                <state key="normal" title="获取名册">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getRoster:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="C1q-1n-Cyy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6C-Mw-l8l">
+                                <rect key="frame" x="159" y="39" width="75" height="30"/>
+                                <state key="normal" title="设置组信息">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setRoster:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dux-dG-JgT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-v6-Ecc">
+                                <rect key="frame" x="159" y="77" width="60" height="30"/>
+                                <state key="normal" title="设置签名">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setSign:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="K2k-Vo-jff"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SE-pC-dRA">
+                                <rect key="frame" x="166" y="115" width="60" height="30"/>
+                                <state key="normal" title="设置头像">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setAvatar:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ffJ-sM-g2A"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-ua-k50">
+                                <rect key="frame" x="159" y="191" width="82" height="30"/>
+                                <state key="normal" title="设置好友gid">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setRosterItemGid:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zJw-bc-cjI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbi-Gk-ePC">
+                                <rect key="frame" x="159" y="153" width="98" height="30"/>
+                                <state key="normal" title="设置好友name">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setRosterItemName:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2uG-aU-mqr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

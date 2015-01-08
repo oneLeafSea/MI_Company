@@ -25,8 +25,7 @@
  * @return if vaule is YES mean success. else fail.
  **/
 
-- (BOOL)loginWithSession:(Session *)sess
-                  UserId:(NSString *)userId
+- (BOOL)loginWithUserId:(NSString *)userId
                      pwd:(NSString *)pwd
                  timeout:(NSTimeInterval)timeout;
 

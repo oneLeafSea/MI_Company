@@ -10,5 +10,11 @@
 
 @implementation RosterGroup
 
+- (instancetype)init {
+    if (self = [super init]) {
+        _items = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 @end

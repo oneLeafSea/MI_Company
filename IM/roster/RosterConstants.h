@@ -19,3 +19,10 @@ extern NSString *kRosterTableDesc;
 extern NSString *kRosterTableGrp;
 extern NSString *kRosterTableItems;
 extern NSString *kRosterTableVer;
+
+
+extern NSString *kRosterKeyGid;
+extern NSString *kRosterKeyGName;
+
+extern NSString *kRosterKeyUid;
+extern NSString *kRosterKeyUName;

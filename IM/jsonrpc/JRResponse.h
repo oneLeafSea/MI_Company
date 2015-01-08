@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, JRResponseType) {
                          ext:(NSDictionary *)ext
                    timestamp:(NSString *)timestamp;
 
-@property(readonly) NSDictionary           *ext;
+@property(readonly)  NSDictionary           *ext;
 @property(readonly)  JRResponseType         type;
 @property(readonly)  NSString               *timestamp;
 

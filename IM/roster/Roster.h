@@ -11,6 +11,8 @@
 
 @interface Roster : NSObject
 
+- (instancetype) initWithResult:(NSString *)result ext:(NSDictionary *)ext;
+
 @property (nonatomic, strong) NSString * uid;
 @property (nonatomic, strong) NSString * desc;
 @property (nonatomic, strong) NSString * grp;

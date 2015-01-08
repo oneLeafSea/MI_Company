@@ -8,9 +8,9 @@
 
 #import "AppDelegate.h"
 #import "LogLevel.h"
-#import "Roster.h"
 #import "NSUUID+StringUUID.h"
 #import "IMConf.h"
+#import "RosterMgr.h"
 
 @interface AppDelegate ()
 
@@ -20,8 +20,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [IMConf setIPAndPort:@"10.22.1.192" port:8000];
+    [IMConf setIPAndPort:@"10.22.1.110" port:8000];
     [self initLogger];
+    
+//    RosterMgr *rm = [[RosterMgr alloc] initWithSelfId:@"gzw" dbq:nil];
+//    Roster *r = [[Roster alloc] init];
+//    [rm parseRoster:r];
     return YES;
 }
 
@@ -53,8 +57,5 @@
     UIColor *green = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:LOG_FLAG_INFO];
 }
-
-
-
 
 @end

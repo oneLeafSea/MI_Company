@@ -21,6 +21,8 @@
 
 extern NSString *kSessionConnected;
 extern NSString *kSessionDied;
+extern NSString *kSessionTimeout;
+extern NSString *kSessionServerTime;
 
 @interface Session : NSObject
 /**

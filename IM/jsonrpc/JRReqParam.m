@@ -37,6 +37,7 @@ static const NSString *kKeyEncrypt   = @"encrypt";
         _key = key;
         _iv  = iv;
         _timestamp = [[NSDate Now] formatWith:nil];
+        _params = [[NSMutableDictionary alloc] init];
         m_data = nil;
     }
     return self;
@@ -44,28 +45,32 @@ static const NSString *kKeyEncrypt   = @"encrypt";
 
 - (NSDictionary *) package {
     
-    m_data = [self JRReqParamData];
-
-    if (m_data == nil) {
-        DDLogError(@"JReqParam data is nil.");
-        return nil;
+    NSDictionary *params = nil;
+    if (self.params.count > 0) {
+        NSString *strData = [NSJSONSerialization jsonStringFromDict:self.params];
+        
+        NSError *err = nil;
+        NSString *base64Data = [Encrypt encodeWithKey:self.key iv:self.iv data:[strData dataUsingEncoding:NSUTF8StringEncoding] error:&err];
+        
+        if (err) {
+            DDLogError(@"encode JReqParam Data:%@", err);
+        }
+        params = @{ kKeyQid : self.qid,
+                                  kKeyToken: self.token,
+                                  kKeyTimeStamp: self.timestamp,
+                                  kKeySignature : @"rooten.Iphone.Signature",
+                                  kKeyData : base64Data,
+                                  kKeyEncrypt : @YES
+                                  };
+    } else {
+        params = @{ kKeyQid : self.qid,
+                    kKeyToken: self.token,
+                    kKeyTimeStamp: self.timestamp,
+                    kKeySignature : @"rooten.Iphone.Signature",
+                    kKeyEncrypt : @YES
+                    };
     }
     
-    NSString *strData = [NSJSONSerialization jsonStringFromDict:m_data];
-    
-    NSError *err = nil;
-    NSString *base64Data = [Encrypt encodeWithKey:self.key iv:self.iv data:[strData dataUsingEncoding:NSUTF8StringEncoding] error:&err];
-    
-    if (err) {
-        DDLogError(@"encode JReqParam Data:%@", err);
-    }
-    NSDictionary *params = @{ kKeyQid : self.qid,
-                              kKeyToken: self.token,
-                              kKeyTimeStamp: self.timestamp,
-                              kKeySignature : @"rooten.Iphone.Signature",
-                              kKeyData : base64Data,
-                              kKeyEncrypt : @YES
-                              };
     return params;
 }
 
