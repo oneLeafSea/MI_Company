@@ -19,6 +19,9 @@
 - (void)sessionDied:(Session *)sess error:(NSError *)err;
 @end
 
+extern NSString *kSessionConnected;
+extern NSString *kSessionDied;
+
 @interface Session : NSObject
 /**
 * Asynchronous connect the server with params. when the operation complete, it will call the session delegate.

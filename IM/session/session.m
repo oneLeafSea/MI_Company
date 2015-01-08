@@ -16,6 +16,10 @@
 #import "MessageConstants.h"
 #import "ServerTimeMsg.h"
 
+
+NSString *kSessionConnected = @"cn.com.rooten.net.session.connected";
+NSString *kSessionDied = @"cn.com.rooten.net.session.died";
+
 typedef NSMutableDictionary RequestMap;
 
 
@@ -206,6 +210,7 @@ typedef NSMutableDictionary RequestMap;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [m_timerout invalidate];
                         [self.delegate session:self connected:YES timeout:NO error:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnected object:self];
                     });
                 }
             }
@@ -234,6 +239,7 @@ typedef NSMutableDictionary RequestMap;
 - (void)OutputStream:(OutputStream *)outputStream error:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
         [self.delegate sessionDied:self error:error];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
     }
 }
 
