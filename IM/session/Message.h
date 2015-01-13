@@ -39,4 +39,5 @@ typedef NS_ENUM(NSUInteger, MessageType) {
 
 - (NSDictionary*)dictFromJsonData:(NSData *)data;
 - (NSArray *)arrayFromJsonData:(NSData *)data;
+
 @end

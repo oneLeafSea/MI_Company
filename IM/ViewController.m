@@ -76,6 +76,32 @@
     [u.rosterMgr getRosterWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
 
 }
+- (IBAction)parseGroup:(id)sender {
+//    User *u = APP_DELEGATE.user;
+//    [u.rosterMgr grouplist];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"mainController"];
+    [UIView beginAnimations:nil context:NULL];
+    [self presentViewController:mainController animated:YES completion:nil];
+    
+    [UIView setAnimationDuration:0.8];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+//    [UIView setAnimationTransition:UIViewAnimationCurveEaseInOut forView:self.view cache:YES];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView commitAnimations];
+    
+//    [UIView beginAnimations:@"View Flip" context:nil];
+//    [UIView setAnimationDuration:0.80];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    
+//    [UIView setAnimationTransition:
+//     UIViewAnimationTransitionFlipFromRight
+//                           forView:self.navigationController.view cache:NO];
+//    
+//    
+//    [self presentViewController:mainController animated:YES completion:nil];
+//    [UIView commitAnimations];
+}
 
 //- (void)handleRosterItemAddReq:(NSNotification *)notification {
 //    RosterItemAddRequest *req = (RosterItemAddRequest *)notification.object;
@@ -93,16 +119,16 @@
 //}
 - (IBAction)setRoster:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token grp:nil];
 }
 - (IBAction)setSign:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterSignatureWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemSignatureWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
 }
 
 - (IBAction)setAvatar:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterAvatarWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemAvatarWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
 }
 - (IBAction)setRosterItemName:(id)sender {
     User *u = APP_DELEGATE.user;

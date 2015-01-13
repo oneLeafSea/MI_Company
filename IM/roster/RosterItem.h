@@ -14,5 +14,6 @@
 
 @property(readonly) NSString *name;
 @property(readonly) NSString *uid;
+@property(readonly) NSString *gid;
 
 @end

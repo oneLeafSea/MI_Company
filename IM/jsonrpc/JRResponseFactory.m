@@ -116,7 +116,7 @@ static const NSString *kTypeBin           = @"bin";
         case JRResponseTypeTable:
         {
             JRTableResponse *tableResp = [[JRTableResponse alloc] initWithType:JRResponseTypeTable ext:ext timestamp:timestamp];
-            if ([resultInResult isKindOfClass:[NSArray class]]) {
+            if ([resultInResult isKindOfClass:[NSArray class]] || resultInResult == nil) {
                 NSArray *ret = (NSArray *)resultInResult;
                 tableResp.result = ret;
                 resp = tableResp;

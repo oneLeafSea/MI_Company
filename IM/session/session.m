@@ -158,6 +158,10 @@ typedef NSMutableDictionary RequestMap;
 
 - (void)InputStream:(InputStream *)inputStream closed:(BOOL)close {
     [m_os close];
+    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
+        [self.delegate sessionDied:self error:nil];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
 }
 
 - (void)InputStream:(InputStream *)inputStream newMessage:(Message *)newMsg {
@@ -242,7 +246,10 @@ typedef NSMutableDictionary RequestMap;
 - (void)OutputStream:(OutputStream *)outputStream closed:(BOOL)closed {
 
     [m_is close];
-
+    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
+        [self.delegate sessionDied:self error:nil];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
 }
 
 - (void)OutputStream:(OutputStream *)outputStream error:(NSError *)error {

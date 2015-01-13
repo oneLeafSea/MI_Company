@@ -13,10 +13,12 @@
 
 - (instancetype) initWithResult:(NSString *)result ext:(NSDictionary *)ext;
 
-@property (nonatomic, strong) NSString * uid;
-@property (nonatomic, strong) NSString * desc;
-@property (nonatomic, strong) NSString * grp;
-@property (nonatomic, strong) NSString * items;
-@property (nonatomic, strong) NSString * ver;
+@property(readonly) NSArray *rosterItems;
+@property(readonly) NSDictionary *extDict;
+@property(readonly) NSDictionary *rosterGroup;
+
+- (void)addGroupItemWithName:(NSString *)grpName gid:(NSString *)gid;
+- (NSString *)genGid;
 
 @end
+

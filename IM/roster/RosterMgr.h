@@ -69,31 +69,78 @@
                url:(NSString *)url
              token:(NSString *)token;
 
-
+/**
+ * set roster group.
+ **/
 - (void)setRosterGrpWithKey:(NSString *)key
                          iv:(NSString *)iv
                         url:(NSString *)url
-                      token:(NSString *)token;
+                      token:(NSString *)token
+                        grp:(NSDictionary *)grp;
 
-- (void)setRosterSignatureWithKey:(NSString *)key
+/**
+ * set roster Signature.
+ **/
+- (void)setRosterItemSignatureWithKey:(NSString *)key
                          iv:(NSString *)iv
                         url:(NSString *)url
                       token:(NSString *)token;
 
-- (void)setRosterAvatarWithKey:(NSString *)key
+/**
+ * set roster item Avatar.
+ **/
+- (void)setRosterItemAvatarWithKey:(NSString *)key
                             iv:(NSString *)iv
                            url:(NSString *)url
                          token:(NSString *)token;
 
+/**
+ * set roster item name.
+ **/
 - (void)setRosterItemNameWithKey:(NSString *)key
                               iv:(NSString *)iv
                              url:(NSString *)url
                            token:(NSString *)token;
 
+/**
+ * set roster item gid.
+ **/
 - (void)setRosterItemGidWithKey:(NSString *)key
                               iv:(NSString *)iv
                              url:(NSString *)url
                           token:(NSString *)token;
+
+
+- (void)searchRosterItemsWithContent:(NSString *)content
+                            curPage:(NSUInteger)curPage
+                             pageSz:(NSUInteger)pageSz
+                                org:(NSString *)org
+                                key:(NSString *)key
+                                 iv:(NSString *)iv
+                                url:(NSString *)url
+                              token:(NSString *)token
+                         completion:(void (^)(BOOL finished, NSArray *data, NSUInteger curPage))completion;
+/**
+ * get group list.
+ **/
+- (NSArray *)grouplist;
+
+
+- (BOOL)addGroupWithName:(NSString *)grpName
+                     key:(NSString *)key
+                      iv:(NSString *)iv
+                     url:(NSString *)url
+                   token:(NSString *)token
+     completion:(void (^)(BOOL finished))completion;
+
+
+
+- (BOOL)exsitsGrpName:(NSString *)grpName;
+
+- (NSInteger)indexOfGrpWithName:(NSString *)name;
+
+- (BOOL)exsitsItemByUid:(NSString *)uid;
+
 /**
  * return the roster version
  **/
@@ -113,7 +160,7 @@
 /**
  * parse roster.
  **/
-- (BOOL)parseRoster:(Roster *)roster;
+//- (BOOL)parseRoster:(Roster *)roster;
 
 /**
  * reset roster.

@@ -31,6 +31,7 @@
 @property(readonly) NSString *key;
 @property(readonly) NSString *iv;
 @property(readonly) NSString *token;
+@property(readonly) NSString *name;
 
 
 

@@ -14,13 +14,13 @@
 
 - (instancetype)initWithUid:(NSString *)uid dbQueue:(FMDatabaseQueue *)dbq;
 
-- (BOOL)insertRoster:(Roster *)roster;
-
-- (Roster *)getRoster;
-
-- (BOOL)updateRoster:(Roster *)roster;
-
-- (BOOL)delRoster:(Roster *)roster;
+//- (BOOL)insertRoster:(Roster *)roster;
+//
+//- (Roster *)getRoster;
+//
+//- (BOOL)updateRoster:(Roster *)roster;
+//
+//- (BOOL)delRoster:(Roster *)roster;
 
 @property(copy, readonly) NSString* uid;
 

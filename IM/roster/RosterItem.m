@@ -38,11 +38,15 @@
 
 
 - (NSString *)uid {
-    return [m_dict objectForKey:kRosterKeyUid];
+    return [m_dict objectForKey:@"fid"];
 }
 
 - (NSString *)name {
-    return [m_dict objectForKey:kRosterKeyUName];
+    return [m_dict objectForKey:@"fname"];
+}
+
+- (NSString *)gid {
+    return [m_dict objectForKey:kRosterKeyGid];
 }
 
 

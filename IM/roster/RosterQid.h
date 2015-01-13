@@ -16,5 +16,6 @@ extern NSString *QID_IM_SET_ROSTER_SIGN;
 extern NSString *QID_IM_SET_ROSTER_AVATAR;
 extern NSString *QID_IM_SET_ROSTER_ITEM_NAME;
 extern NSString *QID_IM_SET_ROSTER_ITEM_GID;
+extern NSString *QID_IM_GET_USER_LIST;
 
 extern NSString *SVC_IM;

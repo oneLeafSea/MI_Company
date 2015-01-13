@@ -85,4 +85,8 @@
 - (NSString *)token {
     return [self.cfg objectForKey:@"token"];
 }
+
+- (NSString *)name {
+    return [self.cfg objectForKey:@"name"];
+}
 @end

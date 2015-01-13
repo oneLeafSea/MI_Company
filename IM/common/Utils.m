@@ -106,4 +106,9 @@
 }
 
 
++ (void)alertWithTip:(NSString *)tip {
+    [[[UIAlertView alloc] initWithTitle:tip message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+}
+
+
 @end

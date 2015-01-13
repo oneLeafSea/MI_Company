@@ -28,4 +28,6 @@
 
 + (NSString *)uuid;
 
++ (void)alertWithTip:(NSString *)tip;
+
 @end
