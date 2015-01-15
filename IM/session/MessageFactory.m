@@ -24,6 +24,8 @@
 #import "RosterNotification.h"
 #import "IMAck.h"
 #import "RosterItemNotification.h"
+#import "ChatMessage.h"
+#import "ChatMessageNotification.h"
 
 @interface MessageFactory()
 @end
@@ -87,6 +89,15 @@
             RosterItemNotification *n = [[RosterItemNotification alloc] initWithData:data];
             [[NSNotificationCenter defaultCenter] postNotificationName:kRosterItemDelNotification object:n];
             DDLogInfo(@"INFO: IM_NOTIFY_ROSTER_DEL.");
+        }
+            break;
+            
+        case IM_MESSAGE:
+        {
+            ChatMessage *msg = [[ChatMessage alloc] initWithData:data];
+            if (msg) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageNewMsg object:msg];
+            }
         }
             break;
         default:

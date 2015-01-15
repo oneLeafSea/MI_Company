@@ -15,6 +15,7 @@
 #import "RosterSection.h"
 #import "RosterItemSearchTableViewController.h"
 #import "RosterNotification.h"
+#import "ChatViewController.h"
 
 @interface RosterViewController () <RosterSectionHeaderViewDelegate> {
     NSMutableArray *m_Sections;
@@ -119,6 +120,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    RosterGroup *g = [m_groups objectAtIndex:indexPath.section];
+    RosterItem* item = [g.items objectAtIndex:indexPath.row];
+    vc.talkingId = item.uid;
+    vc.talkingname = item.name;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)add:(id)sender {

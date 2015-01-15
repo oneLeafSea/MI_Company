@@ -20,12 +20,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [IMConf setIPAndPort:@"10.22.1.110" port:8000];
+    [IMConf setIPAndPort:@"10.22.1.112" port:8000];
     [self initLogger];
     
-//    RosterMgr *rm = [[RosterMgr alloc] initWithSelfId:@"gzw" dbq:nil];
-//    Roster *r = [[Roster alloc] init];
-//    [rm parseRoster:r];
     return YES;
 }
 

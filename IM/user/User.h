@@ -11,6 +11,7 @@
 #import "FMDB.h"
 #import "LoginResp.h"
 #import "session.h"
+#import "ChatMessageMgr.h"
 
 
 @interface User : NSObject
@@ -25,6 +26,7 @@
 @property(readonly) FMDatabaseQueue *dbq;
 @property(readonly) RosterMgr       *rosterMgr;
 @property(readonly) Session         *session;
+@property(readonly) ChatMessageMgr  *msgMgr;
 
 @property(readonly) NSDictionary    *cfg;
 

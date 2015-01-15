@@ -115,7 +115,8 @@
                            accept:(BOOL)accept {
 #warning "这个函数没有测试！"
     RosterItemAddRequest *req = [m_rosterAddTb getReqWithMsgId:msgid];
-    RosterItemAddResult *result = [[RosterItemAddResult alloc] initWithFrom:m_sid to:req.to gid:gid name:name msg:req.msg];
+    RosterItemAddResult *result = [[RosterItemAddResult alloc] initWithFrom:m_sid to:req.from gid:gid name:name msg:req.msg];
+    result.qid = req.qid;
     result.accept = accept;
     result.status = RosterItemDelRequestRequesting;
     if ([m_rosterAddResultTb insertResult:result]) {
@@ -488,6 +489,7 @@
     BOOL ret = [m_rosterAddTb insertReq:req];
     IMAck *ack = [[IMAck alloc] initWithMsgid:req.qid ackType:req.type err:(ret ? nil :@"ERROR: insert roster req.")];
     [m_session post:ack];
+    [self acceptRosterItemWithMsgid:req.qid groupId:@"1" name:@"郭志伟" accept:YES];
 }
 
 - (void)handleRosterItemAddNotify:(NSNotification *)notification {

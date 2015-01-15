@@ -13,6 +13,8 @@
 		7D0D949D1A4BE00900B6588D /* RosterTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949C1A4BE00900B6588D /* RosterTb.m */; };
 		7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949F1A4BE05D00B6588D /* RosterSql.m */; };
 		7D2930891A4D209D003A7004 /* IMConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930881A4D209D003A7004 /* IMConf.m */; };
+		7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C4981A6798A6004365D7 /* ChatViewController.m */; };
+		7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C49C1A6798EB004365D7 /* ChatModel.m */; };
 		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
 		7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */; };
 		7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */; };
@@ -20,6 +22,10 @@
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
 		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
 		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
+		7DB092721A6601B9005268A7 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB092711A6601B9005268A7 /* ChatMessage.m */; };
+		7DB092751A66137E005268A7 /* ChatMessageMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB092741A66137E005268A7 /* ChatMessageMgr.m */; };
+		7DB092781A6649AF005268A7 /* ChatMessageNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB092771A6649AF005268A7 /* ChatMessageNotification.m */; };
+		7DB0927B1A664DCC005268A7 /* ChatMesssageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0927A1A664DCC005268A7 /* ChatMesssageBox.m */; };
 		7DB156BA1A42DC0C00287BBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156B91A42DC0C00287BBE /* main.m */; };
 		7DB156BD1A42DC0C00287BBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156BC1A42DC0C00287BBE /* AppDelegate.m */; };
 		7DB156C31A42DC0C00287BBE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB156C21A42DC0C00287BBE /* ViewController.m */; };
@@ -229,6 +235,10 @@
 		7D0D949F1A4BE05D00B6588D /* RosterSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSql.m; sourceTree = "<group>"; };
 		7D2930871A4D209D003A7004 /* IMConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConf.h; sourceTree = "<group>"; };
 		7D2930881A4D209D003A7004 /* IMConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConf.m; sourceTree = "<group>"; };
+		7D44C4971A6798A6004365D7 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		7D44C4981A6798A6004365D7 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		7D44C49B1A6798EB004365D7 /* ChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
+		7D44C49C1A6798EB004365D7 /* ChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatModel.m; sourceTree = "<group>"; };
 		7D6010D01A5B7AAA006B189A /* RosterItemDelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemDelRequest.h; sourceTree = "<group>"; };
 		7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemDelRequest.m; sourceTree = "<group>"; };
 		7D60EEB01A4C13EC003DA458 /* RosterGroupContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterGroupContainer.h; sourceTree = "<group>"; };
@@ -244,6 +254,14 @@
 		7D76AB341A5E162000901AD0 /* RosterQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterQid.m; sourceTree = "<group>"; };
 		7DABB7121A496A7F002D5675 /* 消息.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "消息.md"; sourceTree = "<group>"; };
 		7DABB7131A496A7F002D5675 /* 管理名册.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "管理名册.md"; sourceTree = "<group>"; };
+		7DB092701A6601B9005268A7 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		7DB092711A6601B9005268A7 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
+		7DB092731A66137E005268A7 /* ChatMessageMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageMgr.h; sourceTree = "<group>"; };
+		7DB092741A66137E005268A7 /* ChatMessageMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageMgr.m; sourceTree = "<group>"; };
+		7DB092761A6649AF005268A7 /* ChatMessageNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageNotification.h; sourceTree = "<group>"; };
+		7DB092771A6649AF005268A7 /* ChatMessageNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageNotification.m; sourceTree = "<group>"; };
+		7DB092791A664DCC005268A7 /* ChatMesssageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMesssageBox.h; sourceTree = "<group>"; };
+		7DB0927A1A664DCC005268A7 /* ChatMesssageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMesssageBox.m; sourceTree = "<group>"; };
 		7DB156B41A42DC0C00287BBE /* IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB156B81A42DC0C00287BBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DB156B91A42DC0C00287BBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -647,6 +665,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7D44C4961A67987E004365D7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7D44C49A1A6798C6004365D7 /* model */,
+				7D44C4971A6798A6004365D7 /* ChatViewController.h */,
+				7D44C4981A6798A6004365D7 /* ChatViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		7D44C49A1A6798C6004365D7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				7D44C49B1A6798EB004365D7 /* ChatModel.h */,
+				7D44C49C1A6798EB004365D7 /* ChatModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		7DABB7111A496A7F002D5675 /* doc */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,6 +691,22 @@
 				7DABB7131A496A7F002D5675 /* 管理名册.md */,
 			);
 			path = doc;
+			sourceTree = "<group>";
+		};
+		7DB0926F1A66017B005268A7 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				7D44C4961A67987E004365D7 /* UI */,
+				7DB092701A6601B9005268A7 /* ChatMessage.h */,
+				7DB092711A6601B9005268A7 /* ChatMessage.m */,
+				7DB092731A66137E005268A7 /* ChatMessageMgr.h */,
+				7DB092741A66137E005268A7 /* ChatMessageMgr.m */,
+				7DB092761A6649AF005268A7 /* ChatMessageNotification.h */,
+				7DB092771A6649AF005268A7 /* ChatMessageNotification.m */,
+				7DB092791A664DCC005268A7 /* ChatMesssageBox.h */,
+				7DB0927A1A664DCC005268A7 /* ChatMesssageBox.m */,
+			);
+			path = chat;
 			sourceTree = "<group>";
 		};
 		7DB156AB1A42DC0C00287BBE = {
@@ -680,6 +733,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7DB0926F1A66017B005268A7 /* chat */,
 				7DFEE99F1A4CF80D009967E8 /* user */,
 				7DB156E01A42DD5500287BBE /* common */,
 				7DB156EE1A42DD5500287BBE /* dict */,
@@ -1537,6 +1591,7 @@
 				7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */,
 				7DB1588E1A42DD5600287BBE /* RowTwitter.m in Sources */,
 				7DB158D01A42DD5600287BBE /* NSObject+XLFormAdditions.m in Sources */,
+				7DB092781A6649AF005268A7 /* ChatMessageNotification.m in Sources */,
 				7DB251B31A6381C6007FC8D4 /* RosterItemSearchResultTableViewController.m in Sources */,
 				7DB158631A42DD5600287BBE /* Module.m in Sources */,
 				7DB158621A42DD5600287BBE /* GDataXMLNode.m in Sources */,
@@ -1571,12 +1626,15 @@
 				7DB1584F1A42DD5600287BBE /* JRListResponse.m in Sources */,
 				7DB1583F1A42DD5600287BBE /* NSJSONSerialization+StrDictConverter.m in Sources */,
 				7DB158711A42DD5600287BBE /* RowDateInline.m in Sources */,
+				7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */,
 				7DB158BD1A42DD5600287BBE /* XLFormDateCell.m in Sources */,
 				7DB158651A42DD5600287BBE /* ModuleDirectory.m in Sources */,
 				7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */,
 				7DB158921A42DD5600287BBE /* PfxxPageVC.m in Sources */,
+				7DB0927B1A664DCC005268A7 /* ChatMesssageBox.m in Sources */,
 				7DB158B41A42DD5600287BBE /* MainCVC.m in Sources */,
 				7DB158D51A42DD5600287BBE /* XLFormRegexValidator.m in Sources */,
+				7DB092751A66137E005268A7 /* ChatMessageMgr.m in Sources */,
 				7DB1584B1A42DD5600287BBE /* DictsVersionSync.m in Sources */,
 				7DB158B21A42DD5600287BBE /* SwipeButtonBarViewCell.m in Sources */,
 				7DB158A61A42DD5600287BBE /* MessageQueueNode.m in Sources */,
@@ -1622,6 +1680,7 @@
 				7DB158681A42DD5600287BBE /* NSString+CheckNumeric.m in Sources */,
 				7DB158491A42DD5600287BBE /* DictsVersion.m in Sources */,
 				7DB158B11A42DD5600287BBE /* SwipeBtnBarView.m in Sources */,
+				7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */,
 				7DB158691A42DD5600287BBE /* Page.m in Sources */,
 				7DB158831A42DD5600287BBE /* RowSelectorPickerView.m in Sources */,
 				7DB158931A42DD5600287BBE /* ModuleDefaultPageViewController.m in Sources */,
@@ -1665,6 +1724,7 @@
 				7DB158A91A42DD5600287BBE /* Pkg.m in Sources */,
 				7DB158AD1A42DD5600287BBE /* ServerTimeMsg.m in Sources */,
 				7DB158C51A42DD5600287BBE /* XLFormStepCounterCell.m in Sources */,
+				7DB092721A6601B9005268A7 /* ChatMessage.m in Sources */,
 				7DB158BF1A42DD5600287BBE /* XLFormInlineSelectorCell.m in Sources */,
 				7DB1589A1A42DD5600287BBE /* ModuleMgr.m in Sources */,
 				7DB158A81A42DD5600287BBE /* OutputStream.m in Sources */,

@@ -42,6 +42,11 @@
         DDLogError(@"ERROR: setup Roster");
         return NO;
     }
+    
+    if (![self setupMsgMgr]) {
+        DDLogError(@"ERROR: setup msgMgr.");
+        return NO;
+    }
     return YES;
 }
 
@@ -65,6 +70,14 @@
 - (BOOL)setupRoster {
     _rosterMgr = [[RosterMgr alloc] initWithSelfId:self.uid dbq:self.dbq session:self.session];
     if (!_rosterMgr) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)setupMsgMgr {
+    _msgMgr = [[ChatMessageMgr alloc] initWithSelfUid:self.uid dbq:self.dbq session:self.session];
+    if (!_msgMgr) {
         return NO;
     }
     return YES;

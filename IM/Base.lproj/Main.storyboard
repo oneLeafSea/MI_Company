@@ -125,7 +125,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSJ-Zd-VcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-734" y="4"/>
+            <point key="canvasLocation" x="-766" y="548"/>
         </scene>
         <!--联系人-->
         <scene sceneID="pwo-y2-ecV">
@@ -222,11 +222,12 @@
                     <connections>
                         <outlet property="m_table" destination="eJ6-ZT-RUw" id="cZD-jb-hP8"/>
                         <segue destination="tcE-mk-naL" kind="show" id="etX-zJ-15p"/>
+                        <segue destination="jRg-GN-O4W" kind="show" id="0Uh-dH-4w2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3w-OB-LLa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="12"/>
+            <point key="canvasLocation" x="-4" y="556"/>
         </scene>
         <!--我-->
         <scene sceneID="K2t-A4-MSc">
@@ -243,7 +244,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxh-37-W5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-734" y="1768"/>
+            <point key="canvasLocation" x="-726" y="2224"/>
         </scene>
         <!--我-->
         <scene sceneID="yak-N3-EpP">
@@ -262,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r49-bx-ArP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1762"/>
+            <point key="canvasLocation" x="-51" y="2218"/>
         </scene>
         <!--功能-->
         <scene sceneID="wsU-jP-qaU">
@@ -279,7 +280,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kI8-Db-6gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-726" y="866"/>
+            <point key="canvasLocation" x="-718" y="1390"/>
         </scene>
         <!--功能-->
         <scene sceneID="GVL-Fk-JOf">
@@ -298,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oaG-Rs-t9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6" y="864"/>
+            <point key="canvasLocation" x="2" y="1388"/>
         </scene>
         <!--Roster Item Add Table View Controller-->
         <scene sceneID="awJ-0f-Ymu">
@@ -362,7 +363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oRx-fb-m8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="874"/>
+            <point key="canvasLocation" x="828" y="1398"/>
         </scene>
         <!--好友查找-->
         <scene sceneID="d6M-za-rkI">
@@ -483,6 +484,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mu8-8l-EeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="820" y="-6"/>
+        </scene>
+        <!--聊天界面-->
+        <scene sceneID="d5Y-zR-kkp">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="jRg-GN-O4W" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c9k-8y-9Ec"/>
+                        <viewControllerLayoutGuide type="bottom" id="1xb-P4-OsQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mZA-bI-IE3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="聊天界面" id="uWt-Aa-GEb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="xbN-Nq-Fwh"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xEw-Nw-TpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805" y="693"/>
         </scene>
         <!--查找结果-->
         <scene sceneID="K1N-nM-UQX">
@@ -896,13 +918,22 @@
                                     <action selector="parseGroup:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vAm-79-dJr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ0-Kf-YQc">
+                                <rect key="frame" x="16" y="267" width="60" height="30"/>
+                                <state key="normal" title="发送消息">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMsg:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hek-pN-e7k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1307" y="-683"/>
+            <point key="canvasLocation" x="1039" y="-887"/>
         </scene>
     </scenes>
     <resources>

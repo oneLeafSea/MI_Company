@@ -15,6 +15,8 @@
 #import "RosterNotification.h"
 #import "IMAck.h"
 
+static NSString *ip = @"http://10.22.1.112:8040/" ;
+
 @interface ViewController () <LoginProceduresDelegate> {
     LoginProcedures *m_lp;
     NSString *uid;
@@ -73,8 +75,14 @@
 
 - (IBAction)getRoster:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr getRosterWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr getRosterWithKey:u.key iv:u.iv url:ip token:u.token];
 
+}
+- (IBAction)sendMsg:(id)sender {
+//    [APP_DELEGATE.user.msgMgr sendTextMesage:@"hello" msgType:ChatMessageTypeNormal to:@"gzw" completion:nil];
+    [APP_DELEGATE.user.msgMgr sendTextMesage:@"hello" msgType:ChatMessageTypeNormal to:@"xyy" completion:^(BOOL finished) {
+        NSLog(@"finished");
+    }];
 }
 - (IBAction)parseGroup:(id)sender {
 //    User *u = APP_DELEGATE.user;
@@ -119,24 +127,24 @@
 //}
 - (IBAction)setRoster:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token grp:nil];
+    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:ip token:u.token grp:nil];
 }
 - (IBAction)setSign:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterItemSignatureWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemSignatureWithKey:u.key iv:u.iv url:ip token:u.token];
 }
 
 - (IBAction)setAvatar:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterItemAvatarWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemAvatarWithKey:u.key iv:u.iv url:ip token:u.token];
 }
 - (IBAction)setRosterItemName:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterItemNameWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemNameWithKey:u.key iv:u.iv url:ip token:u.token];
 }
 - (IBAction)setRosterItemGid:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterItemGidWithKey:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token];
+    [u.rosterMgr setRosterItemGidWithKey:u.key iv:u.iv url:ip token:u.token];
 }
 
 - (IBAction)acceptAddRosterItem:(id)sender {

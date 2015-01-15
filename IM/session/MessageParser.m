@@ -208,8 +208,9 @@ typedef NS_ENUM(NSUInteger, MessageParserStatus) {
         m_parsingPkg.dataType = [self dataType];
         [m_cache popLen:KDataTypeSz];
 
-        DDLogWarn(@"dataLen:%d, dataTypye:%x", (unsigned int)m_parsingPkg.dataLen, (unsigned int)m_parsingPkg.dataType);
+        
         if (kCacheLen >= kBsonDataLen) {
+            DDLogWarn(@"dataLen:%d, dataTypye:%x", (unsigned int)m_parsingPkg.dataLen, (unsigned int)m_parsingPkg.dataType);
             m_parsingPkg.data = [m_cache left:kBsonDataLen];
             [m_cache popLen:kBsonDataLen];
             Message *newMsg = [self callPkgDelegate];
@@ -225,6 +226,7 @@ typedef NS_ENUM(NSUInteger, MessageParserStatus) {
             [m_cache popLen:KDataTypeSz];
         }
         if (kCacheLen >= kBsonDataLen) {
+            DDLogWarn(@"dataLen:%d, dataTypye:%x", (unsigned int)m_parsingPkg.dataLen, (unsigned int)m_parsingPkg.dataType);
             m_parsingPkg.data = [m_cache left:kBsonDataLen];
             [m_cache popLen:kBsonDataLen];
             Message *newMsg = [self callPkgDelegate];
