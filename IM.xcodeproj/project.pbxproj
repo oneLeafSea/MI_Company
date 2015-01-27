@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		18DC89791FFA4323EEF23A9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE0883B8B5AFA0950A7E67A /* libPods.a */; };
+		7D04A7E31A75D47E00BE1660 /* ChatSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04A7E21A75D47E00BE1660 /* ChatSettingTableViewController.m */; };
+		7D04A7E71A7607A200BE1660 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04A7E61A7607A100BE1660 /* LoginViewController.m */; };
 		7D093C921A70CCD4002D43B9 /* ChatMessageControllerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C911A70CCD4002D43B9 /* ChatMessageControllerInfo.m */; };
 		7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */; };
 		7D093C981A710322002D43B9 /* RosterItemAddReqTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */; };
@@ -128,9 +130,6 @@
 		7DB158921A42DD5600287BBE /* PfxxPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157961A42DD5600287BBE /* PfxxPageVC.m */; };
 		7DB158931A42DD5600287BBE /* ModuleDefaultPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157991A42DD5600287BBE /* ModuleDefaultPageViewController.m */; };
 		7DB158941A42DD5600287BBE /* ModuleDefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1579B1A42DD5600287BBE /* ModuleDefaultViewController.m */; };
-		7DB158951A42DD5600287BBE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1579F1A42DD5600287BBE /* LoginViewController.m */; };
-		7DB158961A42DD5600287BBE /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB157A01A42DD5600287BBE /* LoginViewController.xib */; };
-		7DB158971A42DD5600287BBE /* LoginProcedures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157A31A42DD5600287BBE /* LoginProcedures.m */; };
 		7DB158981A42DD5600287BBE /* MainItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157A71A42DD5600287BBE /* MainItemData.m */; };
 		7DB158991A42DD5600287BBE /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157A91A42DD5600287BBE /* MainModel.m */; };
 		7DB1589A1A42DD5600287BBE /* ModuleMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB157AB1A42DD5600287BBE /* ModuleMgr.m */; };
@@ -202,6 +201,7 @@
 		7DB251B61A638F1C007FC8D4 /* RosterItemSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB251B51A638F1C007FC8D4 /* RosterItemSearchTableViewController.m */; };
 		7DB251B91A63B5BA007FC8D4 /* RosterItemSearchResultItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB251B81A63B5BA007FC8D4 /* RosterItemSearchResultItemTableViewCell.m */; };
 		7DB251BC1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB251BB1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m */; };
+		7DB25CA31A76128C00BEDA14 /* LoginProcedures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB25CA21A76128C00BEDA14 /* LoginProcedures.m */; };
 		7DB2D6161A6F6FDE00004D6C /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB2D6151A6F6FDE00004D6C /* RecentViewController.m */; };
 		7DB2D6191A6F6FFC00004D6C /* RecentViewModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB2D6181A6F6FFC00004D6C /* RecentViewModle.m */; };
 		7DB2D61C1A6F767200004D6C /* RecentChatMsgItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB2D61B1A6F767200004D6C /* RecentChatMsgItemTableViewCell.m */; };
@@ -250,6 +250,10 @@
 
 /* Begin PBXFileReference section */
 		3403732BF679527AE70C90E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7D04A7E11A75D47E00BE1660 /* ChatSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatSettingTableViewController.h; sourceTree = "<group>"; };
+		7D04A7E21A75D47E00BE1660 /* ChatSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatSettingTableViewController.m; sourceTree = "<group>"; };
+		7D04A7E51A7607A100BE1660 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7D04A7E61A7607A100BE1660 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		7D093C901A70CCD4002D43B9 /* ChatMessageControllerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageControllerInfo.h; sourceTree = "<group>"; };
 		7D093C911A70CCD4002D43B9 /* ChatMessageControllerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageControllerInfo.m; sourceTree = "<group>"; };
 		7D093C931A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentRosterItemAddReqTableViewCell.h; sourceTree = "<group>"; };
@@ -494,11 +498,6 @@
 		7DB157991A42DD5600287BBE /* ModuleDefaultPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDefaultPageViewController.m; sourceTree = "<group>"; };
 		7DB1579A1A42DD5600287BBE /* ModuleDefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDefaultViewController.h; sourceTree = "<group>"; };
 		7DB1579B1A42DD5600287BBE /* ModuleDefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDefaultViewController.m; sourceTree = "<group>"; };
-		7DB1579E1A42DD5600287BBE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		7DB1579F1A42DD5600287BBE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		7DB157A01A42DD5600287BBE /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		7DB157A21A42DD5600287BBE /* LoginProcedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProcedures.h; sourceTree = "<group>"; };
-		7DB157A31A42DD5600287BBE /* LoginProcedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginProcedures.m; sourceTree = "<group>"; };
 		7DB157A61A42DD5600287BBE /* MainItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainItemData.h; sourceTree = "<group>"; };
 		7DB157A71A42DD5600287BBE /* MainItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainItemData.m; sourceTree = "<group>"; };
 		7DB157A81A42DD5600287BBE /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
@@ -643,6 +642,8 @@
 		7DB251B81A63B5BA007FC8D4 /* RosterItemSearchResultItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemSearchResultItemTableViewCell.m; sourceTree = "<group>"; };
 		7DB251BA1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemReqMsgTableViewController.h; sourceTree = "<group>"; };
 		7DB251BB1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemReqMsgTableViewController.m; sourceTree = "<group>"; };
+		7DB25CA11A76128C00BEDA14 /* LoginProcedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProcedures.h; sourceTree = "<group>"; };
+		7DB25CA21A76128C00BEDA14 /* LoginProcedures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginProcedures.m; sourceTree = "<group>"; };
 		7DB2D6141A6F6FDE00004D6C /* RecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
 		7DB2D6151A6F6FDE00004D6C /* RecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
 		7DB2D6171A6F6FFC00004D6C /* RecentViewModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewModle.h; sourceTree = "<group>"; };
@@ -741,12 +742,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7D04A7E41A76078B00BE1660 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				7DB25CA11A76128C00BEDA14 /* LoginProcedures.h */,
+				7DB25CA21A76128C00BEDA14 /* LoginProcedures.m */,
+				7D04A7E51A7607A100BE1660 /* LoginViewController.h */,
+				7D04A7E61A7607A100BE1660 /* LoginViewController.m */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		7D44C4961A67987E004365D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				7D44C49A1A6798C6004365D7 /* model */,
 				7D44C4971A6798A6004365D7 /* ChatViewController.h */,
 				7D44C4981A6798A6004365D7 /* ChatViewController.m */,
+				7D04A7E11A75D47E00BE1660 /* ChatSettingTableViewController.h */,
+				7D04A7E21A75D47E00BE1660 /* ChatSettingTableViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -815,6 +829,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D04A7E41A76078B00BE1660 /* login */,
 				7DB2D62D1A6FD0C500004D6C /* main */,
 				7DB2D60D1A6F694800004D6C /* recent */,
 				7DB0926F1A66017B005268A7 /* chat */,
@@ -1125,27 +1140,14 @@
 		7DB1579C1A42DD5600287BBE /* login */ = {
 			isa = PBXGroup;
 			children = (
-				7DB1579D1A42DD5600287BBE /* controller */,
 				7DB157A11A42DD5600287BBE /* model */,
 			);
 			path = login;
 			sourceTree = "<group>";
 		};
-		7DB1579D1A42DD5600287BBE /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				7DB1579E1A42DD5600287BBE /* LoginViewController.h */,
-				7DB1579F1A42DD5600287BBE /* LoginViewController.m */,
-				7DB157A01A42DD5600287BBE /* LoginViewController.xib */,
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
 		7DB157A11A42DD5600287BBE /* model */ = {
 			isa = PBXGroup;
 			children = (
-				7DB157A21A42DD5600287BBE /* LoginProcedures.h */,
-				7DB157A31A42DD5600287BBE /* LoginProcedures.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1691,7 +1693,6 @@
 				7DB3FCF11A6E4F3500BFA0E7 /* RosterGrpMgrHeadView.xib in Resources */,
 				7DB156C61A42DC0C00287BBE /* Main.storyboard in Resources */,
 				7DB158451A42DD5600287BBE /* dictname.plist in Resources */,
-				7DB158961A42DD5600287BBE /* LoginViewController.xib in Resources */,
 				7DB158611A42DD5600287BBE /* app.xml in Resources */,
 				7DB251AD1A636D7F007FC8D4 /* SeparatorHeadView.xib in Resources */,
 				7DB158B81A42DD5600287BBE /* LICENSE in Resources */,
@@ -1802,13 +1803,13 @@
 				7DB158A51A42DD5600287BBE /* MessageParser.m in Sources */,
 				7DB158761A42DD5600287BBE /* RowEmail.m in Sources */,
 				7DB158471A42DD5600287BBE /* DictsDownloader.m in Sources */,
+				7DB25CA31A76128C00BEDA14 /* LoginProcedures.m in Sources */,
 				7DB158C61A42DD5600287BBE /* XLFormSwitchCell.m in Sources */,
 				7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */,
 				7DB158861A42DD5600287BBE /* RowSelectorPush.m in Sources */,
 				7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */,
 				7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */,
 				7DFEE9A21A4CF819009967E8 /* User.m in Sources */,
-				7DB158951A42DD5600287BBE /* LoginViewController.m in Sources */,
 				7DB31BEA1A6CA6A10051E6CD /* RosterItemAddReqTb.m in Sources */,
 				7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */,
 				7DB1586F1A42DD5600287BBE /* RowButton.m in Sources */,
@@ -1843,7 +1844,6 @@
 				7DB158441A42DD5600287BBE /* DictDownloadReq.m in Sources */,
 				7DB158901A42DD5600287BBE /* Section.m in Sources */,
 				7DB1588B1A42DD5600287BBE /* RowTextView.m in Sources */,
-				7DB158971A42DD5600287BBE /* LoginProcedures.m in Sources */,
 				7DB669451A5F654500843C72 /* RosterItermTableViewCell.m in Sources */,
 				7DB158431A42DD5600287BBE /* DictDb.m in Sources */,
 				7DD278431A4AC0940012D1F5 /* Roster.m in Sources */,
@@ -1884,6 +1884,7 @@
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
 				7DB158BB1A42DD5600287BBE /* XLFormButtonCell.m in Sources */,
 				7DB1585B1A42DD5600287BBE /* JRReqFrxxDetailParam.m in Sources */,
+				7D04A7E71A7607A200BE1660 /* LoginViewController.m in Sources */,
 				7DB1585F1A42DD5600287BBE /* RecvPushRequest.m in Sources */,
 				7DB1588D1A42DD5600287BBE /* RowTimeInline.m in Sources */,
 				7DB158801A42DD5600287BBE /* RowPicker.m in Sources */,
@@ -1904,6 +1905,7 @@
 				7DB158AA1A42DD5600287BBE /* Push.m in Sources */,
 				7DB158661A42DD5600287BBE /* ModuleQuery.m in Sources */,
 				7DB1584E1A42DD5600287BBE /* JRErrorResponse.m in Sources */,
+				7D04A7E31A75D47E00BE1660 /* ChatSettingTableViewController.m in Sources */,
 				7DB158511A42DD5600287BBE /* JRReqMethod.m in Sources */,
 				7DB158911A42DD5600287BBE /* PfjhMgrVC.m in Sources */,
 				7DB158561A42DD5600287BBE /* JRTableResponse.m in Sources */,

@@ -12,6 +12,7 @@
 #import "ChatMessage.h"
 #import "JSQMessage.h"
 #import "ChatMessageControllerInfo.h"
+#import "ChatSettingTableViewController.h"
 
 @interface ChatViewController ()
 
@@ -49,6 +50,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
     ChatMessageControllerInfo *info = [[ChatMessageControllerInfo alloc] init];
     info.talkingId = [self.talkingId copy];
@@ -106,7 +108,7 @@
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
-    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"male"]
+    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"avatar_default"]
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     return mineImage;
 }
@@ -251,6 +253,11 @@
         }
     });
    
+}
+- (IBAction)toChatSetting:(id)sender {
+    ChatSettingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatSettingTableViewController"];
+    vc.rosterItem = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /*

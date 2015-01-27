@@ -75,7 +75,7 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
 
 - (IBAction)getRoster:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr getRosterWithKey:u.key iv:u.iv url:ip token:u.token];
+    [u.rosterMgr getRosterWithKey:u.key iv:u.iv url:ip token:u.token completion:nil];
 
 }
 - (IBAction)sendMsg:(id)sender {

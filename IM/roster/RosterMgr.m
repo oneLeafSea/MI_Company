@@ -164,7 +164,8 @@
 - (void)getRosterWithKey:(NSString *)key
                 iv:(NSString *)iv
                url:(NSString *)url
-             token:(NSString *)token {
+             token:(NSString *)token
+        completion:(void (^)(BOOL finished))completion{
     __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:url]];
     JRReqMethod *m = [[JRReqMethod alloc] initWithService:SVC_IM];
     JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_IM_GET_ROSTER_ALL token:token key:key iv:iv];
@@ -178,11 +179,26 @@
                 [m_rosterGrpTb refreshGrpWithArray:m_roster.rosterGroup];
                 [m_rosterTb refreshWithItems:m_roster.rosterItems];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
+                if (completion) {
+                    completion(YES);
+                }
+                
             });
         } failure:^(JRReqest *request, NSError *error) {
-            DDLogError(@"get roster errror %@", error);
-        } cancel:^(JRReqest *request) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion(NO);
+                }
+                DDLogError(@"get roster errror %@", error);
+            });
             
+        } cancel:^(JRReqest *request) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                DDLogError(@"get roster cancelled");
+                if (completion) {
+                    completion(NO);
+                }
+            });
         }];
     });
     
@@ -728,11 +744,11 @@ NSComparisonResult sortGroupById(RosterGroup* group1, RosterGroup* group2, void 
 }
 
 - (void)handleRosterItemAddNotify:(NSNotification *)notification {
-    [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token];
+    [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token completion:nil];
 }
 
 - (void)handleRosterItemDelNotify:(NSNotification *)notification {
-     [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token];
+     [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token completion:nil];
 }
 
 @end

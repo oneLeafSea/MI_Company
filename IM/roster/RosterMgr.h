@@ -68,7 +68,8 @@
 - (void)getRosterWithKey:(NSString *)key
                 iv:(NSString *)iv
                url:(NSString *)url
-             token:(NSString *)token;
+             token:(NSString *)token
+        completion:(void (^)(BOOL finished))completion;
 
 /**
  * set roster group.

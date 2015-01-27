@@ -208,10 +208,15 @@
 }
 
 - (void)handleRosterItemAddReqControllerDismiss: (NSNotification *)notificaiton {
+    NSLog(@"1");
     [APP_DELEGATE.user.recentMsg updateRosterItemAddReqBadge:@"0"];
+    NSLog(@"2");
     [self initModelData];
+    NSLog(@"3");
     [m_tableView reloadData];
+    NSLog(@"4");
     [self updateTabItem];
+    NSLog(@"5");
 }
 
 - (void)initModelData {
