@@ -38,6 +38,11 @@
                     to:(NSString *)to
             completion:(void (^)(BOOL finished))completion;
 
+- (NSArray *)loadDbMsgsWithId:(NSString *)Id
+                         type:(ChatMessageType)msgtype
+                        limit:(UInt32)limit
+                       offset:(UInt32)offset;
+
 - (void)reset;
 
 @end

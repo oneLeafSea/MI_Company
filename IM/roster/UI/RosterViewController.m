@@ -40,7 +40,7 @@
     
     
     [self initData];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterGrpChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,6 +114,7 @@
     RosterGroup *g = [m_groups objectAtIndex:indexPath.section];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     cell.nameLabel.text = item.name;
+    cell.signatureLabel.text = item.sign;
     return cell;
 }
 
@@ -143,10 +144,13 @@
 
 #pragma mark - RosterSectionHeaderViewDelegate
 - (void)RosterSectionHeaderViewTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger) tag {
-    DDLogInfo(@"header view is tapped! section:%ld", (long)tag);
     RosterSection *sect = [m_Sections objectAtIndex:tag];
     sect.expand = !sect.expand;
     [m_table reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)RosterSectionHeaderViewGrpMgrTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger)tag {
+    [self performSegueWithIdentifier:@"roster2grpmgr" sender:self];
 }
 
 #pragma mark - Roster Notification handler

@@ -42,7 +42,7 @@
 - (IBAction)seachBtnTapped:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr searchRosterItemsWithContent:contentTextField.text curPage:0 pageSz:20 org:orgTextField.text key:u.key iv:u.iv url:@"http://10.22.1.110:8040/" token:u.token completion:^(BOOL finished, NSArray *data, NSUInteger cur) {
+    [u.rosterMgr searchRosterItemsWithContent:contentTextField.text curPage:0 pageSz:20 org:orgTextField.text key:u.key iv:u.iv url:APP_DELEGATE.user.imurl token:u.token completion:^(BOOL finished, NSArray *data, NSUInteger cur) {
         DDLogInfo(finished ? @"suc" : @"fail");
         if (finished) {
             RosterItemSearchResultTableViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"RosterItemSearchResult"];

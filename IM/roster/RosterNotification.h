@@ -13,4 +13,5 @@ extern NSString *kRosterItemAddRequest;
 extern NSString *kRosterItemAddResponse;
 extern NSString *kRosterItemAddNotification;
 extern NSString *kRosterItemDelNotification;
-extern NSString *kRosterGrpChanged;
+extern NSString *kRosterChanged;
+extern NSString *kRosterItemAddReqControllerDismiss;

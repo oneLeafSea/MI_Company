@@ -16,8 +16,12 @@
 
 - (BOOL) insertReq:(RosterItemAddRequest *)req;
 - (BOOL) updateReq:(RosterItemAddRequest *)req;
+- (BOOL) updateReqStatus:(RosterItemAddReqStatus)reqStatus from:(NSString *)from;
 - (BOOL) delReq:(RosterItemAddRequest *)req;
 - (BOOL) updateReqStatusWithMsgid:(NSString *)msgid status:(RosterItemAddReqStatus) status;
 - (RosterItemAddRequest *) getReqWithMsgId:(NSString *)msgid;
+
+- (NSArray *) getAllRosterItemReqButMe: (NSString *)me;
+- (BOOL) delAll;
 
 @end

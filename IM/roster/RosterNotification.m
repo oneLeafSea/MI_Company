@@ -13,4 +13,5 @@ NSString *kRosterItemAddRequest = @"cn.com.rooten.im.roster_item.add.request";
 NSString *kRosterItemAddResponse = @"cn.com.rooten.im.roster_item.add.response";
 NSString *kRosterItemAddNotification = @"cn.com.rooten.im.roster_item.add.notification";
 NSString *kRosterItemDelNotification = @"cn.com.rooten.im.roster_item.add.notification";
-NSString *kRosterGrpChanged = @"cn.com.rooten.im.roster_grp.changed";
+NSString *kRosterChanged = @"cn.com.rooten.im.roster.changed";
+NSString *kRosterItemAddReqControllerDismiss = @"cn.com.rooten.im.roster.kRosterItemAddReqControllerDismiss";

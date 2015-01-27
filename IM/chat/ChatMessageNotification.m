@@ -8,4 +8,6 @@
 
 #import "ChatMessageNotification.h"
 
-NSString *kChatMessageNewMsg = @"cn.com.rooten.im.chatmessage.newmsg";
+NSString *kChatMessageRecvNewMsg = @"cn.com.rooten.im.chatmessage.recv.newmsg";
+NSString *kChatMessageSendNewMsg = @"cn.com.rooten.im.chatmessage.send.newmsg";
+NSString *kChatMessageControllerWillDismiss = @"cn.com.rooten.im.chatmessage.MessageControllerWillDismiss";

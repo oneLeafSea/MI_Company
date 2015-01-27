@@ -12,6 +12,7 @@ typedef  NS_ENUM(UInt32, RosterItemAddReqStatus) {
     RosterItemAddReqStatusUnkown,
     RosterItemAddReqStatusRequesting,
     RosterItemAddReqStatusACK,
+    RosterItemAddReqStatusReject,
     RosterItemAddReqStatusError
 };
 
@@ -27,7 +28,8 @@ typedef  NS_ENUM(UInt32, RosterItemAddReqStatus) {
                           to:(NSString *)to
                         msgid:(NSString *)msgid
                         msg:(NSString *)msg
-                      status:(NSNumber *)status;
+                      status:(NSNumber *)status
+                        time:(NSString *)time;
 
 - (instancetype) initWithData:(NSData *)data;
 - (NSData *)pkgData;
@@ -37,6 +39,7 @@ typedef  NS_ENUM(UInt32, RosterItemAddReqStatus) {
 @property(copy, readonly) NSString *gid;
 @property(copy, readonly) NSString *reqmsg;
 @property(copy, readonly) NSString *selfName;
+@property(copy, readonly) NSString *time;
 
 @property(readonly) NSString *msg;
 

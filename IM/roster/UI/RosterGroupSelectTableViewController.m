@@ -99,7 +99,7 @@
     if (buttonIndex == 1) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSString *grpName = [alertView textFieldAtIndex:0].text;
-        if (![APP_DELEGATE.user.rosterMgr addGroupWithName:grpName key:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:@"http://10.22.1.110:8040/" token:APP_DELEGATE.user.token completion:^(BOOL finished) {
+        if (![APP_DELEGATE.user.rosterMgr addGroupWithName:grpName key:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:[APP_DELEGATE.user imurl] token:APP_DELEGATE.user.token completion:^(BOOL finished) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if (!finished) {
                 [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"\"%@\"添加失败!", grpName] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];

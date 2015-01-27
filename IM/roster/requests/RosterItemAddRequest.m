@@ -9,6 +9,7 @@
 #import "RosterItemAddRequest.h"
 #import "MessageConstants.h"
 #import "LogLevel.h"
+#import "NSDate+Common.h"
 
 @interface RosterItemAddRequest()
 
@@ -30,7 +31,7 @@
                           to:(NSString *)to
                      groupId:(NSString *)gid
                       reqmsg:(NSString *)reqmsg
-                    selfName:(NSString *)selfName{
+                    selfName:(NSString *)selfName {
     if (self = [self init]) {
         _from = from;
         _gid = gid;
@@ -38,6 +39,7 @@
         _reqmsg = reqmsg;
         _selfName = selfName;
         _status = RosterItemAddReqStatusUnkown;
+        _time = [[NSDate Now] formatWith:nil];
     }
     return self;
 }
@@ -48,6 +50,7 @@
         DDLogInfo(@"<-- %@", dict);
         _from = [dict objectForKey:@"from"];
         _to = [dict objectForKey:@"to"];
+        _time = [dict objectForKey:@"time"];
         self.qid = [dict objectForKey:@"msgid"];
         NSString *msg = [dict objectForKey:@"msg"];
 
@@ -55,6 +58,7 @@
         _reqmsg = [msgDict objectForKey:@"req_msg"];
         _gid = [msgDict objectForKey:@"req_gid"];
         _selfName = [msgDict objectForKey:@"req_name"];
+        
     }
     return self;
 }
@@ -65,6 +69,7 @@
                           @"msgid" : self.qid,
                           @"from"  : self.from,
                           @"to"    : self.to,
+                          @"time"  : self.time
                           };
     NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] initWithDictionary:rard];
     [mutableDict setValue:self.msg forKey:@"msg"];
@@ -87,7 +92,8 @@
                           to:(NSString *)to
                        msgid:(NSString *)msgid
                          msg:(NSString *)msg
-                      status:(NSNumber *)status{
+                      status:(NSNumber *)status
+                        time:(NSString *)time{
     if (self = [self init]) {
         _from = [from copy];
         _to = [to copy];
@@ -97,6 +103,7 @@
         _gid = [[dict objectForKey:@"req_gid"] copy];
         _selfName = [[dict objectForKey:@"req_name"] copy];
         _reqmsg = [[dict objectForKey:@"req_msg"] copy];
+        _time = [dict objectForKey:@"time"];
     }
     return self;
 }

@@ -60,6 +60,7 @@
 - (BOOL)delItemWithUid:(NSString *)uid;
 
 
+
 /**
  * request for the server to return the roster.
  * It will call delegate's method.
@@ -76,7 +77,8 @@
                          iv:(NSString *)iv
                         url:(NSString *)url
                       token:(NSString *)token
-                        grp:(NSDictionary *)grp;
+                        grp:(NSArray *)grp
+                 completion:(void (^)(BOOL finished))completion;
 
 /**
  * set roster Signature.
@@ -120,12 +122,30 @@
                                 url:(NSString *)url
                               token:(NSString *)token
                          completion:(void (^)(BOOL finished, NSArray *data, NSUInteger curPage))completion;
+
+- (BOOL)exsitsItemByUid:(NSString *)uid;
+
+- (RosterItem *) getItemByUid:(NSString *)uid;
+
+- (BOOL)moveRosterItems:(NSArray *)items
+                  toGrpId:(NSString *)gid
+                    key:(NSString *)key
+                     iv:(NSString *)iv
+                    url:(NSString *)url
+                  token:(NSString *)token
+             completion:(void(^)(BOOL finished)) completion;
+
+
+#pragma mark - roster grp operation.
+
 /**
  * get group list.
  **/
 - (NSArray *)grouplist;
 
-
+/**
+ * add grp with name.
+ **/
 - (BOOL)addGroupWithName:(NSString *)grpName
                      key:(NSString *)key
                       iv:(NSString *)iv
@@ -134,12 +154,38 @@
      completion:(void (^)(BOOL finished))completion;
 
 
+/**
+ * reanme grp name.
+ **/
+
+- (BOOL)renameGrpName:(NSString *)name
+                  gid:(NSString *)gid
+                  key:(NSString *)key
+                   iv:(NSString *)iv
+                  url:(NSString *)url
+                token:(NSString *)token
+           completion:(void(^)(BOOL finished)) completion;
+
+
+- (BOOL) delGrpByGid:(NSString *)gid
+                 key:(NSString *)key
+                  iv:(NSString *)iv
+                 url:(NSString *)url
+               token:(NSString *)token
+          compeltion:(void(^)(BOOL finished)) completion;
+
+
 
 - (BOOL)exsitsGrpName:(NSString *)grpName;
 
+
+#pragma mark - roster item req.
+- (NSArray *) getAllRosterItemReqButMe: (NSString *)me;
+
 - (NSInteger)indexOfGrpWithName:(NSString *)name;
 
-- (BOOL)exsitsItemByUid:(NSString *)uid;
+
+- (BOOL) delAllRosterItemReq;
 
 /**
  * return the roster version

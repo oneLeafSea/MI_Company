@@ -47,6 +47,12 @@
         DDLogError(@"ERROR: setup msgMgr.");
         return NO;
     }
+    
+    if (![self setupRecentMgr]) {
+        DDLogError(@"ERROR: setup recentMgr.");
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -83,6 +89,14 @@
     return YES;
 }
 
+- (BOOL)setupRecentMgr {
+    _recentMsg = [[RecentMgr alloc] initWithUid:self.uid dbq:self.dbq session:self.session];
+    if (!_recentMsg) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)reset {
     [self.rosterMgr reset];
 }
@@ -101,5 +115,9 @@
 
 - (NSString *)name {
     return [self.cfg objectForKey:@"name"];
+}
+
+- (NSString *)imurl {
+    return @"http://10.22.1.112:8040/";
 }
 @end

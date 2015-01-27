@@ -12,6 +12,7 @@
 #import "LoginResp.h"
 #import "session.h"
 #import "ChatMessageMgr.h"
+#import "RecentMgr.h"
 
 
 @interface User : NSObject
@@ -27,6 +28,7 @@
 @property(readonly) RosterMgr       *rosterMgr;
 @property(readonly) Session         *session;
 @property(readonly) ChatMessageMgr  *msgMgr;
+@property(readonly) RecentMgr       *recentMsg;
 
 @property(readonly) NSDictionary    *cfg;
 
@@ -34,6 +36,8 @@
 @property(readonly) NSString *iv;
 @property(readonly) NSString *token;
 @property(readonly) NSString *name;
+
+@property(readonly) NSString *imurl;
 
 
 

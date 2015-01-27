@@ -1,0 +1,156 @@
+
+/* Class = "IBUILabel"; text = "未分类"; ObjectID = "19o-c9-0ig"; */
+"19o-c9-0ig.text" = "未分类";
+
+/* Class = "IBUIButton"; normalTitle = "拒绝添加好友"; ObjectID = "4so-Ai-zCl"; */
+"4so-Ai-zCl.normalTitle" = "拒绝添加好友";
+
+/* Class = "IBUILabel"; text = "机构"; ObjectID = "50I-bi-wcr"; */
+"50I-bi-wcr.text" = "机构";
+
+/* Class = "IBUIButton"; normalTitle = "设置头像"; ObjectID = "6SE-pC-dRA"; */
+"6SE-pC-dRA.normalTitle" = "设置头像";
+
+/* Class = "IBUITabBarItem"; title = "我"; ObjectID = "6ut-aN-ll1"; */
+"6ut-aN-ll1.title" = "我";
+
+/* Class = "IBUIButton"; normalTitle = "删除好友"; ObjectID = "9rO-Q5-JRB"; */
+"9rO-Q5-JRB.normalTitle" = "删除好友";
+
+/* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "ATC-X7-aET"; */
+"ATC-X7-aET.headerTitle" = " ";
+
+/* Class = "IBUIButton"; normalTitle = "查  找"; ObjectID = "DYg-3h-BWY"; */
+"DYg-3h-BWY.normalTitle" = "查  找";
+
+/* Class = "IBUITextField"; placeholder = "好友账号/手机号/姓名"; ObjectID = "FUP-fi-Lti"; */
+"FUP-fi-Lti.placeholder" = "好友账号/手机号/姓名";
+
+/* Class = "IBUIButton"; normalTitle = "发送消息"; ObjectID = "FZ0-Kf-YQc"; */
+"FZ0-Kf-YQc.normalTitle" = "发送消息";
+
+/* Class = "IBUILabel"; text = "密码"; ObjectID = "Jab-Oj-qiv"; */
+"Jab-Oj-qiv.text" = "密码";
+
+/* Class = "IBUITabBarItem"; title = "消息"; ObjectID = "Lwv-AB-79F"; */
+"Lwv-AB-79F.title" = "消息";
+
+/* Class = "IBUILabel"; text = "用户名"; ObjectID = "OAo-o4-UMX"; */
+"OAo-o4-UMX.text" = "用户名";
+
+/* Class = "IBUIButton"; normalTitle = "发送添加好友请求"; ObjectID = "Om1-A0-San"; */
+"Om1-A0-San.normalTitle" = "发送添加好友请求";
+
+/* Class = "IBUIButton"; normalTitle = "设置好友gid"; ObjectID = "Ovh-ua-k50"; */
+"Ovh-ua-k50.normalTitle" = "设置好友gid";
+
+/* Class = "IBUINavigationItem"; title = "选择分组"; ObjectID = "Px7-EJ-cv6"; */
+"Px7-EJ-cv6.title" = "选择分组";
+
+/* Class = "IBUINavigationItem"; title = "查找结果"; ObjectID = "QyL-AK-Bwz"; */
+"QyL-AK-Bwz.title" = "查找结果";
+
+/* Class = "IBUIButton"; normalTitle = "设置签名"; ObjectID = "Tf6-v6-Ecc"; */
+"Tf6-v6-Ecc.normalTitle" = "设置签名";
+
+/* Class = "IBUILabel"; text = "我的好友"; ObjectID = "U55-Ow-9mD"; */
+"U55-Ow-9mD.text" = "我的好友";
+
+/* Class = "IBUIButton"; normalTitle = "同意添加好友"; ObjectID = "Y4F-vK-vj5"; */
+"Y4F-vK-vj5.normalTitle" = "同意添加好友";
+
+/* Class = "IBUINavigationItem"; title = "消息"; ObjectID = "ZZm-f2-ZbN"; */
+"ZZm-f2-ZbN.title" = "消息";
+
+/* Class = "IBUITableViewSection"; headerTitle = "请填写验证信息"; ObjectID = "Zly-0I-mA6"; */
+"Zly-0I-mA6.headerTitle" = "请填写验证信息";
+
+/* Class = "IBUILabel"; text = "这是个简介"; ObjectID = "aL3-Vp-glh"; */
+"aL3-Vp-glh.text" = "这是个简介";
+
+/* Class = "IBUIButton"; normalTitle = "获取名册"; ObjectID = "bwe-LH-8no"; */
+"bwe-LH-8no.normalTitle" = "获取名册";
+
+/* Class = "IBUIButton"; normalTitle = "设置组信息"; ObjectID = "c6C-Mw-l8l"; */
+"c6C-Mw-l8l.normalTitle" = "设置组信息";
+
+/* Class = "IBUINavigationItem"; title = "添加好友"; ObjectID = "cHp-gf-Zbl"; */
+"cHp-gf-Zbl.title" = "添加好友";
+
+/* Class = "IBUILabel"; text = "郭志伟"; ObjectID = "con-zt-5NG"; */
+"con-zt-5NG.text" = "郭志伟";
+
+/* Class = "IBUILabel"; text = "好友账号/手机号/姓名"; ObjectID = "dzY-fA-IV2"; */
+"dzY-fA-IV2.text" = "好友账号/手机号/姓名";
+
+/* Class = "IBUITabBarItem"; title = "联系人"; ObjectID = "e90-6k-yPp"; */
+"e90-6k-yPp.title" = "联系人";
+
+/* Class = "IBUIBarButtonItem"; title = "添加"; ObjectID = "fHg-PE-AgM"; */
+"fHg-PE-AgM.title" = "添加";
+
+/* Class = "IBUINavigationItem"; title = "联系人"; ObjectID = "fTg-XV-eQL"; */
+"fTg-XV-eQL.title" = "联系人";
+
+/* Class = "IBUINavigationItem"; title = "验证信息"; ObjectID = "fnk-SN-0iT"; */
+"fnk-SN-0iT.title" = "验证信息";
+
+/* Class = "IBUILabel"; text = "添加到新的分组"; ObjectID = "g75-wZ-4pw"; */
+"g75-wZ-4pw.text" = "添加到新的分组";
+
+/* Class = "IBUITextField"; placeholder = "机构"; ObjectID = "g95-hX-rvw"; */
+"g95-hX-rvw.placeholder" = "机构";
+
+/* Class = "IBUILabel"; text = "分  组"; ObjectID = "gsP-VI-PXj"; */
+"gsP-VI-PXj.text" = "分  组";
+
+/* Class = "IBUIBarButtonItem"; title = "下一步"; ObjectID = "h5t-rC-mz8"; */
+"h5t-rC-mz8.title" = "下一步";
+
+/* Class = "IBUIButton"; normalTitle = "登录"; ObjectID = "jG6-Uz-eF7"; */
+"jG6-Uz-eF7.normalTitle" = "登录";
+
+/* Class = "IBUITabBarItem"; title = "功能"; ObjectID = "jPY-Vh-nGy"; */
+"jPY-Vh-nGy.title" = "功能";
+
+/* Class = "IBUILabel"; text = "姓名(gzw)"; ObjectID = "kUg-Qs-ehj"; */
+"kUg-Qs-ehj.text" = "姓名(gzw)";
+
+/* Class = "IBUILabel"; text = "附加消息：我是XXX"; ObjectID = "lrg-9k-XoZ"; */
+"lrg-9k-XoZ.text" = "附加消息：我是XXX";
+
+/* Class = "IBUIButton"; normalTitle = "解析group"; ObjectID = "nQ9-zS-6hT"; */
+"nQ9-zS-6hT.normalTitle" = "解析group";
+
+/* Class = "IBUILabel"; text = "姓名和uid"; ObjectID = "oEa-WX-sbw"; */
+"oEa-WX-sbw.text" = "姓名和uid";
+
+/* Class = "IBUINavigationItem"; title = "好友查找"; ObjectID = "ofl-72-4Rb"; */
+"ofl-72-4Rb.title" = "好友查找";
+
+/* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "pan-eG-k1H"; */
+"pan-eG-k1H.headerTitle" = " ";
+
+/* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "pzQ-VD-DOk"; */
+"pzQ-VD-DOk.headerTitle" = " ";
+
+/* Class = "IBUIButton"; normalTitle = "登录"; ObjectID = "q5d-6L-LpT"; */
+"q5d-6L-LpT.normalTitle" = "登录";
+
+/* Class = "IBUINavigationItem"; title = "我"; ObjectID = "qkc-S6-0Cf"; */
+"qkc-S6-0Cf.title" = "我";
+
+/* Class = "IBUINavigationItem"; title = "功能"; ObjectID = "rAB-kE-AJT"; */
+"rAB-kE-AJT.title" = "功能";
+
+/* Class = "IBUIBarButtonItem"; title = "发送"; ObjectID = "rkB-Jt-Y4r"; */
+"rkB-Jt-Y4r.title" = "发送";
+
+/* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "s7n-Al-Yjy"; */
+"s7n-Al-Yjy.headerTitle" = " ";
+
+/* Class = "IBUIButton"; normalTitle = "设置好友name"; ObjectID = "sbi-Gk-ePC"; */
+"sbi-Gk-ePC.normalTitle" = "设置好友name";
+
+/* Class = "IBUINavigationItem"; title = "聊天界面"; ObjectID = "uWt-Aa-GEb"; */
+"uWt-Aa-GEb.title" = "聊天界面";

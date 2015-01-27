@@ -60,8 +60,8 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
     m_lp = [[LoginProcedures alloc]init];
     m_lp.delegate = self;
 #if (TARGET_IPHONE_SIMULATOR)
-//    [m_lp loginWithUserId:@"gzw" pwd:@"8" timeout:30];
-    [m_lp loginWithUserId:@"wjw" pwd:@"12345" timeout:30];
+    [m_lp loginWithUserId:@"gzw" pwd:@"8" timeout:30];
+//    [m_lp loginWithUserId:@"wjw" pwd:@"12345" timeout:30];
 #else
     [m_lp loginWithUserId:@"gzw" pwd:@"8" timeout:30];
 #endif
@@ -127,7 +127,7 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
 //}
 - (IBAction)setRoster:(id)sender {
     User *u = APP_DELEGATE.user;
-    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:ip token:u.token grp:nil];
+    [u.rosterMgr setRosterGrpWithKey:u.key iv:u.iv url:ip token:u.token grp:nil completion:nil];
 }
 - (IBAction)setSign:(id)sender {
     User *u = APP_DELEGATE.user;

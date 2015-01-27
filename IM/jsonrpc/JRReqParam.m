@@ -48,7 +48,7 @@ static const NSString *kKeyEncrypt   = @"encrypt";
     NSDictionary *params = nil;
     if (self.params.count > 0) {
         NSString *strData = [NSJSONSerialization jsonStringFromDict:self.params];
-        
+        NSLog(@"%@", strData);
         NSError *err = nil;
         NSString *base64Data = [Encrypt encodeWithKey:self.key iv:self.iv data:[strData dataUsingEncoding:NSUTF8StringEncoding] error:&err];
         
@@ -71,6 +71,7 @@ static const NSString *kKeyEncrypt   = @"encrypt";
                     };
     }
     
+    DDLogInfo(@"--> %@", self.params);
     return params;
 }
 

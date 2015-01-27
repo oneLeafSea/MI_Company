@@ -8,4 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *kChatMessageNewMsg;
+extern NSString *kChatMessageRecvNewMsg;
+extern NSString *kChatMessageSendNewMsg;
+extern NSString *kChatMessageControllerWillDismiss;

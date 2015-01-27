@@ -13,5 +13,7 @@
 @property(copy) NSString       *gid;
 @property NSMutableArray       *items;
 @property(copy) NSString       *name;
+@property       BOOL           defaultGrp;
+@property   NSInteger          weight;
 
 @end

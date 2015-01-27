@@ -14,11 +14,16 @@ extern NSString *kSQLRosterQueryByUid;
 extern NSString *kSQLRosterQuery;
 extern NSString *kSQLRosterUpdate;
 extern NSString *kSQLRosterDel;
+extern NSString *kSQLRosterDelAll;
+
+// roster versin table.
+extern NSString *kSQLRosterVerCreate;
 
 // rosterdelrequest 表
 extern NSString *kSQLRosterItemAddReqCreate;
 extern NSString *kSQLRosterItemAddReqInsert;
 extern NSString *kSQLRosterItemAddReqUpdate;
+extern NSString *kSQLRosterItemUpdateReqStatusByFrom ;
 extern NSString *kSQLRosterItemAddReqUpdateStatus;
 extern NSString *kSQLRosterItemAddReqDel;
 extern NSString *kSQLRosterItemAddReqGetWithMsgid;
@@ -38,3 +43,16 @@ extern NSString *kSQLRosterItemAddResultInsert;
 extern NSString *kSQLRosterItemAddResultUpdate;
 extern NSString *kSQLRosterItemAddResultUpdateStatus;
 extern NSString *kSQLRosterItemAddResultDel;
+extern NSString *kSQLRosterItemAddReqGetAllButMe;
+extern NSString *kSQLRosterItemAddReqDelAll;
+
+// roster_grp table.
+extern NSString *kSQLRosterGrpCreate;
+extern NSString *kSQLRosterGrpUpdate;
+extern NSString *kSQLRosterGrpDelAll;
+extern NSString *kSQLRosterGrpInsert;
+extern NSString *kSQLRosterGrpDelWithGid;
+
+
+// roster_grp_version table.
+extern NSString *kSQLRosterGrpVerCreate;

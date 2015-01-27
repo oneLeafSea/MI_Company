@@ -53,7 +53,7 @@
 - (BOOL) insertReq:(RosterItemAddRequest *)req {
     __block BOOL ret = YES;
     [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeUpdate:kSQLRosterItemAddReqInsert, req.qid, req.from, req.to, req.msg, [NSNumber numberWithUnsignedInt:req.status], [[NSDate Now] formatWith:nil]];
+        ret = [db executeUpdate:kSQLRosterItemAddReqInsert, req.qid, req.from, req.to, req.msg, [NSNumber numberWithUnsignedInt:req.status], req.time];
         if (!ret) {
             *rollback = YES;
         }
@@ -65,13 +65,25 @@
     __block BOOL ret = YES;
     
     [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeUpdate:kSQLRosterItemAddReqUpdate, req.qid, req.from, req.to, req.msg, [NSNumber numberWithUnsignedInt:req.status], [[NSDate Now] formatWith:nil], req.qid];
+        ret = [db executeUpdate:kSQLRosterItemAddReqUpdate, req.qid, req.from, req.to, req.msg, [NSNumber numberWithUnsignedInt:req.status], req.time, req.qid];
         if (!ret) {
             *rollback = YES;
         }
     }];
     return ret;
 }
+
+- (BOOL) updateReqStatus:(RosterItemAddReqStatus)reqStatus from:(NSString *)from {
+    __block BOOL ret = YES;
+    [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLRosterItemUpdateReqStatusByFrom, [NSNumber numberWithInteger:reqStatus], from];
+        if (!ret) {
+            *rollback = YES;
+        }
+    }];
+    return ret;
+}
+
 
 - (BOOL) updateReqStatusWithMsgid:(NSString *)msgid status:(RosterItemAddReqStatus) status {
     __block BOOL ret = YES;
@@ -87,7 +99,7 @@
 - (BOOL) delReq:(RosterItemAddRequest *)req {
     __block BOOL ret = YES;
     [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeQuery:kSQLRosterItemAddReqDel, req.qid];
+        ret = [db executeUpdate:kSQLRosterItemAddReqDel, req.qid];
         if (!ret) {
             *rollback = YES;
         }
@@ -106,11 +118,38 @@
             NSString *to = [rs objectForColumnName:@"to"];
             NSString *msg = [rs objectForColumnName:@"msg"];
             NSNumber *status = [rs objectForColumnName:@"status"];
-            r = [[RosterItemAddRequest alloc] initWithFrom:from to:to msgid:msgid msg:msg status:status];
+            NSString *time = [rs objectForColumnName:@"time"];
+            r = [[RosterItemAddRequest alloc] initWithFrom:from to:to msgid:msgid msg:msg status:status time:time];
         }
         [rs close];
     }];
     return r;
+}
+
+- (NSArray *) getAllRosterItemReqButMe: (NSString *)me {
+    __block NSMutableArray *ret = [[NSMutableArray alloc] init];
+    [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *rs = [db executeQuery:kSQLRosterItemAddReqGetAllButMe, me];
+        while (rs.next) {
+            NSString *msgid = [rs objectForColumnName:@"msgid"];
+            NSString *from = [rs objectForColumnName:@"from"];
+            NSString *to = [rs objectForColumnName:@"to"];
+            NSString *msg = [rs objectForColumnName:@"msg"];
+            NSNumber *status = [rs objectForColumnName:@"status"];
+            NSString *time = [rs objectForColumnName:@"time"];
+            RosterItemAddRequest *r = [[RosterItemAddRequest alloc] initWithFrom:from to:to msgid:msgid msg:msg status:status time:time];
+            [ret addObject:r];
+        }
+    }];
+    return ret;
+}
+
+- (BOOL) delAll {
+    __block BOOL ret = YES;
+    [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+       ret = [db executeUpdate:kSQLRosterItemAddReqDelAll];
+    }];
+    return ret;
 }
 
 @end

@@ -13,6 +13,14 @@ typedef NS_ENUM(UInt32, ChatMessageType) {
     ChatMessageTypeGroupChat    // 群聊
 };
 
+typedef NS_ENUM(UInt32, ChatMessageStatus) {
+    ChatMessageStatusUnkown,
+    ChatMessageStatusSending,
+    ChatMessageStatusSent,
+    ChatMessageStatusRecved,
+    ChatMessageStatusSendError
+};
+
 @interface ChatMessage : Request
 
 @property NSString      *from;
@@ -22,6 +30,7 @@ typedef NS_ENUM(UInt32, ChatMessageType) {
 @property NSString      *time;
 @property ChatMessageType chatMsgType;
 @property NSMutableDictionary *body;
+@property ChatMessageStatus status;
 
 - (instancetype) initWithData:(NSData *)data;
 

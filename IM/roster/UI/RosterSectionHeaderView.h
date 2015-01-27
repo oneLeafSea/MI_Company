@@ -24,5 +24,6 @@
 @protocol RosterSectionHeaderViewDelegate <NSObject>
 
 - (void)RosterSectionHeaderViewTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger) tag;
+- (void)RosterSectionHeaderViewGrpMgrTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger)tag;
 
 @end

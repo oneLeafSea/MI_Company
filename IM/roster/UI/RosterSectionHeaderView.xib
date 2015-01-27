@@ -68,6 +68,7 @@
             <connections>
                 <outlet property="arrowImagView" destination="ukE-6W-gcO" id="QNL-sH-n7i"/>
                 <outlet property="groupNameLabel" destination="0FC-LM-Wah" id="Zkm-2r-aiJ"/>
+                <outlet property="m_btn" destination="mg7-Yj-Pxq" id="g8m-Gg-7RJ"/>
                 <outlet property="statusLabel" destination="JZs-Am-9yC" id="cUk-tT-WiK"/>
             </connections>
             <point key="canvasLocation" x="57" y="-271"/>

@@ -8,11 +8,13 @@
 
 #import "JSQMessages.h"
 #import "ChatModel.h"
+#import "ChatMessage.h"
 
 @interface ChatViewController : JSQMessagesViewController
 
 @property(nonatomic, strong) ChatModel *data;
 @property(nonatomic, strong) NSString *talkingId;
 @property(nonatomic, strong) NSString *talkingname;
+@property ChatMessageType chatMsgType;
 
 @end

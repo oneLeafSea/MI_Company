@@ -24,6 +24,9 @@
     if (self) {
         self.type = IM_MESSAGE;
         self.body = [[NSMutableDictionary alloc] init];
+        self.fromRes = @"unkown";
+        self.toRes = @"unkown";
+        self.status = ChatMessageStatusUnkown;
     }
     return self;
 }
@@ -33,18 +36,22 @@
         if (![self parseData:data]) {
             self = nil;
         }
+        self.toRes = @"iphone";
     }
     return  self;
 }
 
 - (NSData *)pkgData {
+    NSData *bodydata = [self jsonDataFromDict:self.body];
+    NSString *body = [[NSString alloc] initWithData:bodydata encoding:NSUTF8StringEncoding];
     NSDictionary *dict = @{
                            @"from" : self.from,
                            @"to"   : self.to,
                            @"time" : self.time,
-                           @"body" : self.body,
+                           @"body" : body,
                            @"msgid": self.qid,
                            @"type" : [NSNumber numberWithUnsignedInt:self.chatMsgType],
+                           @"fromRes":@"iphone"
                            };
     DDLogInfo(@"--> %@", dict);
     NSData *data = [self jsonDataFromDict:dict];
@@ -54,7 +61,9 @@
 - (BOOL)parseData:(NSData *)data {
     NSDictionary *dict = [self dictFromJsonData:data];
     DDLogInfo(@"<--%@", dict);
-    self.body = [[NSMutableDictionary alloc] initWithDictionary:[dict objectForKeyedSubscript:@"body"]];
+    NSString *strBody = [dict objectForKey:@"body"];
+    NSData *bodyData = [strBody dataUsingEncoding:NSUTF8StringEncoding];
+    self.body = [[NSMutableDictionary alloc] initWithDictionary:[self dictFromJsonData:bodyData]];
     self.from = [dict objectForKey:@"from"];
     self.to = [dict objectForKey:@"to"];
     self.time = [dict objectForKey:@"time"];
@@ -62,4 +71,5 @@
     self.fromRes = [dict objectForKey:@"from_res"];
     return YES;
 }
+
 @end

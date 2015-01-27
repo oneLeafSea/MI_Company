@@ -91,15 +91,23 @@
             DDLogInfo(@"INFO: IM_NOTIFY_ROSTER_DEL.");
         }
             break;
-            
+           
         case IM_MESSAGE:
         {
             ChatMessage *msg = [[ChatMessage alloc] initWithData:data];
             if (msg) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageNewMsg object:msg];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageRecvNewMsg object:msg];
             }
         }
             break;
+            
+        case IM_NOTIFY_MESSAGE:
+        {
+            ChatMessage *msg = [[ChatMessage alloc] initWithData:data];
+            if (msg) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageRecvNewMsg object:msg];
+            }
+        }
         default:
             break;
     }

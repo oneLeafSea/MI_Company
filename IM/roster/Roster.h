@@ -13,12 +13,22 @@
 
 - (instancetype) initWithResult:(NSString *)result ext:(NSDictionary *)ext;
 
-@property(readonly) NSArray *rosterItems;
+@property NSMutableArray *rosterItems;
 @property(readonly) NSDictionary *extDict;
-@property(readonly) NSDictionary *rosterGroup;
+@property NSArray *rosterGroup;
+
 
 - (void)addGroupItemWithName:(NSString *)grpName gid:(NSString *)gid;
+- (void)renameGrpItemWithNewName:(NSString *)grpName gid:(NSString *)gid;
+- (void)removeGrpWithId:(NSString *)gid;
+- (NSDictionary *)getDefaultGroup;
 - (NSString *)genGid;
+- (NSNumber *)genWeight;
+- (BOOL)isDefaultGrp:(NSString *)gid;
+- (NSDictionary *)getGrpById:(NSString *)gid;
+
+- (NSArray *) getRosterItemsInGrpId:(NSString *)gid;
+//- (void)removeRosterItemWithId:(NSString *)uid;
 
 @end
 

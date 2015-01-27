@@ -10,7 +10,7 @@
 #import "RosterConstants.h"
 
 @interface RosterItem() {
-    NSDictionary *m_dict;
+    NSMutableDictionary *m_dict;
 }
 
 
@@ -29,7 +29,7 @@
 }
 
 - (BOOL) setup:(NSDictionary *) item {
-    m_dict = [[NSDictionary alloc] initWithDictionary:item copyItems:YES];
+    m_dict = [[NSMutableDictionary alloc] initWithDictionary:item copyItems:YES];
     if (!m_dict) {
         return NO;
     }
@@ -49,6 +49,12 @@
     return [m_dict objectForKey:kRosterKeyGid];
 }
 
+- (void) setGid:(NSString *)gid {
+    [m_dict setObject:gid forKey:kRosterKeyGid];
+}
 
+- (NSString *)sign {
+    return [m_dict objectForKey:@"sign"];
+}
 
 @end

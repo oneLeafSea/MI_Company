@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "ChatMessageNotification.h"
 #import "ChatMessage.h"
+#import "JSQMessage.h"
+#import "ChatMessageControllerInfo.h"
 
 @interface ChatViewController ()
 
@@ -30,7 +32,8 @@
     // Do any additional setup after loading the view.
     self.senderId = APP_DELEGATE.user.uid;
     self.senderDisplayName = APP_DELEGATE.user.name;
-    self.data = [[ChatModel alloc] init];
+    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:ChatMessageTypeNormal limit:20 offset:0];
+    self.data = [[ChatModel alloc] initWithMsgs:msgs];
     self.navigationItem.title = self.talkingname;
 }
 
@@ -41,11 +44,17 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageNewMsg object:nil];
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageRecvNewMsg object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
+    ChatMessageControllerInfo *info = [[ChatMessageControllerInfo alloc] init];
+    info.talkingId = [self.talkingId copy];
+    info.talkingName = [self.talkingname copy];
+    info.msgType = self.chatMsgType;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageControllerWillDismiss object:info];
 }
 
 
@@ -61,9 +70,9 @@
     [self.data.messages addObject:message];
     [APP_DELEGATE.user.msgMgr sendTextMesage:text msgType:ChatMessageTypeNormal to:self.talkingId completion:^(BOOL finished) {
         NSLog(@"send to %@, %@", self.talkingId, text);
-        [self finishSendingMessageAnimated:YES];
+        
     }];
-    
+    [self finishSendingMessageAnimated:YES];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender
@@ -96,8 +105,10 @@
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
-    return [self.data.avatars objectForKey:message.senderId];
+//    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"male"]
+                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    return mineImage;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -231,11 +242,12 @@
         NSString *text = [msg.body objectForKey:@"content"];
         if ([msg.from isEqualToString:self.talkingId]) {
             JSQMessage *message = [[JSQMessage alloc] initWithSenderId:msg.from
-                                                     senderDisplayName:@"虚羊羊"
+                                                     senderDisplayName:[msg.body objectForKey:@"fromname"]
                                                                   date:date
                                                                   text:text];
             [self.data.messages addObject:message];
             [self.collectionView reloadData];
+            [self scrollToBottomAnimated:YES];
         }
     });
    

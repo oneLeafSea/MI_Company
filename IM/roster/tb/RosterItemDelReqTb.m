@@ -85,7 +85,7 @@
 - (BOOL) delReqWithMsgId:(NSString *)msgid {
     __block BOOL ret = YES;
     [m_dq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeQuery:kSQLRosterItemDelReqDel, msgid];
+        ret = [db executeUpdate:kSQLRosterItemDelReqDel, msgid];
         if (!ret) {
             *rollback = YES;
         }

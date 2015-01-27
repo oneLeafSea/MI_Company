@@ -21,6 +21,9 @@
 #import "RosterItemDelReqTb.h"
 #import "RosterItemAddReqTb.h"
 #import "RosterItemAddResultTb.h"
+#import "RosterVerTb.h"
+#import "RosterGrpVerTb.h"
+#import "RosterGrpTb.h"
 
 #import "Roster.h"
 #import "JRSession.h"
@@ -30,6 +33,7 @@
 #import "RosterGroup.h"
 
 #import "RosterQid.h"
+#import "AppDelegate.h"
 
 
 @interface RosterMgr() {
@@ -38,6 +42,9 @@
     RosterItemAddReqTb      *m_rosterAddTb;
     RosterItemDelReqTb      *m_rosterDelTb;
     RosterItemAddResultTb   *m_rosterAddResultTb;
+    RosterVerTb             *m_rosterVerTb;
+    RosterGrpTb             *m_rosterGrpTb;
+    RosterGrpVerTb          *m_rosterGrpVerTb;
     __weak FMDatabaseQueue  *m_dbq;                // 数据库
     NSString                *m_ver;                // 版本号
     __weak  Session         *m_session;
@@ -73,7 +80,7 @@
 }
 
 - (BOOL)setupTb {
-    m_rosterTb = [[RosterTb alloc] initWithUid:m_sid dbQueue:m_dbq];
+    m_rosterTb = [[RosterTb alloc] initWithDbQueue:m_dbq];
     if (!m_rosterTb) {
         return NO;
     }
@@ -90,6 +97,21 @@
     
     m_rosterAddResultTb = [[RosterItemAddResultTb alloc] initWithDbQueue:m_dbq];
     if (!m_rosterAddResultTb) {
+        return NO;
+    }
+    
+    m_rosterVerTb = [[RosterVerTb alloc] initWithDbQueue:m_dbq];
+    if (!m_rosterVerTb) {
+        return NO;
+    }
+    
+    m_rosterGrpTb = [[RosterGrpTb alloc] initWithDbQueue:m_dbq];
+    if (!m_rosterGrpTb) {
+        return NO;
+    }
+    
+    m_rosterGrpVerTb = [[RosterGrpVerTb alloc] initWithDbQueue:m_dbq];
+    if (!m_rosterGrpVerTb) {
         return NO;
     }
     
@@ -113,12 +135,14 @@
                           groupId:(NSString *)gid
                              name:(NSString *)name
                            accept:(BOOL)accept {
-#warning "这个函数没有测试！"
     RosterItemAddRequest *req = [m_rosterAddTb getReqWithMsgId:msgid];
     RosterItemAddResult *result = [[RosterItemAddResult alloc] initWithFrom:m_sid to:req.from gid:gid name:name msg:req.msg];
     result.qid = req.qid;
     result.accept = accept;
     result.status = RosterItemDelRequestRequesting;
+    req.status = accept ? RosterItemAddReqStatusACK : RosterItemAddReqStatusReject;
+    [m_rosterAddTb updateReq:req];
+    [m_rosterAddTb updateReqStatus:req.status from:req.from];
     if ([m_rosterAddResultTb insertResult:result]) {
         [m_session post:result];
     } else {
@@ -151,6 +175,9 @@
             __block JRTextResponse *txtResp = (JRTextResponse *)resp;
             dispatch_async(dispatch_get_main_queue(), ^{
                 m_roster = [[Roster alloc] initWithResult:txtResp.text ext:txtResp.ext];
+                [m_rosterGrpTb refreshGrpWithArray:m_roster.rosterGroup];
+                [m_rosterTb refreshWithItems:m_roster.rosterItems];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
             });
         } failure:^(JRReqest *request, NSError *error) {
             DDLogError(@"get roster errror %@", error);
@@ -165,12 +192,12 @@
                          iv:(NSString *)iv
                         url:(NSString *)url
                       token:(NSString *)token
-                        grp:(NSDictionary *)grp
+                        grp:(NSArray *)grp
                  completion:(void (^)(BOOL finished))completion {
     __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:url]];
     JRReqMethod *m = [[JRReqMethod alloc] initWithService:SVC_IM];
     JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_IM_SET_ROSTER_GRP token:token key:key iv:iv];
-    NSString *strGrp = [[NSString alloc] initWithData:[Utils jsonDataFromDict:grp] encoding:NSUTF8StringEncoding];
+    NSString *strGrp = [[NSString alloc] initWithData:[Utils jsonDataFromArray:grp] encoding:NSUTF8StringEncoding];
     
     [param.params setObject:strGrp forKey:@"grp"];
     __block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
@@ -178,18 +205,24 @@
         [session request:req success:^(JRReqest *request, JRResponse *resp) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 DDLogInfo(@"INFO: set grp sucess.");
+                m_roster.rosterGroup = grp;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
                 completion(YES);
             });
         } failure:^(JRReqest *request, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                DDLogError(@"ERROR: set grp errror");
-                completion(NO);
+                DDLogError(@"ERROR: set grp errror: %@", error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(NO);
+                });
             });
             
         } cancel:^(JRReqest *request) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 DDLogError(@"ERROR: set grp cancel");
-                completion(NO);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(NO);
+                });
             });
         }];
     });
@@ -332,6 +365,72 @@
 }
 
 
+- (BOOL)moveRosterItems:(NSArray *)items
+                toGrpId:(NSString *)gid
+                    key:(NSString *)key
+                     iv:(NSString *)iv
+                    url:(NSString *)url
+                  token:(NSString *)token
+             completion:(void(^)(BOOL finished)) completion {
+    __block NSMutableString *fidParam = [[NSMutableString alloc] init];
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        RosterItem *item = obj;
+        [fidParam appendString:item.uid];
+        if (idx < items.count - 1) {
+            [fidParam appendString:@","];
+        }
+    }];
+    __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:url]];
+    JRReqMethod *m = [[JRReqMethod alloc] initWithService:SVC_IM];
+    JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_IM_SET_ROSTER_ITEM_GID token:token key:key iv:iv];
+    [param.params setObject:fidParam forKey:@"fid"];
+    [param.params setObject:gid forKey:@"gid"];
+    __block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [session request:req success:^(JRReqest *request, JRResponse *resp) {
+
+            [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                __block RosterItem *rosteritem = obj;
+                __block NSDictionary *item = nil;
+                [m_roster.rosterItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    NSDictionary *i = obj;
+                    NSString *fid = [i objectForKey:@"fid"];
+                    if ([rosteritem.uid isEqualToString:fid]) {
+                        item = i;
+                        *stop = YES;
+                    }
+                }];
+                if (item) {
+                    NSMutableDictionary *newItem = [[NSMutableDictionary alloc] initWithDictionary:item copyItems:YES];;
+                    [newItem setObject:gid forKey:@"gid"];
+                    [m_roster.rosterItems removeObject:item];
+                    [m_roster.rosterItems addObject:newItem];
+                }
+                
+            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
+                completion(YES);
+            });
+           
+            DDLogInfo(@"INFO: set ItemGid sucess.");
+            
+        } failure:^(JRReqest *request, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO);
+            });
+            DDLogError(@"ERROR: set ItemGid errror");
+        } cancel:^(JRReqest *request) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO);
+            });
+        }];
+    });
+
+    return YES;
+}
+
+
 - (NSArray *)parseSearchResult:(NSArray *) result {
     NSMutableArray *ret = ret = [[NSMutableArray alloc] initWithCapacity:20];
     for (NSArray *item in result) {
@@ -350,21 +449,37 @@
 - (NSArray *)grouplist {
     __block NSMutableArray *grpList = [[NSMutableArray alloc] init];
     
-    NSDictionary *grpdict = m_roster.rosterGroup;
-    [grpdict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    NSArray *grp = m_roster.rosterGroup;
+    [grp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *grpItem = obj;
         RosterGroup *rg = [[RosterGroup alloc] init];
-        rg.gid = key;
-        rg.name = obj;
+        rg.gid = grpItem[@"gid"];
+        rg.name = grpItem[@"n"];
+        NSNumber *defGrp = [grpItem objectForKey:@"def"];
+        rg.defaultGrp = [defGrp boolValue];
+        NSNumber *weight = [grpItem objectForKey:@"w"];
+        rg.weight = weight ? [weight integerValue] : idx;
         [grpList addObject:rg];
     }];
+    
+    NSArray *sortedGrpList = [grpList sortedArrayUsingFunction:sortGroupById context:nil];
+    
     NSArray *rosterItems = [m_roster rosterItems];
     for (NSDictionary *item in rosterItems) {
         RosterItem *ri = [[RosterItem alloc] initWithDict:item];
-        RosterGroup *g = [self getRosterGroupWithId:ri.gid grouplist:grpList];
+        RosterGroup *g = [self getRosterGroupWithId:ri.gid grouplist:sortedGrpList];
         [g.items addObject:ri];
     }
-    return grpList;
+    return sortedGrpList;
     
+}
+
+NSComparisonResult sortGroupById(RosterGroup* group1, RosterGroup* group2, void *ignore)
+{
+    if (group1.weight < group2.weight) {
+        return NSOrderedAscending;
+    }
+    return NSOrderedDescending;
 }
 
 - (BOOL)addGroupWithName:(NSString *)grpName
@@ -374,19 +489,117 @@
                    token:(NSString *)token
               completion:(void (^)(BOOL finished))completion{
     if ([self exsitsGrpName:grpName]) {
+        DDLogError(@"ERROR: the %@ grp exsits. @%s", grpName, __PRETTY_FUNCTION__);
         return NO;
     }
-    NSMutableDictionary *grp = [[NSMutableDictionary alloc] initWithDictionary:m_roster.rosterGroup copyItems:YES];
+    __block NSMutableArray *grp = [[NSMutableArray alloc] initWithArray:m_roster.rosterGroup copyItems:YES];
     __block NSString *gid = [m_roster genGid];
-    [grp setObject:grpName forKey:gid];
+    __block NSNumber *weight = [m_roster genWeight];
+    NSDictionary *newGrpItem = @{
+                                 @"gid":gid,
+                                 @"n":grpName,
+                                 @"w":weight
+                                 };
+    [grp addObject:newGrpItem];
     
     __block Roster *roster = m_roster;
     [self setRosterGrpWithKey:key iv:iv url:url token:token grp:grp completion:^(BOOL finished) {
-        [roster addGroupItemWithName:grpName gid:gid];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRosterGrpChanged object:nil];
+        if (finished) {
+            roster.rosterGroup = grp;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
+        }
         completion(finished);
     }];
     return YES;
+}
+
+
+- (BOOL)renameGrpName:(NSString *)name
+                  gid:(NSString *)gid
+                  key:(NSString *)key
+                   iv:(NSString *)iv
+                  url:(NSString *)url
+                token:(NSString *)token
+           completion:(void(^)(BOOL finished)) completion {
+    if ([self exsitsGrpName:name]) {
+        DDLogError(@"ERROR: the %@ grp exsits. @%s", name, __PRETTY_FUNCTION__);
+        return NO;
+    }
+    NSMutableArray *grp = [[NSMutableArray alloc] initWithArray:m_roster.rosterGroup copyItems:YES];
+    __block NSDictionary *grpItem = nil;
+    [grp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *item = obj;
+        if ([gid isEqualToString:item[@"gid"]]) {
+            grpItem = item;
+            *stop = YES;
+        }
+    }];
+    if (grpItem == nil) {
+        return NO;
+    }
+    
+    NSMutableDictionary *newGrpItem = [[NSMutableDictionary alloc] initWithDictionary:grpItem copyItems:YES];
+    [newGrpItem setObject:name forKey:@"n"];
+    [grp removeObject:grpItem];
+    [grp addObject:newGrpItem];
+    
+    __block Roster *roster = m_roster;
+    [self setRosterGrpWithKey:key iv:iv url:url token:token grp:grp completion:^(BOOL finished) {
+        if (finished) {
+            [roster renameGrpItemWithNewName:name gid:gid];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
+        }
+        completion(finished);
+    }];
+    return YES;
+}
+
+- (BOOL) delGrpByGid:(NSString *)gid
+                 key:(NSString *)key
+                  iv:(NSString *)iv
+                 url:(NSString *)url
+               token:(NSString *)token
+          compeltion:(void(^)(BOOL finished)) completion {
+    NSDictionary *defaultGrp = [m_roster getDefaultGroup];
+    if (!defaultGrp) {
+        DDLogError(@"ERROR: can't del default grp.");
+        return NO;
+    }
+    
+    if ([gid isEqualToString:defaultGrp[@"gid"]]) {
+        DDLogWarn(@"WARN: can't del default grp");
+        return NO;
+    }
+    
+    NSMutableArray *rosterGrp = [[NSMutableArray alloc] initWithArray:m_roster.rosterGroup copyItems:YES];
+    
+    __block NSDictionary *searchGrp = nil;
+    [rosterGrp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *item = obj;
+        if ([gid isEqualToString:[item objectForKey:@"gid"]]) {
+            searchGrp = item;
+            *stop = YES;
+        }
+    }];
+    if (!searchGrp) {
+        return NO;
+    }
+    
+    [rosterGrp removeObject:searchGrp];
+    
+    __block Roster *roster = m_roster;
+    [self setRosterGrpWithKey:key iv:iv url:url token:token grp:rosterGrp completion:^(BOOL finished) {
+        if (finished) {
+            [roster removeGrpWithId:gid];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRosterChanged object:nil];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(finished);
+        });
+        
+    }];
+    
+    return NO;
 }
 
 - (BOOL)exsitsGrpName:(NSString *)grpName {
@@ -411,6 +624,19 @@
     return NO;
 }
 
+- (RosterItem *) getItemByUid:(NSString *)uid {
+    NSArray *grpList = [self grouplist];
+    RosterItem *ret = nil;
+    for (RosterGroup *grp in grpList) {
+        for (RosterItem *item in grp.items) {
+            if ([item.uid isEqualToString:uid]) {
+                return item;
+            }
+        }
+    }
+    return ret;
+}
+
 - (NSInteger)indexOfGrpWithName:(NSString *)name {
     __block NSInteger ret_idx = 0;
     NSArray *grp_list = [self grouplist];
@@ -422,6 +648,10 @@
         }
     }];
     return ret_idx;
+}
+
+- (BOOL) delAllRosterItemReq {
+   return [m_rosterAddTb delAll];
 }
 
 - (RosterGroup *)getRosterGroupWithId:(NSString *)gid grouplist:(NSArray *)grplist {
@@ -454,6 +684,11 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - roster item req.
+- (NSArray *) getAllRosterItemReqButMe: (NSString *)me {
+    return [m_rosterAddTb getAllRosterItemReqButMe:me];
 }
 
 
@@ -489,15 +724,15 @@
     BOOL ret = [m_rosterAddTb insertReq:req];
     IMAck *ack = [[IMAck alloc] initWithMsgid:req.qid ackType:req.type err:(ret ? nil :@"ERROR: insert roster req.")];
     [m_session post:ack];
-    [self acceptRosterItemWithMsgid:req.qid groupId:@"1" name:@"郭志伟" accept:YES];
+//    [self acceptRosterItemWithMsgid:req.qid groupId:@"1" name:@"郭志伟" accept:YES];
 }
 
 - (void)handleRosterItemAddNotify:(NSNotification *)notification {
-    
+    [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token];
 }
 
 - (void)handleRosterItemDelNotify:(NSNotification *)notification {
-    
+     [self getRosterWithKey:APP_DELEGATE.user.key iv:APP_DELEGATE.user.iv url:APP_DELEGATE.user.imurl token:APP_DELEGATE.user.token];
 }
 
 @end
