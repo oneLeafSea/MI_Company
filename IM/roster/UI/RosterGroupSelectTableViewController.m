@@ -14,7 +14,6 @@
 
 @interface RosterGroupSelectTableViewController () <UIAlertViewDelegate> {
     NSArray *m_grouplist;
-   
 }
 
 @end
@@ -24,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     m_grouplist = [APP_DELEGATE.user.rosterMgr grouplist];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +87,14 @@
         [self.delegate RosterGroupSelectTableViewController:self didSelectedGrp:[m_grouplist objectAtIndex:_selectedIndex]];
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0 || indexPath.row == 2) {
+        return 20.0f;
+    }
+    return 44.0f;
 }
 
 

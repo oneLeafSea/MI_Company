@@ -39,6 +39,6 @@
 
 @property(readonly) NSString *imurl;
 
-
+@property(atomic, readonly) BOOL kick;
 
 @end

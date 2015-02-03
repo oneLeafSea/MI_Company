@@ -18,6 +18,7 @@
 
 
 NSString *kSessionConnected = @"cn.com.rooten.net.session.connected";
+NSString *kSessionConnectedFail = @"cn.com.rooten.net.session.connectedFail";
 NSString *kSessionDied = @"cn.com.rooten.net.session.died";
 NSString *kSessionTimeout = @"cn.com.rooten.net.session.timeout";
 NSString *kSessionServerTime = @"cn.com.rooten.net.sesion.servertime";
@@ -32,11 +33,13 @@ typedef NSMutableDictionary RequestMap;
     NSString        *m_IP;
     UInt32          m_port;
     BOOL            m_tls;
-    BOOL            m_connected;
+
     RequestMap      *m_requestMap;
     
     NSTimer         *m_timerout;
+    NSLock          *m_lock;
 }
+@property(atomic) BOOL connected;
 @end
 
 @implementation Session
@@ -54,12 +57,15 @@ typedef NSMutableDictionary RequestMap;
 - (void)dealloc {
     DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
     [m_is close];
+    m_is = nil;
     [m_os close];
+    [m_is close];
 }
 
 - (BOOL)setup {
+    m_lock = [[NSLock alloc] init];
     BOOL ret = YES;
-    m_connected = NO;
+    self.connected = NO;
     m_requestMap = [[NSMutableDictionary alloc]initWithCapacity:128];
     return ret;
 }
@@ -81,12 +87,17 @@ typedef NSMutableDictionary RequestMap;
     return YES;
 }
 
+- (BOOL)isConnected {
+    return self.connected;
+}
+
 - (void)connectTimeout {
     [m_timerout invalidate];
     if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
         [self.delegate session:self connected:NO timeout:YES error:nil];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kSessionTimeout object:self];
+    [self disconnect];
 }
 
 - (void)connect {
@@ -158,10 +169,7 @@ typedef NSMutableDictionary RequestMap;
 
 - (void)InputStream:(InputStream *)inputStream closed:(BOOL)close {
     [m_os close];
-    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
-        [self.delegate sessionDied:self error:nil];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
+    [self postSessionDied:nil];
 }
 
 - (void)InputStream:(InputStream *)inputStream newMessage:(Message *)newMsg {
@@ -195,33 +203,51 @@ typedef NSMutableDictionary RequestMap;
 }
 
 - (void)InputStream:(InputStream *)inputStream error:(NSError *)err {
-    
+    m_os.delegate = nil;
+    [m_os close];
     if (err.code == 61) {
         [m_timerout invalidate];
+        self.connected = NO;
         if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
             [self.delegate session:self connected:NO timeout:NO error:err];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kSessionTimeout object:self];
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
-        [self.delegate sessionDied:self error:err];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
     
+    if (/*err.code == 57 || */err.code == 51) {
+        DDLogInfo(@"post 57 notify");
+        self.connected = NO;
+        if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
+            [self.delegate session:self connected:NO timeout:NO error:err];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnectedFail object:self];
+        return;
+    }
+    if (err.code == 57) {
+        DDLogInfo(@"post 57 notify");
+        self.connected = NO;
+        if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
+            [self.delegate session:self connected:NO timeout:NO error:err];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnectedFail object:self];
+    }
+    
+    [self postSessionDied:err];
 }
 
 
 - (void)tellDelegateOpened:(BOOL)completion {
     if (completion) {
         if (m_is.opened && m_os.opened) {
-            if (!m_connected) {
-                m_connected = YES;
+            if (!self.connected) {
+                self.connected = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                   [m_timerout invalidate];
+                });
                 if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [m_timerout invalidate];
                         [self.delegate session:self connected:YES timeout:NO error:nil];
-                       
                     });
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnected object:self];
@@ -237,6 +263,18 @@ typedef NSMutableDictionary RequestMap;
     }
 }
 
+- (void)postSessionDied:(NSError *)err {
+    [m_lock lock];
+    if (self.connected) {
+        self.connected = NO;
+        if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
+            [self.delegate sessionDied:self error:err];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
+    }
+    [m_lock unlock];
+}
+
 
 #pragma -mark OutputStreamDelegate
 - (void)OutputStream:(OutputStream *)outputStream openCompletion:(BOOL)completion {
@@ -244,19 +282,13 @@ typedef NSMutableDictionary RequestMap;
 }
 
 - (void)OutputStream:(OutputStream *)outputStream closed:(BOOL)closed {
-
     [m_is close];
-    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
-        [self.delegate sessionDied:self error:nil];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
+    [self postSessionDied:nil];
 }
 
 - (void)OutputStream:(OutputStream *)outputStream error:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
-        [self.delegate sessionDied:self error:error];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
+    [m_is close];
+    [self postSessionDied:error];
 }
 
 - (void)OutputStream:(OutputStream *)outputStream message:(Message *)message sent:(BOOL)sent error:(NSError *)error {

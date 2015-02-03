@@ -30,4 +30,15 @@
 
 + (void)alertWithTip:(NSString *)tip;
 
++ (unsigned long long)fileSizeAtPath:(NSString *)path error:(NSError **)error;
+
+
++ (NSData *)readFileAtPath:(NSString *)path
+                offset:(unsigned long long)offset
+                  size:(NSUInteger)size;
+
++ (BOOL)writeFileAtPath:(NSString *)path
+                   data:(NSData *)data
+                  offset:(unsigned long long)offset;
+
 @end

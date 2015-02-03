@@ -284,10 +284,15 @@ static const NSUInteger kTimeoutDefault  = 120;
             m_end = YES;
             break;
         case NSStreamEventErrorOccurred:
-            DDLogError(@"NSStreamEventErrorOccurred error:%@", aStream.streamError);
+            DDLogError(@"An error has occurred on the output stream:%@", aStream.streamError);
             [self stop];
             for (MessageQueueNode *node in m_msgQueue) {
                 [self tellDelegateMsg:node.msg sent:NO error:[self msgErrorStreamWrong]];
+            }
+            if ([self.delegate respondsToSelector:@selector(OutputStream:error:)]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate OutputStream:self error:aStream.streamError];
+                });
             }
             m_end = YES;
             break;

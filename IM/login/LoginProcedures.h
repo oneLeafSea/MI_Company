@@ -30,6 +30,7 @@
                  timeout:(NSTimeInterval)timeout;
 
 - (void)stop;
+- (void)removeObservers;
 
 @property(weak) id<LoginProceduresDelegate> delegate;
 @property(readonly) NSString *userId;

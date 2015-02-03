@@ -23,6 +23,7 @@ extern NSString *kSessionConnected;
 extern NSString *kSessionDied;
 extern NSString *kSessionTimeout;
 extern NSString *kSessionServerTime;
+extern NSString *kSessionConnectedFail;
 
 @interface Session : NSObject
 /**
@@ -72,7 +73,7 @@ extern NSString *kSessionServerTime;
 
 - (void)post:(Request *)req;
 
-
+@property(readonly) BOOL isConnected;
 
 @property(weak) id<SessionDelegate> delegate;
 @end

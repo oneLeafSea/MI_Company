@@ -16,8 +16,10 @@
 #import "RosterItemSearchTableViewController.h"
 #import "RosterNotification.h"
 #import "ChatViewController.h"
+#import "ReloginTipView.h"
+#import "LoginNotification.h"
 
-@interface RosterViewController () <RosterSectionHeaderViewDelegate> {
+@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
     __weak IBOutlet UITableView *m_table;
@@ -36,8 +38,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    m_table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self initData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,10 +51,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+    
 }
 
 - (void)initData {
@@ -82,9 +93,15 @@
     return 44;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footerVw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 6000, 0.5f)];
+    footerVw.backgroundColor = [UIColor lightGrayColor];
+    return footerVw;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.2;
+    return 0.5f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -155,6 +172,33 @@
     m_groups = [APP_DELEGATE.user.rosterMgr grouplist];
     [self initData];
     [m_table reloadData];
+}
+
+
+#pragma mark - handle Reloging tip view
+- (void) handleReloging:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ReloginTipView *reloginTipView = [[[NSBundle mainBundle] loadNibNamed:@"ReloginTipView" owner:self options:nil] objectAtIndex:0];
+        reloginTipView.connErrLbl.hidden = YES;
+        [reloginTipView.indicatorView startAnimating];
+        self.navigationItem.titleView = reloginTipView;
+    });
+}
+
+- (void) handleReloginSucess:(NSNotification *)notificaiton {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.titleView = nil;
+    });
+}
+
+- (void) handleReloginFail:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ReloginTipView *reloginTipView = [[[NSBundle mainBundle] loadNibNamed:@"ReloginTipView" owner:self options:nil] objectAtIndex:0];
+        reloginTipView.connErrLbl.hidden = NO;
+        reloginTipView.textLabel.hidden = YES;
+        reloginTipView.indicatorView.hidden = YES;
+        self.navigationItem.titleView = reloginTipView;
+    });
 }
 
 

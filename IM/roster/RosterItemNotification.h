@@ -11,6 +11,7 @@
 @interface RosterItemNotification : Request
 
 - (instancetype)initWithData:(NSData *)data;
+
 @property(readonly) NSString *uid;
 
 @end

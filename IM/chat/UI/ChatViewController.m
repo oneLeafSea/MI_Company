@@ -36,6 +36,8 @@
     NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:ChatMessageTypeNormal limit:20 offset:0];
     self.data = [[ChatModel alloc] initWithMsgs:msgs];
     self.navigationItem.title = self.talkingname;
+//    self.collectionView.collectionViewLayout.springinessEnabled = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {

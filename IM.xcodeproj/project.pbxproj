@@ -10,13 +10,26 @@
 		18DC89791FFA4323EEF23A9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE0883B8B5AFA0950A7E67A /* libPods.a */; };
 		7D04A7E31A75D47E00BE1660 /* ChatSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04A7E21A75D47E00BE1660 /* ChatSettingTableViewController.m */; };
 		7D04A7E71A7607A200BE1660 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D04A7E61A7607A100BE1660 /* LoginViewController.m */; };
+		7D0871441A79CB6600DCBBCA /* FileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0871431A79CB6600DCBBCA /* FileTransfer.m */; };
+		7D0871471A79FB5400DCBBCA /* FileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0871461A79FB5400DCBBCA /* FileHash.m */; };
+		7D08714A1A7A0D3800DCBBCA /* FileBlockPorter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0871491A7A0D3800DCBBCA /* FileBlockPorter.m */; };
+		7D08714D1A7A1D6B00DCBBCA /* FileTransferTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D08714C1A7A1D6B00DCBBCA /* FileTransferTask.m */; };
+		7D0871871A7A5ED200DCBBCA /* FileBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0871861A7A5ED200DCBBCA /* FileBlock.m */; };
 		7D093C921A70CCD4002D43B9 /* ChatMessageControllerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C911A70CCD4002D43B9 /* ChatMessageControllerInfo.m */; };
 		7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */; };
 		7D093C981A710322002D43B9 /* RosterItemAddReqTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */; };
+		7D0CFBEF1A77334700902285 /* Relogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBEE1A77334700902285 /* Relogin.m */; };
+		7D0CFBF21A77339200902285 /* LoginNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBF11A77339200902285 /* LoginNotification.m */; };
 		7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D945E1A4B96C600B6588D /* RosterGroup.m */; };
 		7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D94991A4BDFBD00B6588D /* RosterConstants.m */; };
 		7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949F1A4BE05D00B6588D /* RosterSql.m */; };
+		7D13CB631A78BCDA00FB14B8 /* MineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */; };
+		7D1AD9EB1A7B1EF90069878C /* FileBlocksMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1AD9EA1A7B1EF90069878C /* FileBlocksMgr.m */; };
 		7D2930891A4D209D003A7004 /* IMConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930881A4D209D003A7004 /* IMConf.m */; };
+		7D302CFB1A7746F5004C6BD5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302CFA1A7746F5004C6BD5 /* Reachability.m */; };
+		7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302CFD1A778646004C6BD5 /* ReloginTipView.m */; };
+		7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */; };
+		7D302D031A778E14004C6BD5 /* KickNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302D021A778E14004C6BD5 /* KickNotification.m */; };
 		7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C4981A6798A6004365D7 /* ChatViewController.m */; };
 		7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C49C1A6798EB004365D7 /* ChatModel.m */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
@@ -254,20 +267,45 @@
 		7D04A7E21A75D47E00BE1660 /* ChatSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatSettingTableViewController.m; sourceTree = "<group>"; };
 		7D04A7E51A7607A100BE1660 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7D04A7E61A7607A100BE1660 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7D0871421A79CB6600DCBBCA /* FileTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTransfer.h; sourceTree = "<group>"; };
+		7D0871431A79CB6600DCBBCA /* FileTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTransfer.m; sourceTree = "<group>"; };
+		7D0871451A79FB5400DCBBCA /* FileHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHash.h; sourceTree = "<group>"; };
+		7D0871461A79FB5400DCBBCA /* FileHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHash.m; sourceTree = "<group>"; };
+		7D0871481A7A0D3800DCBBCA /* FileBlockPorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlockPorter.h; sourceTree = "<group>"; };
+		7D0871491A7A0D3800DCBBCA /* FileBlockPorter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlockPorter.m; sourceTree = "<group>"; };
+		7D08714B1A7A1D6B00DCBBCA /* FileTransferTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTransferTask.h; sourceTree = "<group>"; };
+		7D08714C1A7A1D6B00DCBBCA /* FileTransferTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTransferTask.m; sourceTree = "<group>"; };
+		7D0871851A7A5ED200DCBBCA /* FileBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlock.h; sourceTree = "<group>"; };
+		7D0871861A7A5ED200DCBBCA /* FileBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlock.m; sourceTree = "<group>"; };
 		7D093C901A70CCD4002D43B9 /* ChatMessageControllerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageControllerInfo.h; sourceTree = "<group>"; };
 		7D093C911A70CCD4002D43B9 /* ChatMessageControllerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageControllerInfo.m; sourceTree = "<group>"; };
 		7D093C931A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentRosterItemAddReqTableViewCell.h; sourceTree = "<group>"; };
 		7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentRosterItemAddReqTableViewCell.m; sourceTree = "<group>"; };
 		7D093C961A710322002D43B9 /* RosterItemAddReqTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqTableViewController.h; sourceTree = "<group>"; };
 		7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddReqTableViewController.m; sourceTree = "<group>"; };
+		7D0CFBED1A77334700902285 /* Relogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Relogin.h; sourceTree = "<group>"; };
+		7D0CFBEE1A77334700902285 /* Relogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Relogin.m; sourceTree = "<group>"; };
+		7D0CFBF01A77339200902285 /* LoginNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNotification.h; sourceTree = "<group>"; };
+		7D0CFBF11A77339200902285 /* LoginNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNotification.m; sourceTree = "<group>"; };
 		7D0D945D1A4B96C600B6588D /* RosterGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterGroup.h; sourceTree = "<group>"; };
 		7D0D945E1A4B96C600B6588D /* RosterGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterGroup.m; sourceTree = "<group>"; };
 		7D0D94981A4BDFBD00B6588D /* RosterConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterConstants.h; sourceTree = "<group>"; };
 		7D0D94991A4BDFBD00B6588D /* RosterConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterConstants.m; sourceTree = "<group>"; };
 		7D0D949E1A4BE05D00B6588D /* RosterSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSql.h; sourceTree = "<group>"; };
 		7D0D949F1A4BE05D00B6588D /* RosterSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSql.m; sourceTree = "<group>"; };
+		7D13CB611A78BCDA00FB14B8 /* MineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableViewController.h; sourceTree = "<group>"; };
+		7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableViewController.m; sourceTree = "<group>"; };
+		7D1AD9E91A7B1EF90069878C /* FileBlocksMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlocksMgr.h; sourceTree = "<group>"; };
+		7D1AD9EA1A7B1EF90069878C /* FileBlocksMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlocksMgr.m; sourceTree = "<group>"; };
 		7D2930871A4D209D003A7004 /* IMConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConf.h; sourceTree = "<group>"; };
 		7D2930881A4D209D003A7004 /* IMConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConf.m; sourceTree = "<group>"; };
+		7D302CF91A7746F5004C6BD5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7D302CFA1A7746F5004C6BD5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7D302CFC1A778646004C6BD5 /* ReloginTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloginTipView.h; sourceTree = "<group>"; };
+		7D302CFD1A778646004C6BD5 /* ReloginTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloginTipView.m; sourceTree = "<group>"; };
+		7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReloginTipView.xib; sourceTree = "<group>"; };
+		7D302D011A778E14004C6BD5 /* KickNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KickNotification.h; sourceTree = "<group>"; };
+		7D302D021A778E14004C6BD5 /* KickNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KickNotification.m; sourceTree = "<group>"; };
 		7D44C4971A6798A6004365D7 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		7D44C4981A6798A6004365D7 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		7D44C49B1A6798EB004365D7 /* ChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
@@ -749,8 +787,43 @@
 				7DB25CA21A76128C00BEDA14 /* LoginProcedures.m */,
 				7D04A7E51A7607A100BE1660 /* LoginViewController.h */,
 				7D04A7E61A7607A100BE1660 /* LoginViewController.m */,
+				7D0CFBED1A77334700902285 /* Relogin.h */,
+				7D0CFBEE1A77334700902285 /* Relogin.m */,
+				7D0CFBF01A77339200902285 /* LoginNotification.h */,
+				7D0CFBF11A77339200902285 /* LoginNotification.m */,
+				7D302CFC1A778646004C6BD5 /* ReloginTipView.h */,
+				7D302CFD1A778646004C6BD5 /* ReloginTipView.m */,
+				7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */,
+				7D302D011A778E14004C6BD5 /* KickNotification.h */,
+				7D302D021A778E14004C6BD5 /* KickNotification.m */,
 			);
 			path = login;
+			sourceTree = "<group>";
+		};
+		7D13CB5F1A78714900FB14B8 /* fileMgr */ = {
+			isa = PBXGroup;
+			children = (
+				7D0871421A79CB6600DCBBCA /* FileTransfer.h */,
+				7D0871431A79CB6600DCBBCA /* FileTransfer.m */,
+				7D0871481A7A0D3800DCBBCA /* FileBlockPorter.h */,
+				7D0871491A7A0D3800DCBBCA /* FileBlockPorter.m */,
+				7D08714B1A7A1D6B00DCBBCA /* FileTransferTask.h */,
+				7D08714C1A7A1D6B00DCBBCA /* FileTransferTask.m */,
+				7D0871851A7A5ED200DCBBCA /* FileBlock.h */,
+				7D0871861A7A5ED200DCBBCA /* FileBlock.m */,
+				7D1AD9E91A7B1EF90069878C /* FileBlocksMgr.h */,
+				7D1AD9EA1A7B1EF90069878C /* FileBlocksMgr.m */,
+			);
+			path = fileMgr;
+			sourceTree = "<group>";
+		};
+		7D13CB601A78BCCB00FB14B8 /* mine */ = {
+			isa = PBXGroup;
+			children = (
+				7D13CB611A78BCDA00FB14B8 /* MineTableViewController.h */,
+				7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */,
+			);
+			path = mine;
 			sourceTree = "<group>";
 		};
 		7D44C4961A67987E004365D7 /* UI */ = {
@@ -829,6 +902,8 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D13CB601A78BCCB00FB14B8 /* mine */,
+				7D13CB5F1A78714900FB14B8 /* fileMgr */,
 				7D04A7E41A76078B00BE1660 /* login */,
 				7DB2D62D1A6FD0C500004D6C /* main */,
 				7DB2D60D1A6F694800004D6C /* recent */,
@@ -889,6 +964,10 @@
 		7DB156E01A42DD5500287BBE /* common */ = {
 			isa = PBXGroup;
 			children = (
+				7D0871451A79FB5400DCBBCA /* FileHash.h */,
+				7D0871461A79FB5400DCBBCA /* FileHash.m */,
+				7D302CF91A7746F5004C6BD5 /* Reachability.h */,
+				7D302CFA1A7746F5004C6BD5 /* Reachability.m */,
 				7DB156E11A42DD5500287BBE /* Encrypt.h */,
 				7DB156E21A42DD5500287BBE /* Encrypt.m */,
 				7DB156E31A42DD5500287BBE /* LogLevel.h */,
@@ -1703,6 +1782,7 @@
 				7DB158B31A42DD5600287BBE /* SwipeButtonBarViewCell.xib in Resources */,
 				7DB158B71A42DD5600287BBE /* WaitingViewController.xib in Resources */,
 				7DB156C81A42DC0C00287BBE /* Images.xcassets in Resources */,
+				7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1780,11 +1860,13 @@
 				7DB092781A6649AF005268A7 /* ChatMessageNotification.m in Sources */,
 				7DB251B31A6381C6007FC8D4 /* RosterItemSearchResultTableViewController.m in Sources */,
 				7DB158631A42DD5600287BBE /* Module.m in Sources */,
+				7D13CB631A78BCDA00FB14B8 /* MineTableViewController.m in Sources */,
 				7DB158621A42DD5600287BBE /* GDataXMLNode.m in Sources */,
 				7DB2D6161A6F6FDE00004D6C /* RecentViewController.m in Sources */,
 				7DB158CA1A42DD5600287BBE /* XLFormOptionsViewController.m in Sources */,
 				7DB158981A42DD5600287BBE /* MainItemData.m in Sources */,
 				7D59E44E1A689DA800806018 /* ChatMessageSql.m in Sources */,
+				7D0871871A7A5ED200DCBBCA /* FileBlock.m in Sources */,
 				7DB158841A42DD5600287BBE /* RowSelectorPickerViewInline.m in Sources */,
 				7DB06F4C1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m in Sources */,
 				7DB158C21A42DD5600287BBE /* XLFormSegmentedCell.m in Sources */,
@@ -1817,6 +1899,7 @@
 				7DB31BF01A6CA6BF0051E6CD /* RosterGrpTb.m in Sources */,
 				7DB1584F1A42DD5600287BBE /* JRListResponse.m in Sources */,
 				7DB1583F1A42DD5600287BBE /* NSJSONSerialization+StrDictConverter.m in Sources */,
+				7D0CFBEF1A77334700902285 /* Relogin.m in Sources */,
 				7DB3FCE91A6DF7A200BFA0E7 /* RosterGrpMgrTableViewCell.m in Sources */,
 				7DB158711A42DD5600287BBE /* RowDateInline.m in Sources */,
 				7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */,
@@ -1858,8 +1941,10 @@
 				7DB158C91A42DD5600287BBE /* XLFormOptionsObject.m in Sources */,
 				7DB1584A1A42DD5600287BBE /* DictsVersionReq.m in Sources */,
 				7DB158671A42DD5600287BBE /* ModuleRoot.m in Sources */,
+				7D08714D1A7A1D6B00DCBBCA /* FileTransferTask.m in Sources */,
 				7DB158571A42DD5600287BBE /* JRTextResponse.m in Sources */,
 				7DB158401A42DD5600287BBE /* NSUUID+StringUUID.m in Sources */,
+				7D1AD9EB1A7B1EF90069878C /* FileBlocksMgr.m in Sources */,
 				7DB1587B1A42DD5600287BBE /* RowMultipleSelectorPopover.m in Sources */,
 				7DB158CD1A42DD5600287BBE /* XLFormRowDescriptor.m in Sources */,
 				7DB158531A42DD5600287BBE /* JRResponse.m in Sources */,
@@ -1874,6 +1959,7 @@
 				7DB1589C1A42DD5600287BBE /* RosterItemAddResult.m in Sources */,
 				7DB158681A42DD5600287BBE /* NSString+CheckNumeric.m in Sources */,
 				7DB158491A42DD5600287BBE /* DictsVersion.m in Sources */,
+				7D302CFB1A7746F5004C6BD5 /* Reachability.m in Sources */,
 				7DB158B11A42DD5600287BBE /* SwipeBtnBarView.m in Sources */,
 				7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */,
 				7DB158691A42DD5600287BBE /* Page.m in Sources */,
@@ -1882,14 +1968,18 @@
 				7DB158931A42DD5600287BBE /* ModuleDefaultPageViewController.m in Sources */,
 				7DB158421A42DD5600287BBE /* Dict.m in Sources */,
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
+				7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */,
 				7DB158BB1A42DD5600287BBE /* XLFormButtonCell.m in Sources */,
 				7DB1585B1A42DD5600287BBE /* JRReqFrxxDetailParam.m in Sources */,
 				7D04A7E71A7607A200BE1660 /* LoginViewController.m in Sources */,
 				7DB1585F1A42DD5600287BBE /* RecvPushRequest.m in Sources */,
 				7DB1588D1A42DD5600287BBE /* RowTimeInline.m in Sources */,
 				7DB158801A42DD5600287BBE /* RowPicker.m in Sources */,
+				7D08714A1A7A0D3800DCBBCA /* FileBlockPorter.m in Sources */,
 				7DB158581A42DD5600287BBE /* JRReqCheckDictVersionParam.m in Sources */,
+				7D0871471A79FB5400DCBBCA /* FileHash.m in Sources */,
 				7DB158CB1A42DD5600287BBE /* XLFormViewController.m in Sources */,
+				7D0CFBF21A77339200902285 /* LoginNotification.m in Sources */,
 				7DB1586B1A42DD5600287BBE /* Row.m in Sources */,
 				7DB6694D1A5F708900843C72 /* RosterSection.m in Sources */,
 				7DB158461A42DD5600287BBE /* DictRequest.m in Sources */,
@@ -1934,6 +2024,7 @@
 				7DB158A81A42DD5600287BBE /* OutputStream.m in Sources */,
 				7DDAFB161A5E7CC50029D809 /* RosterSectionHeaderView.m in Sources */,
 				7DB2D6291A6F95AE00004D6C /* RecentChatMsgItem.m in Sources */,
+				7D0871441A79CB6600DCBBCA /* FileTransfer.m in Sources */,
 				7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */,
 				7DB158A21A42DD5600287BBE /* Message.m in Sources */,
 				7DB31BEB1A6CA6A10051E6CD /* RosterItemAddResultTb.m in Sources */,
@@ -1947,6 +2038,7 @@
 				7D2930891A4D209D003A7004 /* IMConf.m in Sources */,
 				7DB158C01A42DD5600287BBE /* XLFormLeftRightSelectorCell.m in Sources */,
 				7DB158501A42DD5600287BBE /* JRReqest.m in Sources */,
+				7D302D031A778E14004C6BD5 /* KickNotification.m in Sources */,
 				7DB158C81A42DD5600287BBE /* XLFormTextViewCell.m in Sources */,
 				7DB158721A42DD5600287BBE /* RowDatePicker.m in Sources */,
 				7DB158551A42DD5600287BBE /* JRSession.m in Sources */,

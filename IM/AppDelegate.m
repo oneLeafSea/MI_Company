@@ -11,8 +11,16 @@
 #import "NSUUID+StringUUID.h"
 #import "IMConf.h"
 #import "RosterMgr.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "FileTransferTask.h"
+#import "Utils.h"
+#import "FileTransfer.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () {
+    FileTransferTask *m_fileTask;
+    FileTransfer *m_fileTransfer;
+}
+
 
 @end
 
@@ -22,6 +30,71 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [IMConf setIPAndPort:@"10.22.1.112" port:8000];
     [self initLogger];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    _reachability = [Reachability reachabilityForInternetConnection];
+    if (![_reachability startNotifier]) {
+        NSAssert(NO, @"Reachablitiy errror!");
+    }
+    self.relogin = [[Relogin alloc] init];
+//    NSString *fileName = @"otp_win64_17.3.exe";
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+//    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
+//    NSDictionary *options = @{
+//                              @"path":path,
+//                              @"token":@"token123123",
+//                              @"signature":@"signature12312123"
+//                              };
+//    m_fileTask = [[FileTransferTask alloc] initWithFileName:fileName
+//                                                  urlString:@"http://10.22.1.112:8040/file/download"
+//                                             checkUrlString:@"http://10.22.1.112:8040/file/check"
+//                                                   taskType:FileTransferTaskTypeDownload options:options];
+//    [m_fileTask start];
+    
+    m_fileTransfer = [[FileTransfer alloc] init];
+    __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", 90];
+    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
+    NSDictionary *options = @{
+                              @"path":path,
+                              @"token":@"token123123",
+                              @"signature":@"signature12312123"
+                              };
+    [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
+        if (finished) {
+            DDLogInfo(@"finished");
+        } else {
+            DDLogInfo(@"ERROR:%@", error);
+        }
+    }];
+    
+//    for (int n = 0; n < 9; n++) {
+//        __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", n];
+//        NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
+//        NSDictionary *options = @{
+//                                  @"path":path,
+//                                  @"token":@"token123123",
+//                                  @"signature":@"signature12312123"
+//                                  };
+//        if (n%2 == 0) {
+//            [m_fileTransfer uploadFileName:fileName urlString:@"http://10.22.1.112:8040/file/upload" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
+//                if (finished) {
+//                    DDLogInfo(@"%@ upload!", fileName);
+//                } else {
+//                    DDLogInfo(@"%@ not upload!", fileName);
+//                }
+//                
+//            }];
+//        } else {
+//            [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
+//                if (finished) {
+//                    DDLogInfo(@"%@ upload!", fileName);
+//                } else {
+//                    DDLogInfo(@"%@ not upload!", fileName);
+//                }
+//                
+//            }];
+//        }
+//        
+//    }
     
     return YES;
 }

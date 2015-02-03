@@ -10,6 +10,7 @@
 #import "Utils.h"
 #import "UserConstants.h"
 #import "LogLevel.h"
+#import "KickNotification.h"
 
 @implementation User
 
@@ -52,6 +53,8 @@
         DDLogError(@"ERROR: setup recentMgr.");
         return NO;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
     
     return YES;
 }
@@ -98,7 +101,11 @@
 }
 
 - (void)reset {
+    _session = nil;
     [self.rosterMgr reset];
+    [self.msgMgr reset];
+    [self.recentMsg reset];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationKick object:nil];
 }
 
 - (NSString *)key {
@@ -119,5 +126,9 @@
 
 - (NSString *)imurl {
     return @"http://10.22.1.112:8040/";
+}
+
+- (void)handleKick:(NSNotification *) notification {
+    _kick = YES;
 }
 @end

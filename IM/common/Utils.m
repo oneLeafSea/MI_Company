@@ -110,5 +110,40 @@
     [[[UIAlertView alloc] initWithTitle:tip message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
 }
 
++ (unsigned long long)fileSizeAtPath:(NSString *)path error:(NSError **)error {
+    NSDictionary *fileDict = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:error];
+    if (*error) {
+        return 0;
+    }
+    unsigned long long fileSz = [fileDict fileSize];
+    return fileSz;
+}
+
++ (NSData *)readFileAtPath:(NSString *)path
+                offset:(unsigned long long)offset
+                  size:(NSUInteger)size {
+    NSFileHandle *fHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+    if (!fHandle) {
+        return nil;
+    }
+    [fHandle seekToFileOffset:offset];
+    NSData *data = [fHandle readDataOfLength:size];
+    [fHandle closeFile];
+    return data;
+}
+
++ (BOOL)writeFileAtPath:(NSString *)path
+                   data:(NSData *)data
+                 offset:(unsigned long long)offset {
+    NSFileHandle *fHandle = [NSFileHandle fileHandleForWritingAtPath:path];
+    if (!fHandle) {
+        return NO;
+    }
+    [fHandle seekToFileOffset:offset];
+    [fHandle writeData:data];
+    [fHandle closeFile];
+    return YES;
+}
+
 
 @end

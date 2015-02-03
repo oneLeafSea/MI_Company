@@ -11,6 +11,7 @@
 
 @interface RecentChatMsgItemTableViewCell() {
     JSBadgeView *m_badgeView;
+    __weak IBOutlet UIView *badgeViewContainer;
 }
 @end
 
@@ -18,7 +19,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    m_badgeView = [[JSBadgeView alloc] initWithParentView:self.avatarImgView alignment:JSBadgeViewAlignmentTopRight];
+    m_badgeView = [[JSBadgeView alloc] initWithParentView:badgeViewContainer alignment:JSBadgeViewAlignmentCenter];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

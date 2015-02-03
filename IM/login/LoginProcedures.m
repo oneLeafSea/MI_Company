@@ -18,6 +18,7 @@
 
 #import "LogLevel.h"
 #import "AppDelegate.h"
+#import "LoginNotification.h"
 
 
 @interface LoginProcedures() <RequestDelegate>
@@ -29,6 +30,14 @@
 @end
 
 @implementation LoginProcedures
+
+
+#if DEBUG
+- (void)dealloc {
+    DDLogInfo(@"%@ dealloc", NSStringFromClass([self class]));
+    [self removeObservers];
+}
+#endif
 
 - (BOOL)loginWithUserId:(NSString *)userId
                      pwd:(NSString *)pwd
@@ -66,6 +75,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionServerTime:) name:kSessionServerTime object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionDied:) name:kSessionDied object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionTimeout:) name:kSessionTimeout object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionConnectFail:) name:kSessionConnectedFail object:nil];
 }
 
 - (void)removeObservers {
@@ -73,6 +83,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionServerTime object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionTimeout object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionDied object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionConnectedFail object:nil];
 }
 
 
@@ -93,6 +104,8 @@
             } else {
                 AppDelegate *dgt = [UIApplication sharedApplication].delegate;
                 dgt.user = [[User alloc] initWithLoginresp:loginResp session:m_sess];
+                dgt.relogin.uid = [dgt.user.uid copy];
+                dgt.relogin.pwd = [self.pwd copy];
                 if ([self.delegate respondsToSelector:@selector(loginProcedures:login:error:)]) {
                     [self.delegate loginProcedures:self login:YES error:nil];
                 }
@@ -119,6 +132,7 @@
             if ([self.delegate respondsToSelector:@selector(loginProcedures:recvPush:error:)]) {
                 [self.delegate loginProcedures:self recvPush:err ? NO:YES error:err];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
         }
             break;
         default:
@@ -158,6 +172,13 @@
     [self removeObservers];
     if ([self.delegate respondsToSelector:@selector(loginProceduresConnectFail:timeout:error:)]) {
         [self.delegate loginProceduresConnectFail:self timeout:YES error:[[NSError alloc] initWithDomain:@"login" code:4000 userInfo:@{@"error": @"连接服务器超时！"}]];
+    }
+}
+
+- (void)handleSessionConnectFail:(NSNotification *)notification {
+    [self removeObservers];
+    if ([self.delegate respondsToSelector:@selector(loginProceduresConnectFail:timeout:error:)]) {
+        [self.delegate loginProceduresConnectFail:self timeout:YES error:[[NSError alloc] initWithDomain:@"login" code:4000 userInfo:@{@"error": @"连接服务器失败！"}]];
     }
 }
 

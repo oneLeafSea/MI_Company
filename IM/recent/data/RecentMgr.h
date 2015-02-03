@@ -34,4 +34,7 @@
 - (BOOL) updateRosterItemAddReqMsg:(RosterItemAddRequest *)req;
 - (BOOL) updateRosterItemAddReqBadge:(NSString *)bage;
 
+- (void) reset;
+
+
 @end

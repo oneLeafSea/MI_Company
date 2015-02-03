@@ -26,6 +26,7 @@
 #import "RosterItemNotification.h"
 #import "ChatMessage.h"
 #import "ChatMessageNotification.h"
+#import "KickNotification.h"
 
 @interface MessageFactory()
 @end
@@ -53,6 +54,7 @@
         case PUSH_KICK:
         {
             NSString *kickInfo = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationKick object:kickInfo];
             DDLogInfo(@"<-- %@", kickInfo);
         }
             break;

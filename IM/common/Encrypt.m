@@ -19,7 +19,7 @@
     
     NSData *aesData = [data AES256EncryptedDataUsingKey:keyData iv:ivData error:error];
     
-    NSString *aesbase64Str = [aesData base64EncodedStringWithOptions:NSUTF8StringEncoding];
+    NSString *aesbase64Str = [aesData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return aesbase64Str;
 }
 

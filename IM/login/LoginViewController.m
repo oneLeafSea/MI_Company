@@ -10,6 +10,7 @@
 #import "LoginProcedures.h"
 #import "MBProgressHUD.h"
 #import "utils.h"
+#import "Appdelegate.h"
 
 @interface LoginViewController ()<LoginProceduresDelegate> {
     LoginProcedures *m_loginProc;
@@ -37,14 +38,13 @@
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBg:)];
     avatarTap.numberOfTapsRequired = 1;
     [_bgImgView addGestureRecognizer:avatarTap];
-    m_loginProc = [[LoginProcedures alloc] init];
-    m_loginProc.delegate = self;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+   
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,7 +63,15 @@
     [self.pwdTextField resignFirstResponder];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"请稍候";
-    [m_loginProc loginWithUserId:self.userTextField.text pwd:self.pwdTextField.text timeout:60];
+    m_loginProc = [[LoginProcedures alloc] init];
+    m_loginProc.delegate = self;
+    if (![m_loginProc loginWithUserId:self.userTextField.text pwd:self.pwdTextField.text timeout:30]) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [Utils alertWithTip:@"请打开网络！"];
+        m_loginProc = nil;
+
+    }
+
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {
@@ -74,6 +82,7 @@
     if (!suc) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [Utils alertWithTip:error];
+        m_loginProc = nil;
     }
 }
 
@@ -94,6 +103,7 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [Utils alertWithTip:error];
     }
+    m_loginProc = nil;
     
 }
 
@@ -101,22 +111,15 @@
     if (!suc) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [Utils alertWithTip:@"获取名册失败！"];
+        m_loginProc = nil;
     }
 }
 
 - (void)loginProceduresConnectFail:(LoginProcedures *)proc timeout:(BOOL)timeout error:(NSError *)error {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [Utils alertWithTip:timeout ?@"服务器已断开！":@"连接服务器超时！"];
+    m_loginProc = nil;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
