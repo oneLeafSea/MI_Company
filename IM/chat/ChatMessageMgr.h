@@ -11,6 +11,11 @@
 #import "FMDB.h"
 #import "session.h"
 
+#import <AssetsLibrary/ALAsset.h>
+#import <AssetsLibrary/ALAssetsLibrary.h>
+#import <AssetsLibrary/ALAssetRepresentation.h>
+
+
 @interface ChatMessageMgr : NSObject
 
 - (instancetype)initWithSelfUid:(NSString *)sid
@@ -21,7 +26,7 @@
 - (BOOL)sendTextMesage:(NSString *)content
                msgType:(ChatMessageType) msgType
                     to:(NSString *)to
-            completion:(void (^)(BOOL finished))completion;
+            completion:(void (^)(BOOL finished, id arguments))completion;
 
 - (BOOL)sendVoiceMesage:(NSString *)content
                msgType:(ChatMessageType)msgType
@@ -38,11 +43,29 @@
                     to:(NSString *)to
             completion:(void (^)(BOOL finished))completion;
 
+- (void)sendImageMesageWithAssets:(NSArray *)assets
+                               to:(NSString *)to
+                       completion:(void (^)(BOOL))completion;
+
+- (void)sendImageMesageWithAsset:(ALAsset *)asset
+                         msgType:(ChatMessageType) msgType
+                              to:(NSString *)to
+                      completion:(void(^)(BOOL finished, id thumberImgPath))completion;
+
+- (void)sendImageMesageWithImgPath:(NSString *)imagPath
+                          uuidName:(NSString *)uuidName
+                          imgName:(NSString *)imgName
+                         msgType:(ChatMessageType)msgType
+                              to:(NSString *)to
+                      completion:(void (^)(BOOL finished, id argument))completion;
+
 - (NSArray *)loadDbMsgsWithId:(NSString *)Id
                          type:(ChatMessageType)msgtype
                         limit:(UInt32)limit
                        offset:(UInt32)offset;
 
 - (void)reset;
+
+- (void)updateMsgWithId:(NSString *)msgId status:(ChatMessageStatus)status;
 
 @end

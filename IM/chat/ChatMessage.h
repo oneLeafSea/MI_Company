@@ -18,7 +18,9 @@ typedef NS_ENUM(UInt32, ChatMessageStatus) {
     ChatMessageStatusSending,
     ChatMessageStatusSent,
     ChatMessageStatusRecved,
-    ChatMessageStatusSendError
+    ChatMessageStatusRecving,
+    ChatMessageStatusSendError,
+    ChatMessageStatusRecvError
 };
 
 @interface ChatMessage : Request

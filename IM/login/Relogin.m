@@ -56,6 +56,7 @@
 
 
 - (void) handleSessionDied:(NSNotification *)notification {
+    DDLogCInfo(@"%s", __PRETTY_FUNCTION__);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionDied object:nil];
     if (APP_DELEGATE.user.kick) {
         return;

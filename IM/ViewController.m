@@ -14,6 +14,8 @@
 #import "AppDelegate.h"
 #import "RosterNotification.h"
 #import "IMAck.h"
+#import "ChatMessageMorePanelViewController.h"
+#import "ChatMessageMorePanelItemMode.h"
 
 static NSString *ip = @"http://10.22.1.112:8040/" ;
 
@@ -21,6 +23,7 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
     LoginProcedures *m_lp;
     NSString *uid;
     NSString *name;
+    ChatMessageMorePanelViewController *panelController;
 }
 
 @end
@@ -37,6 +40,35 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
     uid = @"wjw";
     name = @"王家万";
 #endif
+//case 1:
+//    cell.imageView.image = [UIImage imageNamed:@"chatmsg_pic"];
+//    cell.textLabel.text = @"照片";
+//    break;
+//case 2:
+//    cell.imageView.image = [UIImage imageNamed:@"chatmsg_video"];
+//    cell.textLabel.text = @"视频";
+//    break;
+//case 3:
+//    cell.imageView.image = [UIImage imageNamed:@"chatmsg_folder"];
+//    cell.textLabel.text = @"文件";
+//    break;
+//case 4:
+//    cell.imageView.image = [UIImage imageNamed:@"chatmsg_phone"];
+//    cell.textLabel.text = @"通话";
+//    break;
+//default:
+//    break;
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    ChatMessageMorePanelItemMode *item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"照片" imageName:@"chatmsg_pic" target:self selector:@selector(handlePanel)];
+    [arr addObject:item];
+    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"视频" imageName:@"chatmsg_video" target:self selector:@selector(handlePanel)];
+    [arr addObject:item];
+    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"文件" imageName:@"chatmsg_folder" target:self selector:@selector(handlePanel)];
+    [arr addObject:item];
+    
+    panelController = [[ChatMessageMorePanelViewController alloc] initWithPanelItems:arr];
+    [self.view addSubview:panelController.view];
+    panelController.view.frame = CGRectMake(0, self.view.frame.size.height - 270, self.view.frame.size.width, 270);
 
 }
 
@@ -67,6 +99,10 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
 #endif
 }
 
+- (void)handlePanel {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 
 - (IBAction)delRosterItem:(id)sender {
     User *user = APP_DELEGATE.user;
@@ -80,9 +116,9 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
 }
 - (IBAction)sendMsg:(id)sender {
 //    [APP_DELEGATE.user.msgMgr sendTextMesage:@"hello" msgType:ChatMessageTypeNormal to:@"gzw" completion:nil];
-    [APP_DELEGATE.user.msgMgr sendTextMesage:@"hello" msgType:ChatMessageTypeNormal to:@"xyy" completion:^(BOOL finished) {
-        NSLog(@"finished");
-    }];
+//    [APP_DELEGATE.user.msgMgr sendTextMesage:@"hello" msgType:ChatMessageTypeNormal to:@"xyy" completion:^(BOOL finished) {
+//        NSLog(@"finished");
+//    }];
 }
 - (IBAction)parseGroup:(id)sender {
 //    User *u = APP_DELEGATE.user;

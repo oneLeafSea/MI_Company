@@ -11,8 +11,8 @@
 @interface ChatMesssageBox : NSObject
 
 
-- (void)putMsgId:(NSString *)msgid callback:(void(^)(BOOL finished)) callback;
+- (void)putMsgId:(NSString *)msgid callback:(void(^)(BOOL finished, id arguments)) callback;
 
-- (void)notifyMsgId:(NSString *)msgid finished:(BOOL)finished;
+- (void)notifyMsgId:(NSString *)msgid finished:(BOOL)finished  argument:(id)argument;
 
 @end

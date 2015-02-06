@@ -28,7 +28,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [IMConf setIPAndPort:@"10.22.1.112" port:8000];
+    [IMConf setIPAndPort:@"10.22.1.47" port:8000];
+//    [IMConf setIPAndPort:@"218.4.226.210" port:48009];
     [self initLogger];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     _reachability = [Reachability reachabilityForInternetConnection];
@@ -50,21 +51,57 @@
 //                                                   taskType:FileTransferTaskTypeDownload options:options];
 //    [m_fileTask start];
     
-    m_fileTransfer = [[FileTransfer alloc] init];
-    __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", 90];
-    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
-    NSDictionary *options = @{
-                              @"path":path,
-                              @"token":@"token123123",
-                              @"signature":@"signature12312123"
-                              };
-    [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
-        if (finished) {
-            DDLogInfo(@"finished");
-        } else {
-            DDLogInfo(@"ERROR:%@", error);
-        }
-    }];
+//    m_fileTransfer = [[FileTransfer alloc] init];
+//    __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", 0];
+//    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
+//    NSDictionary *options = @{
+//                              @"path":path,
+//                              @"token":@"token123123",
+//                              @"signature":@"signature12312123"
+//                              };
+//    [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
+//        if (finished) {
+//            DDLogInfo(@"finished");
+//        } else {
+//            DDLogInfo(@"ERROR:%@", error);
+//        }
+//    }];
+    
+//    NSString *filepath = [[Utils documentPath] stringByAppendingPathComponent:@"test.amr"];
+//    NSData *data = [[NSData alloc] initWithContentsOfFile:filepath];
+//    NSError *err = nil;
+//    audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&err];
+//    if (err) {
+//        NSLog(@"%@", err);
+//    }
+//    [audioPlayer play];
+//    NSMutableDictionary * recordSetting = [[NSMutableDictionary alloc] init];
+//    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatAppleLossless] forKey:AVFormatIDKey];
+//    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+//    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+//    [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+//    [recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+//    [recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+    
+//    NSString *tempDir = NSTemporaryDirectory();
+//    NSString *soundFilePath = [tempDir stringByAppendingPathComponent:@"sound.m4a"];
+//    
+//    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+//    NSDictionary *recordSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                    [NSNumber numberWithInt:kAudioFormatMPEG4AAC], AVFormatIDKey,
+//                                    [NSNumber numberWithInt:AVAudioQualityMin], AVEncoderAudioQualityKey,
+//                                    [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+//                                    [NSNumber numberWithFloat:8000.0], AVSampleRateKey,
+//                                    nil];
+////    NSString *filepath = [[Utils documentPath] stringByAppendingPathComponent:@"test2.amr"];
+//    audioRecorder = [[AVAudioRecorder alloc] initWithURL:soundFileURL settings:recordSettings error:&err];
+//    if ([audioRecorder prepareToRecord]) {
+//        if ([audioRecorder record]) {
+//            timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
+//        
+//        }
+//    }
+    
     
 //    for (int n = 0; n < 9; n++) {
 //        __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", n];
@@ -97,6 +134,10 @@
 //    }
     
     return YES;
+}
+
+- (void)timeout {
+//    [audioRecorder stop];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

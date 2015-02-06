@@ -90,7 +90,14 @@
             name = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
         }
         chatCell.nameLbl.text = name;
-        chatCell.lastMsgLbl.text = [body objectForKey:@"content"];
+        if ([[body objectForKey:@"type"] isEqualToString:@"text"]) {
+            chatCell.lastMsgLbl.text = [body objectForKey:@"content"];
+        }
+        
+        if ([[body objectForKey:@"type"] isEqualToString:@"image"]) {
+            chatCell.lastMsgLbl.text = @"[图片]";
+        }
+        
         NSInteger badge = [item.badge integerValue];
         if (badge != 0) {
             chatCell.badgeText = item.badge;

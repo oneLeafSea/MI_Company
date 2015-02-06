@@ -1165,6 +1165,17 @@
             </objects>
             <point key="canvasLocation" x="1493" y="4254"/>
         </scene>
+        <!--Chat Message More Panel View Controller-->
+        <scene sceneID="8MA-Vj-iJN">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Q7q-3H-DlT" customClass="ChatMessageMorePanelViewController" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="210"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2aT-UH-qKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2707" y="3926"/>
+        </scene>
         <!--设置-->
         <scene sceneID="ctN-xh-Vzi">
             <objects>
@@ -2090,7 +2101,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Om1-A0-San">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Om1-A0-San">
                                 <rect key="frame" x="16" y="77" width="120" height="30"/>
                                 <state key="normal" title="发送添加好友请求">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2099,7 +2110,7 @@
                                     <action selector="sendRIAReq:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="j6z-hu-BcK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5d-6L-LpT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5d-6L-LpT">
                                 <rect key="frame" x="16" y="39" width="46" height="30"/>
                                 <state key="normal" title="登录">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2108,7 +2119,7 @@
                                     <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Cd4-pO-9Dw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4F-vK-vj5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4F-vK-vj5">
                                 <rect key="frame" x="16" y="115" width="90" height="30"/>
                                 <state key="normal" title="同意添加好友">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2117,7 +2128,7 @@
                                     <action selector="acceptAddRosterItem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pAU-XA-dt9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4so-Ai-zCl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4so-Ai-zCl">
                                 <rect key="frame" x="16" y="153" width="90" height="30"/>
                                 <state key="normal" title="拒绝添加好友">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2126,7 +2137,7 @@
                                     <action selector="rejectAddRosteritem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LAH-ZF-l02"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-Q5-JRB">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-Q5-JRB">
                                 <rect key="frame" x="16" y="191" width="77" height="30"/>
                                 <state key="normal" title="删除好友">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2135,7 +2146,7 @@
                                     <action selector="delRosterItem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="an8-6g-uG1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwe-LH-8no">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwe-LH-8no">
                                 <rect key="frame" x="16" y="229" width="60" height="30"/>
                                 <state key="normal" title="获取名册">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2144,7 +2155,7 @@
                                     <action selector="getRoster:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="C1q-1n-Cyy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6C-Mw-l8l">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6C-Mw-l8l">
                                 <rect key="frame" x="159" y="39" width="75" height="30"/>
                                 <state key="normal" title="设置组信息">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2153,7 +2164,7 @@
                                     <action selector="setRoster:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dux-dG-JgT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-v6-Ecc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-v6-Ecc">
                                 <rect key="frame" x="159" y="77" width="60" height="30"/>
                                 <state key="normal" title="设置签名">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2162,7 +2173,7 @@
                                     <action selector="setSign:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="K2k-Vo-jff"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SE-pC-dRA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SE-pC-dRA">
                                 <rect key="frame" x="166" y="115" width="60" height="30"/>
                                 <state key="normal" title="设置头像">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2171,7 +2182,7 @@
                                     <action selector="setAvatar:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ffJ-sM-g2A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-ua-k50">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-ua-k50">
                                 <rect key="frame" x="159" y="191" width="82" height="30"/>
                                 <state key="normal" title="设置好友gid">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2180,7 +2191,7 @@
                                     <action selector="setRosterItemGid:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zJw-bc-cjI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbi-Gk-ePC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbi-Gk-ePC">
                                 <rect key="frame" x="159" y="153" width="98" height="30"/>
                                 <state key="normal" title="设置好友name">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2189,7 +2200,7 @@
                                     <action selector="setRosterItemName:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2uG-aU-mqr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQ9-zS-6hT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQ9-zS-6hT">
                                 <rect key="frame" x="166" y="229" width="70" height="30"/>
                                 <state key="normal" title="解析group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2198,7 +2209,7 @@
                                     <action selector="parseGroup:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vAm-79-dJr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ0-Kf-YQc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ0-Kf-YQc">
                                 <rect key="frame" x="16" y="267" width="60" height="30"/>
                                 <state key="normal" title="发送消息">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2209,6 +2220,36 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9rO-Q5-JRB" firstAttribute="baseline" secondItem="Ovh-ua-k50" secondAttribute="baseline" id="4yr-jq-OdB"/>
+                            <constraint firstItem="9rO-Q5-JRB" firstAttribute="leading" secondItem="4so-Ai-zCl" secondAttribute="leading" id="651-x7-mrC"/>
+                            <constraint firstItem="Ovh-ua-k50" firstAttribute="leading" secondItem="sbi-Gk-ePC" secondAttribute="leading" id="75Q-gW-BRS"/>
+                            <constraint firstItem="FZ0-Kf-YQc" firstAttribute="top" secondItem="bwe-LH-8no" secondAttribute="bottom" constant="8" symbolic="YES" id="798-NF-dvC"/>
+                            <constraint firstItem="Tf6-v6-Ecc" firstAttribute="leading" secondItem="sbi-Gk-ePC" secondAttribute="leading" id="9t8-nz-rdc"/>
+                            <constraint firstItem="Om1-A0-San" firstAttribute="top" secondItem="q5d-6L-LpT" secondAttribute="bottom" constant="8" symbolic="YES" id="AMN-ko-8bS"/>
+                            <constraint firstItem="6SE-pC-dRA" firstAttribute="baseline" secondItem="Y4F-vK-vj5" secondAttribute="baseline" id="Arg-S2-jt4"/>
+                            <constraint firstItem="c6C-Mw-l8l" firstAttribute="centerX" secondItem="6SE-pC-dRA" secondAttribute="centerX" id="HJm-b5-Onj"/>
+                            <constraint firstItem="6SE-pC-dRA" firstAttribute="leading" secondItem="nQ9-zS-6hT" secondAttribute="leading" id="HKk-zr-fvN"/>
+                            <constraint firstItem="bwe-LH-8no" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="KCc-Xx-0jt"/>
+                            <constraint firstItem="Tf6-v6-Ecc" firstAttribute="leading" secondItem="c6C-Mw-l8l" secondAttribute="leading" id="LYd-uD-jOn"/>
+                            <constraint firstItem="Ovh-ua-k50" firstAttribute="leading" secondItem="9rO-Q5-JRB" secondAttribute="trailing" constant="66" id="PLt-Cs-Khl"/>
+                            <constraint firstItem="Tf6-v6-Ecc" firstAttribute="baseline" secondItem="Om1-A0-San" secondAttribute="baseline" id="Rlc-a1-wGk"/>
+                            <constraint firstItem="4so-Ai-zCl" firstAttribute="top" secondItem="Y4F-vK-vj5" secondAttribute="bottom" constant="8" symbolic="YES" id="TLC-1v-uae"/>
+                            <constraint firstItem="Tf6-v6-Ecc" firstAttribute="leading" secondItem="Om1-A0-San" secondAttribute="trailing" constant="23" id="aQy-7G-ba6"/>
+                            <constraint firstItem="c6C-Mw-l8l" firstAttribute="leading" secondItem="q5d-6L-LpT" secondAttribute="trailing" constant="97" id="agm-z5-5U3"/>
+                            <constraint firstItem="q5d-6L-LpT" firstAttribute="leading" secondItem="Om1-A0-San" secondAttribute="leading" id="bo6-z7-Npk"/>
+                            <constraint firstItem="9rO-Q5-JRB" firstAttribute="top" secondItem="4so-Ai-zCl" secondAttribute="bottom" constant="8" symbolic="YES" id="cEC-Sr-lDq"/>
+                            <constraint firstItem="q5d-6L-LpT" firstAttribute="baseline" secondItem="c6C-Mw-l8l" secondAttribute="baseline" id="cQf-Ga-1iM"/>
+                            <constraint firstItem="sbi-Gk-ePC" firstAttribute="baseline" secondItem="4so-Ai-zCl" secondAttribute="baseline" id="d5H-l7-umC"/>
+                            <constraint firstItem="Y4F-vK-vj5" firstAttribute="top" secondItem="Om1-A0-San" secondAttribute="bottom" constant="8" symbolic="YES" id="ify-x3-ver"/>
+                            <constraint firstItem="bwe-LH-8no" firstAttribute="top" secondItem="9rO-Q5-JRB" secondAttribute="bottom" constant="8" symbolic="YES" id="is1-2O-8d7"/>
+                            <constraint firstItem="FZ0-Kf-YQc" firstAttribute="leading" secondItem="bwe-LH-8no" secondAttribute="leading" id="jkK-kg-bON"/>
+                            <constraint firstItem="bwe-LH-8no" firstAttribute="baseline" secondItem="nQ9-zS-6hT" secondAttribute="baseline" id="l4a-qJ-X56"/>
+                            <constraint firstItem="4so-Ai-zCl" firstAttribute="leading" secondItem="Y4F-vK-vj5" secondAttribute="leading" id="o7D-Vj-d26"/>
+                            <constraint firstItem="Om1-A0-San" firstAttribute="leading" secondItem="Y4F-vK-vj5" secondAttribute="leading" id="qgn-f6-cZx"/>
+                            <constraint firstItem="9rO-Q5-JRB" firstAttribute="leading" secondItem="bwe-LH-8no" secondAttribute="leading" id="rbb-5b-0Tr"/>
+                            <constraint firstItem="q5d-6L-LpT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="19" id="tMB-DW-bOh"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

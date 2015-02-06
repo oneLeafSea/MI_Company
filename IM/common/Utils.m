@@ -112,7 +112,7 @@
 
 + (unsigned long long)fileSizeAtPath:(NSString *)path error:(NSError **)error {
     NSDictionary *fileDict = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:error];
-    if (*error) {
+    if (error && *error) {
         return 0;
     }
     unsigned long long fileSz = [fileDict fileSize];

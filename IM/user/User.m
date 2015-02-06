@@ -34,6 +34,23 @@
 }
 
 - (BOOL)setup {
+    
+    NSString *docPath = [Utils documentPath];
+    _userPath = [docPath stringByAppendingPathComponent:_uid];
+    BOOL ret = [Utils EnsureDirExists:_userPath];
+    if (!ret) {
+        DDLogError(@"ERROR: create user path.");
+        return NO;
+    }
+    
+    _filePath = [_userPath stringByAppendingPathComponent:@"files"];
+    if (![Utils EnsureDirExists:_filePath]) {
+        DDLogError(@"ERROR: create file path.");
+        return NO;
+    }
+    
+    
+    
     if (![self setupDb]) {
         DDLogError(@"ERROR: setup database");
         return NO;
@@ -53,6 +70,8 @@
         DDLogError(@"ERROR: setup recentMgr.");
         return NO;
     }
+    
+    _fileTransfer = [[FileTransfer alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
     
@@ -123,12 +142,34 @@
 - (NSString *)name {
     return [self.cfg objectForKey:@"name"];
 }
-
+//218.4.226.210:48011
 - (NSString *)imurl {
-    return @"http://10.22.1.112:8040/";
+    return @"http://10.22.1.47:8040/";
+//    return @"http://218.4.226.210:48011/";
 }
+
+- (NSString *)signature {
+    return @"this is a signature";
+}
+
 
 - (void)handleKick:(NSNotification *) notification {
     _kick = YES;
 }
+
+- (NSString *)fileDownloadSvcUrl {
+    return @"http://10.22.1.47:8040/file/download";
+//    return @"http://218.4.226.210:48011/file/download";
+}
+
+- (NSString *)fileUploadSvcUrl {
+    return @"http://10.22.1.47:8040/file/upload";
+//    return @"http://218.4.226.210:48011/file/upload";
+}
+
+- (NSString *)fileCheckUrl {
+   return @"http://10.22.1.47:8040/file/check";
+//    return @"http://218.4.226.210:48011/file/check";
+}
+
 @end

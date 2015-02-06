@@ -152,15 +152,14 @@ static const NSUInteger kTimeoutDefault  = 120;
     for (MessageQueueNode *node in m_msgQueue) {
         if ([node.msg isEqual:msg]) {
             [m_msgQueue removeObject:node];
-            if ([self.delegate respondsToSelector:@selector(OutputStream:cancel:msg:)]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate OutputStream:self cancel:YES msg:msg];
-                });
-            }
             break;
         }
     }
-    [self.delegate OutputStream:self cancel:YES msg:msg];
+    if ([self.delegate respondsToSelector:@selector(OutputStream:cancel:msg:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate OutputStream:self cancel:YES msg:msg];
+        });
+    }
 }
 
 - (void)sendMessageIfAvailable {

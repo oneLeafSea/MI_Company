@@ -215,8 +215,8 @@ typedef NSMutableDictionary RequestMap;
         return;
     }
     
-    if (/*err.code == 57 || */err.code == 51) {
-        DDLogInfo(@"post 57 notify");
+    if (err.code == 51) {
+        DDLogInfo(@"post 51 notify");
         self.connected = NO;
         if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
             [self.delegate session:self connected:NO timeout:NO error:err];
@@ -226,15 +226,19 @@ typedef NSMutableDictionary RequestMap;
     }
     if (err.code == 57) {
         DDLogInfo(@"post 57 notify");
-        self.connected = NO;
+//        self.connected = NO;
         if ([self.delegate respondsToSelector:@selector(session:connected:timeout:error:)]) {
             [self.delegate session:self connected:NO timeout:NO error:err];
         }
+        [self postSessionDied:err];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSessionConnectedFail object:self];
+        
+    } else {
+        [self postSessionDied:err];
     }
-    
-    [self postSessionDied:err];
 }
+
+
 
 
 - (void)tellDelegateOpened:(BOOL)completion {
@@ -264,12 +268,14 @@ typedef NSMutableDictionary RequestMap;
 }
 
 - (void)postSessionDied:(NSError *)err {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [m_lock lock];
     if (self.connected) {
         self.connected = NO;
         if ([self.delegate respondsToSelector:@selector(sessionDied:error:)]) {
             [self.delegate sessionDied:self error:err];
         }
+        DDLogInfo(@"post session died!");
         [[NSNotificationCenter defaultCenter] postNotificationName:kSessionDied object:self];
     }
     [m_lock unlock];

@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IM/common/Utils.m"
-            timestampString = "444300900.538334"
+            filePath = "IM/chat/ChatMessageMgr.m"
+            timestampString = "444897609.177698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "+writeFileAtPath:data:offset:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IM/AppDelegate.m"
-            timestampString = "444571346.127929"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "-sendImageMesageWithAsset:msgType:to:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

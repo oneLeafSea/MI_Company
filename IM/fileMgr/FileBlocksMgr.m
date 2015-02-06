@@ -71,7 +71,7 @@ static NSString *kBlocksSuffix = @".blocksInfo";
 }
 
 - (BOOL)creatBlocksAtPath:(NSString *)path {
-    NSUInteger blocksCount = m_sz / m_defaultBlockSz;
+    unsigned long long blocksCount = m_sz / m_defaultBlockSz;
     NSUInteger left = m_sz % m_defaultBlockSz;
     NSUInteger n = 0;
     for (; n < blocksCount; n++) {

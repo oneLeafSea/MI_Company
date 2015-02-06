@@ -13,6 +13,7 @@
 #import "session.h"
 #import "ChatMessageMgr.h"
 #import "RecentMgr.h"
+#import "FileTransfer.h"
 
 
 @interface User : NSObject
@@ -29,6 +30,7 @@
 @property(readonly) Session         *session;
 @property(readonly) ChatMessageMgr  *msgMgr;
 @property(readonly) RecentMgr       *recentMsg;
+@property(readonly) FileTransfer    *fileTransfer;
 
 @property(readonly) NSDictionary    *cfg;
 
@@ -36,8 +38,17 @@
 @property(readonly) NSString *iv;
 @property(readonly) NSString *token;
 @property(readonly) NSString *name;
+@property(readonly) NSString *signature;
 
 @property(readonly) NSString *imurl;
+@property(readonly) NSString *fileDownloadSvcUrl;
+@property(readonly) NSString *fileUploadSvcUrl;
+@property(readonly) NSString *fileCheckUrl;
+
+@property(readonly) NSString *filePath;
+@property(readonly) NSString *userPath;
+
+
 
 @property(atomic, readonly) BOOL kick;
 

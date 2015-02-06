@@ -59,7 +59,7 @@ static int kFileMaxTask = 5;
         checkUrlString:(NSString *)checkUrlString
                options:(NSDictionary *)options
             completion:(void(^)(BOOL finished, NSError *error))completion {
-    dispatch_sync(m_fileTransferQueue, ^{
+    dispatch_async(m_fileTransferQueue, ^{
         FileTransferTask *task = [[FileTransferTask alloc] initWithFileName:fileName urlString:urlString checkUrlString:checkUrlString taskType:FileTransferTaskTypeUpload options:options];
         task.delegate = self;
         task.completion = completion;
@@ -75,7 +75,7 @@ static int kFileMaxTask = 5;
 }
 
 - (void)FileTransferTask:(FileTransferTask *)task finished:(BOOL) finished error:(NSError *)error {
-    dispatch_sync(m_fileTransferQueue, ^{
+    dispatch_async(m_fileTransferQueue, ^{
         task.completion(finished, error);
         [m_transfingQueue removeObject:task];
         if (m_waitingQueue.count > 0) {

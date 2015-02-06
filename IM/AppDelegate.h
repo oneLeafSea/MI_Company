@@ -25,3 +25,6 @@
 
 
 #define APP_DELEGATE ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+#define USER (((AppDelegate*)[[UIApplication sharedApplication] delegate]).user)
+
+

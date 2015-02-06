@@ -9,6 +9,7 @@
 #import "ChatModel.h"
 #import "ChatMessage.h"
 #import "JSQMessage.h"
+#import "AppDelegate.h"
 
 @implementation ChatModel
 
@@ -44,9 +45,26 @@
 - (BOOL)parseMsgs:(NSArray *)msgs {
     [msgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ChatMessage *msg = obj;
-        JSQMessage *jsqMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] text:[msg.body objectForKey:@"content"]];
-        [self.messages addObject:jsqMsg];
-    }];
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
+            JSQMessage *jsqMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] text:[msg.body objectForKey:@"content"]];
+            [self.messages addObject:jsqMsg];
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
+            NSString *uuid = [msg.body objectForKey:@"uuid"];
+            NSString *thumbImgPath = [[USER.filePath stringByAppendingPathComponent:uuid] stringByAppendingString:@"_thumb"];
+            JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithMaskAsOutgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            if (msg.status == ChatMessageStatusRecved || msg.status == ChatMessageStatusSent) {
+                photoItem.image = [UIImage imageWithContentsOfFile:thumbImgPath];
+                photoItem.imgPath = [USER.filePath stringByAppendingPathComponent:uuid];
+            }
+            JSQMessage *photoMessage = [JSQMessage messageWithSenderId:msg.from
+                                                           displayName:[msg.body objectForKey:@"fromname"]
+                                                                 media:photoItem];
+            [self.messages addObject:photoMessage];
+        }
+        
+        }];
     return YES;
 }
 
