@@ -41,4 +41,6 @@
                    data:(NSData *)data
                   offset:(unsigned long long)offset;
 
++ (NSDate *)fileCreationDateAtPath:(NSString *)filePath;
+
 @end

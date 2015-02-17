@@ -145,5 +145,19 @@
     return YES;
 }
 
++ (NSDate *)fileCreationDateAtPath:(NSString *)filePath {
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSDictionary* attrs = [fm attributesOfItemAtPath:filePath error:nil];
+    NSDate *date  = nil;
+    if (attrs != nil) {
+        date = (NSDate*)[attrs objectForKey: NSFileCreationDate];
+        NSLog(@"Date Created: %@", [date description]);
+    }
+    else {
+        NSLog(@"Not found");
+    }
+    return date;
+}
+
 
 @end

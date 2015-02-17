@@ -28,10 +28,12 @@
                     to:(NSString *)to
             completion:(void (^)(BOOL finished, id arguments))completion;
 
-- (BOOL)sendVoiceMesage:(NSString *)content
-               msgType:(ChatMessageType)msgType
+- (BOOL)sendVoiceMesageWithMsgType:(ChatMessageType)msgType
                     to:(NSString *)to
-            completion:(void (^)(BOOL finished))completion;
+               duration:(NSInteger)duration
+              audioPath:(NSString *)audioPath
+            completion:(void (^)(BOOL finished, id arguments))completion;
+
 
 - (BOOL)sendVideoMesage:(NSString *)content
                msgType:(ChatMessageType)msgType

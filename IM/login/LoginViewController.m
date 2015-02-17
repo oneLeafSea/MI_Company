@@ -117,7 +117,7 @@
 
 - (void)loginProceduresConnectFail:(LoginProcedures *)proc timeout:(BOOL)timeout error:(NSError *)error {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [Utils alertWithTip:timeout ?@"服务器已断开！":@"连接服务器超时！"];
+    [Utils alertWithTip:timeout ?@"服务器已断开！":@"连接服务器错误！"];
     m_loginProc = nil;
 }
 

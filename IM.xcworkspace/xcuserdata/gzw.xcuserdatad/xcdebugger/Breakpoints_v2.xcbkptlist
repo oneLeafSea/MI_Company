@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IM/chat/ChatMessageMgr.m"
-            timestampString = "444897609.177698"
+            filePath = "IM/jsq/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.m"
+            timestampString = "445499509.040097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "-sendImageMesageWithAsset:msgType:to:completion:"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

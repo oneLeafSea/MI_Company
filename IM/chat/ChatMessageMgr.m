@@ -96,10 +96,39 @@
     return YES;
 }
 
-- (BOOL)sendVoiceMesage:(NSString *)content
-                msgType:(ChatMessageType)msgType
+- (BOOL)sendVoiceMesageWithMsgType:(ChatMessageType)msgType
                      to:(NSString *)to
-             completion:(void (^)(BOOL finished))completion {
+               duration:(NSInteger)duration
+              audioPath:(NSString *)audioPath
+             completion:(void (^)(BOOL finished, id arguments))completion {
+    
+    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath}  completion:^(BOOL finished, NSError *error) {
+        if (finished) {
+            ChatMessage *msg = [[ChatMessage alloc] init];
+            msg.from = [m_sid copy];
+            msg.to = [to copy];
+            msg.time = [[NSDate Now] formatWith:nil];
+            msg.chatMsgType = msgType;
+            [msg.body setObject:@"voice" forKey:@"type"];
+            [msg.body setObject:APP_DELEGATE.user.name forKey:@"fromname"];
+            [msg.body setObject:[audioPath lastPathComponent] forKey:@"uuid"];
+            [msg.body setObject:[NSString stringWithFormat:@"%ld", (long)duration] forKey:@"duration"];
+            [msg.body setObject:[audioPath lastPathComponent] forKey:@"filename"];
+            unsigned long long filesz = [Utils fileSizeAtPath:audioPath error:nil];
+            [msg.body setObject:[NSString stringWithFormat:@"%llu", filesz] forKey:@"filesize"];
+            
+            if (completion != nil) {
+                [m_msgBox putMsgId:msg.qid callback:completion];
+            }
+            
+            msg.status = ChatMessageStatusSending;
+            if (![m_msgTb insertMessage:msg]) {
+                DDLogError(@"ERROR: Insert voice `message` table.");
+            }
+            [m_session post:msg];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+        }
+    }];
     return YES;
 }
 
@@ -270,6 +299,30 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageImageFileReceived object:msg];
             }
         }];
+    }
+    
+    if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
+        msg.status = ChatMessageStatusRecving;
+        if (![m_msgTb insertMessage:msg]) {
+            DDLogError(@"ERROR: insert voice msg table.");
+        }
+        NSString *uuidName = [msg.body objectForKey:@"uuid"];
+        __block NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:uuidName];
+        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath} completion:^(BOOL finished, NSError *error) {
+            if (!finished) {
+                DDLogError(@"ERROR: download audio file error %@", error);
+            } else {
+                [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageImageFileReceived object:msg];
+            }
+        }];
+    }
+    
+    if ([[msg.body objectForKey:@"type"] isEqualToString:@"file"]) {
+        msg.status = ChatMessageStatusRecving;
+        if (![m_msgTb insertMessage:msg]) {
+            DDLogError(@"ERROR: insert file msg table.");
+        }
     }
     
     IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];

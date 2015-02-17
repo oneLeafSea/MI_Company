@@ -42,7 +42,7 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.collectionView registerClass:[ChatViewMorePanelCellView class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:236/255.0f green:236/255.0f blue:236/255.0f alpha:1];;
     
 }
 

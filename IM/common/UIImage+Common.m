@@ -50,4 +50,8 @@
     return [img saveToPath:path];
 }
 
+- (UIImage *)scaleToSize:(CGSize)sz {
+    return [self compressForUpload:self sz:sz];
+}
+
 @end

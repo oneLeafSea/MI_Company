@@ -22,9 +22,16 @@
 #import "UIImage+Common.h"
 #import "MBProgressHUD.h"
 #import "MWPhotoBrowser.h"
+#import "ChatMessageVoicePanelViewController.h"
+#import "AudioPlayer.h"
+#import "JSQFileMediaItem.h"
 
-@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate> {
-    ChatMessageMorePanelViewController *m_morePanel;
+
+#import "JSQVoiceMediaItem.h"
+
+@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate> {
+    ChatMessageMorePanelViewController  *m_morePanel;
+    ChatMessageVoicePanelViewController *m_voicePanel;
 }
 
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -49,6 +56,7 @@
     self.data = [[ChatModel alloc] initWithMsgs:msgs];
     self.navigationItem.title = self.talkingname;
     [self setMorePanel];
+    [self setVoicePanel];
 
 }
 
@@ -76,12 +84,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageImageFileReceived object:nil];
 }
 
-
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                  senderId:(NSString *)senderId
-         senderDisplayName:(NSString *)senderDisplayName
-                      date:(NSDate *)date {
+- (void)didPressReturnKeyWithMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
+    if (text.length == 0) {
+        return;
+    }
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
                                                           date:date
@@ -94,11 +100,31 @@
     [self finishSendingMessageAnimated:YES];
 }
 
+
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                      date:(NSDate *)date {
+    
+    [self endListeningForKeyboard];
+    [self.inputToolbar.contentView.textView resignFirstResponder];
+    [self jsq_setToolbarBottomLayoutGuideConstant:230];
+    m_voicePanel.view.hidden = NO;
+    m_morePanel.view.hidden = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self beginListeningForKeyboard];
+    });
+    
+}
+
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     [self endListeningForKeyboard];
     [self.inputToolbar.contentView.textView resignFirstResponder];
     [self jsq_setToolbarBottomLayoutGuideConstant:230];
+    m_voicePanel.view.hidden = YES;
+    m_morePanel.view.hidden = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self beginListeningForKeyboard];
     });
@@ -248,6 +274,23 @@
             [self showImageWithPath:item.imgPath];
         }
     }
+    
+    if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
+        JSQVoiceMediaItem *item = (JSQVoiceMediaItem *)msg.media;
+        if (item.isReady) {
+            if (item.playing) {
+                item.playing = NO;
+                [[AudioPlayer sharePlayer] stop];
+            } else {
+                item.playing = YES;
+                [[AudioPlayer sharePlayer] stop];
+                [[AudioPlayer sharePlayer] playWithPath:item.filePath completion:^(BOOL finished) {
+                    item.playing = NO;
+                }];
+            }
+        }
+    }
+    
     NSLog(@"Tapped message bubble!");
 }
 
@@ -261,7 +304,10 @@
 #pragma mark - handle message notification
 
 - (void)handleNewMessageNotification:(NSNotification *) notification {
-    ChatMessage *msg = notification.object;
+    __block ChatMessage *msg = notification.object;
+    if (![msg.from isEqual:self.talkingId]) {
+        return;
+    }
      if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
          dispatch_sync(dispatch_get_main_queue(), ^{
              NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -285,6 +331,22 @@
             item = [self addPhotoMsgWithPath:nil outgoing:NO uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:nil];
             item.msgId = msg.qid;
             [self finishReceivingMessageAnimated:YES];
+        });
+    }
+    
+    if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
+        __block JSQVoiceMediaItem *item = nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *d = [msg.body objectForKey:@"duration"];
+            item = [self addVoiceMsgWithPath:[USER.audioPath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]] outgoing:NO duration:[d integerValue] uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:msg.qid];
+            [self finishReceivingMessage];
+        });
+    }
+    
+    if ([[msg.body objectForKey:@"type"] isEqualToString:@"file"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addFileMsg:msg];
+            [self finishReceivingMessage];
         });
     }
 }
@@ -339,16 +401,49 @@
 - (void) setMorePanelConstraint {
     UIView *view = m_morePanel.view;
     JSQMessagesInputToolbar *toolBar = self.inputToolbar;
-    NSDictionary *viewsDictionary =
-    NSDictionaryOfVariableBindings(view, toolBar);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(view, toolBar);
     view.translatesAutoresizingMaskIntoConstraints = NO;
     toolBar.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:viewsDictionary]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[toolBar][view(==230)]" options:0 metrics:nil views:viewsDictionary]];
 }
 
+- (void)setVoicePanel {
+    m_voicePanel = [[ChatMessageVoicePanelViewController alloc] initWithNibName:@"ChatMessageVoicePanelViewController" bundle:nil];
+    m_voicePanel.delegate = self;
+    m_voicePanel.voiceDir = USER.audioPath;
+    [self addChildViewController:m_voicePanel];
+    [self.view addSubview:m_voicePanel.view];
+    [self setVoicePanelConstraints];
+}
+
+- (void)setVoicePanelConstraints {
+    UIView *view = m_voicePanel.view;
+    JSQMessagesInputToolbar *toolBar = self.inputToolbar;
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(view, toolBar);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[toolBar][view(==230)]" options:0 metrics:nil views:viewsDictionary]];
+}
+
 - (void)takeAPicture {
-   DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.allowsEditing = YES;
+        
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Camera Unavailable"
+                                                       message:@"Unable to find a camera on your device."
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil, nil];
+        [alert show];
+        alert = nil;
+    }
 }
 
 - (void)getPhotoFromImgLib {
@@ -493,6 +588,30 @@
     return photoItem;
 }
 
+- (JSQVoiceMediaItem *)addVoiceMsgWithPath:(NSString *)voicePath
+                                  outgoing:(BOOL)outgoing
+                                  duration:(double)duration
+                                      uid:(NSString *)uid
+                               displayName:(NSString *)name
+                                     msgId:(NSString *)msgId {
+    JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:YES duration:duration outgoing:outgoing];
+    JSQMessage *voiceMsg = [JSQMessage messageWithSenderId:uid displayName:name media:voiceItem];
+    [self.data.messages addObject:voiceMsg];
+    return voiceItem;
+}
+
+- (void)addFileMsg:(ChatMessage *)msg {
+    NSString *uuid = [msg.body objectForKey:@"uuid"];
+    NSString *filePath = [USER.filePath stringByAppendingPathComponent:uuid];
+    BOOL isDownloaded = ((msg.status == ChatMessageStatusRecved) || (msg.status == ChatMessageStatusSent));
+    NSString* sz = [msg.body objectForKey:@"filesize"];
+    NSString *fileName = [msg.body objectForKey:@"filename"];
+    unsigned long long filesz = [sz integerValue];
+    JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isDownloaded:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+    JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
+    [self.data.messages addObject:fileMsg];
+}
+
 
 #pragma mark show image
 - (void) showImageWithPath:(NSString *)imagePath {
@@ -548,6 +667,66 @@
     if (index < _photos.count)
         return [_photos objectAtIndex:index];
     return nil;
+}
+
+
+#pragma UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //This creates a filepath with the current date/time as the name to save the image
+    NSString *imgName = [NSString stringWithFormat:@"%@.jpg", [NSUUID uuid]];
+    NSString *fileSavePath = [USER.filePath stringByAppendingPathComponent:imgName];
+    NSString *thumbFilePath = [fileSavePath stringByAppendingString:@"_thumb"];
+    UIImage *Img = nil;
+    
+    //This checks to see if the image was edited, if it was it saves the edited version as a .jpg
+    if ([info objectForKey:UIImagePickerControllerEditedImage]) {
+        Img = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+    }else{
+        Img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        
+    }
+    
+    [Img saveToPath:fileSavePath scale:1.0];
+    [Img saveToPath:thumbFilePath sz:CGSizeMake(210, 150)];
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        __block JSQPhotoMediaItem * item = [self addPhotoMsgWithPath:nil outgoing:YES uid:USER.uid displayName:USER.name msgId:nil];
+        [self finishSendingMessageAnimated:YES];
+        [USER.msgMgr sendImageMesageWithImgPath:fileSavePath uuidName:imgName imgName:imgName  msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
+            item.image = [UIImage imageWithContentsOfFile:thumbFilePath];
+            item.imgPath = [fileSavePath copy];
+            [self finishSendingMessageAnimated:NO];
+        }];
+        
+    }];
+}
+
+#pragma mark -ChatMessageVoicePanelViewControllerDelegate
+- (void)ChatMessageVoicePanelViewController:(ChatMessageVoicePanelViewController *)voicePanelVc recordCompleteAtPath:(NSString *)audioPath duration:(double)duration {
+    __block JSQVoiceMediaItem *voiceMediaItem = [[JSQVoiceMediaItem alloc] initWithFilePath:audioPath isReady:YES duration:duration outgoing:YES];
+    voiceMediaItem.isReady = NO;
+    JSQMessage *voiceMessage = [JSQMessage messageWithSenderId:USER.uid
+                                                   displayName:USER.name
+                                                         media:voiceMediaItem];
+    [self.data.messages addObject:voiceMessage];
+    [self finishSendingMessageAnimated:YES];
+    
+    [USER.msgMgr sendVoiceMesageWithMsgType:self.chatMsgType to:self.talkingId duration:duration audioPath:audioPath completion:^(BOOL finished, id arguments) {
+        if (finished) {
+            voiceMediaItem.isReady = YES;
+            [self.collectionView reloadData];
+        }
+    }];
+    
+    
+    
+}
+
+
+- (void)ChatMessageVoicePanelViewController:(ChatMessageVoicePanelViewController *)voicePanelVc recordFail:(NSError *)error {
+    
 }
 
 @end

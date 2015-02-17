@@ -27,6 +27,7 @@
  */
 FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
 
+@protocol JSQMessagesToolbarContentViewDelegate;
 /**
  *  A `JSQMessagesToolbarContentView` represents the content displayed in a `JSQMessagesInputToolbar`.
  *  These subviews consist of a left button, a text view, and a right button. One button is used as
@@ -97,6 +98,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  */
 @property (weak, nonatomic, readonly) UIView *rightBarButtonContainerView;
 
+@property (weak) id<JSQMessagesToolbarContentViewDelegate> delegate;
+
 #pragma mark - Class methods
 
 /**
@@ -106,5 +109,12 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingD
  *  initialization or the nib file could not be located.
  */
 + (UINib *)nib;
+
+
+@end
+
+@protocol JSQMessagesToolbarContentViewDelegate <NSObject>
+
+- (void)JSQMessagesToolbarContentViewRetunBtnPressed;
 
 @end

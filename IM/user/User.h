@@ -47,6 +47,7 @@
 
 @property(readonly) NSString *filePath;
 @property(readonly) NSString *userPath;
+@property(readonly) NSString *audioPath;
 
 
 

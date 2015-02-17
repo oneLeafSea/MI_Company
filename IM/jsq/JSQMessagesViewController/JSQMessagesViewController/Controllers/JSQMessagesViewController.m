@@ -315,6 +315,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
 }
 
+- (void)didPressReturnKeyWithMessageText:(NSString *)text
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                                    date:(NSDate *)date {
+    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
+
+
+
 - (void)finishSendingMessage
 {
     [self finishSendingMessageAnimated:YES];
@@ -327,6 +336,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [textView.undoManager removeAllActions];
     
     [self.inputToolbar toggleSendButtonEnabled];
+    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
     
@@ -705,6 +715,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     [textView resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [self didPressReturnKeyWithMessageText:[self jsq_currentlyComposedMessageText] senderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date]];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Notifications

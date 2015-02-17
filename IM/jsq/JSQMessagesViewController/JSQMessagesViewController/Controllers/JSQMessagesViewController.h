@@ -223,6 +223,10 @@
  */
 - (void)finishSendingMessage;
 
+- (void)didPressReturnKeyWithMessageText:(NSString *)text
+                                senderId:(NSString *)senderId
+                       senderDisplayName:(NSString *)senderDisplayName
+                                    date:(NSDate *)date;
 /**
  *  Completes the "sending" of a new message by resetting the `inputToolbar`, adding a new collection view cell in the collection view,
  *  reloading the collection view, and scrolling to the newly sent message as specified by `automaticallyScrollsToMostRecentMessage`.

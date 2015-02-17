@@ -12,8 +12,6 @@
 
 @interface ChatMessage()
 
-
-
 @end
 
 @implementation ChatMessage

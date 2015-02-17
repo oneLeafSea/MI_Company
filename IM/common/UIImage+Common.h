@@ -16,4 +16,6 @@
 
 -(BOOL)saveToPath:(NSString *)path sz:(CGSize)sz;
 
+- (UIImage *)scaleToSize:(CGSize)sz;
+
 @end

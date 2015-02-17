@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JSQFileMediaIncomingView">
+            <rect key="frame" x="0.0" y="0.0" width="245" height="94"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatmsg_voice_incoming_bubble" translatesAutoresizingMaskIntoConstraints="NO" id="4KL-sv-2jy">
+                    <rect key="frame" x="0.0" y="0.0" width="245" height="86"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fileBrowser_type_ppt" translatesAutoresizingMaskIntoConstraints="NO" id="vrv-yO-fAZ">
+                    <rect key="frame" x="35" y="6" width="73" height="73"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文件名" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7q-EV-GYb">
+                    <rect key="frame" x="112" y="8" width="110" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="441KB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5e3-x0-RC7">
+                    <rect key="frame" x="112" y="37" width="52" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未下载" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLB-O0-I19">
+                    <rect key="frame" x="171" y="58" width="51" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="eLB-O0-I19" firstAttribute="leading" secondItem="vrv-yO-fAZ" secondAttribute="trailing" constant="63" id="AXl-cq-1zS"/>
+                <constraint firstItem="5e3-x0-RC7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GAZ-HE-2eE"/>
+                <constraint firstItem="5e3-x0-RC7" firstAttribute="top" secondItem="C7q-EV-GYb" secondAttribute="bottom" constant="8" symbolic="YES" id="GkW-pK-dnr"/>
+                <constraint firstItem="C7q-EV-GYb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="HUP-me-TGl"/>
+                <constraint firstAttribute="bottom" secondItem="5e3-x0-RC7" secondAttribute="bottom" constant="36" id="JoK-vp-0xz"/>
+                <constraint firstItem="vrv-yO-fAZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="RTA-6k-wfC"/>
+                <constraint firstItem="C7q-EV-GYb" firstAttribute="leading" secondItem="vrv-yO-fAZ" secondAttribute="trailing" constant="4" id="ZZx-w8-150"/>
+                <constraint firstAttribute="trailing" secondItem="C7q-EV-GYb" secondAttribute="trailing" constant="23" id="b7e-x6-ooo"/>
+                <constraint firstItem="4KL-sv-2jy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cL8-sY-c4q"/>
+                <constraint firstItem="4KL-sv-2jy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d6U-Uk-YNV"/>
+                <constraint firstAttribute="bottom" secondItem="vrv-yO-fAZ" secondAttribute="bottom" constant="15" id="fwu-qa-Kgk"/>
+                <constraint firstItem="C7q-EV-GYb" firstAttribute="leading" secondItem="5e3-x0-RC7" secondAttribute="leading" id="hQu-Eb-3vT"/>
+                <constraint firstItem="eLB-O0-I19" firstAttribute="top" secondItem="C7q-EV-GYb" secondAttribute="bottom" constant="29" id="i2s-3C-koX"/>
+                <constraint firstItem="4KL-sv-2jy" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="lyZ-3I-Vrl"/>
+                <constraint firstAttribute="trailing" secondItem="4KL-sv-2jy" secondAttribute="trailing" id="thr-nr-UZ0"/>
+                <constraint firstItem="C7q-EV-GYb" firstAttribute="trailing" secondItem="eLB-O0-I19" secondAttribute="trailing" id="uiN-i1-qmJ"/>
+                <constraint firstItem="vrv-yO-fAZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="yLv-Bp-ROQ"/>
+                <constraint firstItem="vrv-yO-fAZ" firstAttribute="bottom" secondItem="eLB-O0-I19" secondAttribute="bottom" id="zi3-JI-mm5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="fileName" destination="C7q-EV-GYb" id="7Cb-CN-IY7"/>
+                <outlet property="fileSize" destination="5e3-x0-RC7" id="8JK-t3-8qw"/>
+                <outlet property="fileTypeImgView" destination="vrv-yO-fAZ" id="rC3-AB-NrU"/>
+                <outlet property="statusLbl" destination="eLB-O0-I19" id="HDp-jr-4ZL"/>
+            </connections>
+            <point key="canvasLocation" x="-43.5" y="-60"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chatmsg_voice_incoming_bubble" width="120" height="35"/>
+        <image name="fileBrowser_type_ppt" width="60" height="60"/>
+    </resources>
+</document>

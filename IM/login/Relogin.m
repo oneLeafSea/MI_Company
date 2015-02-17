@@ -49,7 +49,6 @@
 }
 
 - (void) handleLogin:(NSNotification *)notification {
-    DDLogInfo(@"INFO: add sessionDied.");
     m_login = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionDied:) name:kSessionDied object:nil];
 }

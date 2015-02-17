@@ -23,7 +23,7 @@
 const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 
-@interface JSQMessagesToolbarContentView ()
+@interface JSQMessagesToolbarContentView () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesComposerTextView *textView;
 
@@ -62,6 +62,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     self.rightHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     
     self.backgroundColor = [UIColor clearColor];
+    self.textView.delegate = self;
 }
 
 - (void)dealloc
@@ -171,5 +172,13 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     [super setNeedsDisplay];
     [self.textView setNeedsDisplay];
 }
+
+#pragma mark -UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    return YES;
+}
+
+
 
 @end

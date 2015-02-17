@@ -92,6 +92,10 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"clip"];
 }
 
++ (UIImage *)jsq_defaultAccessoryImageWithName:(NSString *)imgName {
+    return [UIImage jsq_bubbleImageFromBundleWithName:imgName];
+}
+
 + (UIImage *)jsq_defaultTypingIndicatorImage
 {
     return [UIImage jsq_bubbleImageFromBundleWithName:@"typing"];

@@ -69,13 +69,12 @@
     self.dataDetectorTypes = UIDataDetectorTypeNone;
     self.keyboardAppearance = UIKeyboardAppearanceDefault;
     self.keyboardType = UIKeyboardTypeDefault;
-    self.returnKeyType = UIReturnKeyDefault;
+    self.returnKeyType = UIReturnKeySend;
     
     self.text = nil;
     
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
-    
     [self jsq_addTextViewNotificationObservers];
 }
 
@@ -222,5 +221,6 @@
               NSForegroundColorAttributeName : self.placeHolderTextColor,
               NSParagraphStyleAttributeName : paragraphStyle };
 }
+
 
 @end

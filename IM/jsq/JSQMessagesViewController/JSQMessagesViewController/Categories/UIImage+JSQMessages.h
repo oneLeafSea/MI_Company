@@ -66,6 +66,9 @@
  */
 + (UIImage *)jsq_defaultAccessoryImage;
 
+
++ (UIImage *)jsq_defaultAccessoryImageWithName:(NSString *)imgName;
+
 /**
  *  @return The default typing indicator image.
  */

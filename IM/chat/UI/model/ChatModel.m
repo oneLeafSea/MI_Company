@@ -10,6 +10,8 @@
 #import "ChatMessage.h"
 #import "JSQMessage.h"
 #import "AppDelegate.h"
+#import "JSQVoiceMediaItem.h"
+#import "JSQFileMediaItem.h"
 
 @implementation ChatModel
 
@@ -63,6 +65,34 @@
                                                                  media:photoItem];
             [self.messages addObject:photoMessage];
         }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
+            NSString *uuid = [msg.body objectForKey:@"uuid"];
+            NSString *voicePath = [USER.audioPath stringByAppendingPathComponent:uuid];
+            
+            BOOL isReady = ((msg.status == ChatMessageStatusRecved) || (msg.status == ChatMessageStatusSent));
+            unsigned long long  duration = [[msg.body objectForKey:@"duration"] integerValue];
+            
+            JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:isReady duration:duration outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            
+            JSQMessage *voiceMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:voiceItem];
+
+            [self.messages addObject:voiceMsg];
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"file"]) {
+            NSString *uuid = [msg.body objectForKey:@"uuid"];
+            NSString *filePath = [USER.filePath stringByAppendingPathComponent:uuid];
+            BOOL isDownloaded = ((msg.status == ChatMessageStatusRecved) || (msg.status == ChatMessageStatusSent));
+            NSString* sz = [msg.body objectForKey:@"filesize"];
+            NSString *fileName = [msg.body objectForKey:@"filename"];
+            unsigned long long filesz = [sz integerValue];
+            JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isDownloaded:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
+            
+            [self.messages addObject:fileMsg];
+        }
+
         
         }];
     return YES;

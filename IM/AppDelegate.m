@@ -15,10 +15,12 @@
 #import "FileTransferTask.h"
 #import "Utils.h"
 #import "FileTransfer.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate () {
     FileTransferTask *m_fileTask;
     FileTransfer *m_fileTransfer;
+     AVAudioRecorder *m;
 }
 
 

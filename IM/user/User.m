@@ -49,7 +49,11 @@
         return NO;
     }
     
-    
+    _audioPath = [_userPath stringByAppendingString:@"audios"];
+    if (![Utils EnsureDirExists:_audioPath]) {
+        DDLogError(@"ERROR: create audios path");
+        return NO;
+    }
     
     if (![self setupDb]) {
         DDLogError(@"ERROR: setup database");

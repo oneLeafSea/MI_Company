@@ -98,6 +98,10 @@
             chatCell.lastMsgLbl.text = @"[图片]";
         }
         
+        if ([[body objectForKey:@"type"] isEqualToString:@"voice"]) {
+            chatCell.lastMsgLbl.text = @"[音频]";
+        }
+        
         NSInteger badge = [item.badge integerValue];
         if (badge != 0) {
             chatCell.badgeText = item.badge;
