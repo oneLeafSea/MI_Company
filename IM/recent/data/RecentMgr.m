@@ -11,6 +11,9 @@
 #import "Utils.h"
 #import "RecentMsgItem.h"
 #import "MessageConstants.h"
+#import "NSDate+Common.h"
+
+static NSString *kChatMessageTypeNomal = @"0";
 
 @interface RecentMgr() {
     RecentTb *m_recentTb;
@@ -51,19 +54,37 @@
 - (BOOL) updateRevcChatMsg:(ChatMessage *) msg {
     RecentMsgItem *item = [self cnvtRecentMsgItemWithChatMsg:msg];
     BOOL ret = YES;
-    if ([m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE]) {
-        NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.from chatMsgType:item.ext];
-        if (badge <= 0) {
-            item.badge = @"1";
-        } else  {
-            badge++;
-            item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
+    
+    if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+        if ([m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE]) {
+            NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.from chatMsgType:item.ext];
+            if (badge <= 0) {
+                item.badge = @"1";
+            } else  {
+                badge++;
+                item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
+            }
+            
+            ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.from];
+        } else {
+            ret = [m_recentTb insertItem:item];
         }
-        
-        ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.from];
     } else {
-        ret = [m_recentTb insertItem:item];
+        if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE]) {
+            NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.to chatMsgType:item.ext];
+            if (badge <= 0) {
+                item.badge = @"1";
+            } else  {
+                badge++;
+                item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
+            }
+            
+            ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.to];
+        } else {
+            ret = [m_recentTb insertItem:item];
+        }
     }
+    
     
     return ret;
 }
@@ -138,11 +159,19 @@
 }
 
 - (RecentMsgItem *)cnvtRecentMsgItemWithRosterItemAddReq:(RosterItemAddRequest *)req {
+    NSParameterAssert(req.from);
+    NSParameterAssert(req.to);
+    NSParameterAssert(req.msg);
+    NSParameterAssert(req.qid);
+    NSString *time = req.time;
+    if (!time) {
+        time = [[NSDate Now] formatWith:nil];
+    }
     NSDictionary *contentDict = @{
                                   @"from":req.from,
                                   @"to":req.to,
                                   @"msg":req.msg,
-                                  @"time":req.time,
+                                  @"time":time,
                                   @"msgid":req.qid,
                                   };
     NSData *contentData = [Utils jsonDataFromDict:contentDict];
@@ -150,7 +179,7 @@
     RecentMsgItem *item = [[RecentMsgItem alloc] init];
     item.msgid = req.qid;
     item.msgtype = req.type;
-    item.time = req.time;
+    item.time = time;
     item.content = content;
     item.from = req.from;
     item.to = req.to;

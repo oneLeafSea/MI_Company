@@ -61,6 +61,11 @@
                               to:(NSString *)to
                       completion:(void (^)(BOOL finished, id argument))completion;
 
+- (void)sendFileMessageWithFilePath:(NSString *)filePath
+                             msgType:(ChatMessageType)msgType
+                                  to:(NSString *)to
+                          completion:(void (^)(BOOL finished, id argument))completion;
+
 - (NSArray *)loadDbMsgsWithId:(NSString *)Id
                          type:(ChatMessageType)msgtype
                         limit:(UInt32)limit

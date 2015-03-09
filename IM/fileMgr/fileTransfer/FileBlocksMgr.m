@@ -19,6 +19,7 @@ static NSString *kBlocksSuffix = @".blocksInfo";
     NSString            *m_filePath;
     NSMutableArray      *m_blocks;
     NSString            *m_fileName;
+    BOOL                m_end;
 }
 @end
 
@@ -37,6 +38,7 @@ static NSString *kBlocksSuffix = @".blocksInfo";
         if (![self setup]) {
             self = nil;
         }
+        m_end = NO;
     }
     return self;
 }
@@ -132,7 +134,12 @@ static NSString *kBlocksSuffix = @".blocksInfo";
     return ret;
 }
 
-- (void)update {
+- (void)updateBlock:(FileBlock *)block finished:(BOOL) finished {
+    dispatch_sync(m_queue, ^{
+        if (finished) {
+            block.status = FileBlockStatusTransfered;
+        }
+    });
     NSString *blocksInfoPath = [m_filePath stringByAppendingString:kBlocksSuffix];
     [self saveBlocksInfoAtPath:blocksInfoPath];
 }

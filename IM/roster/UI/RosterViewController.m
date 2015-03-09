@@ -18,7 +18,9 @@
 #import "ChatViewController.h"
 #import "ReloginTipView.h"
 #import "LoginNotification.h"
-
+#import "GroupChatListTableViewController.h"
+#import "OsViewController.h"
+//organization structure
 @interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
@@ -75,27 +77,35 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return m_groups.count;
+    return m_groups.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    RosterSection *sect = [m_Sections objectAtIndex:section];
+    if (section == 0) {
+        return 2;
+    }
+    
+    NSInteger index = section -1;
+    RosterSection *sect = [m_Sections objectAtIndex:index];
     if (!sect.expand) {
         return 0;
     }
-    RosterGroup *g = [m_groups objectAtIndex:(NSUInteger)section];
+    RosterGroup *g = [m_groups objectAtIndex:(NSUInteger)index];
     return g.items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 0;
+    }
     return 44;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footerVw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 6000, 0.5f)];
-    footerVw.backgroundColor = [UIColor lightGrayColor];
+    footerVw.backgroundColor = [UIColor colorWithRed:233/255.0f green:233/255.0f blue:233/255.0f alpha:1.0f];
     return footerVw;
 }
 
@@ -106,11 +116,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return nil;
+    }
+    NSInteger index = section - 1;
     RosterSectionHeaderView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"RosterSectionHeaderView" owner:self options:nil] objectAtIndex:0];
-    RosterGroup *g = [m_groups objectAtIndex:(NSUInteger)section];
+    RosterGroup *g = [m_groups objectAtIndex:(NSUInteger)index];
     headerView.groupNameLabel.text = g.name;
     headerView.tag = section;
-    RosterSection *sect =[m_Sections objectAtIndex:section];
+    RosterSection *sect =[m_Sections objectAtIndex:index];
     headerView.arrowImagView.image = [UIImage imageNamed:sect.expand ? @"arrow_down":@"arrow_right"];
     headerView.delegate = self;
     return headerView;
@@ -123,20 +137,47 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        static NSString *grpChatCellId = @"groupChatCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:grpChatCellId forIndexPath:indexPath];
+        return cell;
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        static NSString *osCellId = @"organizationStructureCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:osCellId forIndexPath:indexPath];
+        return cell;
+    }
+    
+    NSInteger index = indexPath.section - 1;
     static NSString *cellId = @"rosterItermCell";
     RosterItermTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    RosterGroup *g = [m_groups objectAtIndex:indexPath.section];
+    RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     cell.nameLabel.text = item.name;
     cell.signatureLabel.text = item.sign;
+    cell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:item.uid];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        GroupChatListTableViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"GroupChatListTableViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        OsViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"OsViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    NSInteger index = indexPath.section - 1;
     ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    RosterGroup *g = [m_groups objectAtIndex:indexPath.section];
+    RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     vc.talkingId = item.uid;
     vc.talkingname = item.name;
@@ -158,7 +199,7 @@
 
 #pragma mark - RosterSectionHeaderViewDelegate
 - (void)RosterSectionHeaderViewTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger) tag {
-    RosterSection *sect = [m_Sections objectAtIndex:tag];
+    RosterSection *sect = [m_Sections objectAtIndex:tag - 1];
     sect.expand = !sect.expand;
     [m_table reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationAutomatic];
 }

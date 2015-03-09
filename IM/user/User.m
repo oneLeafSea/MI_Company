@@ -11,6 +11,7 @@
 #import "UserConstants.h"
 #import "LogLevel.h"
 #import "KickNotification.h"
+#import "IMConf.h"
 
 @implementation User
 
@@ -49,9 +50,15 @@
         return NO;
     }
     
-    _audioPath = [_userPath stringByAppendingString:@"audios"];
+    _audioPath = [_userPath stringByAppendingPathComponent:@"audios"];
     if (![Utils EnsureDirExists:_audioPath]) {
         DDLogError(@"ERROR: create audios path");
+        return NO;
+    }
+    
+    _avatarPath = [_userPath stringByAppendingPathComponent:@"avatars"];
+    if (![Utils EnsureDirExists:_avatarPath]) {
+        DDLogError(@"ERROR: create avatars path.");
         return NO;
     }
     
@@ -75,6 +82,29 @@
         return NO;
     }
     
+    if (![self setupPresenceMgr]) {
+        DDLogError(@"ERROR: setup presenceMgr.");
+        return NO;
+    }
+    
+    if (![self setupAvatarMgr]) {
+        DDLogError(@"ERROR: setup AvatarMgr.");
+        return NO;
+    }
+    
+    if (![self setupGroupChatMgr]) {
+        DDLogError(@"ERROR: setup groupMgr.");
+        return NO;
+    }
+    
+    if (![self setupOsMgr]) {
+        DDLogError(@"ERROR: setup OsMgr.");
+        return NO;
+    }
+    
+    if (![self setupDetailMgr]) {
+        DDLogError(@"ERROR: setup detailMgr.");
+    }
     _fileTransfer = [[FileTransfer alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
@@ -123,6 +153,46 @@
     return YES;
 }
 
+- (BOOL)setupPresenceMgr {
+    _presenceMgr = [[PresenceMgr alloc] init];
+    if (!_presenceMgr) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)setupAvatarMgr {
+    _avatarMgr = [[AvatarMgr alloc] initWithAvatarPath:_avatarPath];
+    if (!_avatarMgr) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)setupGroupChatMgr {
+    _groupChatMgr = [[GroupChatMgr alloc] init];
+    if (!_groupChatMgr) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)setupOsMgr {
+    _osMgr = [[OsMgr alloc] initWithDbq:self.dbq];
+    if (!_osMgr) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)setupDetailMgr {
+    _detailMgr = [[DetailMgr alloc] init];
+    if (!_detailMgr) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)reset {
     _session = nil;
     [self.rosterMgr reset];
@@ -146,10 +216,22 @@
 - (NSString *)name {
     return [self.cfg objectForKey:@"name"];
 }
-//218.4.226.210:48011
+
 - (NSString *)imurl {
-    return @"http://10.22.1.47:8040/";
-//    return @"http://218.4.226.210:48011/";
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_IM"];
+    return url;
+}
+
+- (NSString *)avatarUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    return [services objectForKey:@"SVC_FILE_DOWN_AVATAR"];
+}
+
+- (NSString *)avatarCheckUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_AVATAR_CHECK"];
+    return url;
 }
 
 - (NSString *)signature {
@@ -162,18 +244,20 @@
 }
 
 - (NSString *)fileDownloadSvcUrl {
-    return @"http://10.22.1.47:8040/file/download";
-//    return @"http://218.4.226.210:48011/file/download";
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    return [services objectForKey:@"SVC_FILE_DOWN"];
 }
 
 - (NSString *)fileUploadSvcUrl {
-    return @"http://10.22.1.47:8040/file/upload";
-//    return @"http://218.4.226.210:48011/file/upload";
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    return [services objectForKey:@"SVC_FILE_UPLOAD"];
 }
 
 - (NSString *)fileCheckUrl {
-   return @"http://10.22.1.47:8040/file/check";
-//    return @"http://218.4.226.210:48011/file/check";
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_FILE_CHECK"];
+    NSParameterAssert(url);
+    return url;
 }
 
 @end

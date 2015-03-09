@@ -45,4 +45,20 @@
     [ud setObject:[NSNumber numberWithUnsignedInt:port] forKey:@"port"];
 }
 
++(void) setLAN:(BOOL) Lan {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:[NSNumber numberWithBool:Lan] forKey:@"LAN"];
+}
+
++(BOOL) isLAN {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *lan = [ud objectForKey:@"LAN"];
+    if (lan) {
+        return [lan boolValue];
+    }
+    return NO;
+}
+
+
+
 @end

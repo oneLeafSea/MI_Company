@@ -44,6 +44,7 @@ static const NSUInteger kFileTransferBlockCount = 3;
                          taskType:(FileTransferTaskType)taskType
                           options:(NSDictionary *)options{
     if (self = [super init]) {
+        NSAssert(fileName, @"file name is nil");
         m_fileName = [fileName copy];
         m_urlString = [urlString copy];
         m_options = [options copy];
@@ -149,7 +150,12 @@ static const NSUInteger kFileTransferBlockCount = 3;
 }
 
 - (void) endTransfer {
-    NSString *md5 = [FileHash md5HashOfFileAtPath:[self getFilePath]];
+    NSString *filePath = [self getFilePath];
+    NSString *md5 = [FileHash md5HashOfFileAtPath:filePath];
+    if (!md5) {
+        DDLogError(@"%@ md5 is nil", [filePath lastPathComponent]);
+        return;
+    }
     NSDictionary *params = @{
                              @"token":[m_options objectForKey:@"token"],
                              @"signature":[m_options objectForKey:@"signature"],
@@ -176,8 +182,8 @@ static const NSUInteger kFileTransferBlockCount = 3;
 
 - (void)FileBlockPorter:(FileBlockPorter *)porter block:(FileBlock *)block finished:(BOOL)finished error:(NSError *)error {
     if (finished) {
-         block.status = FileBlockStatusTransfered;
-        [m_blocksMgr update];
+//         block.status = FileBlockStatusTransfered;
+        [m_blocksMgr updateBlock:block finished:YES];
         if ([m_blocksMgr isEnd]) {
             DDLogWarn(@"INFO:file path:%@ transfered.", [[self getFilePath] lastPathComponent]);
             BOOL ret = [m_blocksMgr removeBlockInfo];

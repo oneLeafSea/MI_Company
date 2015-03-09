@@ -15,4 +15,8 @@
 
 +(void) setIPAndPort:(NSString *)IP port:(UInt32)port;
 
++(void) setLAN:(BOOL) Lan;
+
++(BOOL) isLAN;
+
 @end

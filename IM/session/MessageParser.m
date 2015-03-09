@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, MessageParserStatus) {
     [m_cache appendBytes:buf length:len];
 //    DDLogInfo(@"m_cache length is %lu (0)", (unsigned long)m_cache.length);
     if (m_status == MessageParserStatusEnd) {
-        while (kCacheLen >= kCacheMinLen) {
+        while ((kCacheLen >= kCacheMinLen) && (m_status == MessageParserStatusEnd)) {
             if ([self handleHB]) {
                 continue;
             }

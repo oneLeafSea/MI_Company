@@ -15,7 +15,9 @@
 #import "FileTransferTask.h"
 #import "Utils.h"
 #import "FileTransfer.h"
+#import "KickNotification.h"
 #import <AVFoundation/AVFoundation.h>
+#import "Utils.h"
 
 @interface AppDelegate () {
     FileTransferTask *m_fileTask;
@@ -30,8 +32,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [IMConf setIPAndPort:@"10.22.1.47" port:8000];
-//    [IMConf setIPAndPort:@"218.4.226.210" port:48009];
+    if ([IMConf isLAN]) {
+        [IMConf setIPAndPort:@"10.22.1.47" port:8000];
+    } else {
+        [IMConf setIPAndPort:@"218.4.226.210" port:48009];
+    }
+    
     [self initLogger];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     _reachability = [Reachability reachabilityForInternetConnection];
@@ -41,6 +47,7 @@
     self.relogin = [[Relogin alloc] init];
 //    NSString *fileName = @"otp_win64_17.3.exe";
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
 //    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
 //    NSDictionary *options = @{
 //                              @"path":path,
@@ -169,6 +176,13 @@
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     UIColor *green = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:LOG_FLAG_INFO];
+}
+
+- (void)handleKickNotification:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Utils alertWithTip:@"账号已在别处登录。"];
+    });
+    
 }
 
 @end

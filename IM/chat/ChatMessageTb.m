@@ -93,6 +93,7 @@
             msg.status = [status unsignedIntValue];
             [ret addObject:msg];
         }
+        [rs close];
     }];
     return ret;
 }

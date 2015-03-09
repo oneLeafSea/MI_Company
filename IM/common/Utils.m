@@ -151,7 +151,7 @@
     NSDate *date  = nil;
     if (attrs != nil) {
         date = (NSDate*)[attrs objectForKey: NSFileCreationDate];
-        NSLog(@"Date Created: %@", [date description]);
+//        NSLog(@"Date Created: %@", [date description]);
     }
     else {
         NSLog(@"Not found");

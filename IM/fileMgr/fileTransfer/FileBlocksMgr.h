@@ -20,7 +20,7 @@
 
 - (BOOL)removeBlockInfo;
 
-- (void)update;
+- (void)updateBlock:(FileBlock *)block finished:(BOOL) finished;
 
 - (BOOL) isEnd;
 

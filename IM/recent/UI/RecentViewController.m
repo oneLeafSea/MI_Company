@@ -24,6 +24,11 @@
 #import "Utils.h"
 #import "loginNotification.h"
 #import "ReloginTipView.h"
+#import "AvatarNotifications.h"
+#import "OsItem.h"
+#import "PresenceMsg.h"
+
+static NSString *kChatMessageTypeNomal = @"0";
 
 @interface RecentViewController () {
     
@@ -35,6 +40,15 @@
 
 @implementation RecentViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageSendNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageControllerWillDismiss object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterItemAddRequest object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterItemAddReqControllerDismiss object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kAvatarNotificationDownloaded object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     m_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -45,8 +59,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterItemAddReq:) name:kRosterItemAddRequest object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterItemAddReqControllerDismiss:) name:kRosterItemAddReqControllerDismiss object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAvatarDownloaded:) name:kAvatarNotificationDownloaded object:nil];
     [self initModelData];
     [self updateTabItem];
+    [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
     
     
     
@@ -85,11 +101,22 @@
         RecentChatMsgItemTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"RecentChatMsgItemCell" forIndexPath:indexPath];
         NSDictionary *cnt = [item dictContent];
         NSDictionary *body = [cnt objectForKey:@"body"];
-        NSString *name = [body objectForKey:@"fromname"];
-        if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
-            name = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
+        
+        if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+            NSString *name = [body objectForKey:@"fromname"];
+            if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
+                name = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
+                if (name == nil) {
+                    OsItem *osItem = [USER.osMgr getItemInfoByUid:item.to];
+                    name = osItem.name;
+                }
+            }
+            chatCell.nameLbl.text = name;
+        } else {
+            GroupChat *grp = [USER.groupChatMgr getGrpChatByGid:item.to];
+            chatCell.nameLbl.text = grp.gname;
         }
-        chatCell.nameLbl.text = name;
+        
         if ([[body objectForKey:@"type"] isEqualToString:@"text"]) {
             chatCell.lastMsgLbl.text = [body objectForKey:@"content"];
         }
@@ -101,6 +128,21 @@
         if ([[body objectForKey:@"type"] isEqualToString:@"voice"]) {
             chatCell.lastMsgLbl.text = @"[音频]";
         }
+        
+        if ([[body objectForKey:@"type"] isEqualToString:@"file"]) {
+            chatCell.lastMsgLbl.text = @"[文件]";
+        }
+        NSString *uid = item.from;
+        if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
+            uid = item.to;
+        }
+        
+        if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+             chatCell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:uid];
+        } else {
+            chatCell.avatarImgView.image = [UIImage imageNamed:@"groupchat_logo"];
+        }
+       
         
         NSInteger badge = [item.badge integerValue];
         if (badge != 0) {
@@ -115,6 +157,7 @@
         NSString *time = [[JSQMessagesTimestampFormatter sharedFormatter] timeForDate:date];
         chatCell.timeLbl.text = [NSString stringWithFormat:@"%@ %@", relativeDate, time];
         cell = chatCell;
+        return cell;
     }
     
     if (item.msgtype == IM_ROSTER_ITEM_ADD_REQUEST) {
@@ -132,6 +175,8 @@
             rosterReqCell.badgeText = nil;
         }
         cell = rosterReqCell;
+    } else {
+        DDLogError(@"unkown cell");
     }
     
     return cell;
@@ -156,13 +201,19 @@
         
         NSDictionary *cnt = [item dictContent];
         NSDictionary *body = [cnt objectForKey:@"body"];
-        vc.talkingId = item.from;
-        vc.talkingname = [body objectForKey:@"fromname"];
-        if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
-            vc.talkingname = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
+        if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+            vc.talkingId = item.from;
+            vc.talkingname = [body objectForKey:@"fromname"];
+            if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
+                vc.talkingname = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
+                vc.talkingId = item.to;
+            }
+        } else {
             vc.talkingId = item.to;
-            vc.chatMsgType = [item.ext intValue];
+            GroupChat *grp = [USER.groupChatMgr getGrpChatByGid:item.to];
+            vc.talkingname = grp.gname;
         }
+        vc.chatMsgType = [item.ext intValue];
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -236,15 +287,10 @@
 }
 
 - (void)handleRosterItemAddReqControllerDismiss: (NSNotification *)notificaiton {
-    NSLog(@"1");
     [APP_DELEGATE.user.recentMsg updateRosterItemAddReqBadge:@"0"];
-    NSLog(@"2");
     [self initModelData];
-    NSLog(@"3");
     [m_tableView reloadData];
-    NSLog(@"4");
     [self updateTabItem];
-    NSLog(@"5");
 }
 
 - (void)initModelData {
@@ -284,6 +330,11 @@
         reloginTipView.indicatorView.hidden = YES;
         self.navigationItem.titleView = reloginTipView;
     });
+}
+
+#pragma mark - handle avatar notification
+- (void)handleAvatarDownloaded:(NSNotification *)notification {
+    [m_tableView reloadData];
 }
 
 @end

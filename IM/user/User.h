@@ -14,25 +14,36 @@
 #import "ChatMessageMgr.h"
 #import "RecentMgr.h"
 #import "FileTransfer.h"
+#import "PresenceMgr.h"
+#import "AvatarMgr.h"
+#import "GroupChatMgr.h"
+#import "OsMgr.h"
+#import "DetailMgr.h"
 
 
 @interface User : NSObject
-
-//- (instancetype)initWithUid:(NSString *)uid;
 
 - (instancetype)initWithLoginresp:(LoginResp *)resp session:(Session *)session;
 
 - (void)reset;
 
 @property(readonly) NSString        *uid;
+@property           NSString        *pwd;
 @property(readonly) FMDatabaseQueue *dbq;
 @property(readonly) RosterMgr       *rosterMgr;
 @property(readonly) Session         *session;
 @property(readonly) ChatMessageMgr  *msgMgr;
 @property(readonly) RecentMgr       *recentMsg;
 @property(readonly) FileTransfer    *fileTransfer;
+@property(readonly) PresenceMgr     *presenceMgr;
+@property(readonly) AvatarMgr       *avatarMgr;
+@property(readonly) GroupChatMgr    *groupChatMgr;
+@property(readonly) OsMgr           *osMgr;
+@property(readonly) DetailMgr       *detailMgr;
 
 @property(readonly) NSDictionary    *cfg;
+
+@property(nonatomic) Detail         *mineDetail;
 
 @property(readonly) NSString *key;
 @property(readonly) NSString *iv;
@@ -44,10 +55,13 @@
 @property(readonly) NSString *fileDownloadSvcUrl;
 @property(readonly) NSString *fileUploadSvcUrl;
 @property(readonly) NSString *fileCheckUrl;
+@property(readonly) NSString *avatarUrl;
+@property(readonly) NSString *avatarCheckUrl;
 
 @property(readonly) NSString *filePath;
 @property(readonly) NSString *userPath;
 @property(readonly) NSString *audioPath;
+@property(readonly) NSString *avatarPath;
 
 
 

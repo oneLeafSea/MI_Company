@@ -91,7 +91,6 @@ static const NSUInteger kRunLoopInterval = 1;
             NSRunLoop *runloop = [NSRunLoop currentRunLoop];
             [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kRunLoopInterval]];
         }
-        
     } while (!m_end);
     [m_is close];
     DDLogInfo(@"inputstream thread will exit.");

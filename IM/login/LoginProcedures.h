@@ -46,4 +46,5 @@
 - (void)loginProceduresConnectFail:(LoginProcedures *)proc timeout:(BOOL)timeout error:(NSError *)error;
 
 - (void)loginProcedures:(LoginProcedures *)proc getRoster:(BOOL)suc;
+//- (void)loginProcedures:(LoginProcedures *)proc presence:(BOOL)suc;
 @end

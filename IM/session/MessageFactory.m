@@ -106,10 +106,13 @@
         case IM_NOTIFY_MESSAGE:
         {
             ChatMessage *msg = [[ChatMessage alloc] initWithData:data];
-            if (msg) {
-//                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageRecvNewMsg object:msg];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageRecvNewMsg object:msg];
         }
+            break;
+        case IM_PRESENCE: {
+            DDLogInfo(@"presce Info.");
+        }
+            break;
         default:
             break;
     }

@@ -447,6 +447,16 @@
 }
 
 
+- (NSArray *)getRosterAllUids {
+    __block NSMutableArray *uids = [[NSMutableArray alloc] init];
+    [m_roster.rosterItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *item = obj;
+        [uids addObject:[[item objectForKey:@"fid"] copy]];
+    }];
+    return uids;
+}
+
+
 - (NSArray *)parseSearchResult:(NSArray *) result {
     NSMutableArray *ret = ret = [[NSMutableArray alloc] initWithCapacity:20];
     for (NSArray *item in result) {

@@ -132,6 +132,38 @@
     return YES;
 }
 
+- (void)sendFileMessageWithFilePath:(NSString *)filePath
+                             msgType:(ChatMessageType)msgType
+                                  to:(NSString *)to
+                          completion:(void (^)(BOOL finished, id argument))completion {
+    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath} completion:^(BOOL finished, NSError *error) {
+        if (finished) {
+            ChatMessage *msg = [[ChatMessage alloc] init];
+            msg.from = [m_sid copy];
+            msg.to = [to copy];
+            msg.time = [[NSDate Now] formatWith:nil];
+            msg.chatMsgType = msgType;
+            [msg.body setObject:@"file" forKey:@"type"];
+            [msg.body setObject:APP_DELEGATE.user.name forKey:@"fromname"];
+            [msg.body setObject:[filePath lastPathComponent] forKey:@"uuid"];
+            [msg.body setObject:[filePath lastPathComponent] forKey:@"filename"];
+            unsigned long long filesz = [Utils fileSizeAtPath:filePath error:nil];
+            [msg.body setObject:[NSString stringWithFormat:@"%llu", filesz] forKey:@"filesize"];
+            
+            if (completion != nil) {
+                [m_msgBox putMsgId:msg.qid callback:completion];
+            }
+            
+            msg.status = ChatMessageStatusSending;
+            if (![m_msgTb insertMessage:msg]) {
+                DDLogError(@"ERROR: Insert file `message` table.");
+            }
+            [m_session post:msg];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+        }
+    }];
+}
+
 - (BOOL)sendVideoMesage:(NSString *)content
                 msgType:(ChatMessageType)msgType
                      to:(NSString *)to
@@ -265,9 +297,7 @@
     IMAck *ack = notification.object;
     if (ack.ackType == IM_MESSAGE) {
         [m_msgBox notifyMsgId:ack.msgid finished:ack.error ? NO : YES argument:nil];
-        DDLogWarn(@"1");
         [m_msgTb updateWithMsgId:ack.msgid status:ack.error ? ChatMessageStatusSendError : ChatMessageStatusSent];
-        DDLogWarn(@"2");
     }
 }
 
@@ -278,15 +308,25 @@
         if (![m_msgTb insertMessage:msg]) {
             msg.status = ChatMessageStatusRecved;
             DDLogError(@"ERROR: insert msg tbale error in receiving msg.");
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            [m_session post:ack];
+            return;
         }
     }
     
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
         msg.status = ChatMessageStatusRecving;
+        NSString *uuidName = [msg.body objectForKey:@"uuid"];
+        if (!uuidName) {
+            DDLogError(@"ERROR: uuidName is nil");
+            return;
+        }
         if (![m_msgTb insertMessage:msg]) {
             DDLogError(@"ERROR: insert image msg tbale error in receiving msg.");
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            [m_session post:ack];
+            return;
         }
-        NSString *uuidName = [msg.body objectForKey:@"uuid"];
         __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuidName];
         [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath} completion:^(BOOL finished, NSError *error) {
             if (!finished) {
@@ -305,6 +345,9 @@
         msg.status = ChatMessageStatusRecving;
         if (![m_msgTb insertMessage:msg]) {
             DDLogError(@"ERROR: insert voice msg table.");
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            [m_session post:ack];
+            return;
         }
         NSString *uuidName = [msg.body objectForKey:@"uuid"];
         __block NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:uuidName];
@@ -332,5 +375,7 @@
 - (void)updateMsgWithId:(NSString *)msgId status:(ChatMessageStatus)status {
     [m_msgTb updateWithMsgId:msgId status:status];
 }
+
+
 
 @end

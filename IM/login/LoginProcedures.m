@@ -19,11 +19,12 @@
 #import "LogLevel.h"
 #import "AppDelegate.h"
 #import "LoginNotification.h"
+#import "PresenceMsg.h"
 
 
 @interface LoginProcedures() <RequestDelegate>
 {
-    Session *m_sess;
+    Session         *m_sess;
     BOOL            m_stop;
 }
 
@@ -62,6 +63,19 @@
     RecvPushRequest *req = [[RecvPushRequest alloc]init];
     req.delegate = self;
     [m_sess request:req];
+}
+
+- (void)getGroupList {
+    if (m_stop) return;
+    [USER.groupChatMgr getGroupListWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+        DDLogInfo(@"get grp list");
+        if (finished) {
+            [self sendRecvPushRequest];
+        } else {
+            [self stop];
+        }
+        
+    }];
 }
 
 - (void)stop {
@@ -104,8 +118,9 @@
             } else {
                 AppDelegate *dgt = [UIApplication sharedApplication].delegate;
                 dgt.user = [[User alloc] initWithLoginresp:loginResp session:m_sess];
+                dgt.user.pwd = [self.pwd copy];
                 dgt.relogin.uid = [dgt.user.uid copy];
-                dgt.relogin.pwd = [self.pwd copy];
+                dgt.relogin.pwd = dgt.user.pwd;
                 if ([self.delegate respondsToSelector:@selector(loginProcedures:login:error:)]) {
                     [self.delegate loginProcedures:self login:YES error:nil];
                 }
@@ -114,7 +129,15 @@
                         [self.delegate loginProcedures:self getRoster:finished];
                     }
                     if (finished) {
-                        [self sendRecvPushRequest];
+                        [self getGroupList];
+                        [USER.detailMgr getDetailWithUid:USER.uid Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished, Detail *d) {
+                            if (finished) {
+                                USER.mineDetail = d;
+                            } else {
+                                DDLogError(@"ERROR: get detail info.");
+                            }
+                        }];
+                        
                     } else {
                         [self stop];
                     }
@@ -132,6 +155,10 @@
             if ([self.delegate respondsToSelector:@selector(loginProcedures:recvPush:error:)]) {
                 [self.delegate loginProcedures:self recvPush:err ? NO:YES error:err];
             }
+            
+            NSMutableArray *uids = [[NSMutableArray alloc] initWithArray:[USER.rosterMgr getRosterAllUids]];
+            [uids addObject:USER.uid];
+            [USER.avatarMgr getAvatarsByUserIds:uids];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
         }
             break;
@@ -139,6 +166,7 @@
             break;
     }
 }
+
 
 - (void)request:(Request *)req error:(NSError *)error {
     if (m_stop) return;

@@ -140,6 +140,7 @@
             RosterItemAddRequest *r = [[RosterItemAddRequest alloc] initWithFrom:from to:to msgid:msgid msg:msg status:status time:time];
             [ret addObject:r];
         }
+        [rs close];
     }];
     return ret;
 }

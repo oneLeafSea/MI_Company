@@ -67,6 +67,7 @@
     self.time = [dict objectForKey:@"time"];
     self.qid = [dict objectForKey:@"msgid"];
     self.fromRes = [dict objectForKey:@"from_res"];
+    self.chatMsgType = [[dict objectForKey:@"type"] integerValue];
     return YES;
 }
 

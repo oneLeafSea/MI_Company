@@ -16,10 +16,10 @@
                           fileSz:(unsigned long long)fileSz
                             uuid:(NSString *)uuid
                         fileName:(NSString *)fileName
-                    isDownloaded:(BOOL)isDownloaded
+                    isReady:(BOOL)isReady
                         outgoing:(BOOL)maskAsOutgoing;
 
-@property(nonatomic) BOOL isDownloaded;
+@property(nonatomic) BOOL isReady;
 @property(nonatomic) unsigned long long fileSz;
 @property(nonatomic) NSString *uuid;
 @property(nonatomic) NSString *fileName;

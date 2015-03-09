@@ -87,7 +87,7 @@
             NSString* sz = [msg.body objectForKey:@"filesize"];
             NSString *fileName = [msg.body objectForKey:@"filename"];
             unsigned long long filesz = [sz integerValue];
-            JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isDownloaded:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
             JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
             
             [self.messages addObject:fileMsg];

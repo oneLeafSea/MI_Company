@@ -12,6 +12,8 @@
 #import "UIImage+Common.h"
 #import "fileBrowserSelectCellModel.h"
 #import "NSDate+Common.h"
+//#import "AppDelegate.h"
+#import "fileBrowerNavigationViewController.h"
 
 #define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)
 #define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)568) < DBL_EPSILON)
@@ -52,8 +54,14 @@ typedef NS_ENUM(UInt32, fileBrowserViewControllerType) {
     // Do any additional setup after loading the view.
     m_type = fileBrowserViewControllerTypeAll;
     self.sendBtnItem.enabled = NO;
-    NSString *docPath = [Utils documentPath];
-    self.filesPath = [docPath stringByAppendingPathComponent:@"gzw/files"];
+    if ([self.navigationController isKindOfClass:[fileBrowerNavigationViewController class]]) {
+        fileBrowerNavigationViewController *fnc = (fileBrowerNavigationViewController *)self.navigationController;
+        self.filesPath = fnc.filePath;
+        self.delegate = fnc;
+    }
+//    NSString *docPath = [Utils documentPath];
+//    self.filesPath = [docPath stringByAppendingPathComponent:@"gzw/files"];
+//    self.filesPath = USER.filePath;
     m_allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.filesPath error:nil];
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return ![evaluatedObject hasSuffix:@".jpg_thumb"];

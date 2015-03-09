@@ -25,13 +25,16 @@
 #import "ChatMessageVoicePanelViewController.h"
 #import "AudioPlayer.h"
 #import "JSQFileMediaItem.h"
+#import "fileBrowerNavigationViewController.h"
+#import "GroupChatSettingTableViewController.h"
 
 
 #import "JSQVoiceMediaItem.h"
 
-@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate> {
+@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate, fileBrowerNavigationViewControllerDelegate> {
     ChatMessageMorePanelViewController  *m_morePanel;
     ChatMessageVoicePanelViewController *m_voicePanel;
+    __weak IBOutlet UIBarButtonItem *rightBtn;
 }
 
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -52,11 +55,16 @@
     // Do any additional setup after loading the view.
     self.senderId = APP_DELEGATE.user.uid;
     self.senderDisplayName = APP_DELEGATE.user.name;
-    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:ChatMessageTypeNormal limit:20 offset:0];
+    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:50 offset:0];
     self.data = [[ChatModel alloc] initWithMsgs:msgs];
     self.navigationItem.title = self.talkingname;
     [self setMorePanel];
     [self setVoicePanel];
+    if (self.chatMsgType == ChatMessageTypeNormal) {
+        if (![USER.rosterMgr exsitsItemByUid:self.talkingId]) {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    }
 
 }
 
@@ -93,7 +101,7 @@
                                                           date:date
                                                           text:text];
     [self.data.messages addObject:message];
-    [APP_DELEGATE.user.msgMgr sendTextMesage:text msgType:ChatMessageTypeNormal to:self.talkingId completion:^(BOOL finished, id arguments) {
+    [APP_DELEGATE.user.msgMgr sendTextMesage:text msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id arguments) {
         NSLog(@"send to %@, %@", self.talkingId, text);
         
     }];
@@ -149,8 +157,9 @@
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
-    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"avatar_default"]
+    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    UIImage *img = [USER.avatarMgr getAvatarImageByUid:message.senderId];
+    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:img
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     return mineImage;
 }
@@ -305,49 +314,48 @@
 
 - (void)handleNewMessageNotification:(NSNotification *) notification {
     __block ChatMessage *msg = notification.object;
-    if (![msg.from isEqual:self.talkingId]) {
-        return;
-    }
-     if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
-         dispatch_sync(dispatch_get_main_queue(), ^{
-             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-             [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-             NSDate *date = [dateFormat dateFromString:msg.time];
-             NSString *text = [msg.body objectForKey:@"content"];
-             if ([msg.from isEqualToString:self.talkingId]) {
-                 JSQMessage *message = [[JSQMessage alloc] initWithSenderId:msg.from
-                                                          senderDisplayName:[msg.body objectForKey:@"fromname"]
-                                                                       date:date
-                                                                       text:text];
-                 [self.data.messages addObject:message];
-                 [self finishReceivingMessageAnimated:YES];
-             }
-         });
-     }
-    
-    if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
-        __block JSQPhotoMediaItem * item = nil;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            item = [self addPhotoMsgWithPath:nil outgoing:NO uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:nil];
-            item.msgId = msg.qid;
-            [self finishReceivingMessageAnimated:YES];
-        });
-    }
-    
-    if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
-        __block JSQVoiceMediaItem *item = nil;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *d = [msg.body objectForKey:@"duration"];
-            item = [self addVoiceMsgWithPath:[USER.audioPath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]] outgoing:NO duration:[d integerValue] uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:msg.qid];
-            [self finishReceivingMessage];
-        });
-    }
-    
-    if ([[msg.body objectForKey:@"type"] isEqualToString:@"file"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addFileMsg:msg];
-            [self finishReceivingMessage];
-        });
+    if (([msg.from isEqual:self.talkingId] && (msg.chatMsgType == ChatMessageTypeNormal)) || (msg.chatMsgType == ChatMessageTypeGroupChat && [msg.to isEqualToString:self.talkingId])) {
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDate *date = [dateFormat dateFromString:msg.time];
+                NSString *text = [msg.body objectForKey:@"content"];
+//                if ([msg.from isEqualToString:self.talkingId]) {
+                    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:msg.from
+                                                             senderDisplayName:[msg.body objectForKey:@"fromname"]
+                                                                          date:date
+                                                                          text:text];
+                    [self.data.messages addObject:message];
+                    [self finishReceivingMessageAnimated:YES];
+//                }
+            });
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
+            __block JSQPhotoMediaItem * item = nil;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                item = [self addPhotoMsgWithPath:nil outgoing:NO uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:nil];
+                item.msgId = msg.qid;
+                [self finishReceivingMessageAnimated:YES];
+            });
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
+            __block JSQVoiceMediaItem *item = nil;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *d = [msg.body objectForKey:@"duration"];
+                item = [self addVoiceMsgWithPath:[USER.audioPath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]] outgoing:NO duration:[d integerValue] uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:msg.qid];
+                [self finishReceivingMessage];
+            });
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"file"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self addFileMsg:msg];
+                [self finishReceivingMessage];
+            });
+        }
     }
 }
 
@@ -371,9 +379,17 @@
 }
 
 - (IBAction)toChatSetting:(id)sender {
-    ChatSettingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatSettingTableViewController"];
-    vc.rosterItem = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingId];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.chatMsgType == ChatMessageTypeNormal) {
+        ChatSettingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatSettingTableViewController"];
+        vc.rosterItem = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingId];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        GroupChat *grpChat = [USER.groupChatMgr getGrpChatByGid:self.talkingId];
+        GroupChatSettingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GroupChatSettingTableViewController"];
+        vc.grp = grpChat;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 
@@ -471,6 +487,10 @@
 
 - (void)transferFile {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    fileBrowerNavigationViewController *fileBrowser = [self.storyboard instantiateViewControllerWithIdentifier:@"fileBrowserViewController"];
+    fileBrowser.filePath = USER.filePath;
+    fileBrowser.fileBrowserDelegate = self;
+    [self presentViewController:fileBrowser animated:YES completion:nil];
 }
 
 #pragma mark <CTAssetsPickerControllerDelegate>
@@ -607,7 +627,7 @@
     NSString* sz = [msg.body objectForKey:@"filesize"];
     NSString *fileName = [msg.body objectForKey:@"filename"];
     unsigned long long filesz = [sz integerValue];
-    JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isDownloaded:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+    JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
     JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
     [self.data.messages addObject:fileMsg];
 }
@@ -727,6 +747,30 @@
 
 - (void)ChatMessageVoicePanelViewController:(ChatMessageVoicePanelViewController *)voicePanelVc recordFail:(NSError *)error {
     
+}
+
+#pragma mark -<fileBrowerNavigationViewControllerDelegate>
+- (void)fileBrowerNavigationViewController:(fileBrowerNavigationViewController *)fileBrowser selectedPaths:(NSArray *)paths {
+    [fileBrowser dismissViewControllerAnimated:YES completion:^{
+    
+        for (NSString *filePath in paths) {
+            __block JSQFileMediaItem *item = [self addFileMsgWithFilePath:filePath outgoing:YES uid:USER.uid];
+            [self finishSendingMessageAnimated:YES];
+            [USER.msgMgr sendFileMessageWithFilePath:filePath msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
+                item.isReady = YES;
+                [self.collectionView reloadData];
+            }];
+        }
+        
+    }];
+}
+
+- (JSQFileMediaItem *)addFileMsgWithFilePath:(NSString *)filePath outgoing:(BOOL)outgoing uid:(NSString *)uid {
+    unsigned long long fileSz = [Utils fileSizeAtPath:filePath error:nil];
+    JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:fileSz uuid:[filePath lastPathComponent] fileName:[filePath lastPathComponent] isReady:NO outgoing:outgoing];
+    JSQMessage *fileMsg = [JSQMessage messageWithSenderId:uid displayName:USER.name media:fileItem];
+    [self.data.messages addObject:fileMsg];
+    return fileItem;
 }
 
 @end

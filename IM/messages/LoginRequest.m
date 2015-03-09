@@ -11,6 +11,7 @@
 #import "MessageConstants.h"
 #import "LogLevel.h"
 #import "NSJSONSerialization+StrDictConverter.h"
+#import "IMConf.h"
 
 static const NSString *kUserId = @"user";
 static const NSString *kPwd    = @"pwd";
@@ -43,10 +44,12 @@ static const NSString *kPwd    = @"pwd";
 
 - (NSData *)pkgData {
     
+    NSNumber *lan = [NSNumber numberWithBool:[IMConf isLAN]];
     NSDictionary *loginDict = @{kMsgQid   : self.qid,
                                 kUserId   : m_userId,
                                 kPwd      : m_pwd,
-                                kDevice   : kDeviceType
+                                kDevice   : kDeviceType,
+                                @"local"  : lan
                                 };
     DDLogInfo(@"--> %@", loginDict);
 

@@ -63,6 +63,7 @@
             item.time = [rs objectForColumnName:@"time"];
             item.from = [rs objectForColumnName:@"from"];
             item.to = [rs objectForColumnName:@"to"];
+            item.ext = [rs objectForColumnName:@"ext"];
             id badge = [rs objectForColumnName:@"badge"];
             if (badge == [NSNull null]) {
                 item.badge = @"0";
@@ -71,11 +72,15 @@
             }
             [ret addObject:item];
         }
+        [rs close];
     }];
     return ret;
 }
 
 - (BOOL) insertItem:(RecentMsgItem *)item {
+    if (item == nil) {
+        return NO;
+    }
     __block BOOL ret = YES;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
         ret = [db executeUpdate:kSQLRecentInsert, item.msgid, item.from, item.to, [NSNumber numberWithUnsignedInteger:item.msgtype], item.content, item.time, @"1", item.ext];
@@ -145,7 +150,7 @@
 - (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *) fromOrTo chatmsgType:(UInt32) chatMsgtype {
     __block BOOL ret = YES;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeUpdate:kSQLRecentChatMsgBadgeUpdate, badge, fromOrTo, fromOrTo, [NSString stringWithFormat:@"%d", chatMsgtype]];
+        ret = [db executeUpdate:kSQLRecentChatMsgBadgeUpdate, badge, fromOrTo, fromOrTo, [NSString stringWithFormat:@"%d", (unsigned int)chatMsgtype]];
         if (!ret) {
             *rollback = YES;
         }

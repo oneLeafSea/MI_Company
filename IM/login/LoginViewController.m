@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "utils.h"
 #import "Appdelegate.h"
+#import "IMConf.h"
 
 @interface LoginViewController ()<LoginProceduresDelegate> {
     LoginProcedures *m_loginProc;
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
 
+@property (weak, nonatomic) IBOutlet UISwitch *lanSwitch;
 
 @end
 
@@ -38,6 +40,8 @@
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBg:)];
     avatarTap.numberOfTapsRequired = 1;
     [_bgImgView addGestureRecognizer:avatarTap];
+    BOOL isLan = [IMConf isLAN];
+    self.lanSwitch.on = isLan;
    
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
@@ -58,6 +62,17 @@
     [self.pwdTextField resignFirstResponder];
     
 }
+- (IBAction)switchTapped:(UISwitch *)sender {
+    if (sender.on) {
+        [IMConf setIPAndPort:@"10.22.1.47" port:8000];
+        [IMConf setLAN:YES];
+        
+    } else {
+        [IMConf setIPAndPort:@"218.4.226.210" port:48009];
+        [IMConf setLAN:NO];
+    }
+}
+
 - (IBAction)login:(id)sender {
     [self.userTextField resignFirstResponder];
     [self.pwdTextField resignFirstResponder];

@@ -26,6 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.avatarImageView.image = [USER.avatarMgr getAvatarImageByUid:self.rosterItem.uid];
+    self.nameLbl.text = self.rosterItem.name;
+    self.signatrueLbl.text = self.rosterItem.sign;
 }
 
 - (void)didReceiveMemoryWarning {

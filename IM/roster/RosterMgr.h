@@ -137,6 +137,9 @@
              completion:(void(^)(BOOL finished)) completion;
 
 
+- (NSArray *)getRosterAllUids;
+
+
 #pragma mark - roster grp operation.
 
 /**

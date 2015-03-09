@@ -72,7 +72,7 @@
                     [m_loginProc removeObservers];
                 }
                 [APP_DELEGATE.user reset];
-                APP_DELEGATE.user = nil;
+//                APP_DELEGATE.user = nil;
                 m_loginProc = [[LoginProcedures alloc] init];
                 m_loginProc.delegate = self;
                 if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
