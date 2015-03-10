@@ -62,7 +62,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAvatarDownloaded:) name:kAvatarNotificationDownloaded object:nil];
     [self initModelData];
     [self updateTabItem];
-    [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
+    
     
     
     

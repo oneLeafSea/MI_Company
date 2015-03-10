@@ -35,5 +35,6 @@ typedef NS_ENUM(UInt32, ChatMessageStatus) {
 @property ChatMessageStatus status;
 
 - (instancetype) initWithData:(NSData *)data;
+- (instancetype) initWithNvArray:(NSArray *)nvArray chatType:(ChatMessageType)type;
 
 @end

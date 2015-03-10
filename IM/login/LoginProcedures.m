@@ -20,6 +20,7 @@
 #import "AppDelegate.h"
 #import "LoginNotification.h"
 #import "PresenceMsg.h"
+#import "GroupChat.h"
 
 
 @interface LoginProcedures() <RequestDelegate>
@@ -159,6 +160,16 @@
             NSMutableArray *uids = [[NSMutableArray alloc] initWithArray:[USER.rosterMgr getRosterAllUids]];
             [uids addObject:USER.uid];
             [USER.avatarMgr getAvatarsByUserIds:uids];
+            [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
+            [USER.groupChatMgr.grpChatList.grpChatList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                __block GroupChat *gc = obj;
+                [USER.groupChatMgr getGroupOfflineMsgWithGid:gc.gid Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+                    if (!finished) {
+                        DDLogError(@"ERROR: get {gid:%@, gname:%@} offline msg error.", gc.gid, gc.gname);
+                    }
+                }];
+                
+            }];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
         }
             break;

@@ -774,10 +774,16 @@
                                                     <rect key="frame" x="17" y="11" width="34" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="34" id="PdB-Of-4pS"/>
+                                                        <constraint firstAttribute="width" constant="34" id="htn-uK-CJD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="PdB-Of-4pS"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未填写" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8k5-jC-4Yr">
                                                     <rect key="frame" x="59" y="11" width="500" height="21"/>
@@ -787,13 +793,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mff-Ro-CDq" firstAttribute="leading" secondItem="HW8-Om-mcU" secondAttribute="leadingMargin" constant="9" id="1QT-mC-c2C"/>
-                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="leading" secondItem="mff-Ro-CDq" secondAttribute="trailing" constant="8" symbolic="YES" id="7RN-Xd-mvW"/>
-                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="trailing" secondItem="HW8-Om-mcU" secondAttribute="trailingMargin" id="C3t-7u-mUF"/>
-                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="bottom" secondItem="mff-Ro-CDq" secondAttribute="bottom" id="DY2-cu-IWR"/>
-                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="centerY" secondItem="HW8-Om-mcU" secondAttribute="centerY" id="IA2-vN-5ou"/>
-                                                <constraint firstItem="mff-Ro-CDq" firstAttribute="top" secondItem="HW8-Om-mcU" secondAttribute="topMargin" constant="3" id="i2w-Qz-oQ4"/>
-                                                <constraint firstItem="mff-Ro-CDq" firstAttribute="top" secondItem="8k5-jC-4Yr" secondAttribute="top" id="uwW-Fh-KIr"/>
+                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="leading" secondItem="mff-Ro-CDq" secondAttribute="trailing" constant="8" symbolic="YES" id="7Bx-lg-8Pk"/>
+                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="bottom" secondItem="mff-Ro-CDq" secondAttribute="bottom" id="RnL-Zp-9OX"/>
+                                                <constraint firstItem="mff-Ro-CDq" firstAttribute="top" secondItem="HW8-Om-mcU" secondAttribute="topMargin" constant="3" id="SbO-IQ-cwA"/>
+                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="top" secondItem="mff-Ro-CDq" secondAttribute="top" id="hjH-e9-guH"/>
+                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="centerY" secondItem="HW8-Om-mcU" secondAttribute="centerY" id="tAr-1m-Mtw"/>
+                                                <constraint firstItem="8k5-jC-4Yr" firstAttribute="trailing" secondItem="HW8-Om-mcU" secondAttribute="trailingMargin" id="uwb-XP-4Ka"/>
+                                                <constraint firstItem="mff-Ro-CDq" firstAttribute="leading" secondItem="HW8-Om-mcU" secondAttribute="leadingMargin" constant="9" id="xLi-2i-HIk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2907,7 +2913,7 @@
     <resources>
         <image name="addresslist_logo" width="48" height="48"/>
         <image name="avatar_default" width="40" height="40"/>
-        <image name="beauty" width="150" height="150"/>
+        <image name="beauty" width="100" height="100"/>
         <image name="fileBrowser_type_ppt" width="60" height="60"/>
         <image name="fileBrowser_unselected" width="25" height="25"/>
         <image name="function_un" width="30" height="30"/>

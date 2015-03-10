@@ -75,7 +75,7 @@
         if (empty) {
             ret = [db executeUpdate:kSqlOsitemsVerInsert, ver];
         } else {
-            ret = [db executeUpdate:kSqlOsitemsVerInsert, ver];
+            ret = [db executeUpdate:kSqlOsitemsVerUpdate, ver];
         }
         if (!ret) {
             *rollback = YES;

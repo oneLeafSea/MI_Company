@@ -691,7 +691,7 @@
 		7DB092771A6649AF005268A7 /* ChatMessageNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageNotification.m; sourceTree = "<group>"; };
 		7DB092791A664DCC005268A7 /* ChatMesssageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMesssageBox.h; sourceTree = "<group>"; };
 		7DB0927A1A664DCC005268A7 /* ChatMesssageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMesssageBox.m; sourceTree = "<group>"; };
-		7DB156B41A42DC0C00287BBE /* IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "路腾丹丹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB156B81A42DC0C00287BBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DB156B91A42DC0C00287BBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7DB156BB1A42DC0C00287BBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1648,7 +1648,7 @@
 		7DB156B51A42DC0C00287BBE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7DB156B41A42DC0C00287BBE /* IM.app */,
+				7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */,
 				7DB156D01A42DC0C00287BBE /* IMTests.xctest */,
 			);
 			name = Products;
@@ -2559,7 +2559,7 @@
 			);
 			name = IM;
 			productName = IM;
-			productReference = 7DB156B41A42DC0C00287BBE /* IM.app */;
+			productReference = 7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7DB156CF1A42DC0C00287BBE /* IMTests */ = {
@@ -3224,7 +3224,7 @@
 				INFOPLIST_FILE = IM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "路腾丹丹";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -3253,7 +3253,7 @@
 				INFOPLIST_FILE = IM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "路腾丹丹";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

@@ -27,6 +27,14 @@
                               url:(NSString *)url
                        completion:(void(^)(BOOL finished))completion;
 
+- (void)getGroupOfflineMsgWithGid:(NSString *)gid
+                            Token:(NSString *)token
+                        signature:(NSString *)signature
+                              key:(NSString *)key
+                               iv:(NSString *)iv
+                              url:(NSString *)url
+                       completion:(void(^)(BOOL finished))completion;
+
 @property(readonly) GroupChatList *grpChatList;
 
 - (GroupChat *)getGrpChatByGid:(NSString *)gid;

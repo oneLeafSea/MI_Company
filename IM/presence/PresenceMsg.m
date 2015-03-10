@@ -40,16 +40,49 @@ NSString *kPresenceShowXa = @"xa";
     return self;
 }
 
+- (instancetype)initWithData:(NSData *)data {
+    if (self = [self init]) {
+        if (![self parseData:data]) {
+            self = nil;
+        }
+    }
+    return self;
+}
+
 
 - (NSData *)pkgData {
-    NSDictionary *dict = @{
-                           @"msgid": self.qid,
-                           @"type" : self.presenceType,
-                           @"show" : self.show
-                           };
+    
+    NSDictionary *dict = nil;
+    if ([self.presenceType isEqualToString:kPresenceTypeAck]) {
+        dict = @{
+                   @"msgid": self.qid,
+                   @"type" : self.presenceType,
+                   @"show" : self.show,
+                   @"to"   : self.to,
+                   @"to_res" : self.to_res
+                   };
+    } else {
+        dict = @{
+                   @"msgid": self.qid,
+                   @"type" : self.presenceType,
+                   @"show" : self.show
+                   };
+    }
+    
     NSData *data = [self jsonDataFromDict:dict];
     DDLogInfo(@"-->%@", dict);
     return data;
+}
+
+- (BOOL)parseData:(NSData *)data {
+    NSDictionary *dict = [self dictFromJsonData:data];
+    DDLogInfo(@"<-- %@", dict);
+    _from = [[dict objectForKey:@"from"] copy];
+    _from_res = [[dict objectForKey:@"from_res"] copy];
+    self.qid = [[dict objectForKey:@"msgid"] copy];
+    _show = [dict objectForKey:@"show"];
+    _presenceType = [dict objectForKey:@"type"];
+    return YES;
 }
 
 @end

@@ -36,6 +36,7 @@
 #import "AppDelegate.h"
 
 
+
 @interface RosterMgr() {
     NSString                *m_sid;                // 用户的id
     RosterTb                *m_rosterTb;           // 用户表
@@ -494,7 +495,13 @@
     for (NSDictionary *item in rosterItems) {
         RosterItem *ri = [[RosterItem alloc] initWithDict:item];
         RosterGroup *g = [self getRosterGroupWithId:ri.gid grouplist:sortedGrpList];
-        [g.items addObject:ri];
+        PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:ri.uid];
+        if (msg && [msg.show isEqualToString:kPresenceShowOnline]) {
+            [g.items insertObject:ri atIndex:0];
+        } else {
+            [g.items addObject:ri];
+        }
+        
     }
     return sortedGrpList;
     

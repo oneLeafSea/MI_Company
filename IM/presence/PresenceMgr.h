@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PresenceMsg.h"
 
 @interface PresenceMgr : NSObject
 
 - (void)postMsgWithPresenceType:(NSString *)presencetype presenceShow:(NSString *)presenceShow;
 
+
+- (PresenceMsg *)getPresenceMsgByUid:(NSString *)uid;
 @end

@@ -346,7 +346,9 @@
                                 [self getOrgItemsWithToken:token signature:signature key:key iv:iv url:url ver:dbItemsVer completion:^(BOOL finished) {
                                     if (finished) {
                                         self.itemsVer = itemsVer;
-                                        [m_itemVerTb updateVer:itemsVer];
+                                        if (![m_itemVerTb updateVer:itemsVer]) {
+                                            completion(NO);
+                                        }
                                         self.items = [m_itemsTb getItems];
                                         dispatch_async(dispatch_get_main_queue(), ^{
                                             completion(YES);

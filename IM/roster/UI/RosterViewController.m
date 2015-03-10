@@ -20,6 +20,8 @@
 #import "LoginNotification.h"
 #import "GroupChatListTableViewController.h"
 #import "OsViewController.h"
+#import "PresenceNotification.h"
+#import "PresenceMsg.h"
 //organization structure
 @interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate> {
     NSMutableArray *m_Sections;
@@ -30,6 +32,11 @@
 @end
 
 @implementation RosterViewController
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterChanged object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPresenceNotification object:nil];
+}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
@@ -43,7 +50,7 @@
     m_table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self initData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePresenceNotification:) name:kPresenceNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,7 +134,21 @@
     RosterSection *sect =[m_Sections objectAtIndex:index];
     headerView.arrowImagView.image = [UIImage imageNamed:sect.expand ? @"arrow_down":@"arrow_right"];
     headerView.delegate = self;
+    NSInteger onlineCount = [self getOnlineFromGroup:g];
+    headerView.statusLabel.text = [NSString stringWithFormat:@"%ld/%lu", (long)onlineCount, (unsigned long)g.items.count];
     return headerView;
+}
+
+- (NSInteger)getOnlineFromGroup:(RosterGroup *)g {
+    __block NSInteger count = 0;
+    [g.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        RosterItem *item = obj;
+        PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:item.uid];
+        if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
+            count++;
+        }
+    }];
+    return count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,7 +176,13 @@
     RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     cell.nameLabel.text = item.name;
-    cell.signatureLabel.text = item.sign;
+    PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:item.uid];
+    if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
+        cell.signatureLabel.text = [NSString stringWithFormat:@"[在线]%@", item.sign];
+    } else {
+        cell.signatureLabel.text = [NSString stringWithFormat:@"[离线]%@", item.sign];
+    }
+    
     cell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:item.uid];
     return cell;
 }
@@ -242,5 +269,13 @@
     });
 }
 
+
+#pragma mark - handle Presence notification.
+- (void) handlePresenceNotification:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self initData];
+        [m_table reloadData];
+    });
+}
 
 @end

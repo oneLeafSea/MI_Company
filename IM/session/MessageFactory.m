@@ -27,6 +27,9 @@
 #import "ChatMessage.h"
 #import "ChatMessageNotification.h"
 #import "KickNotification.h"
+#import "Utils.h"
+#import "PresenceMsg.h"
+#import "PresenceNotification.h"
 
 @interface MessageFactory()
 @end
@@ -110,7 +113,8 @@
         }
             break;
         case IM_PRESENCE: {
-            DDLogInfo(@"presce Info.");
+            PresenceMsg *msg = [[PresenceMsg alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kPresenceNotification object:msg];
         }
             break;
         default:

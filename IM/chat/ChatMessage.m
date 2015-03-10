@@ -67,7 +67,53 @@
     self.time = [dict objectForKey:@"time"];
     self.qid = [dict objectForKey:@"msgid"];
     self.fromRes = [dict objectForKey:@"from_res"];
-    self.chatMsgType = [[dict objectForKey:@"type"] integerValue];
+    self.chatMsgType = [[dict objectForKey:@"type"] intValue];
+    return YES;
+}
+
+- (instancetype) initWithNvArray:(NSArray *)nvArray chatType:(ChatMessageType)type {
+    if (self = [self init]) {
+        if (![self parseNvArray:nvArray]) {
+            self = nil;
+        }
+        self.chatMsgType = type;
+    }
+    return self;
+}
+
+- (BOOL) parseNvArray:(NSArray *)nvArray {
+    if (!nvArray) {
+        return NO;
+    }
+    [nvArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = obj;
+        NSString *n = [dict objectForKey:@"n"];
+        NSString *v = [dict objectForKey:@"v"];
+        if ([n isEqualToString:@"msgid"]) {
+            self.qid = [v copy];
+            return;
+        }
+        if ([n isEqualToString:@"body"]) {
+            NSData *bodyData = [v dataUsingEncoding:NSUTF8StringEncoding];
+            self.body = [[NSMutableDictionary alloc] initWithDictionary:[self dictFromJsonData:bodyData]];
+            return;
+        }
+        
+        if ([n isEqualToString:@"from"]) {
+            self.from = [v copy];
+            return;
+        }
+        
+        if ([n isEqualToString:@"to"]) {
+            self.to = [v copy];
+            return;
+        }
+        
+        if ([n isEqualToString:@"time"]) {
+            self.time = [v copy];
+            return;
+        }
+    }];
     return YES;
 }
 

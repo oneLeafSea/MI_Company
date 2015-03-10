@@ -24,7 +24,15 @@ extern NSString *kPresenceShowXa;
 
 - (instancetype)initWithPresenceType:(NSString *)presenceType show:(NSString *)presenceShow;
 
+- (instancetype)initWithData:(NSData *)data;
+
+//- (instancetype)initAckPresenceWith
+
 @property(readonly) NSString *presenceType;
 @property(readonly) NSString *show;
+@property(readonly) NSString *from;
+@property(readonly) NSString *from_res;
+@property NSString *to;
+@property NSString *to_res;
 
 @end
