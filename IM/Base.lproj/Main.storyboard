@@ -959,7 +959,18 @@
                     <view key="view" contentMode="scaleToFill" id="QWs-Ed-xvd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="constructing" translatesAutoresizingMaskIntoConstraints="NO" id="d4t-Dv-3eo">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="bottom" secondItem="beH-3A-sHQ" secondAttribute="top" id="4HD-OO-44D"/>
+                            <constraint firstAttribute="trailing" secondItem="d4t-Dv-3eo" secondAttribute="trailing" id="a3o-jb-nA3"/>
+                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="top" secondItem="PEJ-iX-DQK" secondAttribute="bottom" id="eL4-NC-g1H"/>
+                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="leading" secondItem="QWs-Ed-xvd" secondAttribute="leading" id="kcH-bF-WvV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="功能" id="rAB-kE-AJT"/>
                 </viewController>
@@ -2914,6 +2925,7 @@
         <image name="addresslist_logo" width="48" height="48"/>
         <image name="avatar_default" width="40" height="40"/>
         <image name="beauty" width="100" height="100"/>
+        <image name="constructing" width="1242" height="2208"/>
         <image name="fileBrowser_type_ppt" width="60" height="60"/>
         <image name="fileBrowser_unselected" width="25" height="25"/>
         <image name="function_un" width="30" height="30"/>
