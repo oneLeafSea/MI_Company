@@ -86,6 +86,10 @@ static const NSUInteger kFileTransferBlockCount = 3;
     
 }
 
+- (NSString *)fileName {
+    return m_fileName;
+}
+
 
 
 - (NSString *)getFilePath {

@@ -8,6 +8,8 @@
 
 #import "MineTableViewController.h"
 #import "AppDelegate.h"
+#import "session.h"
+#import "LoginNotification.h"
 
 @interface MineTableViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImgView;
@@ -23,6 +25,11 @@
 
 @implementation MineTableViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSessionDied object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLoginSuccess object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -35,6 +42,8 @@
     self.statusLbl.text = USER.session.isConnected ? @"在线" : @"离线";
     self.telLbl.text = [USER.mineDetail.data objectForKey:@"cellphone"];
     self.emailLbl.text = [USER.mineDetail.data objectForKey:@"email"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionDied:) name:kSessionDied object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginSuccess:) name:kNotificationLoginSuccess object:nil];
     
 }
 
@@ -47,6 +56,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)handleSessionDied:(NSNotification *)notificaiton {
+    dispatch_async(dispatch_get_main_queue(), ^{
+       self.statusLbl.text = @"离线";
+    });
+}
+
+- (void)handleLoginSuccess:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.statusLbl.text = @"在线";
+    });
 }
 
 @end

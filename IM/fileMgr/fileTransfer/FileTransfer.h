@@ -40,4 +40,7 @@
                options:(NSDictionary *)options
             completion:(void(^)(BOOL finished, NSError *error))completion;
 
+
+- (BOOL)exsitTask:(NSString *)filename;
+
 @end

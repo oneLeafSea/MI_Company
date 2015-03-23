@@ -56,7 +56,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     BOOL ret = YES;
     
     if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
-        if ([m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE]) {
+        if ([m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE ext:item.ext]) {
             NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.from chatMsgType:item.ext];
             if (badge <= 0) {
                 item.badge = @"1";
@@ -70,7 +70,7 @@ static NSString *kChatMessageTypeNomal = @"0";
             ret = [m_recentTb insertItem:item];
         }
     } else {
-        if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE]) {
+        if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE ext:item.ext]) {
             NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.to chatMsgType:item.ext];
             if (badge <= 0) {
                 item.badge = @"1";
@@ -92,11 +92,20 @@ static NSString *kChatMessageTypeNomal = @"0";
 - (BOOL) updateSendChatMsg:(ChatMessage *) msg {
     RecentMsgItem *item = [self cnvtRecentMsgItemWithChatMsg:msg];
     BOOL ret = YES;
-    if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE]) {
-        ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.to];
+    if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+        if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE ext:item.ext]) {
+            ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.to];
+        } else {
+            ret = [m_recentTb insertItem:item];
+        }
     } else {
-        ret = [m_recentTb insertItem:item];
+        if ([m_recentTb exsitMsgFromOrTo:item.to msgtype:IM_MESSAGE ext:item.ext]) {
+            ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.to];
+        } else {
+            ret = [m_recentTb insertItem:item];
+        }
     }
+    
     
     return ret;
 }

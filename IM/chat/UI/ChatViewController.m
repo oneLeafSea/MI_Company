@@ -166,8 +166,14 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item % 3 == 0) {
-        JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    if (indexPath.item == 0) {
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
+    JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+    
+    if ([message.date timeIntervalSinceDate:previousMessage.date] > 60) {
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     return nil;
@@ -209,7 +215,16 @@
     JSQMessage *msg = [self.data.messages objectAtIndex:indexPath.item];
     
     if (msg.isMediaMessage) {
-        DDLogCInfo(@"media Message");
+        if ([msg.media isKindOfClass:[JSQPhotoMediaItem class]]) {
+            DDLogInfo(@"Photo Msg.");
+        }
+        if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
+            DDLogInfo(@"Voice msg");
+        }
+        
+        if ([msg.media isKindOfClass:[JSQFileMediaItem class]]) {
+            DDLogInfo(@"File msg");
+        }
     } else {
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];
@@ -228,10 +243,15 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item % 3 == 0) {
-        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if (indexPath.item == 0) {
+        return kJSQMessagesCollectionViewAvatarSizeDefault;
     }
     
+    JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    if ([message.date timeIntervalSinceDate:previousMessage.date] > 60) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
     return 0.0f;
 }
 
@@ -316,19 +336,17 @@
     __block ChatMessage *msg = notification.object;
     if (([msg.from isEqual:self.talkingId] && (msg.chatMsgType == ChatMessageTypeNormal)) || (msg.chatMsgType == ChatMessageTypeGroupChat && [msg.to isEqualToString:self.talkingId])) {
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
                 [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSSS"];
                 NSDate *date = [dateFormat dateFromString:msg.time];
                 NSString *text = [msg.body objectForKey:@"content"];
-//                if ([msg.from isEqualToString:self.talkingId]) {
-                    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:msg.from
-                                                             senderDisplayName:[msg.body objectForKey:@"fromname"]
-                                                                          date:date
-                                                                          text:text];
-                    [self.data.messages addObject:message];
-                    [self finishReceivingMessageAnimated:YES];
-//                }
+                JSQMessage *message = [[JSQMessage alloc] initWithSenderId:msg.from
+                                                         senderDisplayName:[msg.body objectForKey:@"fromname"]
+                                                                      date:date
+                                                                      text:text];
+                [self.data.messages addObject:message];
+                [self finishReceivingMessageAnimated:YES];
             });
         }
         
@@ -369,7 +387,6 @@
                     item.imgPath = [USER.filePath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
                     NSString *thumbPath = [item.imgPath stringByAppendingString:@"_thumb"];
                     item.image = [UIImage imageWithContentsOfFile:thumbPath];
-                    
                     [self finishReceivingMessage];
                     break;
                 }
@@ -513,7 +530,7 @@
                     ret = NO;
                     break;
                 }
-                if (![img saveToPath:thumbPath sz:CGSizeMake(210.f, 150.0f)]) {
+                if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)]) {
                     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
                     ret = NO;
                     break;
@@ -709,7 +726,7 @@
     }
     
     [Img saveToPath:fileSavePath scale:1.0];
-    [Img saveToPath:thumbFilePath sz:CGSizeMake(210, 150)];
+    [Img saveToPath:thumbFilePath sz:CGSizeMake(100.0f, 135.0f)];
     
     [picker dismissViewControllerAnimated:YES completion:^{
         __block JSQPhotoMediaItem * item = [self addPhotoMsgWithPath:nil outgoing:YES uid:USER.uid displayName:USER.name msgId:nil];

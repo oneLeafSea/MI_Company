@@ -23,6 +23,8 @@
 
 
 static NSString * const kJSQSystemSoundPlayerUserDefaultsKey = @"kJSQSystemSoundPlayerUserDefaultsKey";
+//Vibrate
+static NSString * const kJSQSystemSoundPlayerUserDefaultsVibrateKey = @"kJSQSystemSoundPlayerUserDefaultsVibrateKey";
 
 NSString * const kJSQSystemSoundTypeCAF = @"caf";
 NSString * const kJSQSystemSoundTypeAIF = @"aif";
@@ -102,6 +104,7 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     if (self) {
         _bundle = [NSBundle mainBundle];
         _on = [self readSoundPlayerOnFromUserDefaults];
+        _vibrateOn = [self readSoundPlayerViOnFromUserVibrateDefaults];
         _sounds = [[NSMutableDictionary alloc] init];
         _completionBlocks = [[NSMutableDictionary alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -176,6 +179,20 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
         return YES;
     }
     
+    
+    return [setting boolValue];
+}
+
+- (BOOL)readSoundPlayerViOnFromUserVibrateDefaults
+{
+    NSNumber *setting = [[NSUserDefaults standardUserDefaults] objectForKey:kJSQSystemSoundPlayerUserDefaultsVibrateKey];
+    
+    if (!setting) {
+        [self toggleSoundPlayerVibrateOn:YES];
+        return YES;
+    }
+    
+    
     return [setting boolValue];
 }
 
@@ -192,6 +209,13 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     if (!on) {
         [self stopAllSounds];
     }
+}
+
+- (void)toggleSoundPlayerVibrateOn:(BOOL)on {
+    _vibrateOn = on;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[NSNumber numberWithBool:on] forKey:kJSQSystemSoundPlayerUserDefaultsVibrateKey];
+    [userDefaults synchronize];
 }
 
 - (void)playSoundWithFilename:(NSString *)filename fileExtension:(NSString *)extension
@@ -230,7 +254,7 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
 
 - (void)playVibrateSound
 {
-    if (self.on) {
+    if (self.vibrateOn) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }

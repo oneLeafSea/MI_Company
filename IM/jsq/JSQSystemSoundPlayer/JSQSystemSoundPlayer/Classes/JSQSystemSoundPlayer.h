@@ -59,6 +59,9 @@ typedef void(^JSQSystemSoundPlayerCompletionBlock)(void);
  */
 @property (assign, nonatomic, readonly) BOOL on;
 
+
+@property (assign, nonatomic, readonly) BOOL vibrateOn;
+
 /**
  *  The bundle in which the sound player uses to search for sound file resources. You may change this property as needed.
  *  The default value is the main bundle. This value must not be `nil`.
@@ -83,6 +86,9 @@ typedef void(^JSQSystemSoundPlayerCompletionBlock)(void);
  *  @warning Disabling the sound player (passing a value of `NO`) will invoke the `stopAllSounds` method.
  */
 - (void)toggleSoundPlayerOn:(BOOL)on;
+
+
+- (void)toggleSoundPlayerVibrateOn:(BOOL)on;
 
 /**
  *  Plays a system sound object corresponding to an audio file with the given filename and extension.

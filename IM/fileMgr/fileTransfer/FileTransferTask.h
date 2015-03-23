@@ -30,6 +30,8 @@ typedef NS_ENUM(UInt32, FileTransferTaskType) {
 @property(nonatomic, copy)void(^completion)(BOOL finished, NSError *error);
 @property(readonly)NSString *taskId;
 
+@property(readonly) NSString *fileName;
+
 @property(weak) id<FileTransferTaskDelegate> delegate;
 
 @end

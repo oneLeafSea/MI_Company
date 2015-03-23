@@ -19,6 +19,8 @@ extern NSString *kSQLRecentExsitFrom;
 
 extern NSString *kSQLRecentExsitFromOrTo;
 
+extern NSString *kSQLRecentExsitFromOrToWithExt;
+
 extern NSString *kSQLRecentUpdateFromOrTo;
 
 extern NSString *kSQLRecentUpdateWithType;

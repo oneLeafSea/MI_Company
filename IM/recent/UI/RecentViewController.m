@@ -47,6 +47,9 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterItemAddRequest object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterItemAddReqControllerDismiss object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kAvatarNotificationDownloaded object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
 }
 
 - (void)viewDidLoad {
@@ -62,7 +65,9 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAvatarDownloaded:) name:kAvatarNotificationDownloaded object:nil];
     [self initModelData];
     [self updateTabItem];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
     
     
     
@@ -71,16 +76,12 @@ static NSString *kChatMessageTypeNomal = @"0";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+    
     
 }
 

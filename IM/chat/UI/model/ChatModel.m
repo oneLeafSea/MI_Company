@@ -13,6 +13,7 @@
 #import "JSQVoiceMediaItem.h"
 #import "JSQFileMediaItem.h"
 #import "NSDate+Common.h"
+#import "UIImage+Common.h"
 
 static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 
@@ -67,6 +68,20 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             if (msg.status == ChatMessageStatusRecved || msg.status == ChatMessageStatusSent) {
                 photoItem.image = [UIImage imageWithContentsOfFile:thumbImgPath];
                 photoItem.imgPath = [USER.filePath stringByAppendingPathComponent:uuid];
+            } else {
+                if (![USER.fileTransfer exsitTask:uuid]) {
+                    if ([msg.from isEqualToString:USER.uid]) {
+                    } else {
+                        __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuid];
+                        [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath} completion:^(BOOL finished, NSError *error) {
+                            NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
+                            UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+                            [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)];
+                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                        }];
+                    }
+                    
+                }
             }
 //            JSQMessage *photoMessage = [JSQMessage messageWithSenderId:msg.from
 //                                                           displayName:[msg.body objectForKey:@"fromname"]

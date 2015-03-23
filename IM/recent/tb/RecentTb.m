@@ -102,21 +102,31 @@
     return ret;
 }
 
-- (BOOL) exsitMsgFromOrTo:(NSString *)fromTo msgtype:(UInt32)type {
+- (BOOL) exsitMsgFromOrTo:(NSString *)fromTo msgtype:(UInt32)type ext:(NSString *)ext {
     __block BOOL ret = NO;
-    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        FMResultSet *rs = [db executeQuery:kSQLRecentExsitFromOrTo, fromTo, fromTo, [NSNumber numberWithUnsignedInt:type]];
-        if (rs.next) {
-            ret = YES;
-        }
-    }];
+    if (ext == nil) {
+        [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *rs = [db executeQuery:kSQLRecentExsitFromOrTo, fromTo, fromTo, [NSNumber numberWithUnsignedInt:type]];
+            if (rs.next) {
+                ret = YES;
+            }
+        }];
+    } else {
+        [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *rs = [db executeQuery:kSQLRecentExsitFromOrToWithExt, fromTo, fromTo, [NSNumber numberWithUnsignedInt:type], ext];
+            if (rs.next) {
+                ret = YES;
+            }
+        }];
+    }
+    
     return ret;
 }
 
 - (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type fromOrTo:(NSString *)fromOrTo {
     __block BOOL ret = NO;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        ret = [db executeUpdate:kSQLRecentUpdateFromOrTo, item.msgid, item.from, item.to, [NSNumber numberWithUnsignedInteger:item.msgtype], item.content, item.time, item.badge, item.ext, fromOrTo, fromOrTo];
+        ret = [db executeUpdate:kSQLRecentUpdateFromOrTo, item.msgid, item.from, item.to, [NSNumber numberWithUnsignedInteger:item.msgtype], item.content, item.time, item.badge, item.ext, fromOrTo, fromOrTo, item.ext];
     }];
     return ret;
 }

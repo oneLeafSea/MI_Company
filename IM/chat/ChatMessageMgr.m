@@ -18,7 +18,7 @@
 #import "Utils.h"
 #import "UIImage+Common.h"
 #import "NSUUID+StringUUID.h"
-
+#import "JSQSystemSoundPlayer+JSQMessages.h"
 
 
 
@@ -211,7 +211,7 @@
     }
     
     __block NSString *thumbPath = [USER.filePath stringByAppendingPathComponent:thumbName];
-    if (![img saveToPath:thumbPath sz:CGSizeMake(210.f, 150.0f)]) {
+    if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)]) {
         cpt(NO, nil);
         [[NSFileManager defaultManager] removeItemAtPath:imagPath error:nil];
         return;
@@ -305,6 +305,8 @@
 }
 
 - (void)handleNewMsg:(NSNotification *)notification {
+    [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    [[JSQSystemSoundPlayer sharedPlayer] playVibrateSound];
     ChatMessage *msg = notification.object;
     
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
@@ -337,7 +339,7 @@
             } else {
                 NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
                 UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-                [image saveToPath:thumbPath sz:CGSizeMake(210.0f, 150.0f)];
+                [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)];
                 [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageImageFileReceived object:msg];
             }

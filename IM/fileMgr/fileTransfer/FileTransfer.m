@@ -34,6 +34,29 @@ static int kFileMaxTask = 5;
     return self;
 }
 
+- (BOOL)exsitTask:(NSString *)filename {
+    __block BOOL ret = NO;
+    [m_transfingQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FileTransferTask *task = obj;
+        if ([task.fileName isEqualToString:filename]) {
+            ret = YES;
+            *stop = YES;
+        }
+    }];
+    if (ret == YES) {
+        return ret;
+    }
+    
+    [m_waitingQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FileTransferTask *task = obj;
+        if ([task.fileName isEqualToString:filename]) {
+            ret = YES;
+            *stop = YES;
+        }
+    }];
+    return ret;
+}
+
 - (void)downloadFileName:(NSString *)fileName
                urlString:(NSString *)urlString
           checkUrlString:(NSString *)checkUrlString
@@ -86,5 +109,7 @@ static int kFileMaxTask = 5;
         }
     });
 }
+
+
 
 @end

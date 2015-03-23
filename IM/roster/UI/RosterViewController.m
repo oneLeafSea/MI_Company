@@ -36,6 +36,9 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRosterChanged object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kPresenceNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -51,6 +54,9 @@
     [self initData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePresenceNotification:) name:kPresenceNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,16 +66,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+   
     
 }
 

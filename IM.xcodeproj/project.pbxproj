@@ -124,6 +124,7 @@
 		7D2E0FB31A830F250099AB04 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E0F831A830F250099AB04 /* LICENSE */; };
 		7D2E0FB41A830F250099AB04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E0F841A830F250099AB04 /* README.md */; };
 		7D2E10021A83948F0099AB04 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E10011A83948F0099AB04 /* UIImage+Common.m */; };
+		7D3015AC1ABBBCA1007205BB /* MineSettingCommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3015AB1ABBBCA1007205BB /* MineSettingCommonTableViewController.m */; };
 		7D302CFB1A7746F5004C6BD5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302CFA1A7746F5004C6BD5 /* Reachability.m */; };
 		7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302CFD1A778646004C6BD5 /* ReloginTipView.m */; };
 		7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */; };
@@ -142,6 +143,8 @@
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
 		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
 		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
+		7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5F81AB66D4100A95FC7 /* system.aiff */; };
+		7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */; };
 		7D7FCDE21AA849370023EF49 /* OsNavigationRootCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */; };
 		7D7FCDE51AA849650023EF49 /* OsNavigationRootCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE41AA849650023EF49 /* OsNavigationRootCollectionCell.m */; };
 		7D7FCDE71AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE61AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib */; };
@@ -150,6 +153,7 @@
 		7D7FCDEF1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDEE1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib */; };
 		7D7FCDF21AA84FEE0023EF49 /* OsNavigationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDF11AA84FEE0023EF49 /* OsNavigationTableViewCell.m */; };
 		7D7FCDF41AA850010023EF49 /* OsNavigationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDF31AA850010023EF49 /* OsNavigationTableViewCell.xib */; };
+		7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */; };
 		7DB06F491A71E23900DD1943 /* RosterItemAddReqModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */; };
 		7DB06F4C1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F4B1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m */; };
 		7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F4E1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m */; };
@@ -351,6 +355,7 @@
 		7DB669421A5F63EF00843C72 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB669411A5F63EF00843C72 /* RosterViewController.m */; };
 		7DB669451A5F654500843C72 /* RosterItermTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB669441A5F654500843C72 /* RosterItermTableViewCell.m */; };
 		7DB6694D1A5F708900843C72 /* RosterSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6694C1A5F708900843C72 /* RosterSection.m */; };
+		7DBD4ABD1AB2DAB1005C618A /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */; };
 		7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */; };
 		7DD278431A4AC0940012D1F5 /* Roster.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278421A4AC0940012D1F5 /* Roster.m */; };
 		7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278451A4AC1490012D1F5 /* RosterItem.m */; };
@@ -629,6 +634,8 @@
 		7D2E0F841A830F250099AB04 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7D2E10001A83948F0099AB04 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
 		7D2E10011A83948F0099AB04 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
+		7D3015AA1ABBBCA1007205BB /* MineSettingCommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSettingCommonTableViewController.h; sourceTree = "<group>"; };
+		7D3015AB1ABBBCA1007205BB /* MineSettingCommonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSettingCommonTableViewController.m; sourceTree = "<group>"; };
 		7D302CF91A7746F5004C6BD5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7D302CFA1A7746F5004C6BD5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7D302CFC1A778646004C6BD5 /* ReloginTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloginTipView.h; sourceTree = "<group>"; };
@@ -663,6 +670,8 @@
 		7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemNotification.m; sourceTree = "<group>"; };
 		7D76AB331A5E162000901AD0 /* RosterQid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterQid.h; sourceTree = "<group>"; };
 		7D76AB341A5E162000901AD0 /* RosterQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterQid.m; sourceTree = "<group>"; };
+		7D7EB5F81AB66D4100A95FC7 /* system.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = system.aiff; sourceTree = "<group>"; };
+		7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = msn.aiff; sourceTree = "<group>"; };
 		7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OsNavigationRootCollectionCell.xib; sourceTree = "<group>"; };
 		7D7FCDE31AA849650023EF49 /* OsNavigationRootCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsNavigationRootCollectionCell.h; sourceTree = "<group>"; };
 		7D7FCDE41AA849650023EF49 /* OsNavigationRootCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsNavigationRootCollectionCell.m; sourceTree = "<group>"; };
@@ -675,6 +684,8 @@
 		7D7FCDF01AA84FEE0023EF49 /* OsNavigationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsNavigationTableViewCell.h; sourceTree = "<group>"; };
 		7D7FCDF11AA84FEE0023EF49 /* OsNavigationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsNavigationTableViewCell.m; sourceTree = "<group>"; };
 		7D7FCDF31AA850010023EF49 /* OsNavigationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OsNavigationTableViewCell.xib; sourceTree = "<group>"; };
+		7D87DAD01AB6976600AD57C6 /* ApnsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApnsMgr.h; sourceTree = "<group>"; };
+		7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApnsMgr.m; sourceTree = "<group>"; };
 		7DABB7121A496A7F002D5675 /* 消息.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "消息.md"; sourceTree = "<group>"; };
 		7DABB7131A496A7F002D5675 /* 管理名册.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "管理名册.md"; sourceTree = "<group>"; };
 		7DB06F471A71E23900DD1943 /* RosterItemAddReqModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqModel.h; sourceTree = "<group>"; };
@@ -691,7 +702,7 @@
 		7DB092771A6649AF005268A7 /* ChatMessageNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageNotification.m; sourceTree = "<group>"; };
 		7DB092791A664DCC005268A7 /* ChatMesssageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMesssageBox.h; sourceTree = "<group>"; };
 		7DB0927A1A664DCC005268A7 /* ChatMesssageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMesssageBox.m; sourceTree = "<group>"; };
-		7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "路腾丹丹.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DB156B41A42DC0C00287BBE /* IM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB156B81A42DC0C00287BBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DB156B91A42DC0C00287BBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7DB156BB1A42DC0C00287BBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1081,6 +1092,8 @@
 		7DB669441A5F654500843C72 /* RosterItermTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItermTableViewCell.m; sourceTree = "<group>"; };
 		7DB6694B1A5F708900843C72 /* RosterSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSection.h; sourceTree = "<group>"; };
 		7DB6694C1A5F708900843C72 /* RosterSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSection.m; sourceTree = "<group>"; };
+		7DBD4ABB1AB2DAB1005C618A /* NSData+Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Conversion.h"; sourceTree = "<group>"; };
+		7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Conversion.m"; sourceTree = "<group>"; };
 		7DBE4FC81A523FCB0002B5BE /* RosterNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterNotification.h; sourceTree = "<group>"; };
 		7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterNotification.m; sourceTree = "<group>"; };
 		7DD278411A4AC0940012D1F5 /* Roster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roster.h; sourceTree = "<group>"; };
@@ -1281,6 +1294,13 @@
 			path = voicePanel;
 			sourceTree = "<group>";
 		};
+		7D0C8D281ABBEA490004F97A /* profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
 		7D13CB5F1A78714900FB14B8 /* fileMgr */ = {
 			isa = PBXGroup;
 			children = (
@@ -1297,6 +1317,8 @@
 				7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */,
 				7DEA706D1AA99F7B002C2C68 /* MineSettingTableViewController.h */,
 				7DEA706E1AA99F7B002C2C68 /* MineSettingTableViewController.m */,
+				7D3015AA1ABBBCA1007205BB /* MineSettingCommonTableViewController.h */,
+				7D3015AB1ABBBCA1007205BB /* MineSettingCommonTableViewController.m */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -1601,6 +1623,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		7D87DACF1AB6975000AD57C6 /* apns */ = {
+			isa = PBXGroup;
+			children = (
+				7D87DAD01AB6976600AD57C6 /* ApnsMgr.h */,
+				7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */,
+			);
+			path = apns;
+			sourceTree = "<group>";
+		};
 		7DABB7111A496A7F002D5675 /* doc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1648,7 +1679,7 @@
 		7DB156B51A42DC0C00287BBE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */,
+				7DB156B41A42DC0C00287BBE /* IM.app */,
 				7DB156D01A42DC0C00287BBE /* IMTests.xctest */,
 			);
 			name = Products;
@@ -1657,6 +1688,10 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D0C8D281ABBEA490004F97A /* profile */,
+				7D87DACF1AB6975000AD57C6 /* apns */,
+				7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */,
+				7D7EB5F81AB66D4100A95FC7 /* system.aiff */,
 				7D244C0B1AAD3C360090AA9A /* pwd */,
 				7DEA70631AA983A6002C2C68 /* detail */,
 				7D1C600D1AA6A4400035A2D2 /* os */,
@@ -1744,6 +1779,8 @@
 				7DB156ED1A42DD5500287BBE /* Utils.m */,
 				7D2E10001A83948F0099AB04 /* UIImage+Common.h */,
 				7D2E10011A83948F0099AB04 /* UIImage+Common.m */,
+				7DBD4ABB1AB2DAB1005C618A /* NSData+Conversion.h */,
+				7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2559,7 +2596,7 @@
 			);
 			name = IM;
 			productName = IM;
-			productReference = 7DB156B41A42DC0C00287BBE /* 路腾丹丹.app */;
+			productReference = 7DB156B41A42DC0C00287BBE /* IM.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7DB156CF1A42DC0C00287BBE /* IMTests */ = {
@@ -2639,6 +2676,7 @@
 			files = (
 				7DB3FCF11A6E4F3500BFA0E7 /* RosterGrpMgrHeadView.xib in Resources */,
 				7D6FD7141A85EC73001BA1F1 /* ChatMessageVoicePanel.xib in Resources */,
+				7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */,
 				7DFA2A471A9041ED00BD8F3C /* JSQVoiceMediaIncomingView.xib in Resources */,
 				7DB156C61A42DC0C00287BBE /* Main.storyboard in Resources */,
 				7D2E0FB01A830F250099AB04 /* LICENSE in Resources */,
@@ -2660,6 +2698,7 @@
 				7D2E0FAF1A830F250099AB04 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				7D2E0FAD1A830F250099AB04 /* JSQMessagesToolbarContentView.xib in Resources */,
 				7DB156CB1A42DC0C00287BBE /* LaunchScreen.xib in Resources */,
+				7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */,
 				7D2E0FB31A830F250099AB04 /* LICENSE in Resources */,
 				7DB158B51A42DD5600287BBE /* MainCVC.xib in Resources */,
 				7DDAFB131A5E785E0029D809 /* RosterSectionHeaderView.xib in Resources */,
@@ -2763,6 +2802,7 @@
 				7DB1587A1A42DD5600287BBE /* RowMultipleSelector.m in Sources */,
 				7D08D02F1A8D92F200F4C8E7 /* ChatMessageVoicePanelViewController.m in Sources */,
 				7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */,
+				7D3015AC1ABBBCA1007205BB /* MineSettingCommonTableViewController.m in Sources */,
 				7DB1588E1A42DD5600287BBE /* RowTwitter.m in Sources */,
 				7D18B6781A81BF1800D2B7CB /* ChatMessageMorePanelPageCollectionViewController.m in Sources */,
 				7DB158D01A42DD5600287BBE /* NSObject+XLFormAdditions.m in Sources */,
@@ -2827,6 +2867,7 @@
 				7D005D7B1A91FF75006CB54C /* JSQFileMediaIncomingView.m in Sources */,
 				7DB1586F1A42DD5600287BBE /* RowButton.m in Sources */,
 				7DB158AE1A42DD5600287BBE /* session.m in Sources */,
+				7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */,
 				7D2E0FAC1A830F250099AB04 /* JSQMessagesToolbarContentView.m in Sources */,
 				7DB31BF01A6CA6BF0051E6CD /* RosterGrpTb.m in Sources */,
 				7DB1584F1A42DD5600287BBE /* JRListResponse.m in Sources */,
@@ -3047,6 +3088,7 @@
 				7DB158871A42DD5600287BBE /* RowSelectorSegmentedControl.m in Sources */,
 				7DB2D6261A6F91B300004D6C /* RecentMgr.m in Sources */,
 				7D2E0FA01A830F250099AB04 /* JSQMessagesCollectionView.m in Sources */,
+				7DBD4ABD1AB2DAB1005C618A /* NSData+Conversion.m in Sources */,
 				7DFEE9A51A4CF924009967E8 /* UserConstants.m in Sources */,
 				7D08D02A1A8D92F200F4C8E7 /* ChatMessageRecorderViewController.m in Sources */,
 				7DFE24B11AA44C2900C5DD29 /* GroupChat.m in Sources */,
@@ -3224,7 +3266,7 @@
 				INFOPLIST_FILE = IM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "路腾丹丹";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -3253,7 +3295,7 @@
 				INFOPLIST_FILE = IM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "路腾丹丹";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

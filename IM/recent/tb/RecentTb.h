@@ -20,7 +20,7 @@
 
 - (BOOL) exsitMsgFrom:(NSString *)from msgtype:(UInt32) type;
 
-- (BOOL) exsitMsgFromOrTo:(NSString *)fromTo msgtype:(UInt32)type;
+- (BOOL) exsitMsgFromOrTo:(NSString *)fromTo msgtype:(UInt32)type ext:(NSString *)ext ;
 
 - (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type fromOrTo:(NSString *)fromOrTo;
 

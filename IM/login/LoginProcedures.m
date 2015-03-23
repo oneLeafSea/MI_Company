@@ -21,6 +21,7 @@
 #import "LoginNotification.h"
 #import "PresenceMsg.h"
 #import "GroupChat.h"
+#import "ApnsMgr.h"
 
 
 @interface LoginProcedures() <RequestDelegate>
@@ -171,6 +172,10 @@
                 
             }];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
+            [ApnsMgr registerWithIOSToken:@"e34f50d210d3b77bc43692791c605135d044696ee94184b4b309447c0f3728a6" uid:@"gzw" Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:@"http://127.0.0.1:8080/register" completion:^(BOOL finished) {
+                    DDLogInfo(@"%d", finished);
+                
+            }];
         }
             break;
         default:

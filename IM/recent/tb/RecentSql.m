@@ -34,7 +34,10 @@ NSString *kSQLRecentInsert = @"INSERT INTO `tb_recent` (`msgid`, `from`, `to`, `
 
 NSString *kSQLRecentExsitFrom = @"SELECT * FROM `tb_recent` WHERE `from` = ? AND `msgtype` = ?";
 
-NSString *kSQLRecentExsitFromOrTo = @"SELECT * FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND `msgtype` = ?";
+NSString *kSQLRecentExsitFromOrTo = @"SELECT * FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND `msgtype` = ?;";
+
+NSString *kSQLRecentExsitFromOrToWithExt = @"SELECT * FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND (`msgtype` = ?) AND (`ext` = ?);";
+
 
 NSString *kSQLRecentUpdateFromOrTo = @"UPDATE `tb_recent` SET "
                                         "`msgid` = ?,"
@@ -46,7 +49,7 @@ NSString *kSQLRecentUpdateFromOrTo = @"UPDATE `tb_recent` SET "
                                         "`badge` = ?,"
                                         "`ext` = ?"
                                         " WHERE "
-                                        "`from` = ? OR `to` = ?;";
+                                        "(`from` = ? OR `to` = ?) AND `ext` = ?;";
 
 NSString *kSQLRecentUpdateWithType = @"UPDATE `tb_recent` SET "
                                             "`msgid` = ?,"

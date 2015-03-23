@@ -18,6 +18,9 @@
 #import "KickNotification.h"
 #import <AVFoundation/AVFoundation.h>
 #import "Utils.h"
+#import "NSData+Conversion.h"
+#import "ApnsMgr.h"
+
 
 @interface AppDelegate () {
     FileTransferTask *m_fileTask;
@@ -45,9 +48,11 @@
         NSAssert(NO, @"Reachablitiy errror!");
     }
     self.relogin = [[Relogin alloc] init];
-//    NSString *fileName = @"otp_win64_17.3.exe";
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
+    [self setupApns];
+
+    
 //    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
 //    NSDictionary *options = @{
 //                              @"path":path,
@@ -172,6 +177,17 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *hex = [deviceToken hexadecimalString];
+    DDLogInfo(@"INFO: %@", hex);
+}
+
+- (void)application:(UIApplication *)application
+didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    DDLogInfo(@"INFO:%@", error);
+}
+
 - (void)initLogger {
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
@@ -184,6 +200,21 @@
         [Utils alertWithTip:@"账号已在别处登录。"];
     });
     
+}
+
+//- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+//    
+//}
+
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
+//    
+//}
+
+- (void)setupApns {
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    UIApplication *app = [UIApplication sharedApplication];
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
+    [app registerUserNotificationSettings:settings];
 }
 
 @end
