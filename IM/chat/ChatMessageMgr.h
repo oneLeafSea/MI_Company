@@ -75,4 +75,6 @@
 
 - (void)updateMsgWithId:(NSString *)msgId status:(ChatMessageStatus)status;
 
+- (ChatMessage *)getLastGrpChatMsgWithGid:(NSString *)gid;
+
 @end

@@ -35,6 +35,7 @@
                               url:(NSString *)url
                        completion:(void(^)(BOOL finished))completion;
 
+
 @property(readonly) GroupChatList *grpChatList;
 
 - (GroupChat *)getGrpChatByGid:(NSString *)gid;

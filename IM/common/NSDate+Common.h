@@ -20,5 +20,9 @@
 
 - (NSString *)formatWith:(NSString *)fmt;
 
++ (instancetype)dateWithFormater:(NSString *) formater stringTime:(NSString *)stringTime;
+
++ (NSString *) stringNow;
+
 
 @end

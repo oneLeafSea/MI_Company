@@ -16,12 +16,16 @@
 
 - (BOOL) updateWithMsgId:(NSString *)msgId status:(ChatMessageStatus) status;
 
+- (BOOL) updateWithMsgId:(NSString *)msgId time:(NSString *)time;
+
 - (BOOL) insertMessage:(ChatMessage *)msg;
 
 - (NSArray *) getMsgsWithId:(NSString *)uid
                     msgType:(ChatMessageType) type
                       limit:(UInt32) limit
                      offset:(UInt32) offset;
+
+- (ChatMessage *)getLastGrpChatMsgByGid:(NSString *)gid;
 
 
 @end

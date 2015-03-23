@@ -12,6 +12,9 @@
 #import "AppDelegate.h"
 #import "JSQVoiceMediaItem.h"
 #import "JSQFileMediaItem.h"
+#import "NSDate+Common.h"
+
+static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 
 @implementation ChatModel
 
@@ -49,9 +52,7 @@
         ChatMessage *msg = obj;
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
 //            JSQMessage *jsqMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] text:[msg.body objectForKey:@"content"]];
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *date = [dateFormat dateFromString:msg.time];
+            NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *jsqMsg = [[JSQMessage alloc] initWithSenderId:msg.from
                                                     senderDisplayName:[msg.body objectForKey:@"fromname"]
                                                                  date:date text:[msg.body objectForKey:@"content"]];
@@ -70,9 +71,7 @@
 //            JSQMessage *photoMessage = [JSQMessage messageWithSenderId:msg.from
 //                                                           displayName:[msg.body objectForKey:@"fromname"]
 //                                                                 media:photoItem];
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *date = [dateFormat dateFromString:msg.time];
+            NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *photoMessage = [[JSQMessage alloc] initWithSenderId:msg.from
                                                           senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:photoItem];
             [self.messages addObject:photoMessage];
@@ -87,10 +86,7 @@
             
             JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:isReady duration:duration outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
             
-//            JSQMessage *voiceMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:voiceItem];
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *date = [dateFormat dateFromString:msg.time];
+            NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *voiceMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:voiceItem];
             [self.messages addObject:voiceMsg];
         }
@@ -103,9 +99,7 @@
             NSString *fileName = [msg.body objectForKey:@"filename"];
             unsigned long long filesz = [sz integerValue];
             JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *date = [dateFormat dateFromString:msg.time];
+            NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
 //            JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
             JSQMessage *fileMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:fileItem];
             

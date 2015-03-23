@@ -151,7 +151,7 @@ static NSString *kChatMessageTypeNomal = @"0";
             chatCell.badgeText = nil;
         }
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSSS"];
         NSDate *date = [dateFormat dateFromString:item.time];
         NSString *relativeDate = [[JSQMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
         NSString *time = [[JSQMessagesTimestampFormatter sharedFormatter] timeForDate:date];

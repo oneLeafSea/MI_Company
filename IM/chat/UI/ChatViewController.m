@@ -318,7 +318,7 @@
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSSS"];
                 NSDate *date = [dateFormat dateFromString:msg.time];
                 NSString *text = [msg.body objectForKey:@"content"];
 //                if ([msg.from isEqualToString:self.talkingId]) {

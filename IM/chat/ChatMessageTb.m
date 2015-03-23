@@ -58,6 +58,17 @@
     return ret;
 }
 
+- (BOOL) updateWithMsgId:(NSString *)msgId time:(NSString *)time {
+    __block BOOL ret = YES;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLChatMessageUpdateTime, time, msgId];
+        if (!ret) {
+            *rollback = YES;
+        }
+    }];
+    return ret;
+}
+
 - (BOOL) insertMessage:(ChatMessage *)msg {
     __block BOOL ret = YES;
     NSString *body = [[NSString alloc] initWithData:[Utils jsonDataFromDict:msg.body] encoding:NSUTF8StringEncoding];
@@ -92,6 +103,32 @@
             NSNumber *status = [rs objectForColumnName:@"status"];
             msg.status = [status unsignedIntValue];
             [ret addObject:msg];
+        }
+        [rs close];
+    }];
+    return ret;
+}
+
+- (ChatMessage *)getLastGrpChatMsgByGid:(NSString *)gid {
+    __block ChatMessage *ret = nil;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *rs = [db executeQuery:kSQLChatMessageGetLastGrpChatMsg, gid];
+        if (rs.next) {
+            ChatMessage *msg = [[ChatMessage alloc] init];
+            msg.qid = [rs objectForColumnName:@"msgid"];
+            msg.from = [rs objectForColumnName:@"from"];
+            msg.to = [rs objectForColumnName:@"to"];
+            NSString *body = [rs objectForColumnName:@"body"];
+            NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
+            msg.body = [[NSMutableDictionary alloc] initWithDictionary:[Utils dictFromJsonData:bodyData] copyItems:YES];
+            msg.time = [rs objectForColumnName:@"time"];
+            NSNumber *type = [rs objectForColumnName:@"type"];
+            msg.chatMsgType = [type unsignedIntValue];
+            msg.fromRes = [rs objectForColumnName:@"fromRes"];
+            msg.toRes = [rs objectForColumnName:@"toRes"];
+            NSNumber *status = [rs objectForColumnName:@"status"];
+            msg.status = [status unsignedIntValue];
+            ret = msg;
         }
         [rs close];
     }];

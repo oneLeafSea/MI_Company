@@ -296,8 +296,11 @@
 - (void)handleIMMessageAck:(NSNotification *)notification {
     IMAck *ack = notification.object;
     if (ack.ackType == IM_MESSAGE) {
+        if ([m_msgTb updateWithMsgId:ack.msgid status:ack.error ? ChatMessageStatusSendError : ChatMessageStatusSent]) {
+            [m_msgTb updateWithMsgId:ack.msgid time:ack.time];
+        }
         [m_msgBox notifyMsgId:ack.msgid finished:ack.error ? NO : YES argument:nil];
-        [m_msgTb updateWithMsgId:ack.msgid status:ack.error ? ChatMessageStatusSendError : ChatMessageStatusSent];
+        
     }
 }
 
@@ -308,7 +311,7 @@
         if (![m_msgTb insertMessage:msg]) {
             msg.status = ChatMessageStatusRecved;
             DDLogError(@"ERROR: insert msg tbale error in receiving msg.");
-            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
         }
@@ -323,7 +326,7 @@
         }
         if (![m_msgTb insertMessage:msg]) {
             DDLogError(@"ERROR: insert image msg tbale error in receiving msg.");
-            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
         }
@@ -345,7 +348,7 @@
         msg.status = ChatMessageStatusRecving;
         if (![m_msgTb insertMessage:msg]) {
             DDLogError(@"ERROR: insert voice msg table.");
-            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+            IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
         }
@@ -368,7 +371,7 @@
         }
     }
     
-    IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type err:nil];
+    IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
     [m_session post:ack];
 }
 
@@ -376,6 +379,9 @@
     [m_msgTb updateWithMsgId:msgId status:status];
 }
 
+- (ChatMessage *)getLastGrpChatMsgWithGid:(NSString *)gid {
+    return [m_msgTb getLastGrpChatMsgByGid:gid];
+}
 
 
 @end

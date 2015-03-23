@@ -17,12 +17,16 @@ extern NSString *kIMAckNotification;
 
 - (instancetype)initWithData:(NSData *)data;
 
-- (instancetype)initWithMsgid:(NSString *)msgid ackType:(UInt32)type err:(NSString *)err;
+- (instancetype)initWithMsgid:(NSString *)msgid
+                      ackType:(UInt32)type
+                         time:(NSString *)time
+                          err:(NSString *)err;
 
 
 
 @property NSString *msgid;
 @property UInt32   ackType;
 @property(nonatomic) NSError *error;
+@property NSString *time;
 
 @end

@@ -34,6 +34,7 @@
 
 #import "RosterQid.h"
 #import "AppDelegate.h"
+#import "NSDate+Common.h"
 
 
 
@@ -755,7 +756,7 @@ NSComparisonResult sortGroupById(RosterGroup* group1, RosterGroup* group2, void 
     RosterItemAddRequest *req = (RosterItemAddRequest *)notification.object;
     req.status = RosterItemAddReqStatusRequesting;
     BOOL ret = [m_rosterAddTb insertReq:req];
-    IMAck *ack = [[IMAck alloc] initWithMsgid:req.qid ackType:req.type err:(ret ? nil :@"ERROR: insert roster req.")];
+    IMAck *ack = [[IMAck alloc] initWithMsgid:req.qid ackType:req.type time:[NSDate stringNow] err:(ret ? nil :@"ERROR: insert roster req.")];
     [m_session post:ack];
 //    [self acceptRosterItemWithMsgid:req.qid groupId:@"1" name:@"郭志伟" accept:YES];
 }

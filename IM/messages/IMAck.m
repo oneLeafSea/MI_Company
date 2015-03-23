@@ -9,6 +9,7 @@
 #import "IMAck.h"
 #import "LogLevel.h"
 #import "MessageConstants.h"
+#import "NSDate+Common.h"
 
 NSInteger kIMAckErrorCode = 40000;
 NSString *kIMAckNotification = @"cn.com.rooten.im.ack";
@@ -32,7 +33,10 @@ NSString *kIMAckNotification = @"cn.com.rooten.im.ack";
     return self;
 }
 
-- (instancetype)initWithMsgid:(NSString *)msgid ackType:(UInt32)type err:(NSString *)err {
+- (instancetype)initWithMsgid:(NSString *)msgid
+                      ackType:(UInt32)type
+                         time:(NSString *)time
+                          err:(NSString *)err; {
     if (self = [self init]) {
         if (msgid == nil) {
             return nil;
@@ -40,6 +44,7 @@ NSString *kIMAckNotification = @"cn.com.rooten.im.ack";
         self.msgid = [msgid copy];
         self.ackType = type;
         self.qid = self.msgid;
+        self.time = [[NSDate Now] formatWith:nil];
         if (err) {
             self.error = [[NSError alloc] initWithDomain:@"IM" code:kIMAckErrorCode userInfo:@{@"err":err}];
         }
@@ -64,6 +69,8 @@ NSString *kIMAckNotification = @"cn.com.rooten.im.ack";
     if (err != nil) {
         self.error = [[NSError alloc] initWithDomain:@"IM" code:kIMAckErrorCode userInfo:@{@"err":err}];
     }
+    
+    self.time = [dict objectForKey:@"time"];
     return YES;
 }
 
@@ -72,6 +79,7 @@ NSString *kIMAckNotification = @"cn.com.rooten.im.ack";
     NSDictionary *dict = @{
                            @"msgid" : self.qid,
                            @"type"  : type,
+                           @"time"  : self.time
                            };
     
     DDLogInfo(@"--> %@", dict);

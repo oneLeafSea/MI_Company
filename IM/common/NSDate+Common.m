@@ -16,12 +16,24 @@
 
 - (NSString *)formatWith:(NSString *)fmt {
     if (fmt == nil) {
-        fmt = @"yyyy-MM-dd HH:mm:ss";
+        fmt = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:fmt];
     NSString *dateStr = [dateFormatter stringFromDate:self];
     return dateStr;
+}
+
++ (instancetype)dateWithFormater:(NSString *) formater stringTime:(NSString *)stringTime {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:formater];
+    NSDate *date = [dateFormat dateFromString:stringTime];
+    return date;
+}
+
++ (NSString *) stringNow {
+    NSDate *now = [NSDate Now];
+    return [now formatWith:nil];
 }
 
 @end
