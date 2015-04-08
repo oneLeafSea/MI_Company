@@ -104,7 +104,14 @@
     
     if (![self setupDetailMgr]) {
         DDLogError(@"ERROR: setup detailMgr.");
+        return NO;
     }
+    
+    if (![self setupWebRtcMgr]) {
+        DDLogError(@"ERROR: setup webRtcMgr.");
+        return NO;
+    }
+    
     _fileTransfer = [[FileTransfer alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
@@ -193,6 +200,14 @@
     return YES;
 }
 
+- (BOOL)setupWebRtcMgr {
+    _webRtcMgr = [[WebRtcMgr alloc] initWithUid:self.uid];
+    if (!_webRtcMgr) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)reset {
     _session = nil;
     [self.rosterMgr reset];
@@ -231,6 +246,18 @@
 - (NSString *)avatarCheckUrl {
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_AVATAR_CHECK"];
+    return url;
+}
+
+- (NSString *)rssUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_RSS"];
+    return url;
+}
+
+- (NSString *)iceUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_ICE"];
     return url;
 }
 

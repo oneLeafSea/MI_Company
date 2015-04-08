@@ -495,6 +495,7 @@
 }
 
 - (void)videoChat {
+    [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -756,8 +757,6 @@
             [self.collectionView reloadData];
         }
     }];
-    
-    
     
 }
 

@@ -30,6 +30,7 @@
 #import "Utils.h"
 #import "PresenceMsg.h"
 #import "PresenceNotification.h"
+#import "WebRtcNotifyMsg.h"
 
 @interface MessageFactory()
 @end
@@ -115,6 +116,11 @@
         case IM_PRESENCE: {
             PresenceMsg *msg = [[PresenceMsg alloc] initWithData:data];
             [[NSNotificationCenter defaultCenter] postNotificationName:kPresenceNotification object:msg];
+        }
+            break;
+        case IM_VOICEVIDEO: {
+            WebRtcNotifyMsg *msg = [[WebRtcNotifyMsg alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kWebRtcNotifyMsgNotificaiton object:msg];
         }
             break;
         default:

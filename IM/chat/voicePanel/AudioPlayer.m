@@ -15,6 +15,7 @@
     NSTimer       *m_levelTimer;
     double        m_counter;
     void (^m_completion)(BOOL);
+    NSUInteger    m_numberOfLoops;
 }
 @end
 
@@ -25,6 +26,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharePlayer = [[self alloc] init];
+        sharePlayer->m_numberOfLoops = 1;
     });
     return sharePlayer;
 }
@@ -32,7 +34,9 @@
 - (BOOL)playWithPath:(NSString *)path {
     NSError *err = nil;
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    [[AVAudioSession sharedInstance] setCategory :AVAudioSessionCategoryAmbient error:nil];
+//    [[AVAudioSession sharedInstance] setCategory :AVAudioSessionCategoryAmbient error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
     m_player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&err];
     m_player.meteringEnabled = YES;
     m_player.delegate = self;
@@ -40,7 +44,17 @@
     m_timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(timeout) userInfo:nil repeats:YES];
     
     m_levelTimer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(levelTimeout) userInfo:nil repeats:YES];
-    return [m_player play];
+    
+    BOOL ret = NO;
+    if ([m_player prepareToPlay]) {
+        m_player.numberOfLoops = m_numberOfLoops;
+        ret = [m_player play];
+    }
+    return ret;
+}
+
+- (void)setNumberOfLoop:(NSUInteger)loops {
+    m_numberOfLoops = loops;
 }
 
 - (BOOL)playWithPath:(NSString *)path completion:(void(^)(BOOL finished))completion {

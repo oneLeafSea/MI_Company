@@ -20,6 +20,8 @@
 #import "Utils.h"
 #import "NSData+Conversion.h"
 #import "ApnsMgr.h"
+#import "RTCPeerConnectionFactory.h"
+//#import "WebRtcWebSocketChannel.h"
 
 
 @interface AppDelegate () {
@@ -35,10 +37,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [RTCPeerConnectionFactory initializeSSL];
     if ([IMConf isLAN]) {
         [IMConf setIPAndPort:@"10.22.1.47" port:8000];
     } else {
-        [IMConf setIPAndPort:@"218.4.226.210" port:48009];
+        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
     }
     
     [self initLogger];
@@ -52,103 +55,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
     [self setupApns];
 
-    
-//    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
-//    NSDictionary *options = @{
-//                              @"path":path,
-//                              @"token":@"token123123",
-//                              @"signature":@"signature12312123"
-//                              };
-//    m_fileTask = [[FileTransferTask alloc] initWithFileName:fileName
-//                                                  urlString:@"http://10.22.1.112:8040/file/download"
-//                                             checkUrlString:@"http://10.22.1.112:8040/file/check"
-//                                                   taskType:FileTransferTaskTypeDownload options:options];
-//    [m_fileTask start];
-    
-//    m_fileTransfer = [[FileTransfer alloc] init];
-//    __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", 0];
-//    NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
-//    NSDictionary *options = @{
-//                              @"path":path,
-//                              @"token":@"token123123",
-//                              @"signature":@"signature12312123"
-//                              };
-//    [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
-//        if (finished) {
-//            DDLogInfo(@"finished");
-//        } else {
-//            DDLogInfo(@"ERROR:%@", error);
-//        }
-//    }];
-    
-//    NSString *filepath = [[Utils documentPath] stringByAppendingPathComponent:@"test.amr"];
-//    NSData *data = [[NSData alloc] initWithContentsOfFile:filepath];
-//    NSError *err = nil;
-//    audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&err];
-//    if (err) {
-//        NSLog(@"%@", err);
-//    }
-//    [audioPlayer play];
-//    NSMutableDictionary * recordSetting = [[NSMutableDictionary alloc] init];
-//    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatAppleLossless] forKey:AVFormatIDKey];
-//    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-//    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-//    [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-//    [recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
-//    [recordSetting setValue:[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
-    
-//    NSString *tempDir = NSTemporaryDirectory();
-//    NSString *soundFilePath = [tempDir stringByAppendingPathComponent:@"sound.m4a"];
-//    
-//    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-//    NSDictionary *recordSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                    [NSNumber numberWithInt:kAudioFormatMPEG4AAC], AVFormatIDKey,
-//                                    [NSNumber numberWithInt:AVAudioQualityMin], AVEncoderAudioQualityKey,
-//                                    [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
-//                                    [NSNumber numberWithFloat:8000.0], AVSampleRateKey,
-//                                    nil];
-////    NSString *filepath = [[Utils documentPath] stringByAppendingPathComponent:@"test2.amr"];
-//    audioRecorder = [[AVAudioRecorder alloc] initWithURL:soundFileURL settings:recordSettings error:&err];
-//    if ([audioRecorder prepareToRecord]) {
-//        if ([audioRecorder record]) {
-//            timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
-//        
-//        }
-//    }
-    
-    
-//    for (int n = 0; n < 9; n++) {
-//        __block NSString *fileName = [NSString stringWithFormat:@"%d.exe", n];
-//        NSString *path = [[Utils documentPath] stringByAppendingPathComponent:fileName];
-//        NSDictionary *options = @{
-//                                  @"path":path,
-//                                  @"token":@"token123123",
-//                                  @"signature":@"signature12312123"
-//                                  };
-//        if (n%2 == 0) {
-//            [m_fileTransfer uploadFileName:fileName urlString:@"http://10.22.1.112:8040/file/upload" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
-//                if (finished) {
-//                    DDLogInfo(@"%@ upload!", fileName);
-//                } else {
-//                    DDLogInfo(@"%@ not upload!", fileName);
-//                }
-//                
-//            }];
-//        } else {
-//            [m_fileTransfer downloadFileName:fileName urlString:@"http://10.22.1.112:8040/file/download" checkUrlString:@"http://10.22.1.112:8040/file/check" options:options completion:^(BOOL finished, NSError *error) {
-//                if (finished) {
-//                    DDLogInfo(@"%@ upload!", fileName);
-//                } else {
-//                    DDLogInfo(@"%@ not upload!", fileName);
-//                }
-//                
-//            }];
-//        }
-//        
-//    }
+//    NSURL *url = [NSURL URLWithString:@"ws://10.22.1.153:8088/webrtc"];
+//    WebRtcWebSocketChannel *channel = [[WebRtcWebSocketChannel alloc] initWithUrl:url delegate:self];
+//    [channel connect];
     
     return YES;
 }
+
+//- (void)channel:(WebRtcWebSocketChannel *)channel
+// didChangeState:(WebRtcWebSocketChannelState)state {
+//    NSLog(@"%d", state);
+//}
+//
+//- (void)channel:(WebRtcWebSocketChannel *)channel
+//didReceiveMessage:(WebRtcSignalingMessage *)message {
+//    
+//}
 
 - (void)timeout {
 //    [audioRecorder stop];
@@ -175,6 +97,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [RTCPeerConnectionFactory deinitializeSSL];
 }
 
 - (void)application:(UIApplication *)application
@@ -190,6 +113,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 
 - (void)initLogger {
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+//    setenv("XcodeColors", "YES", 0);
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     UIColor *green = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:LOG_FLAG_INFO];

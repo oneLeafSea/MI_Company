@@ -57,7 +57,11 @@
 		7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D945E1A4B96C600B6588D /* RosterGroup.m */; };
 		7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D94991A4BDFBD00B6588D /* RosterConstants.m */; };
 		7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D949F1A4BE05D00B6588D /* RosterSql.m */; };
+		7D119B331AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D119B2E1AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m */; };
+		7D119B341AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D119B301AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m */; };
+		7D119B351AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D119B321AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m */; };
 		7D13CB631A78BCDA00FB14B8 /* MineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */; };
+		7D13DDCD1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D13DDCB1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m */; };
 		7D18B6751A81B91100D2B7CB /* ChatMessageMorePanelItemMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D18B6741A81B91100D2B7CB /* ChatMessageMorePanelItemMode.m */; };
 		7D18B6781A81BF1800D2B7CB /* ChatMessageMorePanelPageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D18B6771A81BF1800D2B7CB /* ChatMessageMorePanelPageCollectionViewController.m */; };
 		7D1C60101AA6AAE00035A2D2 /* OsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C600F1AA6AAE00035A2D2 /* OsMgr.m */; };
@@ -72,6 +76,8 @@
 		7D1C602F1AA6E7F30035A2D2 /* OsItemsVerTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C602E1AA6E7F30035A2D2 /* OsItemsVerTb.m */; };
 		7D244C0E1AAD3C4C0090AA9A /* PwdMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */; };
 		7D244C111AAD41EB0090AA9A /* PwdChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C101AAD41EA0090AA9A /* PwdChangeTableViewController.m */; };
+		7D268BFD1ABFE53A0090AD49 /* FcRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */; };
+		7D268C001ABFF4E50090AD49 /* FcImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */; };
 		7D2893CD1A8093EF0050FF26 /* ChatViewMorePanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2893CC1A8093EF0050FF26 /* ChatViewMorePanelView.m */; };
 		7D2893D11A80942C0050FF26 /* ChatViewMorePanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D2893D01A80942C0050FF26 /* ChatViewMorePanelView.xib */; };
 		7D2930891A4D209D003A7004 /* IMConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930881A4D209D003A7004 /* IMConf.m */; };
@@ -119,7 +125,6 @@
 		7D2E0FAE1A830F250099AB04 /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E0F7A1A830F250099AB04 /* JSQMessagesTypingIndicatorFooterView.m */; };
 		7D2E0FAF1A830F250099AB04 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E0F7B1A830F250099AB04 /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		7D2E0FB01A830F250099AB04 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E0F7C1A830F250099AB04 /* LICENSE */; };
-		7D2E0FB11A830F250099AB04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E0F7D1A830F250099AB04 /* README.md */; };
 		7D2E0FB21A830F250099AB04 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E0F821A830F250099AB04 /* JSQSystemSoundPlayer.m */; };
 		7D2E0FB31A830F250099AB04 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E0F831A830F250099AB04 /* LICENSE */; };
 		7D2E0FB41A830F250099AB04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E0F841A830F250099AB04 /* README.md */; };
@@ -129,6 +134,11 @@
 		7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302CFD1A778646004C6BD5 /* ReloginTipView.m */; };
 		7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */; };
 		7D302D031A778E14004C6BD5 /* KickNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302D021A778E14004C6BD5 /* KickNotification.m */; };
+		7D31B09B1ACB8526004D7158 /* WebRtcCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */; };
+		7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */; };
+		7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D111AC555F1008B5A8C /* NSData+WebRtcB64Additions.m */; };
+		7D433D171AC555F1008B5A8C /* webrtcbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D121AC555F1008B5A8C /* webrtcbase64.c */; };
+		7D433D1E1AC560CF008B5A8C /* WebrtcSRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D1D1AC560CF008B5A8C /* WebrtcSRWebSocket.m */; };
 		7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C4981A6798A6004365D7 /* ChatViewController.m */; };
 		7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C49C1A6798EB004365D7 /* ChatModel.m */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
@@ -153,7 +163,17 @@
 		7D7FCDEF1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDEE1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib */; };
 		7D7FCDF21AA84FEE0023EF49 /* OsNavigationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDF11AA84FEE0023EF49 /* OsNavigationTableViewCell.m */; };
 		7D7FCDF41AA850010023EF49 /* OsNavigationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDF31AA850010023EF49 /* OsNavigationTableViewCell.xib */; };
+		7D81DD871AC25B53000A7EDD /* WebRtcClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD861AC25B53000A7EDD /* WebRtcClient.m */; };
+		7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD891AC25D12000A7EDD /* WebRtcWebSocketChannel.m */; };
+		7D81DD8D1AC25DC3000A7EDD /* WebRtcAckMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD8C1AC25DC3000A7EDD /* WebRtcAckMessage.m */; };
+		7D81DD8F1AC272E9000A7EDD /* WebRtcSocketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */; };
 		7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */; };
+		7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */; };
+		7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC11ACA39D2001D67D7 /* call.aif */; };
+		7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC01ACA39C9001D67D7 /* answer.aif */; };
+		7DAB70BF1AC161B5000E81D2 /* WebRtcSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAB70BE1AC161B5000E81D2 /* WebRtcSignalingMessage.m */; };
+		7DB04C9C1AC39DB60097A106 /* WebRtcNotifyMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB04C9B1AC39DB60097A106 /* WebRtcNotifyMsg.m */; };
+		7DB04C9F1AC3A53E0097A106 /* WebRtcMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB04C9E1AC3A53E0097A106 /* WebRtcMgr.m */; };
 		7DB06F491A71E23900DD1943 /* RosterItemAddReqModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */; };
 		7DB06F4C1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F4B1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m */; };
 		7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F4E1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m */; };
@@ -492,8 +512,16 @@
 		7D0D94991A4BDFBD00B6588D /* RosterConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterConstants.m; sourceTree = "<group>"; };
 		7D0D949E1A4BE05D00B6588D /* RosterSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSql.h; sourceTree = "<group>"; };
 		7D0D949F1A4BE05D00B6588D /* RosterSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSql.m; sourceTree = "<group>"; };
+		7D119B2D1AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+WebRtcUtilites.h"; sourceTree = "<group>"; };
+		7D119B2E1AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+WebRtcUtilites.m"; sourceTree = "<group>"; };
+		7D119B2F1AC23EB500AC6CAB /* RTCICECandidate+WRJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCICECandidate+WRJSON.h"; sourceTree = "<group>"; };
+		7D119B301AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCICECandidate+WRJSON.m"; sourceTree = "<group>"; };
+		7D119B311AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCSessionDescription+WRJSON.h"; sourceTree = "<group>"; };
+		7D119B321AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCSessionDescription+WRJSON.m"; sourceTree = "<group>"; };
 		7D13CB611A78BCDA00FB14B8 /* MineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableViewController.h; sourceTree = "<group>"; };
 		7D13CB621A78BCDA00FB14B8 /* MineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableViewController.m; sourceTree = "<group>"; };
+		7D13DDCA1AC91387000E3C03 /* WebRtcRecvViewChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcRecvViewChatViewController.h; sourceTree = "<group>"; };
+		7D13DDCB1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcRecvViewChatViewController.m; sourceTree = "<group>"; };
 		7D18B6731A81B91100D2B7CB /* ChatMessageMorePanelItemMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageMorePanelItemMode.h; sourceTree = "<group>"; };
 		7D18B6741A81B91100D2B7CB /* ChatMessageMorePanelItemMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageMorePanelItemMode.m; sourceTree = "<group>"; };
 		7D18B6761A81BF1800D2B7CB /* ChatMessageMorePanelPageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageMorePanelPageCollectionViewController.h; sourceTree = "<group>"; };
@@ -522,6 +550,10 @@
 		7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdMgr.m; sourceTree = "<group>"; };
 		7D244C0F1AAD41EA0090AA9A /* PwdChangeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdChangeTableViewController.h; sourceTree = "<group>"; };
 		7D244C101AAD41EA0090AA9A /* PwdChangeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdChangeTableViewController.m; sourceTree = "<group>"; };
+		7D268BFB1ABFE53A0090AD49 /* FcRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FcRichTextView.h; sourceTree = "<group>"; };
+		7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FcRichTextView.m; sourceTree = "<group>"; };
+		7D268BFE1ABFF4E50090AD49 /* FcImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FcImageViewer.h; sourceTree = "<group>"; };
+		7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FcImageViewer.m; sourceTree = "<group>"; };
 		7D2893CB1A8093EF0050FF26 /* ChatViewMorePanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewMorePanelView.h; sourceTree = "<group>"; };
 		7D2893CC1A8093EF0050FF26 /* ChatViewMorePanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewMorePanelView.m; sourceTree = "<group>"; };
 		7D2893D01A80942C0050FF26 /* ChatViewMorePanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewMorePanelView.xib; sourceTree = "<group>"; };
@@ -643,6 +675,16 @@
 		7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReloginTipView.xib; sourceTree = "<group>"; };
 		7D302D011A778E14004C6BD5 /* KickNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KickNotification.h; sourceTree = "<group>"; };
 		7D302D021A778E14004C6BD5 /* KickNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KickNotification.m; sourceTree = "<group>"; };
+		7D31B0991ACB8526004D7158 /* WebRtcCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcCallViewController.h; sourceTree = "<group>"; };
+		7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcCallViewController.m; sourceTree = "<group>"; };
+		7D433C6F1AC4F2F1008B5A8C /* WebRtcVideoChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcVideoChatViewController.h; sourceTree = "<group>"; };
+		7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcVideoChatViewController.m; sourceTree = "<group>"; };
+		7D433D101AC555F1008B5A8C /* NSData+WebRtcB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+WebRtcB64Additions.h"; sourceTree = "<group>"; };
+		7D433D111AC555F1008B5A8C /* NSData+WebRtcB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+WebRtcB64Additions.m"; sourceTree = "<group>"; };
+		7D433D121AC555F1008B5A8C /* webrtcbase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = webrtcbase64.c; sourceTree = "<group>"; };
+		7D433D131AC555F1008B5A8C /* webrtcbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webrtcbase64.h; sourceTree = "<group>"; };
+		7D433D1C1AC560CF008B5A8C /* WebrtcSRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebrtcSRWebSocket.h; sourceTree = "<group>"; };
+		7D433D1D1AC560CF008B5A8C /* WebrtcSRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebrtcSRWebSocket.m; sourceTree = "<group>"; };
 		7D44C4971A6798A6004365D7 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		7D44C4981A6798A6004365D7 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		7D44C49B1A6798EB004365D7 /* ChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
@@ -684,10 +726,27 @@
 		7D7FCDF01AA84FEE0023EF49 /* OsNavigationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsNavigationTableViewCell.h; sourceTree = "<group>"; };
 		7D7FCDF11AA84FEE0023EF49 /* OsNavigationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsNavigationTableViewCell.m; sourceTree = "<group>"; };
 		7D7FCDF31AA850010023EF49 /* OsNavigationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OsNavigationTableViewCell.xib; sourceTree = "<group>"; };
+		7D81DD851AC25B53000A7EDD /* WebRtcClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcClient.h; sourceTree = "<group>"; };
+		7D81DD861AC25B53000A7EDD /* WebRtcClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcClient.m; sourceTree = "<group>"; };
+		7D81DD881AC25D12000A7EDD /* WebRtcWebSocketChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcWebSocketChannel.h; sourceTree = "<group>"; };
+		7D81DD891AC25D12000A7EDD /* WebRtcWebSocketChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcWebSocketChannel.m; sourceTree = "<group>"; };
+		7D81DD8B1AC25DC3000A7EDD /* WebRtcAckMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcAckMessage.h; sourceTree = "<group>"; };
+		7D81DD8C1AC25DC3000A7EDD /* WebRtcAckMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcAckMessage.m; sourceTree = "<group>"; };
+		7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcSocketTest.m; sourceTree = "<group>"; };
 		7D87DAD01AB6976600AD57C6 /* ApnsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApnsMgr.h; sourceTree = "<group>"; };
 		7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApnsMgr.m; sourceTree = "<group>"; };
+		7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
+		7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
+		7DA8DEC01ACA39C9001D67D7 /* answer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.aif; sourceTree = "<group>"; };
+		7DA8DEC11ACA39D2001D67D7 /* call.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = call.aif; sourceTree = "<group>"; };
+		7DAB70BD1AC161B5000E81D2 /* WebRtcSignalingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcSignalingMessage.h; sourceTree = "<group>"; };
+		7DAB70BE1AC161B5000E81D2 /* WebRtcSignalingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcSignalingMessage.m; sourceTree = "<group>"; };
 		7DABB7121A496A7F002D5675 /* 消息.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "消息.md"; sourceTree = "<group>"; };
 		7DABB7131A496A7F002D5675 /* 管理名册.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "管理名册.md"; sourceTree = "<group>"; };
+		7DB04C9A1AC39DB60097A106 /* WebRtcNotifyMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcNotifyMsg.h; sourceTree = "<group>"; };
+		7DB04C9B1AC39DB60097A106 /* WebRtcNotifyMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcNotifyMsg.m; sourceTree = "<group>"; };
+		7DB04C9D1AC3A53E0097A106 /* WebRtcMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcMgr.h; sourceTree = "<group>"; };
+		7DB04C9E1AC3A53E0097A106 /* WebRtcMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcMgr.m; sourceTree = "<group>"; };
 		7DB06F471A71E23900DD1943 /* RosterItemAddReqModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqModel.h; sourceTree = "<group>"; };
 		7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddReqModel.m; sourceTree = "<group>"; };
 		7DB06F4A1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqTableViewCell.h; sourceTree = "<group>"; };
@@ -1371,6 +1430,49 @@
 			path = pwd;
 			sourceTree = "<group>";
 		};
+		7D268BFA1ABFE4EB0090AD49 /* friendcircle */ = {
+			isa = PBXGroup;
+			children = (
+				7D268BFB1ABFE53A0090AD49 /* FcRichTextView.h */,
+				7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */,
+				7D268BFE1ABFF4E50090AD49 /* FcImageViewer.h */,
+				7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */,
+			);
+			path = friendcircle;
+			sourceTree = "<group>";
+		};
+		7D268C011AC00DFD0090AD49 /* webrtc */ = {
+			isa = PBXGroup;
+			children = (
+				7D433D1C1AC560CF008B5A8C /* WebrtcSRWebSocket.h */,
+				7D433D1D1AC560CF008B5A8C /* WebrtcSRWebSocket.m */,
+				7D433D101AC555F1008B5A8C /* NSData+WebRtcB64Additions.h */,
+				7D433D111AC555F1008B5A8C /* NSData+WebRtcB64Additions.m */,
+				7D433D121AC555F1008B5A8C /* webrtcbase64.c */,
+				7D433D131AC555F1008B5A8C /* webrtcbase64.h */,
+				7D433C6E1AC4F2B3008B5A8C /* UI */,
+				7D119B2D1AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.h */,
+				7D119B2E1AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m */,
+				7D119B2F1AC23EB500AC6CAB /* RTCICECandidate+WRJSON.h */,
+				7D119B301AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m */,
+				7D119B311AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.h */,
+				7D119B321AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m */,
+				7DAB70BD1AC161B5000E81D2 /* WebRtcSignalingMessage.h */,
+				7DAB70BE1AC161B5000E81D2 /* WebRtcSignalingMessage.m */,
+				7D81DD851AC25B53000A7EDD /* WebRtcClient.h */,
+				7D81DD861AC25B53000A7EDD /* WebRtcClient.m */,
+				7D81DD881AC25D12000A7EDD /* WebRtcWebSocketChannel.h */,
+				7D81DD891AC25D12000A7EDD /* WebRtcWebSocketChannel.m */,
+				7D81DD8B1AC25DC3000A7EDD /* WebRtcAckMessage.h */,
+				7D81DD8C1AC25DC3000A7EDD /* WebRtcAckMessage.m */,
+				7DB04C9A1AC39DB60097A106 /* WebRtcNotifyMsg.h */,
+				7DB04C9B1AC39DB60097A106 /* WebRtcNotifyMsg.m */,
+				7DB04C9D1AC3A53E0097A106 /* WebRtcMgr.h */,
+				7DB04C9E1AC3A53E0097A106 /* WebRtcMgr.m */,
+			);
+			path = webrtc;
+			sourceTree = "<group>";
+		};
 		7D2E0F0D1A830F250099AB04 /* jsq */ = {
 			isa = PBXGroup;
 			children = (
@@ -1589,6 +1691,19 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		7D433C6E1AC4F2B3008B5A8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7D433C6F1AC4F2F1008B5A8C /* WebRtcVideoChatViewController.h */,
+				7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */,
+				7D13DDCA1AC91387000E3C03 /* WebRtcRecvViewChatViewController.h */,
+				7D13DDCB1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m */,
+				7D31B0991ACB8526004D7158 /* WebRtcCallViewController.h */,
+				7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		7D44C4961A67987E004365D7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1688,10 +1803,14 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D268C011AC00DFD0090AD49 /* webrtc */,
+				7D268BFA1ABFE4EB0090AD49 /* friendcircle */,
 				7D0C8D281ABBEA490004F97A /* profile */,
 				7D87DACF1AB6975000AD57C6 /* apns */,
 				7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */,
+				7DA8DEC01ACA39C9001D67D7 /* answer.aif */,
 				7D7EB5F81AB66D4100A95FC7 /* system.aiff */,
+				7DA8DEC11ACA39D2001D67D7 /* call.aif */,
 				7D244C0B1AAD3C360090AA9A /* pwd */,
 				7DEA70631AA983A6002C2C68 /* detail */,
 				7D1C600D1AA6A4400035A2D2 /* os */,
@@ -1745,6 +1864,7 @@
 				7DB156D61A42DC0C00287BBE /* IMTests.m */,
 				7DFEE9A61A4CFA38009967E8 /* UserTests.m */,
 				7DB156D41A42DC0C00287BBE /* Supporting Files */,
+				7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */,
 			);
 			path = IMTests;
 			sourceTree = "<group>";
@@ -1781,6 +1901,8 @@
 				7D2E10011A83948F0099AB04 /* UIImage+Common.m */,
 				7DBD4ABB1AB2DAB1005C618A /* NSData+Conversion.h */,
 				7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */,
+				7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */,
+				7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2674,6 +2796,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */,
+				7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */,
 				7DB3FCF11A6E4F3500BFA0E7 /* RosterGrpMgrHeadView.xib in Resources */,
 				7D6FD7141A85EC73001BA1F1 /* ChatMessageVoicePanel.xib in Resources */,
 				7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */,
@@ -2777,14 +2901,16 @@
 				7D005D7E1A91FF9A006CB54C /* JSQFileMediaOutgoingView.m in Sources */,
 				7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */,
 				7DB158991A42DD5600287BBE /* MainModel.m in Sources */,
+				7D31B09B1ACB8526004D7158 /* WebRtcCallViewController.m in Sources */,
 				7D2E0F8E1A830F250099AB04 /* JSQMessagesViewController.m in Sources */,
 				7DB1586C1A42DD5600287BBE /* RowAccount.m in Sources */,
 				7DB2D6301A6FD10300004D6C /* MainViewController.m in Sources */,
 				7D07BB8A1AA54B4200E78877 /* GroupChatItem.m in Sources */,
 				7DB158851A42DD5600287BBE /* RowSelectorPopover.m in Sources */,
 				7DB1587F1A42DD5600287BBE /* RowPhone.m in Sources */,
-				7D2E0FB11A830F250099AB04 /* README.md in Sources */,
+				7DB04C9C1AC39DB60097A106 /* WebRtcNotifyMsg.m in Sources */,
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
+				7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */,
 				7D07BB971AA59C6500E78877 /* GroupChatSettingTableViewController.m in Sources */,
 				7DB158C31A42DD5600287BBE /* XLFormSelectorCell.m in Sources */,
 				7D1C602C1AA6E7E50035A2D2 /* OsItemsTb.m in Sources */,
@@ -2814,6 +2940,8 @@
 				7DB158631A42DD5600287BBE /* Module.m in Sources */,
 				7DFA2A4A1A90469400BD8F3C /* JSQVoiceMediaOutgoingView.m in Sources */,
 				7D08D0311A8D92F200F4C8E7 /* ChatMessageVolumePanelView.m in Sources */,
+				7D433D171AC555F1008B5A8C /* webrtcbase64.c in Sources */,
+				7D81DD8D1AC25DC3000A7EDD /* WebRtcAckMessage.m in Sources */,
 				7D13CB631A78BCDA00FB14B8 /* MineTableViewController.m in Sources */,
 				7D2E0F9D1A830F250099AB04 /* JSQPhotoMediaItem.m in Sources */,
 				7D2E0F981A830F250099AB04 /* JSQLocationMediaItem.m in Sources */,
@@ -2839,8 +2967,10 @@
 				7DB158D71A42DD5600287BBE /* XLFormValidator.m in Sources */,
 				7DB1584D1A42DD5600287BBE /* JRBinResponse.m in Sources */,
 				7DB2D6191A6F6FFC00004D6C /* RecentViewModle.m in Sources */,
+				7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */,
 				7D1C60191AA6C1350035A2D2 /* OsNotification.m in Sources */,
 				7DB158AB1A42DD5600287BBE /* Request.m in Sources */,
+				7DAB70BF1AC161B5000E81D2 /* WebRtcSignalingMessage.m in Sources */,
 				7D7FCDED1AA84DFB0023EF49 /* OsNavigationSelOrgCollectionCell.m in Sources */,
 				7DB158C71A42DD5600287BBE /* XLFormTextFieldCell.m in Sources */,
 				7DB158781A42DD5600287BBE /* RowInfo.m in Sources */,
@@ -2851,11 +2981,14 @@
 				7DB158761A42DD5600287BBE /* RowEmail.m in Sources */,
 				7DEA706F1AA99F7B002C2C68 /* MineSettingTableViewController.m in Sources */,
 				7D2E0F8D1A830F250099AB04 /* JSQMessagesKeyboardController.m in Sources */,
+				7D119B331AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m in Sources */,
 				7DB158471A42DD5600287BBE /* DictsDownloader.m in Sources */,
 				7DB25CA31A76128C00BEDA14 /* LoginProcedures.m in Sources */,
 				7DB158C61A42DD5600287BBE /* XLFormSwitchCell.m in Sources */,
 				7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */,
+				7D81DD871AC25B53000A7EDD /* WebRtcClient.m in Sources */,
 				7DB158861A42DD5600287BBE /* RowSelectorPush.m in Sources */,
+				7D268BFD1ABFE53A0090AD49 /* FcRichTextView.m in Sources */,
 				7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */,
 				7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */,
 				7D2E0F8A1A830F250099AB04 /* UIDevice+JSQMessages.m in Sources */,
@@ -2895,11 +3028,13 @@
 				7DFE727E1AA8284100B9F674 /* OsModel.m in Sources */,
 				7D1C60101AA6AAE00035A2D2 /* OsMgr.m in Sources */,
 				7DB158B41A42DD5600287BBE /* MainCVC.m in Sources */,
+				7D119B351AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m in Sources */,
 				7DB158D51A42DD5600287BBE /* XLFormRegexValidator.m in Sources */,
 				7DB092751A66137E005268A7 /* ChatMessageMgr.m in Sources */,
 				7DB1584B1A42DD5600287BBE /* DictsVersionSync.m in Sources */,
 				7DFA2A4F1A9049F600BD8F3C /* JSQVoiceMediaIncomingView.m in Sources */,
 				7DB158B21A42DD5600287BBE /* SwipeButtonBarViewCell.m in Sources */,
+				7D268C001ABFF4E50090AD49 /* FcImageViewer.m in Sources */,
 				7D2E0F9F1A830F250099AB04 /* JSQMessagesCellTextView.m in Sources */,
 				7DEA70621AA94335002C2C68 /* OsOrgItemTableViewCell.m in Sources */,
 				7DFE24971A95D04900C5DD29 /* PresenceMgr.m in Sources */,
@@ -2932,9 +3067,12 @@
 				7DB158641A42DD5600287BBE /* ModuleDefault.m in Sources */,
 				7DB158B61A42DD5600287BBE /* WaitingViewController.m in Sources */,
 				7D005D331A91825D006CB54C /* FileUploader.m in Sources */,
+				7D119B341AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m in Sources */,
+				7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */,
 				7DB158731A42DD5600287BBE /* RowDatetime.m in Sources */,
 				7DB1585D1A42DD5600287BBE /* LoginResp.m in Sources */,
 				7DB669421A5F63EF00843C72 /* RosterViewController.m in Sources */,
+				7DB04C9F1AC3A53E0097A106 /* WebRtcMgr.m in Sources */,
 				7DB251B01A637D00007FC8D4 /* RosterItemAddTableViewController.m in Sources */,
 				7DB1585C1A42DD5600287BBE /* LoginRequest.m in Sources */,
 				7D2E0FA81A830F250099AB04 /* JSQMessagesLabel.m in Sources */,
@@ -2946,6 +3084,7 @@
 				7DFE249D1A95D79100C5DD29 /* PresenceMsg.m in Sources */,
 				7DFE24B41AA450B000C5DD29 /* GroupChatList.m in Sources */,
 				7DB158571A42DD5600287BBE /* JRTextResponse.m in Sources */,
+				7D433D1E1AC560CF008B5A8C /* WebrtcSRWebSocket.m in Sources */,
 				7DB158401A42DD5600287BBE /* NSUUID+StringUUID.m in Sources */,
 				7DB1587B1A42DD5600287BBE /* RowMultipleSelectorPopover.m in Sources */,
 				7DB158CD1A42DD5600287BBE /* XLFormRowDescriptor.m in Sources */,
@@ -3035,10 +3174,12 @@
 				7DB158701A42DD5600287BBE /* RowDate.m in Sources */,
 				7DB31BF61A6CC04B0051E6CD /* RosterGrpVerTb.m in Sources */,
 				7DB158A01A42DD5600287BBE /* Hb.m in Sources */,
+				7D13DDCD1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m in Sources */,
 				7DB53ACC1A64AC260043DA2E /* RosterItemSendReqMsgTableViewController.m in Sources */,
 				7DEA706C1AA99025002C2C68 /* Detail.m in Sources */,
 				7DB158751A42DD5600287BBE /* RowDecimal.m in Sources */,
 				7DB158A91A42DD5600287BBE /* Pkg.m in Sources */,
+				7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */,
 				7DB158AD1A42DD5600287BBE /* ServerTimeMsg.m in Sources */,
 				7DB158C51A42DD5600287BBE /* XLFormStepCounterCell.m in Sources */,
 				7DFF639D1A92D39A0001F0A4 /* JSQFileMediaItem.m in Sources */,
@@ -3107,6 +3248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */,
+				7D81DD8F1AC272E9000A7EDD /* WebRtcSocketTest.m in Sources */,
 				7DB156D71A42DC0C00287BBE /* IMTests.m in Sources */,
 				7DFEE9A71A4CFA38009967E8 /* UserTests.m in Sources */,
 			);

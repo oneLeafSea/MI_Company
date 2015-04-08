@@ -68,7 +68,7 @@
         [IMConf setLAN:YES];
         
     } else {
-        [IMConf setIPAndPort:@"218.4.226.210" port:48009];
+        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
         [IMConf setLAN:NO];
     }
 }
@@ -107,7 +107,8 @@
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"mainController"];
         [UIView beginAnimations:nil context:NULL];
-        [self presentViewController:mainController animated:YES completion:nil];
+        APP_DELEGATE.window.rootViewController = mainController;
+//        [self presentViewController:mainController animated:YES completion:nil];
         
         [UIView setAnimationDuration:0.8];
         [UIView setAnimationBeginsFromCurrentState:YES];

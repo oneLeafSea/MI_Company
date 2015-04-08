@@ -19,6 +19,7 @@
 - (BOOL)playWithPath:(NSString *)path completion:(void(^)(BOOL finished))completion;
 
 - (void)stop;
+- (void)setNumberOfLoop:(NSUInteger)loops;
 
 @property(weak) id<AudioPlayerDelegate> delegate;
 

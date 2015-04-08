@@ -19,6 +19,7 @@
 #import "GroupChatMgr.h"
 #import "OsMgr.h"
 #import "DetailMgr.h"
+#import "WebRtcMgr.h"
 
 
 @interface User : NSObject
@@ -40,6 +41,7 @@
 @property(readonly) GroupChatMgr    *groupChatMgr;
 @property(readonly) OsMgr           *osMgr;
 @property(readonly) DetailMgr       *detailMgr;
+@property(readonly) WebRtcMgr       *webRtcMgr;
 
 @property(readonly) NSDictionary    *cfg;
 
@@ -57,6 +59,8 @@
 @property(readonly) NSString *fileCheckUrl;
 @property(readonly) NSString *avatarUrl;
 @property(readonly) NSString *avatarCheckUrl;
+@property(readonly) NSString *rssUrl;
+@property(readonly) NSString *iceUrl;
 
 @property(readonly) NSString *filePath;
 @property(readonly) NSString *userPath;
