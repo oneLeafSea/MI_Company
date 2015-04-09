@@ -59,6 +59,9 @@
 - (void)handleWebRtcNotification:(NSNotification *)notification {
     __block NSString *webrtcUrl = USER.rssUrl;
     __block WebRtcNotifyMsg *msg = notification.object;
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"]) {
+        return;
+    }
     if (m_busy) {
         WebRtcNotifyMsg *ack = [[WebRtcNotifyMsg alloc] initWithFrom:_uid to:msg.from rid:msg.rid];
         ack.contentType = @"busy";

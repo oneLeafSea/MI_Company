@@ -29,6 +29,7 @@
         [_pingTimer invalidate];
         _pingTimer = nil;
     }
+    _socket.delegate = nil;
 }
 
 - (instancetype)initWithUrl:(NSURL *)url
@@ -96,16 +97,22 @@
         return;
     }
     [_delegate channel:self didReceiveMessage:m];
+    if ([m isKindOfClass:[WebRtcSeqMessage class]]) {
+        if (_connectCallback) {
+            _connectCallback(YES);
+            _connectCallback = nil;
+        }
+    }
     DDLogInfo(@"@%s, INFO: %@", __PRETTY_FUNCTION__, messageString);
 }
 
 - (void)webSocketDidOpen:(WebrtcSRWebSocket *)webSocket {
      self.state = kWebRtcWebSocketChannelStateOpen;
     _pingTimer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(ping) userInfo:nil repeats:YES];
-    if (_connectCallback) {
-        _connectCallback(YES);
-        _connectCallback = nil;
-    }
+//    if (_connectCallback) {
+//        _connectCallback(YES);
+//        _connectCallback = nil;
+//    }
 }
 
 - (void)ping {

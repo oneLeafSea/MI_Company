@@ -102,7 +102,7 @@
               audioPath:(NSString *)audioPath
              completion:(void (^)(BOOL finished, id arguments))completion {
     
-    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath}  completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv}  completion:^(BOOL finished, NSError *error) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -136,7 +136,7 @@
                              msgType:(ChatMessageType)msgType
                                   to:(NSString *)to
                           completion:(void (^)(BOOL finished, id argument))completion {
-    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -217,7 +217,7 @@
         return;
     }
     
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (!finished) {
             cpt(NO, error);
         } else {
@@ -254,7 +254,7 @@
                            msgType:(ChatMessageType)msgType
                                 to:(NSString *)to
                         completion:(void (^)(BOOL finished, id argument))cpt {
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (!finished) {
             cpt(NO, error);
         } else {
@@ -333,7 +333,7 @@
             return;
         }
         __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuidName];
-        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath} completion:^(BOOL finished, NSError *error) {
+        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
             if (!finished) {
                 DDLogError(@"ERROR: download image file error %@", error);
             } else {

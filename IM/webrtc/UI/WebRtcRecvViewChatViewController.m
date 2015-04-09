@@ -141,7 +141,7 @@
     self.topView.hidden = NO;
     self.bottomView.hidden = NO;
     m_timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
-    _client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl iceUrl:USER.iceUrl uid:_uid invited:YES];
+    _client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:_uid invited:YES];
     [self.client joinRoomId:self.rid completion:^(BOOL finished) {
         if (!finished) {
             [Utils alertWithTip:@"对方已经取消。"];
@@ -150,8 +150,6 @@
                 [USER.webRtcMgr setbusy:NO];
             }];
 
-        } else {
-            
         }
     }];
     

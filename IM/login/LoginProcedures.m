@@ -135,6 +135,7 @@
                         [USER.detailMgr getDetailWithUid:USER.uid Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished, Detail *d) {
                             if (finished) {
                                 USER.mineDetail = d;
+                                USER.signature = [USER.rosterMgr signature];
                             } else {
                                 DDLogError(@"ERROR: get detail info.");
                             }

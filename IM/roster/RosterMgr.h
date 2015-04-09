@@ -46,7 +46,6 @@
 //                      name:(NSString *)name
 //                       msg:(NSString *)msg
 //                    accept:(BOOL)accept;
-// 还没有测试
 - (BOOL)acceptRosterItemWithMsgid:(NSString *)msgid
                           groupId:(NSString *)gid
                              name:(NSString *)name
@@ -195,6 +194,9 @@
  * return the roster version
  **/
 - (NSString *)version;
+
+#pragma mark - signature
+- (NSString *)signature;
 
 /**
  * handle roster item add request.

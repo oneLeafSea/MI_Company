@@ -250,6 +250,7 @@
 }
 
 - (NSString *)rssUrl {
+    return @"wss://10.22.1.165:8008/webrtc";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_RSS"];
     return url;
@@ -261,9 +262,9 @@
     return url;
 }
 
-- (NSString *)signature {
-    return @"this is a signature";
-}
+//- (NSString *)signature {
+//    return @"this is a signature";
+//}
 
 
 - (void)handleKick:(NSNotification *) notification {

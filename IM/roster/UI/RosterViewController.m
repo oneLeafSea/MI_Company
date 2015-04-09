@@ -53,7 +53,7 @@
     m_table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self initData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePresenceNotification:) name:kPresenceNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePresenceNotification:) name:kPresenceChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
@@ -82,6 +82,18 @@
         RosterSection *section = [[RosterSection alloc] init];
         [m_Sections addObject:section];
     }
+}
+
+- (void)updateData {
+    m_groups = [APP_DELEGATE.user.rosterMgr grouplist];
+    NSMutableArray *sections = [[NSMutableArray alloc] init];
+    for (int n = 0; n < m_groups.count; n++) {
+        RosterSection *section = [[RosterSection alloc] init];
+        RosterSection *oldSect = [m_Sections objectAtIndex:n];
+        section.expand = oldSect.expand;
+        [sections addObject:section];
+    }
+    m_Sections = sections;
 }
 
 
@@ -275,7 +287,7 @@
 #pragma mark - handle Presence notification.
 - (void) handlePresenceNotification:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self initData];
+        [self updateData];
         [m_table reloadData];
     });
 }

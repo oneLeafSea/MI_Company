@@ -14,6 +14,7 @@
 #import "MessageConstants.h"
 #import "LogLevel.h"
 
+
 @interface PresenceMgr() {
     NSMutableDictionary *m_presenceInfo;
 }
@@ -65,6 +66,7 @@
         if ([msg.presenceType isEqualToString:kPresenceTypeAck]) {
             [m_presenceInfo setObject:msg forKey:msg.from];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPresenceChangedNotification object:nil];
     });
 }
 

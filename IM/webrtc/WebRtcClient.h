@@ -37,6 +37,9 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
 - (instancetype)initWithDelegate:(id<WebRtcClientDelegate>)delegate
                       roomServer:(NSURL *)url
                           iceUrl:(NSString *)iceUrl
+                           token:(NSString *)token
+                             key:(NSString *)key
+                              iv:(NSString *)iv
                              uid:(NSString *)uid
                          invited:(BOOL)invited;
 
@@ -52,6 +55,9 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
 
 @property(nonatomic, readonly) BOOL invited;
 @property(nonatomic, readonly) NSString *iceUrl;
+@property(nonatomic, readonly) NSString *token;
+@property(nonatomic, readonly) NSString *key;
+@property(nonatomic, readonly) NSString *iv;
 
 @end
 

@@ -11,6 +11,9 @@
 #import "Utils.h"
 #import "NSDate+Common.h"
 #import "LogLevel.h"
+#import "NSUUID+StringUUID.h"
+#import "NSDate+Common.h"
+#import "Encrypt.h"
 
 @implementation FileBlockPorter
 
@@ -21,9 +24,14 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *blockData = [Utils readFileAtPath:block.filePath offset:block.offset size:block.size];
         NSString *base64Data = [blockData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+        NSString *key = [options objectForKey:@"key"];
+        NSString *iv = [options objectForKey:@"iv"];
+        NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
+                                @"qid":qid,
                                 @"token":[options objectForKey:@"token"],
-                                @"signature":[options objectForKey:@"signature"],
+                                @"signature":sign,
                                 @"filename":block.fileName,
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedInteger:blockData.length],
@@ -56,9 +64,14 @@
                      fileQueue:(dispatch_queue_t)queue
                        options:(NSDictionary *)options {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+        NSString *key = [options objectForKey:@"key"];
+        NSString *iv = [options objectForKey:@"iv"];
+        NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
+                                @"qid":qid,
                                 @"token":[options objectForKey:@"token"],
-                                @"signature":[options objectForKey:@"signature"],
+                                @"signature":sign,
                                 @"filename":block.fileName,
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedLongLong:block.size],

@@ -52,6 +52,8 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
         }
     } else if ([topic isEqualToString:@"ack"]) {
         message = [[WebRtcAckMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
+    } else if ([topic isEqualToString:@"seq"]) {
+        message = [[WebRtcSeqMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
     } else {
         NSLog(@"Unexpected topic: %@", topic);
     }
@@ -152,7 +154,9 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
 
 - (NSString *)contentData {
     NSDictionary *dict = @{
-                           @"rid":_roomId
+                           @"rid":_roomId,
+                           @"signatrue":_seq,
+                           @"token":_token
                            };
     NSData *data = [Utils jsonDataFromDict:dict];
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -212,7 +216,9 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
 
 - (NSString *)contentData {
     NSDictionary *dict = @{
-                           @"rid":_roomId
+                           @"rid":_roomId,
+                           @"signatrue":_seq,
+                           @"token":_token
                            };
     NSData *data = [Utils jsonDataFromDict:dict];
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -242,6 +248,29 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
 - (NSString *)contentData {
     NSString *str = [[NSString alloc] initWithData:[_candidate JSONData] encoding:NSUTF8StringEncoding];
     return str;
+}
+
+@end
+
+@implementation WebRtcSeqMessage
+
+- (instancetype)initWithFrom:(NSString *)from
+                          to:(NSString *)to
+                       msgId:(NSString *)msgId
+                       topic:(NSString *)topic
+                     content:(NSString *)content {
+    if (self = [super initWithFrom:from to:to msgId:msgId topic:topic content:content]) {
+        if (content) {
+            NSDictionary *jsonContent = [NSDictionary dictionaryWithJSONString:content];
+            _seq = [jsonContent objectForKey:@"seq"];
+        }
+    }
+    return self;
+}
+
+- (NSString *)contentData {
+    NSAssert(NO, @"不会运行到此函数。");
+    return nil;
 }
 
 @end

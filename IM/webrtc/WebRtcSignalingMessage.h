@@ -43,6 +43,8 @@
 - (void)setRoomId:(NSString *)rid uid:(NSString *)uid;
 @property(nonatomic, readonly) NSString *roomId;
 @property(nonatomic, readonly) NSString *uid;
+@property(nonatomic, strong) NSString *token;
+@property(nonatomic, strong) NSString *seq;
 
 @end
 
@@ -56,10 +58,15 @@
 
 - (void)setRid:(NSString *)roomId;
 @property(nonatomic, readonly) NSString *roomId;
-
+@property(nonatomic, strong) NSString *seq;
+@property(nonatomic, strong) NSString *token;
 @end
 
 
 @interface WebRtcCandidateMessage: WebRtcSignalingMessage
 @property(nonatomic, strong) RTCICECandidate *candidate;
+@end
+
+@interface WebRtcSeqMessage : WebRtcSignalingMessage
+@property(nonatomic, strong) NSString *seq;
 @end

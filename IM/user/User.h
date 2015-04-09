@@ -51,7 +51,7 @@
 @property(readonly) NSString *iv;
 @property(readonly) NSString *token;
 @property(readonly) NSString *name;
-@property(readonly) NSString *signature;
+@property(nonatomic, strong) NSString *signature;
 
 @property(readonly) NSString *imurl;
 @property(readonly) NSString *fileDownloadSvcUrl;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WaitingViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *waintingActivityIndicator;
 

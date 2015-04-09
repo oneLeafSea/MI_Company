@@ -28,6 +28,7 @@
 #import "RTCAudioTrack.h"
 #import "RTCICEServer+JSON.h"
 #import "LogLevel.h"
+#import "Encrypt.h"
 
 //static NSString *kWebrtcDefaultSTUNServerUrl =  @"stun:10.22.1.159";
 
@@ -40,6 +41,7 @@ static NSInteger kWebRtcClientErrorSetSDP = -2;
 RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     WebRtcWebSocketChannel *m_channel;
     BOOL                    m_front;
+    NSString               *m_seq;
 }
 @property(nonatomic, strong) RTCPeerConnection *peerConnection;
 @property(nonatomic, strong) RTCPeerConnectionFactory *factory;
@@ -54,6 +56,9 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 - (instancetype)initWithDelegate:(id<WebRtcClientDelegate>)delegate
                       roomServer:(NSURL *)url
                           iceUrl:(NSString *)iceUrl
+                           token:(NSString *)token
+                             key:(NSString *)key
+                              iv:(NSString *)iv
                              uid:(NSString *)uid
                          invited:(BOOL)invited{
     if (self = [super init]) {
@@ -65,6 +70,9 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
         _messageQueue = [[NSMutableArray alloc] init];
         _invited = invited;
+        _token = token;
+        _iv = iv;
+        _key = key;
         m_front = YES;
     }
     return self;
@@ -165,6 +173,9 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
                                                                                  msgId:[NSUUID uuid]
                                                                                  topic:@"create"
                                                                             content:nil];
+            m.seq = [NSString stringWithFormat:@"%@%@", m_seq, [NSUUID uuid]];
+            m.seq = [Encrypt encodeWithKey:self.key iv:self.iv data:[m.seq dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+            m.token = self.token;
             _roomId = roomId;
             [m setRoomId:_roomId uid:_uid];
             [m_channel sendMessage:m ack:^(WebRtcAckMessage *ackMsg) {
@@ -196,6 +207,10 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
                                                                              msgId:[NSUUID uuid]
                                                                              topic:@"join"
                                                                            content:nil];
+            
+            m.seq = [NSString stringWithFormat:@"%@%@", m_seq, [NSUUID uuid]];
+            m.seq = [Encrypt encodeWithKey:self.key iv:self.iv data:[m.seq dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+            m.token = self.token;
             [m setRid:rid];
             [m_channel sendMessage:m ack:^(WebRtcAckMessage *ackMsg) {
                 completion([ackMsg.ack isEqualToString:kWebRtcAckMessageOK]);
@@ -353,6 +368,12 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         return;
     }
     
+    if ([message isKindOfClass:[WebRtcSeqMessage class]]) {
+        WebRtcSeqMessage *seqMsg = (WebRtcSeqMessage *)message;
+        m_seq = [seqMsg.seq copy];
+        return;
+    }
+    
     DDLogInfo(@"WARN: receive a unkown message. @webrtc.");
 }
 
@@ -399,9 +420,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
        gotICECandidate:(RTCICECandidate *)candidate {
     dispatch_async(dispatch_get_main_queue(), ^{
-//        ARDICECandidateMessage *message =
-//        [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
-//        [self sendSignalingMessage:message];
         WebRtcCandidateMessage *message = [[WebRtcCandidateMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
         message.candidate = candidate;
         [m_channel sendData:message.JSONData];

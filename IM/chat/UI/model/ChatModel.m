@@ -73,7 +73,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                     if ([msg.from isEqualToString:USER.uid]) {
                     } else {
                         __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuid];
-                        [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath} completion:^(BOOL finished, NSError *error) {
+                        [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
                             NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
                             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
                             [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)];

@@ -26,7 +26,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharePlayer = [[self alloc] init];
-        sharePlayer->m_numberOfLoops = 1;
+        sharePlayer->m_numberOfLoops = 0;
     });
     return sharePlayer;
 }

@@ -497,6 +497,10 @@
         RosterItem *ri = [[RosterItem alloc] initWithDict:item];
         RosterGroup *g = [self getRosterGroupWithId:ri.gid grouplist:sortedGrpList];
         PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:ri.uid];
+        if ([ri.uid isEqualToString:@"hjt"] || [ri.uid isEqualToString:@"ddw"]) {
+            int a = 0;
+            a++;
+        }
         if (msg && [msg.show isEqualToString:kPresenceShowOnline]) {
             [g.items insertObject:ri atIndex:0];
         } else {
@@ -701,6 +705,11 @@ NSComparisonResult sortGroupById(RosterGroup* group1, RosterGroup* group2, void 
 
 - (NSString *)version {
     return m_ver;
+}
+
+- (NSString *)signature {
+    NSString *sign = [m_roster.extDict objectForKey:@"sign"];
+    return sign;
 }
 
 - (void)reset {

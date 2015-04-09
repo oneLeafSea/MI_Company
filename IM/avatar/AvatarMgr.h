@@ -18,6 +18,8 @@
 - (void) getAvatarsByUserIds:(NSArray *)userIds;
 
 - (void) getAvatarWithToken:(NSString *)token
+                        key:(NSString *)key
+                         iv:(NSString *)iv
                   signature:(NSString *)singnature
                      userId:(NSString *)userId
                         url:(NSString *)url

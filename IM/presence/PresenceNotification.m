@@ -9,3 +9,4 @@
 #import "PresenceNotification.h"
 
 NSString *kPresenceNotification = @"cn.com.rooten.Presence";
+NSString *kPresenceChangedNotification = @"cn.com.rooten.Presence.change";

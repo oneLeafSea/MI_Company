@@ -261,8 +261,11 @@
         OsItem *item = obj;
         if ([item.op isEqualToString:@"i"]) {
             if (![m_itemsTb insertItem:item]) {
-                ret = NO;
-                *stop = YES;
+                DDLogError(@"ERROR: insert ostb error, try update.");
+                if (![m_itemsTb updateItem:item]) {
+                    ret = NO;
+                    *stop = YES;
+                }
             }
             return;
         }

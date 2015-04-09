@@ -77,7 +77,9 @@ static NSUInteger kWebrtcTimeout = 30;
 - (void)viewDidLoad {
     [super viewDidLoad];
     m_callTimerStick = 0;
+    self.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:self.talkingUid];
     [self.avatarImgView circle];
+    self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
     
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
     
@@ -85,7 +87,7 @@ static NSUInteger kWebrtcTimeout = 30;
     [tapGestureRecognizer setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    self.client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl iceUrl:USER.iceUrl uid:self.uid invited:NO];
+    self.client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:self.uid invited:NO];
     _rid = [NSUUID uuid];
     WebRtcNotifyMsg *msg = [[WebRtcNotifyMsg alloc] initWithFrom:_uid to:self.talkingUid rid:self.rid];
     [self.client createRoomWithId:_rid Completion:^(BOOL finished) {
@@ -93,6 +95,17 @@ static NSUInteger kWebrtcTimeout = 30;
             [USER.session post:msg];
             self.bgImgView.hidden =YES;
             self.avatarView.hidden = YES;
+        } else {
+            [self disconnect];
+            [[AudioPlayer sharePlayer] stop];
+            if (m_callTimer) {
+                [m_callTimer invalidate];
+                m_callTimer = nil;
+            }
+            [self dismissViewControllerAnimated:YES completion:^{
+                [USER.webRtcMgr setbusy:NO];
+                [Utils alertWithTip:@"连接信令服务器失败。"];
+            }];
         }
     }];
     
@@ -155,7 +168,12 @@ static NSUInteger kWebrtcTimeout = 30;
         [m_callTimer invalidate];
         m_callTimer = nil;
         [[AudioPlayer sharePlayer] stop];
-        [Utils alertWithTip:@"对方无响应."];
+        [self disconnect];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [Utils alertWithTip:@"对方无响应."];
+            [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+        }];
+        
     }
     
 }
