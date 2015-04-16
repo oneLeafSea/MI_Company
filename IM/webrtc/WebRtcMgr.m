@@ -44,6 +44,7 @@
 }
 
 - (void)inviteUid:(NSString *)uid  session:(Session *)s {
+    m_busy = YES;
     __block NSString *webrtcUrl = USER.rssUrl;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebRtcCallViewController *vc = [sb instantiateViewControllerWithIdentifier:@"WebRtcCallViewController"];
@@ -51,7 +52,6 @@
     vc.uid = self.uid;
     vc.talkingUid = uid;
     [APP_DELEGATE.window.rootViewController presentViewController:vc animated:YES completion:^{
-        m_busy = YES;
     }];
 }
 
@@ -59,7 +59,7 @@
 - (void)handleWebRtcNotification:(NSNotification *)notification {
     __block NSString *webrtcUrl = USER.rssUrl;
     __block WebRtcNotifyMsg *msg = notification.object;
-    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"]) {
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"] || [[msg.content objectForKey:@"type"] isEqualToString:@"reject"]) {
         return;
     }
     if (m_busy) {
@@ -68,6 +68,7 @@
         [USER.session post:ack];
         return;
     }
+    m_busy = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WebRtcRecvViewChatViewController *recvController =[sb instantiateViewControllerWithIdentifier:@"WebRtcRecvViewChatViewController"];
@@ -76,7 +77,6 @@
         recvController.serverUrl = [NSURL URLWithString:webrtcUrl];
         recvController.talkingUid = msg.from;
         [APP_DELEGATE.window.rootViewController presentViewController:recvController animated:YES completion:^{
-            m_busy = YES;
         }];
     });
     

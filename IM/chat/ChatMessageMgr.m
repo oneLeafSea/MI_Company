@@ -356,7 +356,7 @@
         }
         NSString *uuidName = [msg.body objectForKey:@"uuid"];
         __block NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:uuidName];
-        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath} completion:^(BOOL finished, NSError *error) {
+        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
             if (!finished) {
                 DDLogError(@"ERROR: download audio file error %@", error);
             } else {

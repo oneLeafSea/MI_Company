@@ -34,7 +34,7 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:USER.uid];
-    self.signLbl.text = USER.signature;
+    self.signLbl.text = [USER.rosterMgr signature];
     NSString *sex = [USER.mineDetail.data objectForKey:@"sex"];
     self.sexLbl.text = [sex isEqual:@"1"] ? @"男" : @"女";
     self.positionLbl.text = [USER.mineDetail.data objectForKey:@"position"];

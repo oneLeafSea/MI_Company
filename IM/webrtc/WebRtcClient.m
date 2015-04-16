@@ -116,6 +116,12 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     [audioTrack setEnabled:![audioTrack isEnabled]];
 }
 
+- (BOOL)isMute {
+    RTCMediaStream *localStream = _peerConnection.localStreams[0];
+    RTCAudioTrack *audioTrack = localStream.audioTracks[0];
+    return ![audioTrack isEnabled];
+}
+
 - (RTCVideoTrack *)createLocalVideoTrackWithFront:(BOOL) front {
     RTCVideoTrack *localVideoTrack = nil;
 #if !TARGET_IPHONE_SIMULATOR && TARGET_OS_IPHONE

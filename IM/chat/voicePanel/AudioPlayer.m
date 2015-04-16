@@ -47,7 +47,9 @@
     
     BOOL ret = NO;
     if ([m_player prepareToPlay]) {
-        m_player.numberOfLoops = m_numberOfLoops;
+        if (m_numberOfLoops > 0) {
+            m_player.numberOfLoops = m_numberOfLoops;
+        }
         ret = [m_player play];
     }
     return ret;
@@ -67,6 +69,7 @@
     [m_timer invalidate];
     [m_levelTimer invalidate];
     [m_player stop];
+    m_numberOfLoops = 0;
     if (m_completion) {
         m_completion(NO);
         m_completion = nil;

@@ -101,6 +101,24 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             
             JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:isReady duration:duration outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
             
+            if (!isReady && ![USER.fileTransfer exsitTask:uuid]) {
+                if ([msg.from isEqualToString:USER.uid]) {
+                    [USER.fileTransfer uploadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+                        if (finished) {
+                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                        }
+                    }];
+                } else {
+                    [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+                        if (finished) {
+                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                        }
+                    }];
+                }
+                
+                }
+
+            
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *voiceMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:voiceItem];
             [self.messages addObject:voiceMsg];

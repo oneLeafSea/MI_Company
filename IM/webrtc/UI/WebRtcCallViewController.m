@@ -186,11 +186,21 @@ static NSUInteger kWebrtcTimeout = 30;
 }
 
 - (IBAction)speakerBtnTapped:(id)sender {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+    static BOOL speaker = NO;
+    if (!speaker) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+        speaker = YES;
+    } else {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord
+                                               error:nil];
+        speaker = NO;
+    }
+    [self.speakerBtn setImage:[UIImage imageNamed:speaker ? @"webrtc_speaker_sel" : @"webrtc_speaker"] forState:UIControlStateNormal];
 }
 
 - (IBAction)muteBtnTapped:(id)sender {
     [self.client mute];
+    [self.muteBtn setImage:[UIImage imageNamed:[self.client isMute] ? @"webrtc_mute_sel" : @"webrtc_mute"] forState:UIControlStateNormal];
 }
 
 - (IBAction)hangupBtnTapped:(id)sender {

@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
 
 - (void)mute;
 
+- (BOOL)isMute;
+
 @property(nonatomic, readonly) BOOL invited;
 @property(nonatomic, readonly) NSString *iceUrl;
 @property(nonatomic, readonly) NSString *token;

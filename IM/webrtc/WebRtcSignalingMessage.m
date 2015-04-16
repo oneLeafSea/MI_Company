@@ -48,7 +48,7 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
         } else if ([typeString isEqualToString:@"candidate"]) {
             message = [[WebRtcCandidateMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
         } else {
-            NSLog(@"Unexpected conten type: %@", typeString);
+            NSLog(@"Unexpected content type: %@", typeString);
         }
     } else if ([topic isEqualToString:@"ack"]) {
         message = [[WebRtcAckMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
