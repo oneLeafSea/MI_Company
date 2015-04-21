@@ -10,8 +10,8 @@
 
 static NSString const *kRTCICECandidateTypeKey = @"type";
 static NSString const *kRTCICECandidateTypeValue = @"candidate";
-static NSString const *kRTCICECandidateMidKey = @"id";
-static NSString const *kRTCICECandidateMLineIndexKey = @"label";
+static NSString const *kRTCICECandidateMidKey = @"sdpMid";
+static NSString const *kRTCICECandidateMLineIndexKey = @"sdpMLineIndex";
 static NSString const *kRTCICECandidateSdpKey = @"candidate";
 
 @implementation RTCICECandidate (WRJSON)
@@ -19,7 +19,7 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
 + (RTCICECandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
     NSString *mid = dictionary[kRTCICECandidateMidKey];
     NSString *sdp = dictionary[kRTCICECandidateSdpKey];
-    NSNumber *num = dictionary[kRTCICECandidateMLineIndexKey];
+    NSString *num = dictionary[kRTCICECandidateMLineIndexKey];
     NSInteger mLineIndex = [num integerValue];
     return [[RTCICECandidate alloc] initWithMid:mid index:mLineIndex sdp:sdp];
 }
@@ -27,7 +27,7 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
 - (NSData *)JSONData {
     NSDictionary *json = @{
                            kRTCICECandidateTypeKey : kRTCICECandidateTypeValue,
-                           kRTCICECandidateMLineIndexKey : @(self.sdpMLineIndex),
+                           kRTCICECandidateMLineIndexKey : [NSString stringWithFormat:@"%d", self.sdpMLineIndex],
                            kRTCICECandidateMidKey : self.sdpMid,
                            kRTCICECandidateSdpKey : self.sdp
                            };
