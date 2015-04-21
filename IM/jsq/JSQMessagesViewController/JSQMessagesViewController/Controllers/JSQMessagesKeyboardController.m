@@ -83,6 +83,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         _panGestureRecognizer = panGestureRecognizer;
         _delegate = delegate;
         _jsq_isObserving = NO;
+//        [self.panGestureRecognizer addTarget:self action:@selector(jsq_handlePanGestureRecognizer:)];
     }
     return self;
 }

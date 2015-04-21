@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LogLevel.h"
+#import "DDFileLogger.h"
 #import "NSUUID+StringUUID.h"
 #import "IMConf.h"
 #import "RosterMgr.h"
@@ -117,6 +118,11 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     UIColor *green = [UIColor colorWithRed:(0/255.0) green:(125/255.0) blue:(0/255.0) alpha:1.0];
     [[DDTTYLogger sharedInstance] setForegroundColor:green backgroundColor:nil forFlag:LOG_FLAG_INFO];
+    
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    [DDLog addLogger:fileLogger];
 }
 
 - (void)handleKickNotification:(NSNotification *)notification {

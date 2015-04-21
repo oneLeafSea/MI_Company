@@ -65,7 +65,9 @@
             self.navigationItem.rightBarButtonItem = nil;
         }
     }
-
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(CollectionViewDidTapped)];
+    [self.collectionView addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,6 +108,11 @@
         
     }];
     [self finishSendingMessageAnimated:YES];
+}
+
+- (void)CollectionViewDidTapped {
+    [self.inputToolbar.contentView.textView resignFirstResponder];
+    [self jsq_setToolbarBottomLayoutGuideConstant:0];
 }
 
 

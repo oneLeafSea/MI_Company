@@ -110,7 +110,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"collection selected at row: %ld", (long)indexPath.row);
+//    NSLog(@"collection selected at row: %ld", (long)indexPath.row);
     if ([self.delgate respondsToSelector:@selector(OsNavigationTableViewCell:tappedAtIndex:)]) {
         [self.delgate OsNavigationTableViewCell:self tappedAtIndex:indexPath.row];
     }

@@ -59,7 +59,8 @@
 - (void)handleWebRtcNotification:(NSNotification *)notification {
     __block NSString *webrtcUrl = USER.rssUrl;
     __block WebRtcNotifyMsg *msg = notification.object;
-    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"] || [[msg.content objectForKey:@"type"] isEqualToString:@"reject"]) {
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"] || [[msg.content objectForKey:@"type"] isEqualToString:@"reject"] ||
+        [[msg.content objectForKey:@"type"] isEqualToString:@"close"]) {
         return;
     }
     if (m_busy) {

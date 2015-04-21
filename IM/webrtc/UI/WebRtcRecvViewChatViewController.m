@@ -24,6 +24,7 @@
 @interface WebRtcRecvViewChatViewController () <WebRtcClientDelegate, RTCEAGLVideoViewDelegate> {
     NSTimer *m_timer;
     NSInteger m_timeStick;
+    BOOL     m_remoteVideoEnable;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
@@ -90,7 +91,11 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
     [[AudioPlayer sharePlayer] playWithPath:path];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
-    
+    m_remoteVideoEnable = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +103,8 @@
 }
 - (IBAction)videoBtnTapped:(id)sender {
     [self.localVideoTrack setEnabled:!self.localVideoTrack.isEnabled];
+    [self.client sendVideoMsgWithEnable:self.localVideoTrack.isEnabled];
+    self.localView.hidden = !self.localVideoTrack.isEnabled;
 }
 
 - (IBAction)switchBtnTapped:(id)sender {
@@ -105,11 +112,21 @@
 }
 
 - (IBAction)speakerBtnTapped:(UIButton *)sender {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+    static BOOL speaker = NO;
+    if (!speaker) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+        speaker = YES;
+    } else {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord
+                                               error:nil];
+        speaker = NO;
+    }
+    [self.speakerBtn setImage:[UIImage imageNamed:speaker ? @"webrtc_speaker_sel" : @"webrtc_speaker"] forState:UIControlStateNormal];
 }
 
 - (IBAction)muteBtnTapped:(id)sender {
     [self.client mute];
+    [self.muteBtn setImage:[UIImage imageNamed:[self.client isMute] ? @"webrtc_mute_sel" : @"webrtc_mute"] forState:UIControlStateNormal];
 }
 
 - (IBAction)hangupBtnTapped:(id)sender {
@@ -226,7 +243,7 @@
 
 - (void)WebRtcClient:(WebRtcClient *)client
 didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
-    self.localView.hidden = NO;
+    self.localView.hidden = !localVideoTrack.isEnabled;
     if (self.localVideoTrack) {
         [self.localVideoTrack removeRenderer:self.localView];
         self.localVideoTrack = nil;
@@ -238,7 +255,7 @@ didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 
 - (void)WebRtcClient:(WebRtcClient *)client
 didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
-    
+    [self setRemoteViewUIWithEnable:m_remoteVideoEnable];
     self.remoteVideoTrack = remoteVideoTrack;
     [self.remoteVideoTrack addRenderer:self.remoteView];
 
@@ -246,7 +263,24 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 
 - (void)WebRtcClient:(WebRtcClient *)client
             didError:(NSError *)error {
-    
+    DDLogInfo(@"ERROR:%@", error);
+}
+
+- (void)WebRtcClient:(WebRtcClient *)client videoEnabled:(BOOL)enable {
+    m_remoteVideoEnable = enable;
+    [self setRemoteViewUIWithEnable:m_remoteVideoEnable];
+}
+
+- (void)setRemoteViewUIWithEnable:(BOOL) enable {
+    if (m_remoteVideoEnable) {
+        self.remoteView.hidden = NO;
+        self.bgImgView.hidden = YES;
+        self.avatarView.hidden = YES;
+    } else {
+        self.remoteView.hidden = YES;
+        self.bgImgView.hidden = NO;
+        self.avatarView.hidden = NO;
+    }
 }
 
 #pragma mark - RTCEAGLVideoViewDelegate

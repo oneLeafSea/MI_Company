@@ -47,6 +47,8 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
             message = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
         } else if ([typeString isEqualToString:@"candidate"]) {
             message = [[WebRtcCandidateMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
+        } else if ([typeString isEqualToString:@"video"]) {
+            message = [[WebRtcVideoMessage alloc] initWithFrom:from to:to msgId:msgId topic:topic content:content];
         } else {
             NSLog(@"Unexpected content type: %@", typeString);
         }
@@ -271,6 +273,35 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
 - (NSString *)contentData {
     NSAssert(NO, @"不会运行到此函数。");
     return nil;
+}
+
+@end
+
+@implementation WebRtcVideoMessage
+
+- (instancetype)initWithFrom:(NSString *)from to:(NSString *)to msgId:(NSString *)msgId topic:(NSString *)topic content:(NSString *)content {
+    if (self = [super initWithFrom:from to:to msgId:msgId topic:topic content:content]) {
+        if (content) {
+            NSDictionary *jsonContent = [NSDictionary dictionaryWithJSONString:content];
+            NSString *enable = [jsonContent objectForKey:@"videoenable"];
+            if ([enable isEqualToString:@"true"]) {
+                _enable = YES;
+            } else {
+                _enable = NO;
+            }
+        }
+    }
+    return self;
+}
+
+- (NSString *)contentData {
+    NSDictionary *dict = @{
+                           @"type":@"video",
+                           @"videoenable":self.enable ? @"true": @"false",
+                           };
+    NSData *data = [Utils jsonDataFromDict:dict];
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return str;
 }
 
 @end

@@ -70,3 +70,7 @@
 @interface WebRtcSeqMessage : WebRtcSignalingMessage
 @property(nonatomic, strong) NSString *seq;
 @end
+
+@interface WebRtcVideoMessage: WebRtcSignalingMessage
+@property(nonatomic, assign) BOOL enable;
+@end

@@ -67,7 +67,8 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         _uid = uid;
         _delegate = delegate;
         _factory = [[RTCPeerConnectionFactory alloc] init];
-        _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
+//        _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
+        _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
         _messageQueue = [[NSMutableArray alloc] init];
         _invited = invited;
         _token = token;
@@ -120,6 +121,12 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     RTCMediaStream *localStream = _peerConnection.localStreams[0];
     RTCAudioTrack *audioTrack = localStream.audioTracks[0];
     return ![audioTrack isEnabled];
+}
+
+- (void)sendVideoMsgWithEnable:(BOOL)enable {
+    WebRtcVideoMessage *msg = [[WebRtcVideoMessage alloc] initWithFrom:self.uid to:self.talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+    msg.enable = enable;
+    [m_channel sendData:msg.JSONData];
 }
 
 - (RTCVideoTrack *)createLocalVideoTrackWithFront:(BOOL) front {
@@ -270,6 +277,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     RTCMediaConstraints *mediaConstraints = [self defaultMediaStreamConstraints];
     RTCVideoSource *videoSource = [_factory videoSourceWithCapturer:capturer constraints:mediaConstraints];
     localVideoTrack = [_factory videoTrackWithID:@"ARDAMSv0" source:videoSource];
+    [localVideoTrack setEnabled:NO];
 #endif
     return localVideoTrack;
 }
@@ -380,6 +388,15 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         return;
     }
     
+    if ([message isKindOfClass:[WebRtcVideoMessage class]]) {
+        WebRtcVideoMessage *videoMsg = (WebRtcVideoMessage *)message;
+        DDLogInfo(@"INFO: receive video msg %d.", videoMsg.enable);
+        if ([self.delegate respondsToSelector:@selector(WebRtcClient:videoEnabled:)]) {
+            [self.delegate WebRtcClient:self videoEnabled:videoMsg.enable];
+        }
+        return;
+    }
+    
     DDLogInfo(@"WARN: receive a unkown message. @webrtc.");
 }
 
@@ -434,6 +451,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 
 - (void)peerConnection:(RTCPeerConnection*)peerConnection
     didOpenDataChannel:(RTCDataChannel*)dataChannel {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
 
@@ -524,9 +542,18 @@ didSetSessionDescriptionWithError:(NSError *)error {
                                     password:@""];
 }
 
+- (RTCICEServer *)defaultTurnServer {
+    NSString *ip = [self.iceUrl componentsSeparatedByString:@":"][1];
+    NSString *turnUrl = [NSString stringWithFormat:@"turn:%@", ip];
+    NSURL *defaultSTUNServerURL = [NSURL URLWithString:turnUrl];
+    return [[RTCICEServer alloc] initWithURI:defaultSTUNServerURL
+                                    username:@""
+                                    password:@""];
+}
+
 - (RTCMediaConstraints *)defaultPeerConnectionConstraints {
     NSArray *optionalConstraints = @[
-//                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"true"]
+                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"false"]
                                      ];
     RTCMediaConstraints* constraints =
     [[RTCMediaConstraints alloc]

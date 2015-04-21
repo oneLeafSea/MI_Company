@@ -290,6 +290,7 @@
 - (NSArray *)parseItemsResp:(JRTableResponse *)resp {
     __block BOOL ret = YES;
     NSArray *result = resp.result;
+    DDLogInfo(@"INFO: os update info: %@", result);
     __block NSMutableArray *items = [[NSMutableArray alloc] init];
     [result enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSArray *item = obj;

@@ -27,6 +27,7 @@
     NSInteger m_callTimerStick;
     NSTimer *m_timer;
     NSInteger m_timeStick;
+    BOOL      m_remoteVideoEnable;
 }
 @property (weak, nonatomic) IBOutlet RTCEAGLVideoView *remoteView;
 @property (weak, nonatomic) IBOutlet RTCEAGLVideoView *localView;
@@ -81,8 +82,6 @@ static NSUInteger kWebrtcTimeout = 30;
     [self.avatarImgView circle];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
     
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleButtonContainer)];
     [tapGestureRecognizer setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -93,8 +92,8 @@ static NSUInteger kWebrtcTimeout = 30;
     [self.client createRoomWithId:_rid Completion:^(BOOL finished) {
         if (finished) {
             [USER.session post:msg];
-            self.bgImgView.hidden =YES;
-            self.avatarView.hidden = YES;
+//            self.bgImgView.hidden =YES;
+//            self.avatarView.hidden = YES;
         } else {
             [self disconnect];
             [[AudioPlayer sharePlayer] stop];
@@ -179,6 +178,8 @@ static NSUInteger kWebrtcTimeout = 30;
 }
 - (IBAction)videoBtnTapped:(id)sender {
     [self.localVideoTrack setEnabled:!self.localVideoTrack.isEnabled];
+    [self.client sendVideoMsgWithEnable:self.localVideoTrack.isEnabled];
+    self.localView.hidden = !self.localVideoTrack.isEnabled;
 }
 
 - (IBAction)switchBtnTapped:(id)sender {
@@ -234,6 +235,7 @@ static NSUInteger kWebrtcTimeout = 30;
             [self disconnect];
             [self dismissViewControllerAnimated:YES completion:^{
                 [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+                [[AudioPlayer sharePlayer] stop];
             }];
             break;
     }
@@ -241,7 +243,7 @@ static NSUInteger kWebrtcTimeout = 30;
 
 - (void)WebRtcClient:(WebRtcClient *)client
 didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
-    self.localView.hidden = NO;
+    self.localView.hidden = !localVideoTrack.isEnabled;
     if (self.localVideoTrack) {
         [self.localVideoTrack removeRenderer:self.localView];
         self.localVideoTrack = nil;
@@ -266,11 +268,29 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
     self.tipLbl.hidden = YES;
     self.remoteVideoTrack = remoteVideoTrack;
     [self.remoteVideoTrack addRenderer:self.remoteView];
+    self.remoteView.hidden = !m_remoteVideoEnable;
 }
 
 - (void)WebRtcClient:(WebRtcClient *)client
             didError:(NSError *)error {
-    
+    DDLogError(@"ERROR:%@", error);
+}
+
+- (void)WebRtcClient:(WebRtcClient *)client videoEnabled:(BOOL)enable {
+    m_remoteVideoEnable = enable;
+    [self setRemoteViewUIWithEnable:m_remoteVideoEnable];
+}
+
+- (void)setRemoteViewUIWithEnable:(BOOL) enable {
+    if (m_remoteVideoEnable) {
+        self.remoteView.hidden = NO;
+        self.bgImgView.hidden = YES;
+        self.avatarView.hidden = YES;
+    } else {
+        self.remoteView.hidden = YES;
+        self.bgImgView.hidden = NO;
+        self.avatarView.hidden = NO;
+    }
 }
 
 - (void)updateTimeLbl {

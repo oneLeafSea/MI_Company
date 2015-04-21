@@ -55,6 +55,8 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
 
 - (BOOL)isMute;
 
+- (void)sendVideoMsgWithEnable:(BOOL)enable;
+
 @property(nonatomic, readonly) BOOL invited;
 @property(nonatomic, readonly) NSString *iceUrl;
 @property(nonatomic, readonly) NSString *token;
@@ -77,5 +79,7 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 
 - (void)WebRtcClient:(WebRtcClient *)client
          didError:(NSError *)error;
+
+- (void)WebRtcClient:(WebRtcClient *)client videoEnabled:(BOOL)enable;
 
 @end
