@@ -46,7 +46,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 @property(nonatomic, strong) RTCPeerConnection *peerConnection;
 @property(nonatomic, strong) RTCPeerConnectionFactory *factory;
 @property(nonatomic, strong) NSMutableArray *iceServers;
-@property(nonatomic, strong) NSMutableArray *messageQueue;
+@property(nonatomic, strong) NSMutableArray *candidateQueue;
 
 
 @end
@@ -67,9 +67,8 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         _uid = uid;
         _delegate = delegate;
         _factory = [[RTCPeerConnectionFactory alloc] init];
-//        _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
         _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
-        _messageQueue = [[NSMutableArray alloc] init];
+        _candidateQueue = [[NSMutableArray alloc] init];
         _invited = invited;
         _token = token;
         _iv = iv;
@@ -79,9 +78,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     return self;
 }
 
-//- (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-//}
 
 - (void)swichCamera {
     if (m_front) {
@@ -195,12 +191,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
                 BOOL ok = [ackMsg.ack isEqualToString:kWebRtcAckMessageOK];
                 if (ok) {
                     self.state = kWebRtcClientStateConnected;
-                    RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
-                    _peerConnection = [_factory peerConnectionWithICEServers:_iceServers
-                                                                 constraints:constraints
-                                                                    delegate:self];
-                    RTCMediaStream *localStream = [self createLocalMediaStream];
-                    [_peerConnection addStream:localStream];
                 }
                 completion(ok);
             }];
@@ -208,6 +198,22 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
             completion(NO);
         }
     }];
+}
+
+- (void)createPeerConnection {
+    RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
+    _peerConnection = [_factory peerConnectionWithICEServers:_iceServers
+                                                 constraints:constraints
+                                                    delegate:self];
+    RTCMediaStream *localStream = [self createLocalMediaStream];
+    [_peerConnection addStream:localStream];
+}
+
+- (void)drainMessageQueueIfReady {
+    for (RTCICECandidate *c in _candidateQueue) {
+        [_peerConnection addICECandidate:c];
+    }
+    [_candidateQueue removeAllObjects];
 }
 
 - (void)joinRoomId:(NSString *)rid completion:(void(^)(BOOL finished))completion {
@@ -299,28 +305,26 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
+//    m_hasReceivedSdp = YES;
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)processOfferMessage:(WebRtcSessionDescriptionMessage *)sdpMsg {
     DDLogInfo(@"收到offer。");
-    RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
-    _peerConnection = [_factory peerConnectionWithICEServers:_iceServers
-                                                 constraints:constraints
-                                                    delegate:self];
-    RTCMediaStream *localStream = [self createLocalMediaStream];
-    [_peerConnection addStream:localStream];
+    [self createPeerConnection];
     _talkingUid = sdpMsg.from;
-    [_messageQueue addObject:sdpMsg];
+//    [_messageQueue addObject:sdpMsg];
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
+//     m_hasReceivedSdp = YES;
      DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)processJoinMesssage:(WebRtcJoinRoomMessage *)joinMsg {
+    [self createPeerConnection];
     _talkingUid = joinMsg.from;
-    [_messageQueue addObject:joinMsg];
+//    [_messageQueue addObject:joinMsg];
     [self sendOffer];
      DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
@@ -366,7 +370,10 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     
     if ([message isKindOfClass:[WebRtcCandidateMessage class]]) {
         WebRtcCandidateMessage *candidateMsg = (WebRtcCandidateMessage *)message;
-        [_peerConnection addICECandidate:candidateMsg.candidate];
+//        [_peerConnection addICECandidate:candidateMsg.candidate];
+        [_candidateQueue addObject:candidateMsg.candidate];
+        [self drainMessageQueueIfReady];
+        DDLogInfo(@"INFO: add ice candidate.");
         return;
     }
     
@@ -476,25 +483,6 @@ didCreateSessionDescription:(RTCSessionDescription *)sdp
         }
         [_peerConnection setLocalDescriptionWithDelegate:self
                                       sessionDescription:sdp];
-        for (WebRtcSignalingMessage *msg in _messageQueue) {
-            if ([msg isKindOfClass:[WebRtcJoinRoomMessage class]]) {
-                WebRtcSessionDescriptionMessage *message =
-                [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:msg.from msgId:[NSUUID uuid] topic:@"message" content:nil];
-                message.sessionDescription = sdp;
-                [m_channel sendData:[message JSONData]];
-            }
-            
-            if ([msg isKindOfClass:[WebRtcSessionDescriptionMessage class]]) {
-                WebRtcSessionDescriptionMessage *offerMsg = (WebRtcSessionDescriptionMessage *)msg;
-                if ([offerMsg.sessionDescription.type isEqualToString:@"offer"]) {
-                    WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:offerMsg.from msgId:[NSUUID uuid] topic:@"message" content:nil];
-                    answerMsg.sessionDescription = sdp;
-                    [m_channel sendData:[answerMsg JSONData]];
-                }
-                
-            }
-        }
-        [_messageQueue removeAllObjects];
     });
 }
 
@@ -515,11 +503,29 @@ didSetSessionDescriptionWithError:(NSError *)error {
             [_delegate WebRtcClient:self didError:sdpError];
             return;
         }
-        DDLogInfo(@"设置romote sdp 成功。");
-        if (self.invited && !self.peerConnection.localDescription) {
-            RTCMediaConstraints *constraints = [self defaultAnswerConstraints];
-            [_peerConnection createAnswerWithDelegate:self
-                                          constraints:constraints];
+        DDLogInfo(@"设置 sdp 成功。");
+        if (self.invited) {
+            if (self.peerConnection.localDescription) {
+                // set ice
+                WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+                answerMsg.sessionDescription = _peerConnection.localDescription;
+                [m_channel sendData:[answerMsg JSONData]];
+                [self drainMessageQueueIfReady];
+            } else {
+                // create & send answer
+                [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
+            }
+        } else {
+            if (self.peerConnection.remoteDescription) {
+                [self drainMessageQueueIfReady];
+                // set ice
+            } else {
+                // create & send offer
+                WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+                offerMsg.sessionDescription = _peerConnection.localDescription;
+                NSLog(@"type: %@", offerMsg.sessionDescription.type);
+                [m_channel sendData:[offerMsg JSONData]];
+            }
         }
     });
 }

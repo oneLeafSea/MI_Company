@@ -69,15 +69,7 @@
     _rid = [_content objectForKey:@"rid"];
     return YES;
 }
-//
-//{
-//    content = "{\"rid\":\"5ef77e3e-0c2c-4e5c-a749-690b17295c3b\"}";
-//    from = xyy;
-//    "from_res" = Android;
-//    msgid = "b2b4fddf-552e-4b8d-b84f-5c5d9bf86200";
-//    time = "2015-03-26 15:01:38.000512";
-//    to = gzw;
-//}
+
 
 - (NSData *)pkgData {
     NSDictionary *dictContent = @{

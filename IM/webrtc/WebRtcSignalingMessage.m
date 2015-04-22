@@ -14,6 +14,7 @@
 #import "RTCICECandidate+WRJSON.h"
 #import "WebRtcAckMessage.h"
 #import "Utils.h"
+#import "LogLevel.h"
 
 
 static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
@@ -91,6 +92,7 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
                            @"msgid":_msgId,
                            @"content":[self contentData]
                            };
+    DDLogInfo(@"INFO:%@", dict);
     return [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
 }
 
@@ -240,6 +242,7 @@ static NSString const *kWebRtcSignalingMessageTypeKey = @"type";
         if (content) {
             NSDictionary *jsonContent = [NSDictionary dictionaryWithJSONString:content];
             RTCICECandidate *candidate = [RTCICECandidate candidateFromJSONDictionary:jsonContent];
+            NSParameterAssert(candidate);
             _candidate = candidate;
         }
         
