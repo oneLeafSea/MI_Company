@@ -568,11 +568,19 @@
                                                     <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-l3-6mB">
+                                                    <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="IFF-l3-6mB" firstAttribute="leading" secondItem="HXa-aM-7Tx" secondAttribute="leading" id="06h-Yn-k6V"/>
+                                                <constraint firstItem="HXa-aM-7Tx" firstAttribute="bottom" secondItem="IFF-l3-6mB" secondAttribute="bottom" id="0MV-dM-o2a"/>
+                                                <constraint firstItem="con-zt-5NG" firstAttribute="leading" secondItem="IFF-l3-6mB" secondAttribute="trailing" constant="8" symbolic="YES" id="29X-CG-x8k"/>
                                                 <constraint firstItem="HXa-aM-7Tx" firstAttribute="top" secondItem="FkS-Up-Ru6" secondAttribute="topMargin" id="BC7-vp-95d"/>
                                                 <constraint firstItem="aL3-Vp-glh" firstAttribute="leading" secondItem="con-zt-5NG" secondAttribute="leading" id="Db3-rt-jWK"/>
                                                 <constraint firstItem="HXa-aM-7Tx" firstAttribute="top" secondItem="con-zt-5NG" secondAttribute="top" id="Gql-Pu-d8E"/>
+                                                <constraint firstItem="IFF-l3-6mB" firstAttribute="top" secondItem="HXa-aM-7Tx" secondAttribute="top" id="NaV-oM-gSr"/>
                                                 <constraint firstItem="con-zt-5NG" firstAttribute="trailing" secondItem="FkS-Up-Ru6" secondAttribute="trailingMargin" id="Wen-Rr-oi2"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="aL3-Vp-glh" secondAttribute="bottom" constant="-2.5" id="nDD-gO-WwM"/>
                                                 <constraint firstItem="HXa-aM-7Tx" firstAttribute="leading" secondItem="FkS-Up-Ru6" secondAttribute="leadingMargin" id="p4Y-74-MQE"/>
@@ -583,6 +591,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImgView" destination="HXa-aM-7Tx" id="uDT-im-uGJ"/>
+                                            <outlet property="maskView" destination="IFF-l3-6mB" id="p2s-KC-xni"/>
                                             <outlet property="nameLabel" destination="con-zt-5NG" id="HTV-q2-UDM"/>
                                             <outlet property="signatureLabel" destination="aL3-Vp-glh" id="EZX-Rh-vzU"/>
                                         </connections>

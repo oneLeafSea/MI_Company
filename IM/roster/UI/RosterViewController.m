@@ -193,8 +193,10 @@
     PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:item.uid];
     if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
         cell.signatureLabel.text = [NSString stringWithFormat:@"[在线]%@", item.sign];
+        cell.maskView.hidden = YES;
     } else {
         cell.signatureLabel.text = [NSString stringWithFormat:@"[离线]%@", item.sign];
+        cell.maskView.hidden = NO;
     }
     
     cell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:item.uid];

@@ -31,10 +31,13 @@
 
 #import "JSQVoiceMediaItem.h"
 
-@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate, fileBrowerNavigationViewControllerDelegate> {
+@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate, fileBrowerNavigationViewControllerDelegate, UIScrollViewDelegate> {
     ChatMessageMorePanelViewController  *m_morePanel;
     ChatMessageVoicePanelViewController *m_voicePanel;
-    __weak IBOutlet UIBarButtonItem *rightBtn;
+    __weak IBOutlet UIBarButtonItem     *rightBtn;
+    UIRefreshControl                    *m_refreshControl;
+    BOOL                                m_first;
+    BOOL                                m_needLoadMore;
 }
 
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -68,6 +71,51 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(CollectionViewDidTapped)];
     [self.collectionView addGestureRecognizer:tapGesture];
+    m_refreshControl = [[UIRefreshControl alloc] init];;
+    [self.collectionView addSubview:m_refreshControl];
+    [m_refreshControl addTarget:self action:@selector(handleRefresh) forControlEvents:UIControlEventValueChanged];
+//    self.collectionView.delegate = self;
+    m_first = YES;
+}
+
+- (void)handleRefresh {
+    if (![self needRefresh]) {
+        [m_refreshControl endRefreshing];
+        [m_refreshControl removeFromSuperview];
+        [m_refreshControl removeTarget:self action:@selector(handleRefresh) forControlEvents:UIControlEventValueChanged];
+        return;
+    }
+    __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
+    [UIView setAnimationsEnabled:NO];
+    [self.collectionView performBatchUpdates:^{
+        NSUInteger count = self.data.messages.count;
+        NSMutableArray *arrayWithIndexPathsInsert = [NSMutableArray array];
+        [self loadMore];
+        NSUInteger newItemCount = self.data.messages.count;
+        for (int n = 0; n < newItemCount - count; n++) {
+            [arrayWithIndexPathsInsert addObject:[NSIndexPath indexPathForRow:n inSection:0]];
+        }
+        [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPathsInsert];
+    } completion:^(BOOL finished) {
+        CGFloat newTableViewHeight = self.collectionView.contentSize.height;
+        self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight);
+        [m_refreshControl endRefreshing];
+    }];
+    [UIView setAnimationsEnabled:YES];
+    
+}
+
+- (BOOL)needRefresh {
+    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 50) offset:0];
+    if (self.data.messages.count == msgs.count) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)loadMore {
+    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 50) offset:0];
+    self.data = [[ChatModel alloc] initWithMsgs:msgs];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +128,10 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageRecvNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageFileReceived:) name:kChatMessageImageFileReceived object:nil];
-    
+    if (m_first) {
+        [self.collectionView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+        m_first = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -500,6 +551,39 @@
     }
     
 }
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView.contentOffset.y >= 0 && scrollView.contentOffset.y <= 44) {
+//        if (![self needRefresh]) {
+//            return;
+//        }
+//        __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
+//        [UIView setAnimationsEnabled:NO];
+//        [self.collectionView performBatchUpdates:^{
+//            NSUInteger count = self.data.messages.count;
+//            NSMutableArray *arrayWithIndexPathsInsert = [NSMutableArray array];
+//            [self loadMore];
+//            NSUInteger newItemCount = self.data.messages.count;
+//            for (int n = 0; n < newItemCount - count; n++) {
+//                [arrayWithIndexPathsInsert addObject:[NSIndexPath indexPathForRow:n inSection:0]];
+//            }
+//            [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPathsInsert];
+//        } completion:^(BOOL finished) {
+//            CGFloat newTableViewHeight = self.collectionView.contentSize.height;
+//            self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight);
+//        }];
+//        [UIView setAnimationsEnabled:YES];
+//    }
+//}
+
+//
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//   
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+//}
+
 
 - (void)videoChat {
     [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
@@ -568,7 +652,6 @@
     
 }
 
-
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
 {
     return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
@@ -577,13 +660,11 @@
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldEnableAsset:(ALAsset *)asset
 {
     // Enable video clips if they are at least 5s
-    if ([[asset valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo])
-    {
+    if ([[asset valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo]) {
         NSTimeInterval duration = [[asset valueForProperty:ALAssetPropertyDuration] doubleValue];
         return lround(duration) >= 5;
     }
-    else
-    {
+    else {
         return YES;
     }
 }
@@ -769,7 +850,7 @@
 
 
 - (void)ChatMessageVoicePanelViewController:(ChatMessageVoicePanelViewController *)voicePanelVc recordFail:(NSError *)error {
-    
+
 }
 
 #pragma mark -<fileBrowerNavigationViewControllerDelegate>

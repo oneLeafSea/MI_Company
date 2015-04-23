@@ -35,25 +35,6 @@
             completion:(void (^)(BOOL finished, id arguments))completion;
 
 
-- (BOOL)sendVideoMesage:(NSString *)content
-               msgType:(ChatMessageType)msgType
-                    to:(NSString *)to
-            completion:(void (^)(BOOL  finished))completion;
-
-- (BOOL)sendImageMesage:(NSString *)content
-               msgType:(ChatMessageType)msgType
-                    to:(NSString *)to
-            completion:(void (^)(BOOL finished))completion;
-
-- (void)sendImageMesageWithAssets:(NSArray *)assets
-                               to:(NSString *)to
-                       completion:(void (^)(BOOL))completion;
-
-- (void)sendImageMesageWithAsset:(ALAsset *)asset
-                         msgType:(ChatMessageType) msgType
-                              to:(NSString *)to
-                      completion:(void(^)(BOOL finished, id thumberImgPath))completion;
-
 - (void)sendImageMesageWithImgPath:(NSString *)imagPath
                           uuidName:(NSString *)uuidName
                           imgName:(NSString *)imgName
