@@ -96,6 +96,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -238,6 +243,15 @@
                 [APP_DELEGATE.user.webRtcMgr setbusy:NO];
             }];
             break;
+        case kWebRtcClientStateTimeout:
+            [m_timer invalidate];
+            m_timer = nil;
+            [self disconnect];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+                [[AudioPlayer sharePlayer] stop];
+            }];
+            break;
     }
 }
 
@@ -314,16 +328,7 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
                 [self.localViewRightConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
             }
         } else if (videoView == self.remoteView) {
-            //Resize Remote View
             self.remoteVideoSize = size;
-//            CGSize aspectRatio = CGSizeEqualToSize(size, CGSizeZero) ? defaultAspectRatio : size;
-//            CGRect videoRect = self.view.bounds;
-//            CGRect videoFrame = AVMakeRectWithAspectRatioInsideRect(aspectRatio, videoRect);
-//            [self.remoteViewTopConstraint setConstant:containerHeight/2.0f - videoFrame.size.height/2.0f];
-//            [self.remoteViewBottomConstraint setConstant:containerHeight/2.0f - videoFrame.size.height/2.0f];
-//            [self.remoteViewLeftConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
-//            [self.remoteViewRightConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
-            
         }
         [self.view layoutIfNeeded];
     }];

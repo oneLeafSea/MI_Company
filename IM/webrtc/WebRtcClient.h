@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
     // Connected to servers.
     kWebRtcClientStateConnected,
     
-    kWebRtcClientStateLeave
+    kWebRtcClientStateLeave,
+    kWebRtcClientStateTimeout
 };
 
 

@@ -30,18 +30,20 @@
 #import "LogLevel.h"
 #import "Encrypt.h"
 
-//static NSString *kWebrtcDefaultSTUNServerUrl =  @"stun:10.22.1.159";
-
 
 static NSString *kWebRtcClientErrorDomain = @"WebRtcClient";
 static NSInteger kWebRtcClientErrorCreateSDP = -1;
 static NSInteger kWebRtcClientErrorSetSDP = -2;
+static NSUInteger kWebrtcTimeout = 30;
 
 @interface WebRtcClient()<WebRtcWebSocketChannelDelegate,
 RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     WebRtcWebSocketChannel *m_channel;
     BOOL                    m_front;
     NSString               *m_seq;
+    NSTimer                *m_timer;
+    BOOL                    m_iceStateFinished;
+    BOOL                    m_iceGatherFinished;
 }
 @property(nonatomic, strong) RTCPeerConnection *peerConnection;
 @property(nonatomic, strong) RTCPeerConnectionFactory *factory;
@@ -174,6 +176,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 
 
 - (void)createRoomWithId:(NSString *)roomId Completion:(void(^)(BOOL finished))completion {
+    [self startTimer];
     m_channel = [[WebRtcWebSocketChannel alloc] initWithUrl:self.serverHost delegate:self];
     [m_channel connectWithCompletion:^(BOOL ok) {
         if (ok) {
@@ -187,17 +190,24 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
             m.token = self.token;
             _roomId = roomId;
             [m setRoomId:_roomId uid:_uid];
-            [m_channel sendMessage:m ack:^(WebRtcAckMessage *ackMsg) {
-                BOOL ok = [ackMsg.ack isEqualToString:kWebRtcAckMessageOK];
-                if (ok) {
-                    self.state = kWebRtcClientStateConnected;
-                }
-                completion(ok);
-            }];
+            [m_channel sendData:m.JSONData];
+            self.state = kWebRtcClientStateConnected;
+            completion(ok);
         } else {
             completion(NO);
         }
     }];
+}
+
+- (void)startTimer {
+    m_timer = [NSTimer scheduledTimerWithTimeInterval:kWebrtcTimeout target:self selector:@selector(timeout) userInfo:nil repeats:NO];
+}
+
+- (void)timeout {
+    if (m_iceGatherFinished && m_iceStateFinished) {
+        return;
+    }
+    [_delegate WebRtcClient:self didChangeState:kWebRtcClientStateTimeout];
 }
 
 - (void)createPeerConnection {
@@ -217,6 +227,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 }
 
 - (void)joinRoomId:(NSString *)rid completion:(void(^)(BOOL finished))completion {
+    [self startTimer];
     m_channel = [[WebRtcWebSocketChannel alloc] initWithUrl:self.serverHost delegate:self];
     [m_channel connectWithCompletion:^(BOOL ok) {
         if (ok) {
@@ -231,9 +242,8 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
             m.seq = [Encrypt encodeWithKey:self.key iv:self.iv data:[m.seq dataUsingEncoding:NSUTF8StringEncoding] error:nil];
             m.token = self.token;
             [m setRid:rid];
-            [m_channel sendMessage:m ack:^(WebRtcAckMessage *ackMsg) {
-                completion([ackMsg.ack isEqualToString:kWebRtcAckMessageOK]);
-            }];
+            [m_channel sendData:[m JSONData]];
+            completion(YES);
         } else {
             completion(NO);
         }
@@ -292,9 +302,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     if (_state == kWebRtcClientStateDisconnected) {
         return;
     }
-//    WebRtcLeaveRoomMessage *m = [[WebRtcLeaveRoomMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"leave" content:nil];
-//    m.uid = _uid;
-//    [m_channel sendData:m.JSONData];
      _peerConnection = nil;
     [m_channel disconnect];
     m_channel = nil;
@@ -313,7 +320,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     DDLogInfo(@"收到offer。");
     [self createPeerConnection];
     _talkingUid = sdpMsg.from;
-//    [_messageQueue addObject:sdpMsg];
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
@@ -370,7 +376,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     
     if ([message isKindOfClass:[WebRtcCandidateMessage class]]) {
         WebRtcCandidateMessage *candidateMsg = (WebRtcCandidateMessage *)message;
-//        [_peerConnection addICECandidate:candidateMsg.candidate];
         [_candidateQueue addObject:candidateMsg.candidate];
         [self drainMessageQueueIfReady];
         DDLogInfo(@"INFO: add ice candidate.");
@@ -440,10 +445,16 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
   iceConnectionChanged:(RTCICEConnectionState)newState {
     DDLogInfo(@"ICE state changed: %d", newState);
+    if (newState == RTCICEConnectionConnected) {
+        m_iceStateFinished = YES;
+    }
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
    iceGatheringChanged:(RTCICEGatheringState)newState {
+    if (newState == RTCICEGatheringComplete) {
+        m_iceGatherFinished = YES;
+    }
     DDLogInfo(@"ICE gathering state changed: %d", newState);
 }
 

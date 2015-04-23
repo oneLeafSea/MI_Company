@@ -23,8 +23,8 @@
 #import "WebRtcNotifyMsg.h"
 
 @interface WebRtcCallViewController () <WebRtcClientDelegate, RTCEAGLVideoViewDelegate> {
-    NSTimer *m_callTimer;
-    NSInteger m_callTimerStick;
+//    NSTimer *m_callTimer;
+//    NSInteger m_callTimerStick;
     NSTimer *m_timer;
     NSInteger m_timeStick;
     BOOL      m_remoteVideoEnable;
@@ -67,7 +67,7 @@
 
 @end
 
-static NSUInteger kWebrtcTimeout = 30;
+//static NSUInteger kWebrtcTimeout = 30;
 
 @implementation WebRtcCallViewController
 
@@ -77,10 +77,11 @@ static NSUInteger kWebrtcTimeout = 30;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    m_callTimerStick = 0;
+//    m_callTimerStick = 0;
     self.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:self.talkingUid];
     [self.avatarImgView circle];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
+    self.localView.hidden = YES;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleButtonContainer)];
     [tapGestureRecognizer setNumberOfTapsRequired:1];
@@ -97,10 +98,10 @@ static NSUInteger kWebrtcTimeout = 30;
         } else {
             [self disconnect];
             [[AudioPlayer sharePlayer] stop];
-            if (m_callTimer) {
-                [m_callTimer invalidate];
-                m_callTimer = nil;
-            }
+//            if (m_callTimer) {
+//                [m_callTimer invalidate];
+//                m_callTimer = nil;
+//            }
             [self dismissViewControllerAnimated:YES completion:^{
                 [USER.webRtcMgr setbusy:NO];
                 [Utils alertWithTip:@"连接信令服务器失败。"];
@@ -113,7 +114,7 @@ static NSUInteger kWebrtcTimeout = 30;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"call" ofType:@"aif"];
     [[AudioPlayer sharePlayer] playWithPath:path];
     
-    m_callTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleCallTimeout) userInfo:nil repeats:YES];
+//    m_callTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleCallTimeout) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMsg:) name:kWebRtcNotifyMsgNotificaiton object:nil];
 }
 
@@ -122,6 +123,12 @@ static NSUInteger kWebrtcTimeout = 30;
     [self.topViewTopConstraint setConstant:-40.0f];
     [self.topView setAlpha:0.0f];
     [self.view layoutIfNeeded];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,22 +167,22 @@ static NSUInteger kWebrtcTimeout = 30;
     }];
 }
 
-- (void)handleCallTimeout {
-    m_callTimerStick++;
-    self.timeLbl.text = [NSString stringWithFormat:@"%02d:%02d", m_callTimerStick / 60, m_callTimerStick % 60];
-    if (m_callTimerStick > kWebrtcTimeout) {
-        [m_callTimer invalidate];
-        m_callTimer = nil;
-        [[AudioPlayer sharePlayer] stop];
-        [self disconnect];
-        [self dismissViewControllerAnimated:YES completion:^{
-            [Utils alertWithTip:@"对方无响应."];
-            [APP_DELEGATE.user.webRtcMgr setbusy:NO];
-        }];
-        
-    }
-    
-}
+//- (void)handleCallTimeout {
+//    m_callTimerStick++;
+//    self.timeLbl.text = [NSString stringWithFormat:@"%02d:%02d", m_callTimerStick / 60, m_callTimerStick % 60];
+//    if (m_callTimerStick > kWebrtcTimeout) {
+//        [m_callTimer invalidate];
+//        m_callTimer = nil;
+//        [[AudioPlayer sharePlayer] stop];
+//        [self disconnect];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            [Utils alertWithTip:@"对方无响应."];
+//            [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+//        }];
+//        
+//    }
+//    
+//}
 - (IBAction)videoBtnTapped:(id)sender {
     [self.localVideoTrack setEnabled:!self.localVideoTrack.isEnabled];
     [self.client sendVideoMsgWithEnable:self.localVideoTrack.isEnabled];
@@ -207,8 +214,8 @@ static NSUInteger kWebrtcTimeout = 30;
 - (IBAction)hangupBtnTapped:(id)sender {
     [m_timer invalidate];
     m_timer = nil;
-    [m_callTimer invalidate];
-    m_callTimer = nil;
+//    [m_callTimer invalidate];
+//    m_callTimer = nil;
     [[AudioPlayer sharePlayer] stop];
     [self disconnect];
     [self dismissViewControllerAnimated:YES completion:^{
@@ -238,6 +245,16 @@ static NSUInteger kWebrtcTimeout = 30;
                 [[AudioPlayer sharePlayer] stop];
             }];
             break;
+        case kWebRtcClientStateTimeout:
+            [m_timer invalidate];
+            m_timer = nil;
+            [self disconnect];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+                [[AudioPlayer sharePlayer] stop];
+                [Utils alertWithTip:@"对方无响应."];
+            }];
+            break;
     }
 }
 
@@ -255,10 +272,10 @@ didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 
 - (void)WebRtcClient:(WebRtcClient *)client
 didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
-    if (m_callTimer) {
-        [m_callTimer invalidate];
-        m_callTimer = nil;
-    }
+//    if (m_callTimer) {
+//        [m_callTimer invalidate];
+//        m_callTimer = nil;
+//    }
     if (!m_timer) {
         m_timeStick = 0;
         m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimeLbl) userInfo:nil repeats:YES];
@@ -347,8 +364,8 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [m_timer invalidate];
                 m_timer = nil;
-                [m_callTimer invalidate];
-                m_callTimer = nil;
+//                [m_callTimer invalidate];
+//                m_callTimer = nil;
                 [[AudioPlayer sharePlayer] stop];
                 [self disconnect];
                 [self dismissViewControllerAnimated:YES completion:^{
@@ -362,8 +379,8 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [m_timer invalidate];
                 m_timer = nil;
-                [m_callTimer invalidate];
-                m_callTimer = nil;
+//                [m_callTimer invalidate];
+//                m_callTimer = nil;
                 [[AudioPlayer sharePlayer] stop];
                 [self disconnect];
                 [self dismissViewControllerAnimated:YES completion:^{
