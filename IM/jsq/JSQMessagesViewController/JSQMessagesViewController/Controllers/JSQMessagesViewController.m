@@ -218,6 +218,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -343,9 +344,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
+//    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:animated];
-    }
+//    }
 }
 
 - (void)finishReceivingMessage
@@ -694,9 +695,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [textView becomeFirstResponder];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
+//    if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
-    }
+//    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView

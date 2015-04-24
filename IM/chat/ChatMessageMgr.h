@@ -47,6 +47,13 @@
                                   to:(NSString *)to
                           completion:(void (^)(BOOL finished, id argument))completion;
 
+- (void)InsertVideoChatWithFrom:(NSString *)from
+                       fromName:(NSString *)fromName
+                             to:(NSString *)to
+                          msgId:(NSString *)msgId
+                      connected:(BOOL)connected
+                       interval:(NSUInteger)interval;
+
 - (NSArray *)loadDbMsgsWithId:(NSString *)Id
                          type:(ChatMessageType)msgtype
                         limit:(UInt32)limit

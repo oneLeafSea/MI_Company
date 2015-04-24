@@ -154,6 +154,7 @@
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
 		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
 		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
+		7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */; };
 		7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5F81AB66D4100A95FC7 /* system.aiff */; };
 		7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */; };
 		7D7FCDE21AA849370023EF49 /* OsNavigationRootCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */; };
@@ -714,6 +715,8 @@
 		7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemNotification.m; sourceTree = "<group>"; };
 		7D76AB331A5E162000901AD0 /* RosterQid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterQid.h; sourceTree = "<group>"; };
 		7D76AB341A5E162000901AD0 /* RosterQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterQid.m; sourceTree = "<group>"; };
+		7D79F62D1AEA13CE005ABF41 /* JSQVideoChatMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoChatMediaItem.h; sourceTree = "<group>"; };
+		7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoChatMediaItem.m; sourceTree = "<group>"; };
 		7D7EB5F81AB66D4100A95FC7 /* system.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = system.aiff; sourceTree = "<group>"; };
 		7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = msn.aiff; sourceTree = "<group>"; };
 		7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OsNavigationRootCollectionCell.xib; sourceTree = "<group>"; };
@@ -1624,6 +1627,8 @@
 				7D005D811A91FFD6006CB54C /* JSQFileMediaOutgoingView.xib */,
 				7DFF639B1A92D39A0001F0A4 /* JSQFileMediaItem.h */,
 				7DFF639C1A92D39A0001F0A4 /* JSQFileMediaItem.m */,
+				7D79F62D1AEA13CE005ABF41 /* JSQVideoChatMediaItem.h */,
+				7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2972,6 +2977,7 @@
 				7DAB70BF1AC161B5000E81D2 /* WebRtcSignalingMessage.m in Sources */,
 				7D7FCDED1AA84DFB0023EF49 /* OsNavigationSelOrgCollectionCell.m in Sources */,
 				7DB158C71A42DD5600287BBE /* XLFormTextFieldCell.m in Sources */,
+				7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */,
 				7DB158781A42DD5600287BBE /* RowInfo.m in Sources */,
 				7DB158481A42DD5600287BBE /* DictsMgr.m in Sources */,
 				7DFE24A11AA4193800C5DD29 /* AvatarMgr.m in Sources */,

@@ -15,6 +15,7 @@
 #import "LogLevel.h"
 #import "FileHash.h"
 #import "NSUUID+StringUUID.h"
+#import "Encrypt.h"
 
 
 static const int kMaxFileBlockPorters = 5;
@@ -100,8 +101,6 @@ static const NSUInteger kFileTransferBlockCount = 3;
 - (BOOL) notifyFileServerStart {
     
     NSDictionary *params = @{
-                             @"token":[m_options objectForKey:@"token"],
-                             @"signature":[m_options objectForKey:@"signature"],
                              @"filename":m_fileName,
                              @"offset":[NSNumber numberWithUnsignedInteger:0],
                              @"block-size":[NSNumber numberWithUnsignedInteger:0],
@@ -109,17 +108,26 @@ static const NSUInteger kFileTransferBlockCount = 3;
                              @"filesize":[NSNumber numberWithUnsignedLongLong:(m_type == FileTransferTaskTypeUpload) ? m_sz : 0]
                              };
     
+    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString *key = [m_options objectForKey:@"key"];
+    NSString *iv = [m_options objectForKey:@"iv"];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:qid forHTTPHeaderField:@"qid"];
+    [manager.requestSerializer setValue:[m_options objectForKey:@"token"] forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:sign forHTTPHeaderField:@"signature"];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:m_urlString parameters:params constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        dispatch_async(m_taskQueue, ^{
-            NSHTTPURLResponse *resp = operation.response;
-            if (m_type == FileTransferTaskTypeDownload) {
-                NSString *val = [[resp allHeaderFields] valueForKey:@"Fl"];
-                m_sz = [val intValue];
-            }
-            [self startTransfer];
-        });
+    [manager POST:m_urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            dispatch_async(m_taskQueue, ^{
+                NSHTTPURLResponse *resp = operation.response;
+                if (m_type == FileTransferTaskTypeDownload) {
+                    NSString *val = [[resp allHeaderFields] valueForKey:@"Fl"];
+                    m_sz = [val intValue];
+                }
+                [self startTransfer];
+            });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         dispatch_async(m_taskQueue, ^{
             NSLog(@"%@", error);

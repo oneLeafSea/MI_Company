@@ -20,6 +20,8 @@
 
 - (BOOL) insertMessage:(ChatMessage *)msg;
 
+- (BOOL) existMsgId:(NSString *)msgId;
+
 - (NSArray *) getMsgsWithId:(NSString *)uid
                     msgType:(ChatMessageType) type
                       limit:(UInt32) limit

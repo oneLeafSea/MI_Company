@@ -58,6 +58,8 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
 
 - (void)sendVideoMsgWithEnable:(BOOL)enable;
 
+- (BOOL)isConnected;
+
 @property(nonatomic, readonly) BOOL invited;
 @property(nonatomic, readonly) NSString *iceUrl;
 @property(nonatomic, readonly) NSString *token;

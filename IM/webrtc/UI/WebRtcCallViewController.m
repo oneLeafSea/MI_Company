@@ -129,6 +129,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    [USER.msgMgr InsertVideoChatWithFrom:USER.uid fromName:USER.name to:self.talkingUid msgId:[NSUUID uuid] connected:[self.client isConnected] interval:m_timeStick];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -17,4 +17,6 @@ extern NSString *kSQLChatMessageUpdateTime;
 
 extern NSString *KSQLChatMessageGetMsg;
 
+extern NSString *kSQLChatMessageExistMsgId;
+
 extern NSString *kSQLChatMessageGetLastGrpChatMsg;

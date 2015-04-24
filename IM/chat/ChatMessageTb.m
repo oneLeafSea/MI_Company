@@ -79,6 +79,18 @@
     return ret;
 }
 
+- (BOOL) existMsgId:(NSString *)msgId {
+    __block BOOL ret = NO;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *rs = [db executeQuery:kSQLChatMessageExistMsgId, msgId];
+        if (rs.next) {
+            ret = YES;
+        }
+        [rs close];
+    }];
+    return ret;
+}
+
 
 - (NSArray *) getMsgsWithId:(NSString *)uid
                     msgType:(ChatMessageType) type

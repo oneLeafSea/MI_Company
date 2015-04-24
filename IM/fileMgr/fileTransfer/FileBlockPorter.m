@@ -29,9 +29,6 @@
         NSString *iv = [options objectForKey:@"iv"];
         NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
-                                @"qid":qid,
-                                @"token":[options objectForKey:@"token"],
-                                @"signature":sign,
                                 @"filename":block.fileName,
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedInteger:blockData.length],
@@ -41,8 +38,12 @@
                                 };
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"qid"];
+        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"token"];
+        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"signature"];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [manager POST:urlString parameters:params constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             DDLogInfo(@"uploaded fileName:%@ offset:%llu size:%lu", block.fileName, block.offset, (unsigned long)block.size);
             dispatch_async(queue, ^{
                 if ([self.delegate respondsToSelector:@selector(FileBlockPorter:block:finished:error:)]) {

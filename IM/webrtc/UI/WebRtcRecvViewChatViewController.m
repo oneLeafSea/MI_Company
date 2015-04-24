@@ -19,6 +19,7 @@
 #import "LogLevel.h"
 #import "AppDelegate.h"
 #import "WebRtcNotifyMsg.h"
+#import "NSUUID+StringUUID.h"
 
 
 @interface WebRtcRecvViewChatViewController () <WebRtcClientDelegate, RTCEAGLVideoViewDelegate> {
@@ -101,6 +102,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    [USER.msgMgr InsertVideoChatWithFrom:self.talkingUid fromName:self.nameLbl.text to:USER.uid msgId:[NSUUID uuid] connected:[self.client isConnected] interval:m_timeStick];
 }
 
 - (void)didReceiveMemoryWarning {

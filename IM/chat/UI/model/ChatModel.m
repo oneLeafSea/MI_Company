@@ -11,6 +11,7 @@
 #import "JSQMessage.h"
 #import "AppDelegate.h"
 #import "JSQVoiceMediaItem.h"
+#import "JSQVideoChatMediaItem.h"
 #import "JSQFileMediaItem.h"
 #import "NSDate+Common.h"
 #import "UIImage+Common.h"
@@ -52,7 +53,6 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
     [msgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ChatMessage *msg = obj;
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
-//            JSQMessage *jsqMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] text:[msg.body objectForKey:@"content"]];
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *jsqMsg = [[JSQMessage alloc] initWithSenderId:msg.from
                                                     senderDisplayName:[msg.body objectForKey:@"fromname"]
@@ -83,9 +83,6 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                     
                 }
             }
-//            JSQMessage *photoMessage = [JSQMessage messageWithSenderId:msg.from
-//                                                           displayName:[msg.body objectForKey:@"fromname"]
-//                                                                 media:photoItem];
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *photoMessage = [[JSQMessage alloc] initWithSenderId:msg.from
                                                           senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:photoItem];
@@ -133,13 +130,25 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             unsigned long long filesz = [sz integerValue];
             JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
-//            JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
             JSQMessage *fileMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:fileItem];
             
             [self.messages addObject:fileMsg];
         }
-
         
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"videochat"]) {
+            NSString *tip = @"通话未接通";
+            NSNumber *n = [msg.body objectForKey:@"connected"];
+            BOOL connected = [n boolValue];
+            NSUInteger interval = [[msg.body objectForKey:@"interval"] integerValue];
+            if (connected) {
+                tip = [NSString stringWithFormat:@"通话时长%02d:%02d", interval/60, interval%60];
+            }
+            NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
+            JSQVideoChatMediaItem *item = [[JSQVideoChatMediaItem alloc] initWithTip:tip];
+            item.appliesMediaViewMaskAsOutgoing = [USER.uid isEqualToString:msg.from];
+            JSQMessage *videoChatMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:item];
+            [self.messages addObject:videoChatMsg];
+        }
         }];
     return YES;
 }

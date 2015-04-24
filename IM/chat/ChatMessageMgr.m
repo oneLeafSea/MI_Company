@@ -164,6 +164,28 @@
     }];
 }
 
+
+- (void)InsertVideoChatWithFrom:(NSString *)from
+                       fromName:(NSString *)fromName
+                             to:(NSString *)to
+                          msgId:(NSString *)msgId
+                      connected:(BOOL)connected
+                       interval:(NSUInteger)interval {
+    ChatMessage *msg = [[ChatMessage alloc] init];
+    msg.qid = msgId;
+    msg.from = from;
+    msg.to = to;
+    msg.time = [[NSDate Now] formatWith:nil];
+    msg.chatMsgType = ChatMessageTypeNormal;
+    [msg.body setObject:@"videochat" forKey:@"type"];
+    [msg.body setObject:[NSNumber numberWithBool:connected] forKey:@"connected"];
+    [msg.body setObject:[NSNumber numberWithInteger:interval] forKey:@"interval"];
+    [msg.body setObject:fromName forKey:@"fromname"];
+    if ([m_msgTb insertMessage:msg]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageVideoChatMsg object:msg];
+    }
+}
+
 - (BOOL)sendVideoMesage:(NSString *)content
                 msgType:(ChatMessageType)msgType
                      to:(NSString *)to
@@ -185,7 +207,6 @@
     for (ALAsset *asset in assets) {
         if (asset.defaultRepresentation) {
             UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage scale:0.1 orientation:UIImageOrientationUp];
-//            NSString *imgName = asset.defaultRepresentation.filename;
             NSString *uuidName = [NSString stringWithFormat:@"%@.jpg", [NSUUID uuid]];
             NSString *imagPath = [APP_DELEGATE.user.filePath stringByAppendingPathComponent:uuidName];
             if (![img saveToPath:imagPath scale:0.1]) {

@@ -27,11 +27,13 @@
 #import "JSQFileMediaItem.h"
 #import "fileBrowerNavigationViewController.h"
 #import "GroupChatSettingTableViewController.h"
+#import "NSDate+Common.h"
 
 
 #import "JSQVoiceMediaItem.h"
+#import "JSQVideoChatMediaItem.h"
 
-@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate, fileBrowerNavigationViewControllerDelegate, UIScrollViewDelegate> {
+@interface ChatViewController () <CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChatMessageVoicePanelViewControllerDelegate, fileBrowerNavigationViewControllerDelegate, UIScrollViewDelegate, UIActionSheetDelegate> {
     ChatMessageMorePanelViewController  *m_morePanel;
     ChatMessageVoicePanelViewController *m_voicePanel;
     __weak IBOutlet UIBarButtonItem     *rightBtn;
@@ -74,8 +76,17 @@
     m_refreshControl = [[UIRefreshControl alloc] init];;
     [self.collectionView addSubview:m_refreshControl];
     [m_refreshControl addTarget:self action:@selector(handleRefresh) forControlEvents:UIControlEventValueChanged];
-//    self.collectionView.delegate = self;
+    self.automaticallyScrollsToMostRecentMessage  = NO;
     m_first = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageRecvNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageFileReceived:) name:kChatMessageImageFileReceived object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleVideoMsgNotification:) name:kChatMessageVideoChatMsg object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageImageFileReceived object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageVideoChatMsg object:nil];
 }
 
 - (void)handleRefresh {
@@ -126,8 +137,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageRecvNewMsg object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageFileReceived:) name:kChatMessageImageFileReceived object:nil];
+    
     if (m_first) {
         [self.collectionView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
         m_first = NO;
@@ -136,13 +146,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
     ChatMessageControllerInfo *info = [[ChatMessageControllerInfo alloc] init];
     info.talkingId = [self.talkingId copy];
     info.talkingName = [self.talkingname copy];
     info.msgType = self.chatMsgType;
     [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageControllerWillDismiss object:info];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageImageFileReceived object:nil];
 }
 
 - (void)didPressReturnKeyWithMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
@@ -181,7 +189,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self beginListeningForKeyboard];
     });
-    
+    [self scrollToBottomAnimated:YES];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender
@@ -194,6 +202,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self beginListeningForKeyboard];
     });
+    [self scrollToBottomAnimated:YES];
 }
 
 
@@ -377,7 +386,10 @@
             }
         }
     }
-    
+    if ([msg.media isKindOfClass:[JSQVideoChatMediaItem class]]) {
+        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"进行通话" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"通话" otherButtonTitles:nil];
+        [as showInView:self.view];
+    }
     NSLog(@"Tapped message bubble!");
 }
 
@@ -389,6 +401,30 @@
 }
 
 #pragma mark - handle message notification
+
+- (void)handleVideoMsgNotification:(NSNotification *)notification {
+    __block ChatMessage *msg = notification.object;
+    if ([msg.to isEqualToString:self.talkingId] && self.chatMsgType == ChatMessageTypeNormal) {
+        NSString *tip = @"通话未接通";
+        NSNumber *n = [msg.body objectForKey:@"connected"];
+        BOOL connected = [n boolValue];
+        NSUInteger interval = [[msg.body objectForKey:@"interval"] integerValue];
+        if (connected) {
+            tip = [NSString stringWithFormat:@"通话时长%02d:%02d", interval/60, interval%60];
+        }
+        NSDate *date = [NSDate dateWithFormater:@"yyyy-MM-dd HH:mm:ss.SSSSSS" stringTime:msg.time];
+        JSQVideoChatMediaItem *item = [[JSQVideoChatMediaItem alloc] initWithTip:tip];
+        item.appliesMediaViewMaskAsOutgoing = [USER.uid isEqualToString:msg.from];
+        JSQMessage *videoChatMsg = [[JSQMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:item];
+        [self.data.messages addObject:videoChatMsg];
+        [self.collectionView performBatchUpdates:^{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.data.messages.count - 1 inSection:0];
+            [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished) {
+            [self scrollToBottomAnimated:YES];
+        }];
+    }
+}
 
 - (void)handleNewMessageNotification:(NSNotification *) notification {
     __block ChatMessage *msg = notification.object;
@@ -476,10 +512,12 @@
     [arr addObject:item];
     item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"照片" imageName:@"chatmsg_pic" target:self selector:@selector(getPhotoFromImgLib)];
     [arr addObject:item];
-    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"通话" imageName:@"chatmsg_phone" target:self selector:@selector(audioChat)];
-    [arr addObject:item];
-    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"视频" imageName:@"chatmsg_video" target:self selector:@selector(videoChat)];
-    [arr addObject:item];
+    if (self.chatMsgType == ChatMessageTypeNormal ) {
+        item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"通话" imageName:@"chatmsg_phone" target:self selector:@selector(audioChat)];
+        [arr addObject:item];
+        item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"视频" imageName:@"chatmsg_video" target:self selector:@selector(videoChat)];
+        [arr addObject:item];
+    }
     item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"文件" imageName:@"chatmsg_folder" target:self selector:@selector(transferFile)];
     [arr addObject:item];
     m_morePanel = [[ChatMessageMorePanelViewController alloc] initWithPanelItems:arr];
@@ -875,6 +913,14 @@
     JSQMessage *fileMsg = [JSQMessage messageWithSenderId:uid displayName:USER.name media:fileItem];
     [self.data.messages addObject:fileMsg];
     return fileItem;
+}
+
+#pragma makr -UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
+    }
 }
 
 @end

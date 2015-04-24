@@ -33,6 +33,8 @@ NSString *kSQLChatMessageInsert = @"INSERT INTO `tb_message` (`msgid`, `from`, `
                                     "?"
                                     ");";
 
+NSString *kSQLChatMessageExistMsgId = @"SELECT * FROM `tb_message` WHERE `msgid` = ?;";
+
 NSString *kSQLChatMessageUpdateStatus = @"UPDATE `tb_message` SET "
                                          "status = ?"
                                          " WHERE "

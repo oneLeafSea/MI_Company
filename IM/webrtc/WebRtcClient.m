@@ -109,6 +109,11 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     }
 }
 
+- (BOOL)isConnected {
+    return m_iceGatherFinished && m_iceStateFinished;
+}
+
+
 - (void)mute {
     RTCMediaStream *localStream = _peerConnection.localStreams[0];
     RTCAudioTrack *audioTrack = localStream.audioTracks[0];
