@@ -42,6 +42,7 @@ static const NSUInteger kFileTransferBlockCount = 3;
 - (instancetype) initWithFileName:(NSString *)fileName
                         urlString:(NSString *)urlString
                    checkUrlString:(NSString *)checkUrlString
+                completeUrlString:(NSString *)completeUrlString
                          taskType:(FileTransferTaskType)taskType
                           options:(NSDictionary *)options{
     if (self = [super init]) {
@@ -53,6 +54,7 @@ static const NSUInteger kFileTransferBlockCount = 3;
         m_porter = [[NSMutableArray alloc] initWithCapacity:kMaxFileBlockPorters];
         m_checkUrlString = [checkUrlString copy];
         _taskId = [NSUUID uuid];
+        _completeUrl = [completeUrlString copy];
     }
     return self;
 }
@@ -115,9 +117,9 @@ static const NSUInteger kFileTransferBlockCount = 3;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:qid forHTTPHeaderField:@"qid"];
-    [manager.requestSerializer setValue:[m_options objectForKey:@"token"] forHTTPHeaderField:@"token"];
-    [manager.requestSerializer setValue:sign forHTTPHeaderField:@"signature"];
+    [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
+    [manager.requestSerializer setValue:[m_options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
+    [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:m_urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(m_taskQueue, ^{
@@ -130,7 +132,6 @@ static const NSUInteger kFileTransferBlockCount = 3;
             });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         dispatch_async(m_taskQueue, ^{
-            NSLog(@"%@", error);
             DDLogError(@"ERROR: %s. %@", __PRETTY_FUNCTION__, error);
             if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
                 [self.delegate FileTransferTask:self finished:NO error:error];
@@ -168,26 +169,70 @@ static const NSUInteger kFileTransferBlockCount = 3;
         DDLogError(@"%@ md5 is nil", [filePath lastPathComponent]);
         return;
     }
-    NSDictionary *params = @{
-                             @"token":[m_options objectForKey:@"token"],
-                             @"signature":[m_options objectForKey:@"signature"],
-                             @"filename":m_fileName,
-                             @"timestamp":[[NSDate Now] formatWith:nil],
-                             @"filesize":[NSNumber numberWithUnsignedLongLong:(m_type == FileTransferTaskTypeUpload) ? m_sz : 0],
-                             @"md5":md5,
-                             @"end":@YES
-                             };
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:m_checkUrlString parameters:params constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
-            [self.delegate FileTransferTask:self finished:YES error:nil];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
-            [self.delegate FileTransferTask:self finished:NO error:[self genErrorWithCode:4000 desc:@"md5 check error."]];
-        }
-    }];
+    
+    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString *key = [m_options objectForKey:@"key"];
+    NSString *iv = [m_options objectForKey:@"iv"];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    
+    if (m_type == FileTransferTaskTypeUpload) {
+        NSDictionary *params = @{
+                                 @"filename":m_fileName,
+                                 @"timestamp":[[NSDate Now] formatWith:nil],
+                                 @"md5":md5
+                                 };
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[m_options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
+        [manager POST:_completeUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+                [self.delegate FileTransferTask:self finished:YES error:nil];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+                [self.delegate FileTransferTask:self finished:NO error:[self genErrorWithCode:4000 desc:@"upload md5 check error."]];
+            }
+        }];
+    } else {
+        NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+        NSString *key = [m_options objectForKey:@"key"];
+        NSString *iv = [m_options objectForKey:@"iv"];
+        NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+        NSDictionary *params = @{
+                                 @"filename":m_fileName,
+                                 @"timestamp":[[NSDate Now] formatWith:nil],
+                                 @"filesize":[NSNumber numberWithUnsignedLongLong:(m_type == FileTransferTaskTypeUpload) ? m_sz : 0],
+                                 @"md5":md5,
+                                 @"end":@YES
+                                 };
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[m_options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [manager POST:m_checkUrlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+                [self.delegate FileTransferTask:self finished:YES error:nil];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+                [self.delegate FileTransferTask:self finished:NO error:[self genErrorWithCode:4000 desc:@"md5 check error."]];
+            }
+        }];
+//        [manager POST:m_checkUrlString parameters:params constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+//                [self.delegate FileTransferTask:self finished:YES error:nil];
+//            }
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            DDLogError(@"md5 check error. %@", error);
+//            if ([self.delegate respondsToSelector:@selector(FileTransferTask:finished:error:)]) {
+//                [self.delegate FileTransferTask:self finished:NO error:[self genErrorWithCode:4000 desc:@"md5 check error."]];
+//            }
+//        }];
+    }
 }
 
 #pragma mark - file blocke porter delegate.

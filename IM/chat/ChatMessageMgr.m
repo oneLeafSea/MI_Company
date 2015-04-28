@@ -102,7 +102,7 @@
               audioPath:(NSString *)audioPath
              completion:(void (^)(BOOL finished, id arguments))completion {
     
-    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv}  completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv}  completion:^(BOOL finished, NSError *error) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -136,7 +136,7 @@
                              msgType:(ChatMessageType)msgType
                                   to:(NSString *)to
                           completion:(void (^)(BOOL finished, id argument))completion {
-    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -232,13 +232,13 @@
     }
     
     __block NSString *thumbPath = [USER.filePath stringByAppendingPathComponent:thumbName];
-    if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)]) {
+    if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)]) {
         cpt(NO, nil);
         [[NSFileManager defaultManager] removeItemAtPath:imagPath error:nil];
         return;
     }
     
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (!finished) {
             cpt(NO, error);
         } else {
@@ -275,7 +275,7 @@
                            msgType:(ChatMessageType)msgType
                                 to:(NSString *)to
                         completion:(void (^)(BOOL finished, id argument))cpt {
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
         if (!finished) {
             cpt(NO, error);
         } else {
@@ -360,7 +360,7 @@
             } else {
                 NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
                 UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-                [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)];
+                [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)];
                 [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageImageFileReceived object:msg];
             }

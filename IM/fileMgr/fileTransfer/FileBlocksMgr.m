@@ -116,7 +116,6 @@ static NSString *kBlocksSuffix = @".blocksInfo";
                 [m_blocks addObject:[[FileBlock alloc] initWithDict:b filePath:m_filePath]];
             }
         }
-//        m_filePath = [blockInfo objectForKey:@"filePath"];
         NSNumber *filesz = [blockInfo objectForKey:@"filesz"];
         m_sz = [filesz unsignedLongLongValue];
         NSNumber *defaultBlockSz = [blockInfo objectForKey:@"defaultBlockSz"];

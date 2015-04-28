@@ -410,7 +410,7 @@
         BOOL connected = [n boolValue];
         NSUInteger interval = [[msg.body objectForKey:@"interval"] integerValue];
         if (connected) {
-            tip = [NSString stringWithFormat:@"通话时长%02d:%02d", interval/60, interval%60];
+            tip = [NSString stringWithFormat:@"通话时长%02lu:%02lu", interval/60, interval%60];
         }
         NSDate *date = [NSDate dateWithFormater:@"yyyy-MM-dd HH:mm:ss.SSSSSS" stringTime:msg.time];
         JSQVideoChatMediaItem *item = [[JSQVideoChatMediaItem alloc] initWithTip:tip];
@@ -481,7 +481,8 @@
                     item.imgPath = [USER.filePath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
                     NSString *thumbPath = [item.imgPath stringByAppendingString:@"_thumb"];
                     item.image = [UIImage imageWithContentsOfFile:thumbPath];
-                    [self finishReceivingMessage];
+                    [self.collectionView reloadData];
+                    [self scrollToBottomAnimated:YES];
                     break;
                 }
             }
@@ -502,8 +503,6 @@
     }
     
 }
-
-
 
 
 - (void) setMorePanel {
@@ -589,39 +588,6 @@
     }
     
 }
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView.contentOffset.y >= 0 && scrollView.contentOffset.y <= 44) {
-//        if (![self needRefresh]) {
-//            return;
-//        }
-//        __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
-//        [UIView setAnimationsEnabled:NO];
-//        [self.collectionView performBatchUpdates:^{
-//            NSUInteger count = self.data.messages.count;
-//            NSMutableArray *arrayWithIndexPathsInsert = [NSMutableArray array];
-//            [self loadMore];
-//            NSUInteger newItemCount = self.data.messages.count;
-//            for (int n = 0; n < newItemCount - count; n++) {
-//                [arrayWithIndexPathsInsert addObject:[NSIndexPath indexPathForRow:n inSection:0]];
-//            }
-//            [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPathsInsert];
-//        } completion:^(BOOL finished) {
-//            CGFloat newTableViewHeight = self.collectionView.contentSize.height;
-//            self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight);
-//        }];
-//        [UIView setAnimationsEnabled:YES];
-//    }
-//}
-
-//
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//   
-//}
-//
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//}
-
 
 - (void)videoChat {
     [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
@@ -660,7 +626,7 @@
                     ret = NO;
                     break;
                 }
-                if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)]) {
+                if (![img saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)]) {
                     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
                     ret = NO;
                     break;
@@ -853,7 +819,7 @@
     }
     
     [Img saveToPath:fileSavePath scale:1.0];
-    [Img saveToPath:thumbFilePath sz:CGSizeMake(100.0f, 135.0f)];
+    [Img saveToPath:thumbFilePath sz:CGSizeMake(100.0f, 100.0f)];
     
     [picker dismissViewControllerAnimated:YES completion:^{
         __block JSQPhotoMediaItem * item = [self addPhotoMsgWithPath:nil outgoing:YES uid:USER.uid displayName:USER.name msgId:nil];

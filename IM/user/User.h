@@ -20,7 +20,9 @@
 #import "OsMgr.h"
 #import "DetailMgr.h"
 #import "WebRtcMgr.h"
+#import "ChatMessageHistory.h"
 
+@class ChatMessageHistory;
 
 @interface User : NSObject
 
@@ -42,6 +44,7 @@
 @property(readonly) OsMgr           *osMgr;
 @property(readonly) DetailMgr       *detailMgr;
 @property(readonly) WebRtcMgr       *webRtcMgr;
+@property(readonly) ChatMessageHistory *msgHistory;
 
 @property(readonly) NSDictionary    *cfg;
 
@@ -55,6 +58,7 @@
 
 @property(readonly) NSString *imurl;
 @property(readonly) NSString *fileDownloadSvcUrl;
+@property(readonly) NSString *fileCompleteUrl;
 @property(readonly) NSString *fileUploadSvcUrl;
 @property(readonly) NSString *fileCheckUrl;
 @property(readonly) NSString *avatarUrl;

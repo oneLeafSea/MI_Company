@@ -63,7 +63,7 @@ static int kFileMaxTask = 5;
                  options:(NSDictionary *)options
               completion:(void(^)(BOOL finished, NSError *error))completion {
     dispatch_sync(m_fileTransferQueue, ^{
-        FileTransferTask *task = [[FileTransferTask alloc] initWithFileName:fileName urlString:urlString checkUrlString:checkUrlString taskType:FileTransferTaskTypeDownload options:options];
+        FileTransferTask *task = [[FileTransferTask alloc] initWithFileName:fileName urlString:urlString checkUrlString:checkUrlString completeUrlString:nil taskType:FileTransferTaskTypeDownload options:options];
         task.delegate = self;
         task.completion = completion;
         if (m_transfingQueue.count >= kFileMaxTask) {
@@ -80,10 +80,11 @@ static int kFileMaxTask = 5;
 - (void)uploadFileName:(NSString *)fileName
              urlString:(NSString *)urlString
         checkUrlString:(NSString *)checkUrlString
+     completeUrlString:(NSString *)completeUrlString
                options:(NSDictionary *)options
             completion:(void(^)(BOOL finished, NSError *error))completion {
     dispatch_async(m_fileTransferQueue, ^{
-        FileTransferTask *task = [[FileTransferTask alloc] initWithFileName:fileName urlString:urlString checkUrlString:checkUrlString taskType:FileTransferTaskTypeUpload options:options];
+        FileTransferTask *task = [[FileTransferTask alloc] initWithFileName:fileName urlString:urlString checkUrlString:checkUrlString completeUrlString:completeUrlString taskType:FileTransferTaskTypeUpload options:options];
         task.delegate = self;
         task.completion = completion;
         if (m_transfingQueue.count >= kFileMaxTask) {

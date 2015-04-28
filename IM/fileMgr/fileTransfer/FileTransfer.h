@@ -37,6 +37,7 @@
 - (void)uploadFileName:(NSString *)fileName
              urlString:(NSString *)urlString
         checkUrlString:(NSString *)checkUrlString
+     completeUrlString:(NSString *)completeUrlString
                options:(NSDictionary *)options
             completion:(void(^)(BOOL finished, NSError *error))completion;
 

@@ -76,7 +76,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                         [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
                             NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
                             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-                            [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 135.0f)];
+                            [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)];
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
                         }];
                     }
@@ -85,7 +85,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             }
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQMessage *photoMessage = [[JSQMessage alloc] initWithSenderId:msg.from
-                                                          senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:photoItem];
+                                                          senderDisplayName:[msg.body objectForKey:@"fromname"] ? [msg.body objectForKey:@"fromname"] : @"" date:date media:photoItem];
             [self.messages addObject:photoMessage];
         }
         
@@ -100,7 +100,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             
             if (!isReady && ![USER.fileTransfer exsitTask:uuid]) {
                 if ([msg.from isEqualToString:USER.uid]) {
-                    [USER.fileTransfer uploadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+                    [USER.fileTransfer uploadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
                         if (finished) {
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
                         }

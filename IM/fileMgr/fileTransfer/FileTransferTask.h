@@ -20,6 +20,7 @@ typedef NS_ENUM(UInt32, FileTransferTaskType) {
 - (instancetype) initWithFileName:(NSString *)fileName
                         urlString:(NSString *)urlString
                    checkUrlString:(NSString *)checkUrlString
+                completeUrlString:(NSString *)completeUrlString
                          taskType:(FileTransferTaskType)taskType
                           options:(NSDictionary *)options;
 
@@ -31,6 +32,7 @@ typedef NS_ENUM(UInt32, FileTransferTaskType) {
 @property(readonly)NSString *taskId;
 
 @property(readonly) NSString *fileName;
+@property(readonly) NSString *completeUrl;
 
 @property(weak) id<FileTransferTaskDelegate> delegate;
 

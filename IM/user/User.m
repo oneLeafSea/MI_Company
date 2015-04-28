@@ -112,6 +112,11 @@
         return NO;
     }
     
+    if (![self setupMsgHistory]) {
+        DDLogError(@"ERROR: setup msgHistory.");
+        return NO;
+    }
+    
     _fileTransfer = [[FileTransfer alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
@@ -208,6 +213,14 @@
     return YES;
 }
 
+- (BOOL)setupMsgHistory {
+    _msgHistory = [[ChatMessageHistory alloc] initWithUser:self];
+    if (!_msgHistory) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)reset {
     _session = nil;
     [self.rosterMgr reset];
@@ -272,16 +285,25 @@
 }
 
 - (NSString *)fileDownloadSvcUrl {
+//     return @"http://10.22.1.112:8040/file/download/";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     return [services objectForKey:@"SVC_FILE_DOWN"];
 }
 
+- (NSString *)fileCompleteUrl {
+//    return @"http://10.22.1.112:8040/file/complete";
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    return [services objectForKey:@"SVC_FILE_COMPLETE"];
+}
+
 - (NSString *)fileUploadSvcUrl {
+//    return @"http://10.22.1.112:8040/file/upload/";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     return [services objectForKey:@"SVC_FILE_UPLOAD"];
 }
 
 - (NSString *)fileCheckUrl {
+//    return @"http://10.22.1.112:8040/file/check/";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_FILE_CHECK"];
     NSParameterAssert(url);

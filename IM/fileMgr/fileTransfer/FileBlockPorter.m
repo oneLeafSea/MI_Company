@@ -39,9 +39,9 @@
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"qid"];
-        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"token"];
-        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"signature"];
+        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             DDLogInfo(@"uploaded fileName:%@ offset:%llu size:%lu", block.fileName, block.offset, (unsigned long)block.size);
@@ -70,17 +70,18 @@
         NSString *iv = [options objectForKey:@"iv"];
         NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
-                                @"qid":qid,
-                                @"token":[options objectForKey:@"token"],
-                                @"signature":sign,
                                 @"filename":block.fileName,
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedLongLong:block.size],
                                 @"timestamp":[[NSDate Now] formatWith:nil]
                                 };
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [manager POST:urlString parameters:params constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             DDLogInfo(@"downloaded fileName:%@ offset:%llu size:%lu", block.fileName, block.offset, (unsigned long)block.size);
             NSData *data = responseObject;
             NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -95,7 +96,6 @@
             });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             dispatch_async(queue, ^{
-                DDLogInfo(@"%@", error);
                 DDLogInfo(@"download fail offset:%llu size:%lu", block.offset, (unsigned long)block.size);
                 if ([self.delegate respondsToSelector:@selector(FileBlockPorter:block:finished:error:)]) {
                     [self.delegate FileBlockPorter:self block:block finished:NO error:error];

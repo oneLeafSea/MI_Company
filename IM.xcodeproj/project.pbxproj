@@ -11,10 +11,8 @@
 		7D005D2D1A91825D006CB54C /* FileBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D201A91825D006CB54C /* FileBlock.m */; };
 		7D005D2E1A91825D006CB54C /* FileBlockPorter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D221A91825D006CB54C /* FileBlockPorter.m */; };
 		7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D241A91825D006CB54C /* FileBlocksMgr.m */; };
-		7D005D301A91825D006CB54C /* FileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D261A91825D006CB54C /* FileDownloader.m */; };
 		7D005D311A91825D006CB54C /* FileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D281A91825D006CB54C /* FileTransfer.m */; };
 		7D005D321A91825D006CB54C /* FileTransferTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D2A1A91825D006CB54C /* FileTransferTask.m */; };
-		7D005D331A91825D006CB54C /* FileUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D2C1A91825D006CB54C /* FileUploader.m */; };
 		7D005D721A91B9DF006CB54C /* fileBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D711A91B9DF006CB54C /* fileBrowserViewController.m */; };
 		7D005D751A91BA00006CB54C /* fileBrowserSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D741A91BA00006CB54C /* fileBrowserSelectTableViewCell.m */; };
 		7D005D781A91DC7E006CB54C /* fileBrowserSelectCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D771A91DC7E006CB54C /* fileBrowserSelectCellModel.m */; };
@@ -135,6 +133,7 @@
 		7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */; };
 		7D302D031A778E14004C6BD5 /* KickNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302D021A778E14004C6BD5 /* KickNotification.m */; };
 		7D31B09B1ACB8526004D7158 /* WebRtcCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */; };
+		7D4271441AEE28AD009F2B71 /* ChatMessageHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4271431AEE28AD009F2B71 /* ChatMessageHistory.m */; };
 		7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */; };
 		7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D111AC555F1008B5A8C /* NSData+WebRtcB64Additions.m */; };
 		7D433D171AC555F1008B5A8C /* webrtcbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D121AC555F1008B5A8C /* webrtcbase64.c */; };
@@ -152,6 +151,7 @@
 		7D6FD7141A85EC73001BA1F1 /* ChatMessageVoicePanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6FD7131A85EC73001BA1F1 /* ChatMessageVoicePanel.xib */; };
 		7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */; };
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
+		7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE91AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m */; };
 		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
 		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
 		7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */; };
@@ -160,7 +160,6 @@
 		7D7FCDE21AA849370023EF49 /* OsNavigationRootCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */; };
 		7D7FCDE51AA849650023EF49 /* OsNavigationRootCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE41AA849650023EF49 /* OsNavigationRootCollectionCell.m */; };
 		7D7FCDE71AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE61AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib */; };
-		7D7FCDEA1AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE91AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m */; };
 		7D7FCDED1AA84DFB0023EF49 /* OsNavigationSelOrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDEC1AA84DFB0023EF49 /* OsNavigationSelOrgCollectionCell.m */; };
 		7D7FCDEF1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDEE1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib */; };
 		7D7FCDF21AA84FEE0023EF49 /* OsNavigationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDF11AA84FEE0023EF49 /* OsNavigationTableViewCell.m */; };
@@ -428,14 +427,10 @@
 		7D005D221A91825D006CB54C /* FileBlockPorter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlockPorter.m; sourceTree = "<group>"; };
 		7D005D231A91825D006CB54C /* FileBlocksMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlocksMgr.h; sourceTree = "<group>"; };
 		7D005D241A91825D006CB54C /* FileBlocksMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlocksMgr.m; sourceTree = "<group>"; };
-		7D005D251A91825D006CB54C /* FileDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDownloader.h; sourceTree = "<group>"; };
-		7D005D261A91825D006CB54C /* FileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDownloader.m; sourceTree = "<group>"; };
 		7D005D271A91825D006CB54C /* FileTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTransfer.h; sourceTree = "<group>"; };
 		7D005D281A91825D006CB54C /* FileTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTransfer.m; sourceTree = "<group>"; };
 		7D005D291A91825D006CB54C /* FileTransferTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTransferTask.h; sourceTree = "<group>"; };
 		7D005D2A1A91825D006CB54C /* FileTransferTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTransferTask.m; sourceTree = "<group>"; };
-		7D005D2B1A91825D006CB54C /* FileUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUploader.h; sourceTree = "<group>"; };
-		7D005D2C1A91825D006CB54C /* FileUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUploader.m; sourceTree = "<group>"; };
 		7D005D701A91B9DF006CB54C /* fileBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileBrowserViewController.h; sourceTree = "<group>"; };
 		7D005D711A91B9DF006CB54C /* fileBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileBrowserViewController.m; sourceTree = "<group>"; };
 		7D005D731A91BA00006CB54C /* fileBrowserSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileBrowserSelectTableViewCell.h; sourceTree = "<group>"; };
@@ -678,6 +673,8 @@
 		7D302D021A778E14004C6BD5 /* KickNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KickNotification.m; sourceTree = "<group>"; };
 		7D31B0991ACB8526004D7158 /* WebRtcCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcCallViewController.h; sourceTree = "<group>"; };
 		7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcCallViewController.m; sourceTree = "<group>"; };
+		7D4271421AEE28AD009F2B71 /* ChatMessageHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageHistory.h; sourceTree = "<group>"; };
+		7D4271431AEE28AD009F2B71 /* ChatMessageHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageHistory.m; sourceTree = "<group>"; };
 		7D433C6F1AC4F2F1008B5A8C /* WebRtcVideoChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcVideoChatViewController.h; sourceTree = "<group>"; };
 		7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcVideoChatViewController.m; sourceTree = "<group>"; };
 		7D433D101AC555F1008B5A8C /* NSData+WebRtcB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+WebRtcB64Additions.h"; sourceTree = "<group>"; };
@@ -1256,14 +1253,10 @@
 				7D005D221A91825D006CB54C /* FileBlockPorter.m */,
 				7D005D231A91825D006CB54C /* FileBlocksMgr.h */,
 				7D005D241A91825D006CB54C /* FileBlocksMgr.m */,
-				7D005D251A91825D006CB54C /* FileDownloader.h */,
-				7D005D261A91825D006CB54C /* FileDownloader.m */,
 				7D005D271A91825D006CB54C /* FileTransfer.h */,
 				7D005D281A91825D006CB54C /* FileTransfer.m */,
 				7D005D291A91825D006CB54C /* FileTransferTask.h */,
 				7D005D2A1A91825D006CB54C /* FileTransferTask.m */,
-				7D005D2B1A91825D006CB54C /* FileUploader.h */,
-				7D005D2C1A91825D006CB54C /* FileUploader.m */,
 			);
 			path = fileTransfer;
 			sourceTree = "<group>";
@@ -1696,6 +1689,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		7D4271411AEE28AD009F2B71 /* historymsg */ = {
+			isa = PBXGroup;
+			children = (
+				7D4271421AEE28AD009F2B71 /* ChatMessageHistory.h */,
+				7D4271431AEE28AD009F2B71 /* ChatMessageHistory.m */,
+			);
+			path = historymsg;
+			sourceTree = "<group>";
+		};
 		7D433C6E1AC4F2B3008B5A8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1764,6 +1766,7 @@
 		7DB0926F1A66017B005268A7 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				7D4271411AEE28AD009F2B71 /* historymsg */,
 				7D08D0071A8D92F200F4C8E7 /* voicePanel */,
 				7D44C4961A67987E004365D7 /* UI */,
 				7DB092701A6601B9005268A7 /* ChatMessage.h */,
@@ -2895,7 +2898,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D7FCDEA1AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m in Sources */,
+				7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */,
 				7DFE24AB1AA43F5B00C5DD29 /* GroupChatMgr.m in Sources */,
 				7DB2D6201A6F8DC700004D6C /* RecentTb.m in Sources */,
 				7DB1587C1A42DD5600287BBE /* RowName.m in Sources */,
@@ -3071,7 +3074,6 @@
 				7DB158A31A42DD5600287BBE /* MessageFactory.m in Sources */,
 				7DB158641A42DD5600287BBE /* ModuleDefault.m in Sources */,
 				7DB158B61A42DD5600287BBE /* WaitingViewController.m in Sources */,
-				7D005D331A91825D006CB54C /* FileUploader.m in Sources */,
 				7D119B341AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m in Sources */,
 				7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */,
 				7DB158731A42DD5600287BBE /* RowDatetime.m in Sources */,
@@ -3114,6 +3116,7 @@
 				7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */,
 				7DB158691A42DD5600287BBE /* Page.m in Sources */,
 				7D005D721A91B9DF006CB54C /* fileBrowserViewController.m in Sources */,
+				7D4271441AEE28AD009F2B71 /* ChatMessageHistory.m in Sources */,
 				7D2E0F9C1A830F250099AB04 /* JSQMessagesBubbleImage.m in Sources */,
 				7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */,
 				7DB158831A42DD5600287BBE /* RowSelectorPickerView.m in Sources */,
@@ -3228,7 +3231,6 @@
 				7DB251AB1A636D70007FC8D4 /* SeparatorHeadView.m in Sources */,
 				7DEA705F1AA94326002C2C68 /* OsOrgTableViewCell.m in Sources */,
 				7D1C60291AA6E7D20035A2D2 /* OsOrgVerTb.m in Sources */,
-				7D005D301A91825D006CB54C /* FileDownloader.m in Sources */,
 				7DB158741A42DD5600287BBE /* RowDateTimeInline.m in Sources */,
 				7D60237A1A80BAB3001BDD46 /* ChatViewMorePanelCellView.m in Sources */,
 				7DB158AC1A42DD5600287BBE /* Response.m in Sources */,
