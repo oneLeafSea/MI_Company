@@ -44,6 +44,7 @@ NSString *kSQLChatMessageUpdateTime = @"UPDATE `tb_message` SET "
                                             "time = ?"
                                             " WHERE "
                                             "msgid = ?";
+NSString *kSQLChatMessageGetMsgById = @"SELECT * FROM `tb_message` WHERE `msgid` = ?;";
 
 NSString *KSQLChatMessageGetMsg = @"SELECT * FROM (SELECT * FROM `tb_message` WHERE (`from` = ? OR `to` = ?) AND type = ? ORDER BY `time` DESC LIMIT ? OFFSET ?) ORDER BY `time` ASC";
 

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "WebRtcSignalingMessage.h"
-#import "WebRtcAckMessage.h"
 
 typedef NS_ENUM(NSInteger, WebRtcWebSocketChannelState) {
     // State when disconnected.
@@ -29,7 +28,7 @@ typedef NS_ENUM(NSInteger, WebRtcWebSocketChannelState) {
 
 - (void)connectWithCompletion:(void(^)(BOOL ok))completion;
 - (void)sendData:(NSData *)data;
-- (void)sendMessage:(WebRtcSignalingMessage *)msg ack:(void(^)(WebRtcAckMessage *ackMsg)) ack;
+//- (void)sendMessage:(WebRtcSignalingMessage *)msg ack:(void(^)(WebRtcAckMessage *ackMsg)) ack;
 - (void)disconnect;
 
 @property(weak, nonatomic) id<WebRtcWebSocketChannelDelegate> delegate;

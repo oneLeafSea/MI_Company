@@ -13,12 +13,13 @@
 #import "WebRtcRecvViewChatViewController.h"
 #import "WebRtcCallViewController.h"
 #import "AppDelegate.h"
+#import "MultiCallClient.h"
 
 //static NSString *kWebrtcUrl = @"wss://10.22.1.117:8088/webrtc";
 
-@interface WebRtcMgr() {
-    WebRtcClient *m_client;
+@interface WebRtcMgr() <MultiCallClientDelegate> {
     BOOL m_busy;
+    MultiCallClient *m_mcc;
 }
 @end
 
@@ -70,6 +71,17 @@
         return;
     }
     m_busy = YES;
+    
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"mulitivoice"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+                m_mcc = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:webrtcUrl] iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:YES];
+                [m_mcc joinRoomId:msg.rid];
+            
+        });
+        return;
+    }
+    
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WebRtcRecvViewChatViewController *recvController =[sb instantiateViewControllerWithIdentifier:@"WebRtcRecvViewChatViewController"];
@@ -85,6 +97,17 @@
 
 - (void)setbusy:(BOOL)busy {
     m_busy = busy;
+}
+
+
+- (void)MultiCallClient:(MultiCallClient *)cli didLeaveWithUid:(NSString *)uid deivce:(NSString *)device {
+    
+}
+- (void)MultiCallClient:(MultiCallClient *)cli didJoinedWithUid:(NSString *)uid deivce:(NSString *)device {
+    
+}
+- (void)MultiCallClient:(MultiCallClient *)cli didChangeState:(MultiCallClientState)state {
+    
 }
 
 

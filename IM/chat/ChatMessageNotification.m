@@ -14,3 +14,5 @@ NSString *kChatMessageControllerWillDismiss = @"cn.com.rooten.im.chatmessage.Mes
 NSString *kChatMessageImageFileReceived = @"cn.com.rooten.im.chatmessage.ImageFileReceived";
 
 NSString *kChatMessageVideoChatMsg = @"cn.com.rooten.im.chatmessage.videochatmsg";
+
+NSString *kChatMessageMediaMsgDownload = @"cn.com.rooten.im.chatmessage.chatMessageMediaMsgDownload";

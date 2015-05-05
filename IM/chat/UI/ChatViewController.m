@@ -81,12 +81,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewMessageNotification:) name:kChatMessageRecvNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleImageFileReceived:) name:kChatMessageImageFileReceived object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleVideoMsgNotification:) name:kChatMessageVideoChatMsg object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMediaMsg:) name:kChatMessageMediaMsgDownload object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageImageFileReceived object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageVideoChatMsg object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageMediaMsgDownload object:nil];
 }
 
 - (void)handleRefresh {
@@ -490,6 +492,32 @@
     });
 }
 
+- (void)handleMediaMsg:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ChatMessage *msg = (ChatMessage *)notification.object;
+        for (JSQMessage *m in self.data.messages) {
+            if ([m.media isKindOfClass:[JSQPhotoMediaItem class]]) {
+                JSQPhotoMediaItem *item = (JSQPhotoMediaItem *)m.media;
+                if ([msg.qid isEqualToString:item.msgId]) {
+                    item.imgPath = [USER.filePath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
+                    NSString *thumbPath = [item.imgPath stringByAppendingString:@"_thumb"];
+                    item.image = [UIImage imageWithContentsOfFile:thumbPath];
+                    [self.collectionView reloadData];
+                }
+            }
+            
+            if ([m.media isKindOfClass:[JSQVoiceMediaItem class]]) {
+                JSQVoiceMediaItem *item = (JSQVoiceMediaItem *)m.media;
+                if ([msg.qid isEqualToString:item.msgId]) {
+                    item.isReady = YES;
+                    [self.collectionView reloadData];
+                }
+            }
+        }
+
+    });
+}
+
 - (IBAction)toChatSetting:(id)sender {
     if (self.chatMsgType == ChatMessageTypeNormal) {
         ChatSettingTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatSettingTableViewController"];
@@ -724,7 +752,7 @@
                                       uid:(NSString *)uid
                                displayName:(NSString *)name
                                      msgId:(NSString *)msgId {
-    JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:YES duration:duration outgoing:outgoing];
+    JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:YES duration:duration outgoing:outgoing msgId:msgId];
     JSQMessage *voiceMsg = [JSQMessage messageWithSenderId:uid displayName:name media:voiceItem];
     [self.data.messages addObject:voiceMsg];
     return voiceItem;
@@ -835,7 +863,7 @@
 
 #pragma mark -ChatMessageVoicePanelViewControllerDelegate
 - (void)ChatMessageVoicePanelViewController:(ChatMessageVoicePanelViewController *)voicePanelVc recordCompleteAtPath:(NSString *)audioPath duration:(double)duration {
-    __block JSQVoiceMediaItem *voiceMediaItem = [[JSQVoiceMediaItem alloc] initWithFilePath:audioPath isReady:YES duration:duration outgoing:YES];
+    __block JSQVoiceMediaItem *voiceMediaItem = [[JSQVoiceMediaItem alloc] initWithFilePath:audioPath isReady:YES duration:duration outgoing:YES msgId:nil];
     voiceMediaItem.isReady = NO;
     JSQMessage *voiceMessage = [JSQMessage messageWithSenderId:USER.uid
                                                    displayName:USER.name

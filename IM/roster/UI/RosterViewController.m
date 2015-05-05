@@ -22,13 +22,21 @@
 #import "OsViewController.h"
 #import "PresenceNotification.h"
 #import "PresenceMsg.h"
+#import "PopMenu.h"
+#import "MultiSelectViewController.h"
+#import "RosterItem.h"
+#import "MultiSelectItem.h"
+#import "MultiCallClient.h"
+#import "NSUUID+StringUUID.h"
 //organization structure
-@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate> {
+@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, MultiCallClientDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
     __weak IBOutlet UITableView *m_table;
+    MultiCallClient *m_cli;
+    
 }
-
+@property (nonatomic, strong) PopMenu *popMenu;
 @end
 
 @implementation RosterViewController
@@ -228,8 +236,52 @@
 }
 
 - (IBAction)add:(id)sender {
-    RosterItemSearchTableViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"RosterItemSearchResultTableViewController"];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.popMenu showMenuOnView:self.view atPoint:CGPointZero];
+}
+
+- (PopMenu *)popMenu {
+    if (!_popMenu) {
+        NSMutableArray *popMenuItems = [[NSMutableArray alloc] initWithCapacity:3];
+        [popMenuItems addObject:[[PopMenuItem alloc] initWithImage:[UIImage imageNamed:@"roster_multicall"] title:@"多人通话"]];
+        [popMenuItems addObject:[[PopMenuItem alloc] initWithImage:[UIImage imageNamed:@"roster_add_friend"] title:@"添加好友"]];
+        _popMenu = [[PopMenu alloc] initWithMenus:popMenuItems];
+        typeof(self) __weak weakSelf = self;
+        _popMenu.popMenuDidSlectedCompled = ^(NSInteger index, PopMenuItem *popMenuItems) {
+            if (index == 0) {
+                DDLogInfo(@"发起群聊。");
+                [weakSelf showMultiSelectController];
+            }else if (index == 1 ) {
+                DDLogInfo(@"添加好友。");
+                RosterItemSearchTableViewController *vc = [[weakSelf storyboard] instantiateViewControllerWithIdentifier:@"RosterItemSearchResultTableViewController"];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+        };
+    }
+    return _popMenu;
+}
+
+- (void)showMultiSelectController {
+    MultiSelectViewController *vc = [[MultiSelectViewController alloc]init];
+    NSArray *rosterItems = [USER.rosterMgr allRosterItems];
+    NSMutableArray *multiItems = [[NSMutableArray alloc] init];
+    [rosterItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MultiSelectItem *item = [[MultiSelectItem alloc] init];
+        RosterItem *rItem = obj;
+        item.uid = rItem.uid;
+        item.name = rItem.name;
+        item.imageURL = [NSURL fileURLWithPath:[USER.avatarMgr.avatarPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", rItem.uid]]];
+        [multiItems addObject:item];
+    }];
+    vc.items = multiItems;
+    vc.delegate = self;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    navController.navigationBar.barTintColor = [UIColor colorWithRed:75 / 255.0f green:193 / 255.0f blue:210 / 255.0f alpha:1.0f];
+    navController.navigationBar.tintColor = [UIColor whiteColor];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],NSForegroundColorAttributeName,
+                                               nil];
+    navController.navigationBar.titleTextAttributes = navbarTitleTextAttributes;
+    [self.navigationController presentViewController:navController animated:YES completion:nil];;
 }
 
 #pragma mark - Navigation
@@ -292,6 +344,27 @@
         [self updateData];
         [m_table reloadData];
     });
+}
+
+#pragma mark - MultiSelectViewControllerDelegate
+- (void)MultiSelectViewController:(MultiSelectViewController *)controller didConfirmWithSelectedItems:(NSArray *)selectedItems {
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
+    [selectedItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MultiSelectItem *item = obj;
+        [uids addObject:item.uid];
+    }];
+    m_cli = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:USER.rssUrl] iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:NO];
+    [m_cli createRoomId:[NSUUID uuid] session:USER.session talkingUids:uids];
+}
+
+- (void)MultiCallClient:(MultiCallClient *)cli didLeaveWithUid:(NSString *)uid deivce:(NSString *)device {
+    
+}
+- (void)MultiCallClient:(MultiCallClient *)cli didJoinedWithUid:(NSString *)uid deivce:(NSString *)device {
+    
+}
+- (void)MultiCallClient:(MultiCallClient *)cli didChangeState:(MultiCallClientState)state {
+    
 }
 
 @end

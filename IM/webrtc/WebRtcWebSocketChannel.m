@@ -72,11 +72,11 @@
     [_socket send:data];
 }
 
-- (void)sendMessage:(WebRtcSignalingMessage *)msg
-                ack:(void(^)(WebRtcAckMessage *ackMsg)) ack {
-    [_msgQueue setObject:ack forKey:msg.msgId];
-    [_socket send:msg.JSONData];
-}
+//- (void)sendMessage:(WebRtcSignalingMessage *)msg
+//                ack:(void(^)(WebRtcAckMessage *ackMsg)) ack {
+//    [_msgQueue setObject:ack forKey:msg.msgId];
+//    [_socket send:msg.JSONData];
+//}
 
 #pragma mark -SRWebSocketDelegate
 
@@ -87,15 +87,15 @@
         DDLogWarn(@"WARN: unkown message.");
         return;
     }
-    if ([m isKindOfClass:[WebRtcAckMessage class]]) {
-        WebRtcAckMessage *ack = (WebRtcAckMessage *)m;
-        void (^callback)(WebRtcAckMessage *) = [_msgQueue objectForKey:ack.msgId];
-        if (callback) {
-            callback(ack);
-            [_msgQueue removeObjectForKey:ack.msgId];
-        }
-        return;
-    }
+//    if ([m isKindOfClass:[WebRtcAckMessage class]]) {
+//        WebRtcAckMessage *ack = (WebRtcAckMessage *)m;
+//        void (^callback)(WebRtcAckMessage *) = [_msgQueue objectForKey:ack.msgId];
+//        if (callback) {
+//            callback(ack);
+//            [_msgQueue removeObjectForKey:ack.msgId];
+//        }
+//        return;
+//    }
     [_delegate channel:self didReceiveMessage:m];
     if ([m isKindOfClass:[WebRtcSeqMessage class]]) {
         if (_connectCallback) {

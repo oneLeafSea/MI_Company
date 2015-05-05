@@ -10,6 +10,7 @@
 #define _DEBUG
 
 #import "RTCVideoTrack.h"
+#import "session.h"
 
 @protocol WebRtcClientDelegate;
 
@@ -44,7 +45,8 @@ typedef NS_ENUM(NSInteger, WebRtcClientState) {
                              uid:(NSString *)uid
                          invited:(BOOL)invited;
 
-- (void)createRoomWithId:(NSString *)roomId Completion:(void(^)(BOOL finished))completion;
+- (void)createRoomWithId:(NSString *)roomId
+              Completion:(void(^)(BOOL finished))completion;
 
 - (void)joinRoomId:(NSString *)rid completion:(void(^)(BOOL finished))completion;
 

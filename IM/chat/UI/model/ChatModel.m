@@ -15,6 +15,7 @@
 #import "JSQFileMediaItem.h"
 #import "NSDate+Common.h"
 #import "UIImage+Common.h"
+#import "ChatMessageNotification.h"
 
 static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 
@@ -65,12 +66,21 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             NSString *uuid = [msg.body objectForKey:@"uuid"];
             NSString *thumbImgPath = [[USER.filePath stringByAppendingPathComponent:uuid] stringByAppendingString:@"_thumb"];
             JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithMaskAsOutgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            photoItem.msgId = msg.qid;
             if (msg.status == ChatMessageStatusRecved || msg.status == ChatMessageStatusSent) {
                 photoItem.image = [UIImage imageWithContentsOfFile:thumbImgPath];
                 photoItem.imgPath = [USER.filePath stringByAppendingPathComponent:uuid];
             } else {
                 if (![USER.fileTransfer exsitTask:uuid]) {
                     if ([msg.from isEqualToString:USER.uid]) {
+                        __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuid];
+                        [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+                            NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
+                            UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+                            [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)];
+                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusSent];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
+                        }];
                     } else {
                         __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuid];
                         [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
@@ -78,6 +88,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
                             [image saveToPath:thumbPath sz:CGSizeMake(100.0f, 100.0f)];
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
                         }];
                     }
                     
@@ -96,19 +107,21 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             BOOL isReady = ((msg.status == ChatMessageStatusRecved) || (msg.status == ChatMessageStatusSent));
             unsigned long long  duration = [[msg.body objectForKey:@"duration"] integerValue];
             
-            JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:isReady duration:duration outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+            JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:isReady duration:duration outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO msgId:msg.qid];
             
             if (!isReady && ![USER.fileTransfer exsitTask:uuid]) {
                 if ([msg.from isEqualToString:USER.uid]) {
-                    [USER.fileTransfer uploadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+                    [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
                         if (finished) {
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
                         }
                     }];
                 } else {
                     [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
                         if (finished) {
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
                         }
                     }];
                 }

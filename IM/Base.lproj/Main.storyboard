@@ -418,6 +418,20 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="wHD-b7-kK5" style="IBUITableViewCellStyleDefault" id="uGV-GR-UiD">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uGV-GR-UiD" id="lhU-Tk-gRw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="历史消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wHD-b7-kK5">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="LbP-ci-y5W" style="IBUITableViewCellStyleDefault" id="Qre-di-Arv">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qre-di-Arv" id="GVP-QA-pc1">
@@ -443,6 +457,7 @@
                     <navigationItem key="navigationItem" title="群设置" id="tq8-hR-Chp"/>
                     <connections>
                         <segue destination="esJ-0q-R8Z" kind="show" id="ORP-8J-WYw"/>
+                        <segue destination="Q8Q-gQ-oOm" kind="show" id="1Mz-Iq-tFg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hha-a0-lLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1981,7 +1996,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aT-UH-qKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="3714"/>
+            <point key="canvasLocation" x="2132" y="3614"/>
         </scene>
         <!--Web Rtc Video Chat View Controller-->
         <scene sceneID="IK4-Sq-dXs">
@@ -2959,6 +2974,21 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TuB-Gy-zaW" rowHeight="44" style="IBUITableViewCellStyleDefault" id="rEY-cX-hYp">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rEY-cX-hYp" id="4Rq-Ef-wQ5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="历史消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TuB-Gy-zaW">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wjn-Od-6c3">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -3708,7 +3738,26 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="2085" y="-188"/>
+            <point key="canvasLocation" x="2818" y="-406"/>
+        </scene>
+        <!--历史消息-->
+        <scene sceneID="b5U-IW-fPi">
+            <objects>
+                <viewController storyboardIdentifier="ChatHistoryMessageViewController" id="Q8Q-gQ-oOm" customClass="ChatHistoryMessageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q7f-1z-Hha"/>
+                        <viewControllerLayoutGuide type="bottom" id="XaC-wJ-nTa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="poH-Yw-fPq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="历史消息" id="c4b-4S-8Yr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ded-NA-lYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2203" y="-52"/>
         </scene>
     </scenes>
     <resources>

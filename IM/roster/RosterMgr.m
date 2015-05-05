@@ -675,6 +675,16 @@ NSComparisonResult sortGroupById(RosterGroup* group1, RosterGroup* group2, void 
     return ret;
 }
 
+- (NSArray *)allRosterItems {
+    __block NSMutableArray *ret = [[NSMutableArray alloc] init];
+    [m_roster.rosterItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *item = obj;
+        RosterItem *ri = [[RosterItem alloc] initWithDict:item];
+        [ret addObject:ri];
+    }];
+    return ret;
+}
+
 - (NSInteger)indexOfGrpWithName:(NSString *)name {
     __block NSInteger ret_idx = 0;
     NSArray *grp_list = [self grouplist];

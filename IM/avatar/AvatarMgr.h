@@ -29,5 +29,6 @@
 
 - (UIImage *) getAvatarImageByUid:(NSString *)uid;
 
+@property(nonatomic, readonly) NSString *avatarPath;
 
 @end

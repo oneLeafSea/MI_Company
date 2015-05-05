@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface OsNavigationSelOrgCollectionCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 
 @end

@@ -65,4 +65,8 @@
 
 - (ChatMessage *)getLastGrpChatMsgWithGid:(NSString *)gid;
 
+- (ChatMessage *)getMsgByMsgId:(NSString *)msgId;
+
+- (BOOL) insertMsg:(ChatMessage *)msg;
+
 @end

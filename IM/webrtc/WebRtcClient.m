@@ -35,6 +35,7 @@ static NSString *kWebRtcClientErrorDomain = @"WebRtcClient";
 static NSInteger kWebRtcClientErrorCreateSDP = -1;
 static NSInteger kWebRtcClientErrorSetSDP = -2;
 static NSUInteger kWebrtcTimeout = 30;
+static NSString *kDeviceType = @"iphone";
 
 @interface WebRtcClient()<WebRtcWebSocketChannelDelegate,
 RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
@@ -44,6 +45,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     NSTimer                *m_timer;
     BOOL                    m_iceStateFinished;
     BOOL                    m_iceGatherFinished;
+    NSString               *m_toRes;
 }
 @property(nonatomic, strong) RTCPeerConnection *peerConnection;
 @property(nonatomic, strong) RTCPeerConnectionFactory *factory;
@@ -127,7 +129,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 }
 
 - (void)sendVideoMsgWithEnable:(BOOL)enable {
-    WebRtcVideoMessage *msg = [[WebRtcVideoMessage alloc] initWithFrom:self.uid to:self.talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+    WebRtcVideoMessage *msg = [[WebRtcVideoMessage alloc] initWithFrom:self.uid fromRes:kDeviceType to:self.talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
     msg.enable = enable;
     [m_channel sendData:msg.JSONData];
 }
@@ -180,13 +182,16 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 }
 
 
-- (void)createRoomWithId:(NSString *)roomId Completion:(void(^)(BOOL finished))completion {
+- (void)createRoomWithId:(NSString *)roomId
+              Completion:(void(^)(BOOL finished))completion {
     [self startTimer];
     m_channel = [[WebRtcWebSocketChannel alloc] initWithUrl:self.serverHost delegate:self];
     [m_channel connectWithCompletion:^(BOOL ok) {
         if (ok) {
             WebRtcCreateRoomMessage *m = [[WebRtcCreateRoomMessage alloc] initWithFrom:_uid
+                                                                               fromRes:@"iphone"
                                                                                     to:@""
+                                                                                 toRes:@""
                                                                                  msgId:[NSUUID uuid]
                                                                                  topic:@"create"
                                                                             content:nil];
@@ -197,10 +202,8 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
             [m setRoomId:_roomId uid:_uid];
             [m_channel sendData:m.JSONData];
             self.state = kWebRtcClientStateConnected;
-            completion(ok);
-        } else {
-            completion(NO);
         }
+        completion(ok);
     }];
 }
 
@@ -238,7 +241,9 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         if (ok) {
             self.state = kWebRtcClientStateConnected;
             WebRtcJoinRoomMessage *m = [[WebRtcJoinRoomMessage alloc] initWithFrom:_uid
+                                                                           fromRes:kDeviceType
                                                                                 to:@""
+                                                                             toRes:@""
                                                                              msgId:[NSUUID uuid]
                                                                              topic:@"join"
                                                                            content:nil];
@@ -317,7 +322,6 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
-//    m_hasReceivedSdp = YES;
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -325,16 +329,17 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     DDLogInfo(@"收到offer。");
     [self createPeerConnection];
     _talkingUid = sdpMsg.from;
+    m_toRes = [sdpMsg.fromRes copy];
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
-//     m_hasReceivedSdp = YES;
      DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)processJoinMesssage:(WebRtcJoinRoomMessage *)joinMsg {
     [self createPeerConnection];
     _talkingUid = joinMsg.from;
+    m_toRes = [joinMsg.fromRes copy];
 //    [_messageQueue addObject:joinMsg];
     [self sendOffer];
      DDLogInfo(@"%s", __PRETTY_FUNCTION__);
@@ -466,7 +471,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
        gotICECandidate:(RTCICECandidate *)candidate {
     dispatch_async(dispatch_get_main_queue(), ^{
-        WebRtcCandidateMessage *message = [[WebRtcCandidateMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+        WebRtcCandidateMessage *message = [[WebRtcCandidateMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
         message.candidate = candidate;
         [m_channel sendData:message.JSONData];
     });
@@ -522,22 +527,18 @@ didSetSessionDescriptionWithError:(NSError *)error {
         DDLogInfo(@"设置 sdp 成功。");
         if (self.invited) {
             if (self.peerConnection.localDescription) {
-                // set ice
-                WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+                WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
                 answerMsg.sessionDescription = _peerConnection.localDescription;
                 [m_channel sendData:[answerMsg JSONData]];
                 [self drainMessageQueueIfReady];
             } else {
-                // create & send answer
                 [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
             }
         } else {
             if (self.peerConnection.remoteDescription) {
                 [self drainMessageQueueIfReady];
-                // set ice
             } else {
-                // create & send offer
-                WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid to:_talkingUid msgId:[NSUUID uuid] topic:@"message" content:nil];
+                WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
                 offerMsg.sessionDescription = _peerConnection.localDescription;
                 NSLog(@"type: %@", offerMsg.sessionDescription.type);
                 [m_channel sendData:[offerMsg JSONData]];

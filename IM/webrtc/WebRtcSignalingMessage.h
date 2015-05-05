@@ -18,13 +18,17 @@
 - (NSData *)JSONData;
 
 - (instancetype)initWithFrom:(NSString *)from
+                     fromRes:(NSString *)fromRes
                           to:(NSString *)to
+                       toRes:(NSString *)toRes
                        msgId:(NSString *)msgId
                        topic:(NSString *)topic
                      content:(NSString *)content;
 
 @property(nonatomic, readonly) NSString *from;
+@property(nonatomic, readonly) NSString *fromRes;
 @property(nonatomic, readonly) NSString *to;
+@property(nonatomic, readonly) NSString *toRes;
 @property(nonatomic, readonly) NSString *msgId;
 @property(nonatomic, readonly) NSString *topic;
 @property(nonatomic, strong) NSString *content;
@@ -51,6 +55,7 @@
 @interface WebRtcLeaveRoomMessage : WebRtcSignalingMessage
 
 @property(nonatomic, strong) NSString *uid;
+@property(nonatomic, strong) NSString *deviceType;
 
 @end
 

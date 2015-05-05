@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ChatMessage.h"
 
 @class User;
 
@@ -14,14 +15,23 @@
 
 - (instancetype)initWithUser:(User *)user;
 
-- (void) getHistoryMessageWithMsgId:(NSString *)msgId gid:(NSString *)gid completion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
+- (void) getHistoryMessageWithMsgId:(NSString *)msgId
+                        chatMsgType:(ChatMessageType)type
+                          talkingId:(NSString *)talkingId
+                         completion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
 
-- (void) getHistoryMessageWithGid:(NSString *)gid completion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
+- (void) getHistoryMessageWithTalkingId:(NSString *)talkingId
+                      chatMsgType:(ChatMessageType)type
+                       completion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
 
-- (void) loadMoreWithCompletion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
+- (void) loadMoreWithTalkingId:(NSString *)talkingId
+             chatMsgType:(ChatMessageType)type
+              Completion:(void(^)(BOOL finished, NSArray *chatMsgs)) completion;
+
+- (void)reset;
 
 @property(atomic, readonly)BOOL isLoading;
 @property(atomic, readonly)NSUInteger pageSize;
-@property(atomic, readonly)NSUInteger cur;
+@property(atomic)   NSUInteger cur;
 
 @end

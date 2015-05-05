@@ -127,6 +127,8 @@
 
 - (RosterItem *) getItemByUid:(NSString *)uid;
 
+- (NSArray *)allRosterItems;
+
 - (BOOL)moveRosterItems:(NSArray *)items
                   toGrpId:(NSString *)gid
                     key:(NSString *)key

@@ -13,3 +13,5 @@ extern NSString *kChatMessageSendNewMsg;
 extern NSString *kChatMessageControllerWillDismiss;
 extern NSString *kChatMessageImageFileReceived;
 extern NSString *kChatMessageVideoChatMsg;
+
+extern NSString *kChatMessageMediaMsgDownload;

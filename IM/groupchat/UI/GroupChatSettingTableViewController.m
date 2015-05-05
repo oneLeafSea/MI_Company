@@ -8,6 +8,7 @@
 
 #import "GroupChatSettingTableViewController.h"
 #import "GroupChatItemListViewController.h"
+#import "ChatHistoryMessageViewController.h"
 
 @interface GroupChatSettingTableViewController ()
 
@@ -36,6 +37,14 @@
     if (indexPath.row == 1) {
         GroupChatItemListViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"GroupChatItemListViewController"];
         vc.grp = self.grp;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.row == 2) {
+        ChatHistoryMessageViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatHistoryMessageViewController"];
+        vc.talkingId = self.grp.gid;
+        vc.talkingname = self.grp.gname;
+        vc.chatMsgType = ChatMessageTypeGroupChat;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

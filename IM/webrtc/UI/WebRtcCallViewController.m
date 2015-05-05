@@ -168,22 +168,6 @@
     }];
 }
 
-//- (void)handleCallTimeout {
-//    m_callTimerStick++;
-//    self.timeLbl.text = [NSString stringWithFormat:@"%02d:%02d", m_callTimerStick / 60, m_callTimerStick % 60];
-//    if (m_callTimerStick > kWebrtcTimeout) {
-//        [m_callTimer invalidate];
-//        m_callTimer = nil;
-//        [[AudioPlayer sharePlayer] stop];
-//        [self disconnect];
-//        [self dismissViewControllerAnimated:YES completion:^{
-//            [Utils alertWithTip:@"对方无响应."];
-//            [APP_DELEGATE.user.webRtcMgr setbusy:NO];
-//        }];
-//        
-//    }
-//    
-//}
 - (IBAction)videoBtnTapped:(id)sender {
     [self.localVideoTrack setEnabled:!self.localVideoTrack.isEnabled];
     [self.client sendVideoMsgWithEnable:self.localVideoTrack.isEnabled];
@@ -215,8 +199,6 @@
 - (IBAction)hangupBtnTapped:(id)sender {
     [m_timer invalidate];
     m_timer = nil;
-//    [m_callTimer invalidate];
-//    m_callTimer = nil;
     [[AudioPlayer sharePlayer] stop];
     [self disconnect];
     [self dismissViewControllerAnimated:YES completion:^{
@@ -273,10 +255,6 @@ didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 
 - (void)WebRtcClient:(WebRtcClient *)client
 didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
-//    if (m_callTimer) {
-//        [m_callTimer invalidate];
-//        m_callTimer = nil;
-//    }
     if (!m_timer) {
         m_timeStick = 0;
         m_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimeLbl) userInfo:nil repeats:YES];

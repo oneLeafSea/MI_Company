@@ -29,5 +29,5 @@
 
 - (ChatMessage *)getLastGrpChatMsgByGid:(NSString *)gid;
 
-
+- (ChatMessage *)getMsgByMsgId:(NSString *)msgId;
 @end

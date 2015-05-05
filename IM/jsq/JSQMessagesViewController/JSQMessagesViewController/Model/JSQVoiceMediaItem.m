@@ -23,11 +23,13 @@
 - (instancetype)initWithFilePath:(NSString *)filePath
                          isReady:(BOOL)isReady
                         duration:(double) duration
-                        outgoing:(BOOL)maskAsOutgoing {
+                        outgoing:(BOOL)maskAsOutgoing
+                           msgId:(NSString *)msgId{
     if (self = [super initWithMaskAsOutgoing:maskAsOutgoing]) {
         self.filePath = [filePath copy];
         self.isReady = isReady;
         _duration = duration;
+        self.msgId = msgId;
     }
     return self;
 }

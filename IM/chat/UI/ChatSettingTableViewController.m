@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "Utils.h"
+#import "ChatHistoryMessageViewController.h"
 
 
 @interface ChatSettingTableViewController () <RosterGroupSelectTableViewControllerDelegate>
@@ -51,6 +52,14 @@
         RosterGroupSelectTableViewController *grpSelVc = [[self storyboard] instantiateViewControllerWithIdentifier:@"RosterGroupSelect"];
         grpSelVc.delegate = self;
         [self.navigationController pushViewController:grpSelVc animated:YES];
+    }
+    
+    if (indexPath.row == 4) {
+        ChatHistoryMessageViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatHistoryMessageViewController"];
+        vc.talkingId = self.rosterItem.uid;
+        vc.talkingname = self.rosterItem.name;
+        vc.chatMsgType = ChatMessageTypeNormal;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

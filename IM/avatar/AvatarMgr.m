@@ -90,4 +90,8 @@
     return img;
 }
 
+- (NSString *)avatarPath {
+    return m_avatarPath;
+}
+
 @end

@@ -16,10 +16,12 @@
 - (instancetype)initWithFilePath:(NSString *)filePath
                          isReady:(BOOL)isReady
                         duration:(double) duration
-                        outgoing:(BOOL)maskAsOutgoing;
+                        outgoing:(BOOL)maskAsOutgoing
+                           msgId:(NSString *)msgId;
 
 @property(nonatomic) BOOL isReady;
 @property(nonatomic) BOOL playing;
 @property(readonly, nonatomic) double duration;
+@property(copy)     NSString *msgId;
 
 @end

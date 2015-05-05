@@ -406,5 +406,12 @@
     return [m_msgTb getLastGrpChatMsgByGid:gid];
 }
 
+- (ChatMessage *)getMsgByMsgId:(NSString *)msgId {
+    return [m_msgTb getMsgByMsgId:msgId];
+}
+
+- (BOOL) insertMsg:(ChatMessage *)msg {
+    return [m_msgTb insertMessage:msg];
+}
 
 @end
