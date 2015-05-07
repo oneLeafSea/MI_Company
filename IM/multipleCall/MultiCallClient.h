@@ -46,12 +46,16 @@ typedef NS_ENUM(NSInteger, MultiCallClientState) {
 @property(nonatomic, readonly) NSURL    *serverHost;
 @property(nonatomic, readonly) MultiCallClientState state;
 
+- (void)mute;
+- (BOOL)isMute;
 
 - (void)createRoomId:(NSString *)rid
              session:(Session *)session
          talkingUids:(NSArray *)talkingUids;
 
 - (void)joinRoomId:(NSString *)rid;
+
+- (void)disconnect;
 
 @end
 
@@ -61,5 +65,7 @@ typedef NS_ENUM(NSInteger, MultiCallClientState) {
 - (void)MultiCallClient:(MultiCallClient *)cli didLeaveWithUid:(NSString *)uid deivce:(NSString *)device;
 - (void)MultiCallClient:(MultiCallClient *)cli didJoinedWithUid:(NSString *)uid deivce:(NSString *)device;
 - (void)MultiCallClient:(MultiCallClient *)cli didChangeState:(MultiCallClientState)state;
+
+- (void)MultiCallClient:(MultiCallClient *)cli recviveRemoteAudioFromUid:(NSString *)uid;
 
 @end

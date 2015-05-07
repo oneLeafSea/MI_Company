@@ -141,6 +141,13 @@
 		7D433D1E1AC560CF008B5A8C /* WebrtcSRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D1D1AC560CF008B5A8C /* WebrtcSRWebSocket.m */; };
 		7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C4981A6798A6004365D7 /* ChatViewController.m */; };
 		7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D44C49C1A6798EB004365D7 /* ChatModel.m */; };
+		7D4D082D1AF9B7940031C035 /* AvatarContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D082C1AF9B7940031C035 /* AvatarContainerView.m */; };
+		7D4D082F1AF9B8370031C035 /* AvatarContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4D082E1AF9B8370031C035 /* AvatarContainerView.xib */; };
+		7D4D08331AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08311AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.m */; };
+		7D4D08341AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4D08321AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib */; };
+		7D4D08371AF9C01F0031C035 /* AvatarContainerViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08361AF9C01F0031C035 /* AvatarContainerViewItem.m */; };
+		7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */; };
+		7D4D083C1AF9E4EC0031C035 /* MultiCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
 		7D59E44E1A689DA800806018 /* ChatMessageSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44D1A689DA800806018 /* ChatMessageSql.m */; };
 		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
@@ -707,6 +714,17 @@
 		7D44C49C1A6798EB004365D7 /* ChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatModel.m; sourceTree = "<group>"; };
 		7D44C49E1A67B9ED004365D7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D44C49F1A67B9ED004365D7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7D4D082B1AF9B7940031C035 /* AvatarContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarContainerView.h; sourceTree = "<group>"; };
+		7D4D082C1AF9B7940031C035 /* AvatarContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarContainerView.m; sourceTree = "<group>"; };
+		7D4D082E1AF9B8370031C035 /* AvatarContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarContainerView.xib; sourceTree = "<group>"; };
+		7D4D08301AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarContainerCellCollectionViewCell.h; sourceTree = "<group>"; };
+		7D4D08311AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarContainerCellCollectionViewCell.m; sourceTree = "<group>"; };
+		7D4D08321AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarContainerCellCollectionViewCell.xib; sourceTree = "<group>"; };
+		7D4D08351AF9C01F0031C035 /* AvatarContainerViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarContainerViewItem.h; sourceTree = "<group>"; };
+		7D4D08361AF9C01F0031C035 /* AvatarContainerViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarContainerViewItem.m; sourceTree = "<group>"; };
+		7D4D08381AF9E4EC0031C035 /* MultiCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCallViewController.h; sourceTree = "<group>"; };
+		7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCallViewController.m; sourceTree = "<group>"; };
+		7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiCallViewController.xib; sourceTree = "<group>"; };
 		7D59E4491A689AF200806018 /* ChatMessageTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageTb.h; sourceTree = "<group>"; };
 		7D59E44A1A689AF200806018 /* ChatMessageTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageTb.m; sourceTree = "<group>"; };
 		7D59E44C1A689DA800806018 /* ChatMessageSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageSql.h; sourceTree = "<group>"; };
@@ -1790,6 +1808,24 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		7D4D082A1AF9B0650031C035 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7D4D082B1AF9B7940031C035 /* AvatarContainerView.h */,
+				7D4D082C1AF9B7940031C035 /* AvatarContainerView.m */,
+				7D4D082E1AF9B8370031C035 /* AvatarContainerView.xib */,
+				7D4D08301AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.h */,
+				7D4D08311AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.m */,
+				7D4D08321AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib */,
+				7D4D08351AF9C01F0031C035 /* AvatarContainerViewItem.h */,
+				7D4D08361AF9C01F0031C035 /* AvatarContainerViewItem.m */,
+				7D4D08381AF9E4EC0031C035 /* MultiCallViewController.h */,
+				7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */,
+				7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		7D87DACF1AB6975000AD57C6 /* apns */ = {
 			isa = PBXGroup;
 			children = (
@@ -2660,6 +2696,7 @@
 		7DF3CA941AF7095700D08AE7 /* multipleCall */ = {
 			isa = PBXGroup;
 			children = (
+				7D4D082A1AF9B0650031C035 /* UI */,
 				7DF3CABA1AF7126F00D08AE7 /* popMenu */,
 				7DF3CA991AF70C7F00D08AE7 /* MultiSelectTableViewController */,
 				7DF3CAC41AF7597400D08AE7 /* MultiCallPeerConnection.h */,
@@ -2923,6 +2960,7 @@
 				7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */,
 				7DB3FCF11A6E4F3500BFA0E7 /* RosterGrpMgrHeadView.xib in Resources */,
 				7D6FD7141A85EC73001BA1F1 /* ChatMessageVoicePanel.xib in Resources */,
+				7D4D082F1AF9B8370031C035 /* AvatarContainerView.xib in Resources */,
 				7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */,
 				7DFA2A471A9041ED00BD8F3C /* JSQVoiceMediaIncomingView.xib in Resources */,
 				7DB156C61A42DC0C00287BBE /* Main.storyboard in Resources */,
@@ -2950,6 +2988,7 @@
 				7DF3CAB21AF70C7F00D08AE7 /* MultiSelectedPanel.xib in Resources */,
 				7DB158B51A42DD5600287BBE /* MainCVC.xib in Resources */,
 				7DDAFB131A5E785E0029D809 /* RosterSectionHeaderView.xib in Resources */,
+				7D4D08341AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib in Resources */,
 				7D6023771A80B774001BDD46 /* ChatViewMorePanelCellView.xib in Resources */,
 				7D2E0FAA1A830F250099AB04 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				7D08D02E1A8D92F200F4C8E7 /* ChatMessageSpeakerPanelViewController.xib in Resources */,
@@ -2964,6 +3003,7 @@
 				7D7FCDE71AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib in Resources */,
 				7D08D0271A8D92F200F4C8E7 /* ChatMessagePlayerPanel.xib in Resources */,
 				7D2E0F861A830F250099AB04 /* JSQMessages.strings in Resources */,
+				7D4D083C1AF9E4EC0031C035 /* MultiCallViewController.xib in Resources */,
 				7D2E0F8F1A830F250099AB04 /* JSQMessagesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3108,6 +3148,7 @@
 				7DB158A51A42DD5600287BBE /* MessageParser.m in Sources */,
 				7DB158761A42DD5600287BBE /* RowEmail.m in Sources */,
 				7DEA706F1AA99F7B002C2C68 /* MineSettingTableViewController.m in Sources */,
+				7D4D082D1AF9B7940031C035 /* AvatarContainerView.m in Sources */,
 				7D2E0F8D1A830F250099AB04 /* JSQMessagesKeyboardController.m in Sources */,
 				7D119B331AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m in Sources */,
 				7DB158471A42DD5600287BBE /* DictsDownloader.m in Sources */,
@@ -3125,6 +3166,7 @@
 				7DB31BEA1A6CA6A10051E6CD /* RosterItemAddReqTb.m in Sources */,
 				7D2E0FA11A830F250099AB04 /* JSQMessagesCollectionViewCell.m in Sources */,
 				7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */,
+				7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */,
 				7D005D7B1A91FF75006CB54C /* JSQFileMediaIncomingView.m in Sources */,
 				7DB1586F1A42DD5600287BBE /* RowButton.m in Sources */,
 				7DB158AE1A42DD5600287BBE /* session.m in Sources */,
@@ -3272,6 +3314,7 @@
 				7DFE72821AA8416500B9F674 /* OsViewController.m in Sources */,
 				7DB158BA1A42DD5600287BBE /* XLFormBaseCell.m in Sources */,
 				7DB251B61A638F1C007FC8D4 /* RosterItemSearchTableViewController.m in Sources */,
+				7D4D08331AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.m in Sources */,
 				7DB158791A42DD5600287BBE /* RowInteger.m in Sources */,
 				7DB31BEC1A6CA6A10051E6CD /* RosterItemDelReqTb.m in Sources */,
 				7DB156BA1A42DC0C00287BBE /* main.m in Sources */,
@@ -3301,6 +3344,7 @@
 				7D2E0FA21A830F250099AB04 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				7DB3FCE61A6DF15400BFA0E7 /* RosterGrpMgrTableViewController.m in Sources */,
 				7D08D0341A8D92F200F4C8E7 /* ScaleableRoundView.m in Sources */,
+				7D4D08371AF9C01F0031C035 /* AvatarContainerViewItem.m in Sources */,
 				7DB158C11A42DD5600287BBE /* XLFormPickerCell.m in Sources */,
 				7D2E0F871A830F250099AB04 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				7DB2D62C1A6F963F00004D6C /* RecentMsgItem.m in Sources */,

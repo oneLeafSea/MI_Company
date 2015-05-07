@@ -46,6 +46,14 @@
     return [m_presenceInfo objectForKey:uid];
 }
 
+- (BOOL) isOnline:(NSString *)uid {
+    PresenceMsg *msg = [self getPresenceMsgByUid:uid];
+    if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
+        return YES;
+    }
+    return NO;
+}
+
 
 - (void)handlePresenceNotification:(NSNotification *)notification {
     __block PresenceMsg *msg = notification.object;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define kMenuTableViewWidth 122
+#define kMenuTableViewWidth 150
 #define kMenuTableViewSapcing 7
 
 #define kMenuItemViewHeight 36

@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="131" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="os_right" translatesAutoresizingMaskIntoConstraints="NO" id="Web-PO-XKJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="os_right" translatesAutoresizingMaskIntoConstraints="NO" id="Web-PO-XKJ">
                     <rect key="frame" x="0.0" y="18" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="K0R-T5-i1f"/>

@@ -30,6 +30,8 @@
 
 - (void)reset;
 
+- (RosterItem *)getRosterInfoByUid:(NSString *)uid;
+
 @property(readonly) NSString        *uid;
 @property           NSString        *pwd;
 @property(readonly) FMDatabaseQueue *dbq;

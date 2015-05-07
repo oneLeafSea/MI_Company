@@ -36,6 +36,16 @@
     return YES;
 }
 
+- (instancetype)initWithUid:(NSString *)uid
+                       name:(NSString *)name {
+    if (self = [super init]) {
+        m_dict = [[NSMutableDictionary alloc] init];
+        [m_dict setObject:uid forKey:@"fid"];
+        [m_dict setObject:name forKey:@"fname"];
+    }
+    return self;
+}
+
 
 - (NSString *)uid {
     return [m_dict objectForKey:@"fid"];

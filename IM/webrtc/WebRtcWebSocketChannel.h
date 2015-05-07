@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, WebRtcWebSocketChannelState) {
 
 - (void)connectWithCompletion:(void(^)(BOOL ok))completion;
 - (void)sendData:(NSData *)data;
-//- (void)sendMessage:(WebRtcSignalingMessage *)msg ack:(void(^)(WebRtcAckMessage *ackMsg)) ack;
 - (void)disconnect;
 
 @property(weak, nonatomic) id<WebRtcWebSocketChannelDelegate> delegate;

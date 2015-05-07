@@ -15,4 +15,6 @@
 
 
 - (PresenceMsg *)getPresenceMsgByUid:(NSString *)uid;
+
+- (BOOL) isOnline:(NSString *)uid;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MultiSelectViewController.h"
+
 #import "MLLetterIndexNavigationView.h"
 #import "MultiSelectItem.h"
 #import "MultiSelectTableViewCell.h"
@@ -196,6 +197,7 @@
     self.letterIndexView.frame = CGRectMake(self.tableView.frameRight-20.0f, topY, 20.0f, self.view.frameHeight-kSelectPanelHeight-topY);
     
     self.selectedPanel.frame = CGRectMake(0, self.tableView.frameBottom, self.view.frameWidth, kSelectPanelHeight);
+#undef kSelectPanelHeight
     
 }
 

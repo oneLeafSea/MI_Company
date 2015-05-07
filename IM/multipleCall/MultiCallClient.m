@@ -108,6 +108,18 @@
     }];
 }
 
+- (void)mute {
+    RTCMediaStream *localStream = _localStream;
+    RTCAudioTrack *audioTrack = localStream.audioTracks[0];
+    [audioTrack setEnabled:![audioTrack isEnabled]];
+}
+
+- (BOOL)isMute {
+    RTCMediaStream *localStream = _localStream;
+    RTCAudioTrack *audioTrack = localStream.audioTracks[0];
+    return ![audioTrack isEnabled];
+}
+
 
 #pragma - private method.
 
@@ -262,9 +274,9 @@ didReceiveMessage:(WebRtcSignalingMessage *)message {
 #pragma mark - MultiCallPeerConnectionDelegate
 - (void)MultiCallPeerConnection:(MultiCallPeerConnection *)connection
                        didError:(NSError *) error {
-    
+    [_delegate MultiCallClient:self didLeaveWithUid:connection.uid deivce:connection.deviceType];
 }
 - (void)MultiCallPeerConnection:(MultiCallPeerConnection *)connection didReceiveAudioTrack:(RTCAudioTrack *)audioTrack {
-    
+    [_delegate MultiCallClient:self recviveRemoteAudioFromUid:connection.uid];
 }
 @end

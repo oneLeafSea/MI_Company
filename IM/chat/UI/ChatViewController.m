@@ -412,7 +412,7 @@
         BOOL connected = [n boolValue];
         NSUInteger interval = [[msg.body objectForKey:@"interval"] integerValue];
         if (connected) {
-            tip = [NSString stringWithFormat:@"通话时长%02lu:%02lu", interval/60, interval%60];
+            tip = [NSString stringWithFormat:@"通话时长%02u:%02u", interval/60, interval%60];
         }
         NSDate *date = [NSDate dateWithFormater:@"yyyy-MM-dd HH:mm:ss.SSSSSS" stringTime:msg.time];
         JSQVideoChatMediaItem *item = [[JSQVideoChatMediaItem alloc] initWithTip:tip];

@@ -13,13 +13,14 @@
 #import "WebRtcRecvViewChatViewController.h"
 #import "WebRtcCallViewController.h"
 #import "AppDelegate.h"
-#import "MultiCallClient.h"
+#import "MultiCallViewController.h"
+#import "AudioPlayer.h"
 
 //static NSString *kWebrtcUrl = @"wss://10.22.1.117:8088/webrtc";
 
-@interface WebRtcMgr() <MultiCallClientDelegate> {
+@interface WebRtcMgr()<UIAlertViewDelegate> {
     BOOL m_busy;
-    MultiCallClient *m_mcc;
+    NSString *m_roomId;
 }
 @end
 
@@ -74,9 +75,15 @@
     
     if ([[msg.content objectForKey:@"type"] isEqualToString:@"mulitivoice"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-                m_mcc = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:webrtcUrl] iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:YES];
-                [m_mcc joinRoomId:msg.rid];
-            
+            [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
+            [[AudioPlayer sharePlayer] playWithPath:path];
+            NSString *from = msg.from;
+            RosterItem *ri = [USER getRosterInfoByUid:from];
+            m_roomId = [msg.rid copy];
+            NSString *tip = [NSString stringWithFormat:@"%@想和你多人通话！", ri.name];
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"多人通话" message:tip delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"接听", nil];
+            [av show];
         });
         return;
     }
@@ -99,16 +106,20 @@
     m_busy = busy;
 }
 
-
-- (void)MultiCallClient:(MultiCallClient *)cli didLeaveWithUid:(NSString *)uid deivce:(NSString *)device {
-    
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [[AudioPlayer sharePlayer] stop];
+    switch (buttonIndex) {
+        case 1: {
+            MultiCallViewController *vc = [[MultiCallViewController alloc] initWithNibName:@"MultiCallViewController" bundle:nil];
+            vc.invited = YES;
+            vc.roomId = [m_roomId copy];
+            [APP_DELEGATE.window.rootViewController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
-- (void)MultiCallClient:(MultiCallClient *)cli didJoinedWithUid:(NSString *)uid deivce:(NSString *)device {
-    
-}
-- (void)MultiCallClient:(MultiCallClient *)cli didChangeState:(MultiCallClientState)state {
-    
-}
-
 
 @end

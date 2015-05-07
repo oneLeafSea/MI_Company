@@ -310,4 +310,16 @@
     return url;
 }
 
+- (RosterItem *)getRosterInfoByUid:(NSString *)uid {
+    RosterItem *item = [self.rosterMgr getItemByUid:uid];
+    if (item) {
+        return item;
+    }
+    OsItem * osItem = [self.osMgr getItemInfoByUid:uid];
+    if (osItem) {
+        item = [[RosterItem alloc] initWithUid:osItem.uid name:osItem.name];
+    }
+    return item;
+}
+
 @end

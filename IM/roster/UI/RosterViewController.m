@@ -28,12 +28,12 @@
 #import "MultiSelectItem.h"
 #import "MultiCallClient.h"
 #import "NSUUID+StringUUID.h"
-//organization structure
-@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, MultiCallClientDelegate> {
+#import "MultiCallViewController.h"
+
+@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
     __weak IBOutlet UITableView *m_table;
-    MultiCallClient *m_cli;
     
 }
 @property (nonatomic, strong) PopMenu *popMenu;
@@ -265,8 +265,11 @@
     NSArray *rosterItems = [USER.rosterMgr allRosterItems];
     NSMutableArray *multiItems = [[NSMutableArray alloc] init];
     [rosterItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        MultiSelectItem *item = [[MultiSelectItem alloc] init];
         RosterItem *rItem = obj;
+        if (![USER.presenceMgr isOnline:rItem.uid]) {
+            return ;
+        }
+        MultiSelectItem *item = [[MultiSelectItem alloc] init];
         item.uid = rItem.uid;
         item.name = rItem.name;
         item.imageURL = [NSURL fileURLWithPath:[USER.avatarMgr.avatarPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", rItem.uid]]];
@@ -353,18 +356,11 @@
         MultiSelectItem *item = obj;
         [uids addObject:item.uid];
     }];
-    m_cli = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:USER.rssUrl] iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:NO];
-    [m_cli createRoomId:[NSUUID uuid] session:USER.session talkingUids:uids];
+    MultiCallViewController *vc = [[MultiCallViewController alloc] initWithNibName:@"MultiCallViewController" bundle:nil];
+    vc.invited = NO;
+    vc.talkingUids = uids;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)MultiCallClient:(MultiCallClient *)cli didLeaveWithUid:(NSString *)uid deivce:(NSString *)device {
-    
-}
-- (void)MultiCallClient:(MultiCallClient *)cli didJoinedWithUid:(NSString *)uid deivce:(NSString *)device {
-    
-}
-- (void)MultiCallClient:(MultiCallClient *)cli didChangeState:(MultiCallClientState)state {
-    
-}
 
 @end
