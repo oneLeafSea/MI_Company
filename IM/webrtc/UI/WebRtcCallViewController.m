@@ -302,7 +302,6 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
         CGFloat containerHeight = self.view.frame.size.height;
         CGSize defaultAspectRatio = CGSizeMake(4, 3);
         if (videoView == self.localView) {
-            //Resize the Local View depending if it is full screen or thumbnail
             self.localVideoSize = size;
             CGSize aspectRatio = CGSizeEqualToSize(size, CGSizeZero) ? defaultAspectRatio : size;
             CGRect videoRect = self.view.bounds;
@@ -343,8 +342,6 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [m_timer invalidate];
                 m_timer = nil;
-//                [m_callTimer invalidate];
-//                m_callTimer = nil;
                 [[AudioPlayer sharePlayer] stop];
                 [self disconnect];
                 [self dismissViewControllerAnimated:YES completion:^{
@@ -358,8 +355,6 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [m_timer invalidate];
                 m_timer = nil;
-//                [m_callTimer invalidate];
-//                m_callTimer = nil;
                 [[AudioPlayer sharePlayer] stop];
                 [self disconnect];
                 [self dismissViewControllerAnimated:YES completion:^{

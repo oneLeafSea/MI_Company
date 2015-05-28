@@ -496,12 +496,7 @@
     for (NSDictionary *item in rosterItems) {
         RosterItem *ri = [[RosterItem alloc] initWithDict:item];
         RosterGroup *g = [self getRosterGroupWithId:ri.gid grouplist:sortedGrpList];
-        PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:ri.uid];
-        if ([ri.uid isEqualToString:@"hjt"] || [ri.uid isEqualToString:@"ddw"]) {
-            int a = 0;
-            a++;
-        }
-        if (msg && [msg.show isEqualToString:kPresenceShowOnline]) {
+        if ([USER.presenceMgr isOnline:ri.uid]) {
             [g.items insertObject:ri atIndex:0];
         } else {
             [g.items addObject:ri];

@@ -23,6 +23,7 @@ static NSString *kWebRtcNotifyMsgNotificaiton = @"cn.com.rooten.im.WebRtcNotifyM
 @property(nonatomic, readonly) NSString *from;
 @property(nonatomic, readonly) NSString *from_res;
 @property(nonatomic, readonly) NSString *to;
+@property(nonatomic, strong) NSString *to_res;
 @property(nonatomic, strong) NSString *contentType;
 @property(readonly)         NSDictionary *content;
 

@@ -20,6 +20,7 @@
 #import "MultiSelectViewController.h"
 #import "WebRtcNotifyMsg.h"
 #import "Utils.h"
+#import "UIView+Toast.h"
 
 @interface MultiCallViewController () <MultiCallClientDelegate, MultiSelectViewControllerDelegate> {
     NSTimer  *_timer;
@@ -43,6 +44,10 @@
     [self setup];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kWebRtcNotifyMsgNotificaiton object:nil];
+}
+
 
 - (void)setup {
     _avatarContainerView = [AvatarContainerView instanceFromNib];
@@ -55,17 +60,26 @@
         self.roomId = [NSUUID uuid];
         [self.cli createRoomId:self.roomId session:USER.session talkingUids:self.talkingUids];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMsg:) name:kWebRtcNotifyMsgNotificaiton object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    [UIDevice currentDevice].proximityMonitoringEnabled = YES;
     [self genAvatarContainerViewData];
     _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    [UIDevice currentDevice].proximityMonitoringEnabled = NO;
+}
+
 - (void)handleTimer {
     _timeSticks++;
-    self.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d", _timeSticks / 60, _timeSticks % 60];
+    self.timeLabel.text = [NSString stringWithFormat:@"%02u:%02u", _timeSticks / 60, _timeSticks % 60];
 }
 
 - (void)genAvatarContainerViewData {
@@ -83,6 +97,8 @@
     return aci;
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -93,10 +109,12 @@
     if (!speaker) {
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
         speaker = YES;
+        [UIDevice currentDevice].proximityMonitoringEnabled = NO;
     } else {
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord
                                                error:nil];
         speaker = NO;
+        [UIDevice currentDevice].proximityMonitoringEnabled = YES;
     }
     [self.speakerBtn setImage:[UIImage imageNamed:speaker ? @"webrtc_speaker_sel" : @"webrtc_speaker"] forState:UIControlStateNormal];
 }
@@ -182,6 +200,35 @@
         notifyMsg.contentType = @"mulitivoice";
         [USER.session post:notifyMsg];
     }];
+}
+
+- (void)handleMsg:(NSNotification *)notification {
+    WebRtcNotifyMsg *m = notification.object;
+    NSString *uid = m.from;
+    RosterItem *item = [USER getRosterInfoByUid:uid];
+    NSString *type = [m.content objectForKey:@"type"];
+    NSString *rid = [m.content objectForKey:@"rid"];
+    if ([_roomId isEqualToString:rid]) {
+        if ([type isEqualToString:@"reject"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.view makeToast:[NSString stringWithFormat:@"%@已拒绝。", item.name]
+                            duration:2.0
+                            position:CSToastPositionCenter
+                               title:nil];
+                [_avatarContainerView removeAvatarItemByUid:uid];
+            });
+        }
+        
+        if ([type isEqualToString:@"busy"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.view makeToast:[NSString stringWithFormat:@"%@正在通话。", item.name]
+                            duration:2.0
+                            position:CSToastPositionCenter
+                               title:nil];
+                [_avatarContainerView removeAvatarItemByUid:uid];
+            });
+        }
+    }
 }
 
 @end

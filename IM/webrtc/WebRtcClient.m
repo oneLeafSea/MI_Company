@@ -34,7 +34,7 @@
 static NSString *kWebRtcClientErrorDomain = @"WebRtcClient";
 static NSInteger kWebRtcClientErrorCreateSDP = -1;
 static NSInteger kWebRtcClientErrorSetSDP = -2;
-static NSUInteger kWebrtcTimeout = 30;
+static NSUInteger kWebrtcTimeout = 60 * 60;
 static NSString *kDeviceType = @"iphone";
 
 @interface WebRtcClient()<WebRtcWebSocketChannelDelegate,
@@ -46,6 +46,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     BOOL                    m_iceStateFinished;
     BOOL                    m_iceGatherFinished;
     NSString               *m_toRes;
+     BOOL                   _ready;
 }
 @property(nonatomic, strong) RTCPeerConnection *peerConnection;
 @property(nonatomic, strong) RTCPeerConnectionFactory *factory;
@@ -78,6 +79,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         _iv = iv;
         _key = key;
         m_front = YES;
+        _ready = NO;
     }
     return self;
 }
@@ -228,11 +230,12 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 }
 
 - (void)drainMessageQueueIfReady {
-    for (RTCICECandidate *c in _candidateQueue) {
-        [_peerConnection addICECandidate:c];
-    }
-    [_candidateQueue removeAllObjects];
-}
+    if (_ready) {
+        for (RTCICECandidate *c in _candidateQueue) {
+            [_peerConnection addICECandidate:c];
+        }
+        [_candidateQueue removeAllObjects];
+    }}
 
 - (void)joinRoomId:(NSString *)rid completion:(void(^)(BOOL finished))completion {
     [self startTimer];
@@ -530,12 +533,14 @@ didSetSessionDescriptionWithError:(NSError *)error {
                 WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
                 answerMsg.sessionDescription = _peerConnection.localDescription;
                 [m_channel sendData:[answerMsg JSONData]];
+                _ready = YES;
                 [self drainMessageQueueIfReady];
             } else {
                 [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
             }
         } else {
             if (self.peerConnection.remoteDescription) {
+                _ready = YES;
                 [self drainMessageQueueIfReady];
             } else {
                 WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];

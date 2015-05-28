@@ -165,8 +165,7 @@
     __block NSInteger count = 0;
     [g.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         RosterItem *item = obj;
-        PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:item.uid];
-        if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
+        if ([USER.presenceMgr isOnline:item.uid]) {
             count++;
         }
     }];
@@ -198,8 +197,7 @@
     RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     cell.nameLabel.text = item.name;
-    PresenceMsg *msg = [USER.presenceMgr getPresenceMsgByUid:item.uid];
-    if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
+    if ([USER.presenceMgr isOnline:item.uid]) {
         cell.signatureLabel.text = [NSString stringWithFormat:@"[在线]%@", item.sign];
         cell.maskView.hidden = YES;
     } else {

@@ -260,7 +260,7 @@ didSetSessionDescriptionWithError:(NSError *)error {
             [_delegate MultiCallPeerConnection:self didError:sdpError];
             return;
         }
-        DDLogInfo(@"设置 sdp 成功。");
+ 
         if (self.invited) {
             if (self.peerConnection.localDescription) {
                 WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_selfUid fromRes:kDeviceType to:_uid toRes:_deviceType msgId:[NSUUID uuid] topic:@"message" content:nil];

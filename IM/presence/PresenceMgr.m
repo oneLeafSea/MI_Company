@@ -42,16 +42,23 @@
     [USER.session post:msg];
 }
 
-- (PresenceMsg *)getPresenceMsgByUid:(NSString *)uid {
+- (NSArray *)getPresenceMsgArrayByUid:(NSString *)uid {
     return [m_presenceInfo objectForKey:uid];
 }
 
 - (BOOL) isOnline:(NSString *)uid {
-    PresenceMsg *msg = [self getPresenceMsgByUid:uid];
-    if (msg && [msg.show isEqualToString:kPresenceTypeOnline]) {
-        return YES;
+    NSArray *msgArray = [self getPresenceMsgArrayByUid:uid];
+    __block BOOL online = NO;
+    if (msgArray) {
+        [msgArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PresenceMsg *msg = obj;
+            if ([msg.show isEqualToString:kPresenceTypeOnline]) {
+                online = YES;
+                *stop = YES;
+            }
+        }];
     }
-    return NO;
+    return online;
 }
 
 
@@ -59,12 +66,27 @@
     __block PresenceMsg *msg = notification.object;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([msg.presenceType isEqualToString:kPresenceTypeLeave]) {
-            [m_presenceInfo removeObjectForKey:msg.from];
+            NSMutableArray *presenceArray = [m_presenceInfo objectForKey:msg.from];
+            if (presenceArray) {
+                __block NSInteger delIdx = 0;
+                [presenceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    PresenceMsg *m = obj;
+                    if ([m.from_res isEqualToString:msg.from_res]) {
+                        delIdx = idx;
+                        *stop = YES;
+                    }
+                }];
+                [presenceArray removeObjectAtIndex:delIdx];
+                if (presenceArray.count == 0) {
+                    [m_presenceInfo removeObjectForKey:msg.from];
+                }
+            }
+            
         }
         
         if ([msg.presenceType isEqualToString:kPresenceTypeOnline]) {
-            [m_presenceInfo setObject:msg forKey:msg.from];
-            [USER.presenceMgr ackPresenceWithUid:msg.from toRes:msg.from_res];
+            [self addToPreseceInfo:msg];
+            [self ackPresenceWithUid:msg.from toRes:msg.from_res];
         }
         
         if ([msg.presenceType isEqualToString:kPresenceTypeState]) {
@@ -72,10 +94,34 @@
         }
         
         if ([msg.presenceType isEqualToString:kPresenceTypeAck]) {
-            [m_presenceInfo setObject:msg forKey:msg.from];
+            [self addToPreseceInfo:msg];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kPresenceChangedNotification object:nil];
     });
+}
+
+- (void)addToPreseceInfo:(PresenceMsg *)msg {
+    NSMutableArray *presenceArray = [m_presenceInfo objectForKey:msg.from];
+    if (!presenceArray) {
+        presenceArray = [[NSMutableArray alloc] init];
+       
+    } else {
+        __block BOOL found = NO;
+        __block NSUInteger i = 0;
+        [presenceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PresenceMsg *m = obj;
+            if ([m.from_res isEqualToString:msg.from_res]) {
+                found = YES;
+                i = idx;
+                *stop = YES;
+            }
+        }];
+        if (found) {
+            [presenceArray removeObjectAtIndex:i];
+        }
+    }
+     [presenceArray addObject:msg];
+    [m_presenceInfo setObject:presenceArray forKey:msg.from];
 }
 
 - (void) ackPresenceWithUid:(NSString *)uid toRes:(NSString *)toRes {

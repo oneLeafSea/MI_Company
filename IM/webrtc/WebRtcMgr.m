@@ -21,6 +21,8 @@
 @interface WebRtcMgr()<UIAlertViewDelegate> {
     BOOL m_busy;
     NSString *m_roomId;
+    UIAlertView *m_av;
+    NSString *m_invitedId;
 }
 @end
 
@@ -65,6 +67,16 @@
         [[msg.content objectForKey:@"type"] isEqualToString:@"close"]) {
         return;
     }
+    
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"handle"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[AudioPlayer sharePlayer] stop];
+            if (m_av.visible) {
+                [m_av dismissWithClickedButtonIndex:4 animated:YES];
+            }
+        });
+    }
+    
     if (m_busy) {
         WebRtcNotifyMsg *ack = [[WebRtcNotifyMsg alloc] initWithFrom:_uid to:msg.from rid:msg.rid];
         ack.contentType = @"busy";
@@ -72,6 +84,8 @@
         return;
     }
     m_busy = YES;
+    
+  
     
     if ([[msg.content objectForKey:@"type"] isEqualToString:@"mulitivoice"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -81,9 +95,10 @@
             NSString *from = msg.from;
             RosterItem *ri = [USER getRosterInfoByUid:from];
             m_roomId = [msg.rid copy];
+            m_invitedId = [msg.from copy];
             NSString *tip = [NSString stringWithFormat:@"%@想和你多人通话！", ri.name];
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"多人通话" message:tip delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"接听", nil];
-            [av show];
+            m_av = [[UIAlertView alloc] initWithTitle:@"多人通话" message:tip delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"接听", nil];
+            [m_av show];
         });
         return;
     }
@@ -96,10 +111,28 @@
         recvController.uid = self.uid;
         recvController.serverUrl = [NSURL URLWithString:webrtcUrl];
         recvController.talkingUid = msg.from;
-        [APP_DELEGATE.window.rootViewController presentViewController:recvController animated:YES completion:^{
-        }];
+        [APP_DELEGATE.window.rootViewController presentViewController:recvController animated:YES completion:nil];
     });
     
+}
+
+- (void)sendDeviceReceived:(NSString *)rid {
+    NSArray *presenceArray = [USER.presenceMgr getPresenceMsgArrayByUid:USER.uid];
+    if (presenceArray.count > 0) {
+        [presenceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PresenceMsg *msg = obj;
+            WebRtcNotifyMsg *recevNotify = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:USER.uid rid:rid];
+            recevNotify.to_res = msg.from_res;
+            recevNotify.contentType = @"handle";
+            [USER.session post:recevNotify];
+        }];
+    }
+}
+
+- (void)reject {
+    WebRtcNotifyMsg *nm = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:m_invitedId rid:m_roomId];
+    nm.contentType = @"reject";
+    [USER.session post:nm];
 }
 
 - (void)setbusy:(BOOL)busy {
@@ -109,7 +142,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[AudioPlayer sharePlayer] stop];
     switch (buttonIndex) {
+        case 0:
+            m_busy = NO;
+            [self sendDeviceReceived:m_roomId];
+            [self reject];
+            break;
         case 1: {
+            [self sendDeviceReceived:m_roomId];
             MultiCallViewController *vc = [[MultiCallViewController alloc] initWithNibName:@"MultiCallViewController" bundle:nil];
             vc.invited = YES;
             vc.roomId = [m_roomId copy];
@@ -118,6 +157,7 @@
             break;
             
         default:
+            m_busy = NO;
             break;
     }
 }

@@ -87,7 +87,9 @@
     self.time = [[NSDate Now] formatWith:nil];
     NSDictionary *dict = @{
                            @"from" : self.from,
+                           @"from_res": @"iphone",
                            @"to"   : self.to,
+                           @"to_res": self.to_res ? self.to_res : @"",
                            @"time" : self.time,
                            @"content" : body,
                            @"msgid": self.qid,

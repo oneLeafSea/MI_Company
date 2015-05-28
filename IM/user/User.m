@@ -263,7 +263,6 @@
 }
 
 - (NSString *)rssUrl {
-//    return @"ws://10.22.1.214:8008/webrtc";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_RSS"];
     return url;

@@ -24,7 +24,7 @@
 
 
 - (void)dealloc {
-    DDLogInfo(@"WebRtcWebSocketChannel");
+    DDLogInfo(@"WebRtcWebSocketChannel dealloc");
     if (_pingTimer) {
         [_pingTimer invalidate];
         _pingTimer = nil;
@@ -82,20 +82,12 @@
 
 - (void)webSocket:(WebrtcSRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSString *messageString = message;
+    DDLogInfo(@"INFO:<-- %@", message);
     WebRtcSignalingMessage *m = [WebRtcSignalingMessage messageFromJSONString:messageString];
     if (!m) {
         DDLogWarn(@"WARN: unkown message.");
         return;
     }
-//    if ([m isKindOfClass:[WebRtcAckMessage class]]) {
-//        WebRtcAckMessage *ack = (WebRtcAckMessage *)m;
-//        void (^callback)(WebRtcAckMessage *) = [_msgQueue objectForKey:ack.msgId];
-//        if (callback) {
-//            callback(ack);
-//            [_msgQueue removeObjectForKey:ack.msgId];
-//        }
-//        return;
-//    }
     [_delegate channel:self didReceiveMessage:m];
     if ([m isKindOfClass:[WebRtcSeqMessage class]]) {
         if (_connectCallback) {
@@ -103,16 +95,11 @@
             _connectCallback = nil;
         }
     }
-    DDLogInfo(@"@%s, INFO: %@", __PRETTY_FUNCTION__, messageString);
 }
 
 - (void)webSocketDidOpen:(WebrtcSRWebSocket *)webSocket {
      self.state = kWebRtcWebSocketChannelStateOpen;
     _pingTimer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(ping) userInfo:nil repeats:YES];
-//    if (_connectCallback) {
-//        _connectCallback(YES);
-//        _connectCallback = nil;
-//    }
 }
 
 - (void)ping {

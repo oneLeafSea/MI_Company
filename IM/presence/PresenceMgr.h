@@ -14,7 +14,7 @@
 - (void)postMsgWithPresenceType:(NSString *)presencetype presenceShow:(NSString *)presenceShow;
 
 
-- (PresenceMsg *)getPresenceMsgByUid:(NSString *)uid;
+- (NSArray *)getPresenceMsgArrayByUid:(NSString *)uid;
 
 - (BOOL) isOnline:(NSString *)uid;
 @end

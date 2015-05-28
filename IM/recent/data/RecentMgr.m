@@ -131,7 +131,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     item.from = msg.from;
     item.to = msg.to;
     item.badge = @"0";
-    item.ext = [NSString stringWithFormat:@"%u", msg.chatMsgType];
+    item.ext = [NSString stringWithFormat:@"%u", (unsigned int)msg.chatMsgType];
     return item;
 }
 
@@ -154,7 +154,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     BOOL ret = YES;
     if ([m_recentTb exsitmsgType:req.type]) {
         NSInteger badge = [m_recentTb getFirstBadgeWithMsgType:req.type];
-        item.badge = [NSString stringWithFormat:@"%ld", badge + 1];
+        item.badge = [NSString stringWithFormat:@"%d", badge + 1];
         ret = [m_recentTb updateItem:item msgtyp:req.type];
     } else {
         ret = [m_recentTb insertItem:item];
