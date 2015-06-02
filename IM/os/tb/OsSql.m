@@ -43,7 +43,7 @@ NSString *kSqlOsItemsCreate = @"CREATE TABLE IF NOT EXISTS `tb_os_items` ("
                                         "`org`	TEXT,"
                                         "PRIMARY KEY(uid)"
                                         ");";
-NSString *kSqlOsItemsDel = @"DELETE FROM `tb_os_items`;";
+NSString *kSqlOsItemsDel = @"DELETE FROM `tb_os_items` WHERE `uid` = ?;";
 NSString *kSqlOsItemsQuery = @"SELECT * FROM `tb_os_items`;";
 NSString *kSqlOsItemsQueryByOrg = @"SELECT * FROM `tb_os_items` WHERE `org` = ?;";
 NSString *kSqlOsItemsQueryByUid = @"SELECT * FROM `tb_os_items` WHERE `uid` = ?;";
