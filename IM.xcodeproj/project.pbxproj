@@ -281,6 +281,24 @@
 		7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278451A4AC1490012D1F5 /* RosterItem.m */; };
 		7DDAFB131A5E785E0029D809 /* RosterSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAFB121A5E785E0029D809 /* RosterSectionHeaderView.xib */; };
 		7DDAFB161A5E7CC50029D809 /* RosterSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAFB151A5E7CC50029D809 /* RosterSectionHeaderView.m */; };
+		7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF92F81B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m */; };
+		7DDF931C1B1FDD4C0097C6BD /* ALAsset+assetType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF92FA1B1FDD4C0097C6BD /* ALAsset+assetType.m */; };
+		7DDF931D1B1FDD4C0097C6BD /* ALAsset+isEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF92FC1B1FDD4C0097C6BD /* ALAsset+isEqual.m */; };
+		7DDF931E1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF92FE1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m */; };
+		7DDF931F1B1FDD4C0097C6BD /* CTAssetItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93001B1FDD4C0097C6BD /* CTAssetItemViewController.m */; };
+		7DDF93201B1FDD4C0097C6BD /* CTAssetScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93021B1FDD4C0097C6BD /* CTAssetScrollView.m */; };
+		7DDF93211B1FDD4C0097C6BD /* CTAssetsGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93041B1FDD4C0097C6BD /* CTAssetsGroupViewCell.m */; };
+		7DDF93221B1FDD4C0097C6BD /* CTAssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93061B1FDD4C0097C6BD /* CTAssetsGroupViewController.m */; };
+		7DDF93231B1FDD4C0097C6BD /* CTAssetsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93081B1FDD4C0097C6BD /* CTAssetsPageViewController.m */; };
+		7DDF93241B1FDD4C0097C6BD /* CTAssetsPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DDF930A1B1FDD4C0097C6BD /* CTAssetsPickerController.bundle */; };
+		7DDF93251B1FDD4C0097C6BD /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF930C1B1FDD4C0097C6BD /* CTAssetsPickerController.m */; };
+		7DDF93261B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF930E1B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m */; };
+		7DDF93271B1FDD4C0097C6BD /* CTAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93101B1FDD4C0097C6BD /* CTAssetsViewCell.m */; };
+		7DDF93281B1FDD4C0097C6BD /* CTAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93121B1FDD4C0097C6BD /* CTAssetsViewController.m */; };
+		7DDF93291B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93141B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m */; };
+		7DDF932A1B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93161B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m */; };
+		7DDF932B1B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93181B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m */; };
+		7DDF932C1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF931A1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m */; };
 		7DEA705F1AA94326002C2C68 /* OsOrgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA705E1AA94326002C2C68 /* OsOrgTableViewCell.m */; };
 		7DEA70621AA94335002C2C68 /* OsOrgItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA70611AA94335002C2C68 /* OsOrgItemTableViewCell.m */; };
 		7DEA70661AA988CC002C2C68 /* DetailMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA70651AA988CC002C2C68 /* DetailMgr.m */; };
@@ -875,6 +893,42 @@
 		7DDAFB121A5E785E0029D809 /* RosterSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RosterSectionHeaderView.xib; sourceTree = "<group>"; };
 		7DDAFB141A5E7CC50029D809 /* RosterSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSectionHeaderView.h; sourceTree = "<group>"; };
 		7DDAFB151A5E7CC50029D809 /* RosterSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionHeaderView.m; sourceTree = "<group>"; };
+		7DDF92F71B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+accessibilityLabel.h"; sourceTree = "<group>"; };
+		7DDF92F81B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+accessibilityLabel.m"; sourceTree = "<group>"; };
+		7DDF92F91B1FDD4C0097C6BD /* ALAsset+assetType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+assetType.h"; sourceTree = "<group>"; };
+		7DDF92FA1B1FDD4C0097C6BD /* ALAsset+assetType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+assetType.m"; sourceTree = "<group>"; };
+		7DDF92FB1B1FDD4C0097C6BD /* ALAsset+isEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+isEqual.h"; sourceTree = "<group>"; };
+		7DDF92FC1B1FDD4C0097C6BD /* ALAsset+isEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+isEqual.m"; sourceTree = "<group>"; };
+		7DDF92FD1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsGroup+isEqual.h"; sourceTree = "<group>"; };
+		7DDF92FE1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsGroup+isEqual.m"; sourceTree = "<group>"; };
+		7DDF92FF1B1FDD4C0097C6BD /* CTAssetItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetItemViewController.h; sourceTree = "<group>"; };
+		7DDF93001B1FDD4C0097C6BD /* CTAssetItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetItemViewController.m; sourceTree = "<group>"; };
+		7DDF93011B1FDD4C0097C6BD /* CTAssetScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetScrollView.h; sourceTree = "<group>"; };
+		7DDF93021B1FDD4C0097C6BD /* CTAssetScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetScrollView.m; sourceTree = "<group>"; };
+		7DDF93031B1FDD4C0097C6BD /* CTAssetsGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsGroupViewCell.h; sourceTree = "<group>"; };
+		7DDF93041B1FDD4C0097C6BD /* CTAssetsGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsGroupViewCell.m; sourceTree = "<group>"; };
+		7DDF93051B1FDD4C0097C6BD /* CTAssetsGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsGroupViewController.h; sourceTree = "<group>"; };
+		7DDF93061B1FDD4C0097C6BD /* CTAssetsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsGroupViewController.m; sourceTree = "<group>"; };
+		7DDF93071B1FDD4C0097C6BD /* CTAssetsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPageViewController.h; sourceTree = "<group>"; };
+		7DDF93081B1FDD4C0097C6BD /* CTAssetsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPageViewController.m; sourceTree = "<group>"; };
+		7DDF93091B1FDD4C0097C6BD /* CTAssetsPickerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerCommon.h; sourceTree = "<group>"; };
+		7DDF930A1B1FDD4C0097C6BD /* CTAssetsPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CTAssetsPickerController.bundle; sourceTree = "<group>"; };
+		7DDF930B1B1FDD4C0097C6BD /* CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerController.h; sourceTree = "<group>"; };
+		7DDF930C1B1FDD4C0097C6BD /* CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPickerController.m; sourceTree = "<group>"; };
+		7DDF930D1B1FDD4C0097C6BD /* CTAssetsSupplementaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsSupplementaryView.h; sourceTree = "<group>"; };
+		7DDF930E1B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsSupplementaryView.m; sourceTree = "<group>"; };
+		7DDF930F1B1FDD4C0097C6BD /* CTAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewCell.h; sourceTree = "<group>"; };
+		7DDF93101B1FDD4C0097C6BD /* CTAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewCell.m; sourceTree = "<group>"; };
+		7DDF93111B1FDD4C0097C6BD /* CTAssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewController.h; sourceTree = "<group>"; };
+		7DDF93121B1FDD4C0097C6BD /* CTAssetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewController.m; sourceTree = "<group>"; };
+		7DDF93131B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsViewControllerTransition.h; sourceTree = "<group>"; };
+		7DDF93141B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewControllerTransition.m; sourceTree = "<group>"; };
+		7DDF93151B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CTAssetsPickerController.h"; sourceTree = "<group>"; };
+		7DDF93161B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CTAssetsPickerController.m"; sourceTree = "<group>"; };
+		7DDF93171B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+timeIntervalFormatter.h"; sourceTree = "<group>"; };
+		7DDF93181B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+timeIntervalFormatter.m"; sourceTree = "<group>"; };
+		7DDF93191B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CTAssetsPickerController.h"; sourceTree = "<group>"; };
+		7DDF931A1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CTAssetsPickerController.m"; sourceTree = "<group>"; };
 		7DEA705D1AA94326002C2C68 /* OsOrgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsOrgTableViewCell.h; sourceTree = "<group>"; };
 		7DEA705E1AA94326002C2C68 /* OsOrgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsOrgTableViewCell.m; sourceTree = "<group>"; };
 		7DEA70601AA94335002C2C68 /* OsOrgItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsOrgItemTableViewCell.h; sourceTree = "<group>"; };
@@ -1571,6 +1625,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7DDF92F51B1FDD4C0097C6BD /* vendors */,
 				7DF3CA941AF7095700D08AE7 /* multipleCall */,
 				7D268C011AC00DFD0090AD49 /* webrtc */,
 				7D268BFA1ABFE4EB0090AD49 /* friendcircle */,
@@ -1968,6 +2023,57 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7DDF92F51B1FDD4C0097C6BD /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				7DDF92F61B1FDD4C0097C6BD /* CTAssetsPickerController */,
+			);
+			path = vendors;
+			sourceTree = "<group>";
+		};
+		7DDF92F61B1FDD4C0097C6BD /* CTAssetsPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				7DDF92F71B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.h */,
+				7DDF92F81B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m */,
+				7DDF92F91B1FDD4C0097C6BD /* ALAsset+assetType.h */,
+				7DDF92FA1B1FDD4C0097C6BD /* ALAsset+assetType.m */,
+				7DDF92FB1B1FDD4C0097C6BD /* ALAsset+isEqual.h */,
+				7DDF92FC1B1FDD4C0097C6BD /* ALAsset+isEqual.m */,
+				7DDF92FD1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.h */,
+				7DDF92FE1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m */,
+				7DDF92FF1B1FDD4C0097C6BD /* CTAssetItemViewController.h */,
+				7DDF93001B1FDD4C0097C6BD /* CTAssetItemViewController.m */,
+				7DDF93011B1FDD4C0097C6BD /* CTAssetScrollView.h */,
+				7DDF93021B1FDD4C0097C6BD /* CTAssetScrollView.m */,
+				7DDF93031B1FDD4C0097C6BD /* CTAssetsGroupViewCell.h */,
+				7DDF93041B1FDD4C0097C6BD /* CTAssetsGroupViewCell.m */,
+				7DDF93051B1FDD4C0097C6BD /* CTAssetsGroupViewController.h */,
+				7DDF93061B1FDD4C0097C6BD /* CTAssetsGroupViewController.m */,
+				7DDF93071B1FDD4C0097C6BD /* CTAssetsPageViewController.h */,
+				7DDF93081B1FDD4C0097C6BD /* CTAssetsPageViewController.m */,
+				7DDF93091B1FDD4C0097C6BD /* CTAssetsPickerCommon.h */,
+				7DDF930A1B1FDD4C0097C6BD /* CTAssetsPickerController.bundle */,
+				7DDF930B1B1FDD4C0097C6BD /* CTAssetsPickerController.h */,
+				7DDF930C1B1FDD4C0097C6BD /* CTAssetsPickerController.m */,
+				7DDF930D1B1FDD4C0097C6BD /* CTAssetsSupplementaryView.h */,
+				7DDF930E1B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m */,
+				7DDF930F1B1FDD4C0097C6BD /* CTAssetsViewCell.h */,
+				7DDF93101B1FDD4C0097C6BD /* CTAssetsViewCell.m */,
+				7DDF93111B1FDD4C0097C6BD /* CTAssetsViewController.h */,
+				7DDF93121B1FDD4C0097C6BD /* CTAssetsViewController.m */,
+				7DDF93131B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.h */,
+				7DDF93141B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m */,
+				7DDF93151B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.h */,
+				7DDF93161B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m */,
+				7DDF93171B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.h */,
+				7DDF93181B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m */,
+				7DDF93191B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.h */,
+				7DDF931A1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m */,
+			);
+			path = CTAssetsPickerController;
+			sourceTree = "<group>";
+		};
 		7DEA70631AA983A6002C2C68 /* detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -2270,6 +2376,7 @@
 				7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */,
 				7D2E0FB31A830F250099AB04 /* LICENSE in Resources */,
 				7DF3CAB21AF70C7F00D08AE7 /* MultiSelectedPanel.xib in Resources */,
+				7DDF93241B1FDD4C0097C6BD /* CTAssetsPickerController.bundle in Resources */,
 				7DDAFB131A5E785E0029D809 /* RosterSectionHeaderView.xib in Resources */,
 				7D4D08341AF9B9670031C035 /* AvatarContainerCellCollectionViewCell.xib in Resources */,
 				7D6023771A80B774001BDD46 /* ChatViewMorePanelCellView.xib in Resources */,
@@ -2350,6 +2457,7 @@
 				7D2E0F8E1A830F250099AB04 /* JSQMessagesViewController.m in Sources */,
 				7DB2D6301A6FD10300004D6C /* MainViewController.m in Sources */,
 				7D07BB8A1AA54B4200E78877 /* GroupChatItem.m in Sources */,
+				7DDF93201B1FDD4C0097C6BD /* CTAssetScrollView.m in Sources */,
 				7DB04C9C1AC39DB60097A106 /* WebRtcNotifyMsg.m in Sources */,
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
 				7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */,
@@ -2389,7 +2497,9 @@
 				7DFE249A1A95D70800C5DD29 /* PresenceNotification.m in Sources */,
 				7DF3CAC31AF7130800D08AE7 /* PopMenuItemView.m in Sources */,
 				7DB1584D1A42DD5600287BBE /* JRBinResponse.m in Sources */,
+				7DDF932B1B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				7DB2D6191A6F6FFC00004D6C /* RecentViewModle.m in Sources */,
+				7DDF93271B1FDD4C0097C6BD /* CTAssetsViewCell.m in Sources */,
 				7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */,
 				7D1C60191AA6C1350035A2D2 /* OsNotification.m in Sources */,
 				7DB158AB1A42DD5600287BBE /* Request.m in Sources */,
@@ -2427,6 +2537,8 @@
 				7D07BB9A1AA5A4F500E78877 /* GroupChatItemListViewController.m in Sources */,
 				7DB1583F1A42DD5600287BBE /* NSJSONSerialization+StrDictConverter.m in Sources */,
 				7D0CFBEF1A77334700902285 /* Relogin.m in Sources */,
+				7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */,
+				7DDF93291B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m in Sources */,
 				7D2E0F9E1A830F250099AB04 /* JSQVideoMediaItem.m in Sources */,
 				7D08D02C1A8D92F200F4C8E7 /* ChatMessageSpeakerPanelView.m in Sources */,
 				7DB3FCE91A6DF7A200BFA0E7 /* RosterGrpMgrTableViewCell.m in Sources */,
@@ -2456,6 +2568,7 @@
 				7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */,
 				7DB158541A42DD5600287BBE /* JRResponseFactory.m in Sources */,
 				7DB2D6231A6F8E5100004D6C /* RecentSql.m in Sources */,
+				7DDF93211B1FDD4C0097C6BD /* CTAssetsGroupViewCell.m in Sources */,
 				7DB158411A42DD5600287BBE /* Utils.m in Sources */,
 				7D2E0F8B1A830F250099AB04 /* UIImage+JSQMessages.m in Sources */,
 				7D2E0FA41A830F250099AB04 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
@@ -2487,6 +2600,7 @@
 				7DB158571A42DD5600287BBE /* JRTextResponse.m in Sources */,
 				7D433D1E1AC560CF008B5A8C /* WebrtcSRWebSocket.m in Sources */,
 				7DB158401A42DD5600287BBE /* NSUUID+StringUUID.m in Sources */,
+				7DDF932A1B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m in Sources */,
 				7DB158531A42DD5600287BBE /* JRResponse.m in Sources */,
 				7DB158A41A42DD5600287BBE /* MessageKeeper.m in Sources */,
 				7DF3CAC01AF712E500D08AE7 /* PopMenuItem.m in Sources */,
@@ -2494,9 +2608,13 @@
 				7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */,
 				7D2E0F891A830F250099AB04 /* UIColor+JSQMessages.m in Sources */,
 				7D18B6751A81B91100D2B7CB /* ChatMessageMorePanelItemMode.m in Sources */,
+				7DDF932C1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m in Sources */,
 				7D7FCDF21AA84FEE0023EF49 /* OsNavigationTableViewCell.m in Sources */,
 				7DB1585E1A42DD5600287BBE /* LogoutRequest.m in Sources */,
+				7DDF93281B1FDD4C0097C6BD /* CTAssetsViewController.m in Sources */,
+				7DDF931E1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m in Sources */,
 				7DB1589C1A42DD5600287BBE /* RosterItemAddResult.m in Sources */,
+				7DDF931D1B1FDD4C0097C6BD /* ALAsset+isEqual.m in Sources */,
 				7D302CFB1A7746F5004C6BD5 /* Reachability.m in Sources */,
 				7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */,
 				7DF3CAB81AF70C7F00D08AE7 /* MultiSelectViewController.m in Sources */,
@@ -2518,6 +2636,7 @@
 				7D0CFBF21A77339200902285 /* LoginNotification.m in Sources */,
 				7D11508D1AEF85F7008D6859 /* ChatHistoryMessageViewController.m in Sources */,
 				7DB6694D1A5F708900843C72 /* RosterSection.m in Sources */,
+				7DDF931C1B1FDD4C0097C6BD /* ALAsset+assetType.m in Sources */,
 				7DB3FCEC1A6E02CD00BFA0E7 /* RosterGrpMgrModel.m in Sources */,
 				7D08D0261A8D92F200F4C8E7 /* AudioRecorder.m in Sources */,
 				7DFE72821AA8416500B9F674 /* OsViewController.m in Sources */,
@@ -2544,12 +2663,15 @@
 				7D2E0FA21A830F250099AB04 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				7DB3FCE61A6DF15400BFA0E7 /* RosterGrpMgrTableViewController.m in Sources */,
 				7D08D0341A8D92F200F4C8E7 /* ScaleableRoundView.m in Sources */,
+				7DDF93261B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m in Sources */,
 				7D4D08371AF9C01F0031C035 /* AvatarContainerViewItem.m in Sources */,
 				7D2E0F871A830F250099AB04 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
+				7DDF93251B1FDD4C0097C6BD /* CTAssetsPickerController.m in Sources */,
 				7DB2D62C1A6F963F00004D6C /* RecentMsgItem.m in Sources */,
 				7DB251BC1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m in Sources */,
 				7D2E0FA71A830F250099AB04 /* JSQMessagesInputToolbar.m in Sources */,
 				7DB31BF61A6CC04B0051E6CD /* RosterGrpVerTb.m in Sources */,
+				7DDF93221B1FDD4C0097C6BD /* CTAssetsGroupViewController.m in Sources */,
 				7DB158A01A42DD5600287BBE /* Hb.m in Sources */,
 				7D13DDCD1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m in Sources */,
 				7DB53ACC1A64AC260043DA2E /* RosterItemSendReqMsgTableViewController.m in Sources */,
@@ -2558,6 +2680,7 @@
 				7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */,
 				7DB158AD1A42DD5600287BBE /* ServerTimeMsg.m in Sources */,
 				7DFF639D1A92D39A0001F0A4 /* JSQFileMediaItem.m in Sources */,
+				7DDF93231B1FDD4C0097C6BD /* CTAssetsPageViewController.m in Sources */,
 				7D093C921A70CCD4002D43B9 /* ChatMessageControllerInfo.m in Sources */,
 				7DB092721A6601B9005268A7 /* ChatMessage.m in Sources */,
 				7DB158A81A42DD5600287BBE /* OutputStream.m in Sources */,
@@ -2599,6 +2722,7 @@
 				7D08D02A1A8D92F200F4C8E7 /* ChatMessageRecorderViewController.m in Sources */,
 				7DFE24B11AA44C2900C5DD29 /* GroupChat.m in Sources */,
 				7DB31BF31A6CBDF40051E6CD /* RosterVerTb.m in Sources */,
+				7DDF931F1B1FDD4C0097C6BD /* CTAssetItemViewController.m in Sources */,
 				7DB1585A1A42DD5600287BBE /* JRreqFrbhParam.m in Sources */,
 				7DB1583E1A42DD5600287BBE /* NSDate+Common.m in Sources */,
 				7D2E0F991A830F250099AB04 /* JSQMediaItem.m in Sources */,
