@@ -87,7 +87,10 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ChatMessageMorePanelItemMode *item = [m_panelItems objectAtIndex:indexPath.row];
     if ([item.target respondsToSelector:item.selector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [item.target performSelector:item.selector];
+#pragma clang diagnostic pop
     }
     
 }

@@ -9,13 +9,19 @@
 #import "FriendCircleViewController.h"
 #import <Masonry.h>
 #import <DateTools.h>
+#import <MJRefresh.h>
 
 #import "FCItemTableViewCell.h"
+#import "LogLevel.h"
+#import "RTTextInputBar.h"
 
 
-@interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource, FCItemTableViewCellDelegate, RTTextInputBarDelegate> {
+    NSInteger _dataCount;
+}
 
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) RTTextInputBar *inputBar;
 
 @end
 
@@ -30,8 +36,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _dataCount = 2;
     self.navigationItem.title = @"朋友圈";
     [self setupTableView];
+    [self.view addSubview:self.inputBar];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,11 +60,25 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _dataCount += 2;
+        sleep(3);
+        [self.tableView reloadData];
+        [self.tableView.header endRefreshing];
+    }];
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        sleep(3);
+        _dataCount += 2;
+        [self.tableView reloadData];
+        [self.tableView.footer endRefreshing];
+    }];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 #pragma mark -- tableview delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return _dataCount;
 }
 
 
@@ -63,7 +86,7 @@
     
     FCItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FCItemTableViewCell" forIndexPath:indexPath];
     cell.model = [self getCellModel];
-    
+    cell.delegate = self;
     
     return cell;
 }
@@ -80,7 +103,7 @@
     FCICItemCellModel *commentsItemCellModel = [[FCICItemCellModel alloc] init];
     commentsItemCellModel.name = @"郭志伟";
     commentsItemCellModel.uid = @"gzw";
-    commentsItemCellModel.content = @"太棒了！";
+    commentsItemCellModel.content = @":太棒了！我们喜欢在一起玩耍，哈哈哈哈哈哈哈";
     commentsItemCellModel.repliedName = @"李维";
     commentsItemCellModel.repliedUid = @"liwei";
     
@@ -115,7 +138,7 @@
     
     FCItemCommentsViewModel *commentsViewModel = [[FCItemCommentsViewModel alloc] init];
     commentsViewModel.fcicItemCellModels = [[NSMutableArray alloc] initWithArray:@[commentsItemCellModel]];
-//
+
     FCItemViewModel *itemViewModel = [[FCItemViewModel alloc] init];
     itemViewModel.commentsViewModel = commentsViewModel;
     itemViewModel.imgViewModel = imgsViewModel;
@@ -131,8 +154,42 @@
     return itemCellModel;
 }
 
+//#pragma mark - getter
+- (RTTextInputBar *)inputBar {
+    if (!_inputBar) {
+        _inputBar = [RTTextInputBar showInView:self.view];
+        _inputBar.textView.placeholder = @"回复郭志伟";
+        _inputBar.rtDelegate = self;
+    }
+    return _inputBar;
+}
+
+- (void)textInputBar:(RTTextInputBar *)inputBar didPressSendBtnWithText:(NSString *)txt {
+    
+}
+
 #pragma mark -- private method
 - (void)setupConstraints {
     
 }
+
+#pragma mark - FCItemTableViewCellDelegate
+- (void)fcItemTableViewCell:(FCItemTableViewCell *)cell commentsDidTapped:(FCICItemCellModel *)model {
+    DDLogInfo(@"cell tappped");
+    [self showTextInputbar];
+    
+}
+
+- (void)fcItemTableViewCellCommentsRemark:(FCItemTableViewCell *)cell {
+    DDLogInfo(@"remark tapped");
+    [self showTextInputbar];
+}
+
+
+- (void)showTextInputbar {
+    if (!self.inputBar.textView.isFirstResponder) {
+        [self.inputBar.textView becomeFirstResponder];
+    }
+}
+
 @end

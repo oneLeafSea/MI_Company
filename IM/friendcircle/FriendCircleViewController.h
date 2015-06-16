@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import <SLKTextViewController.h>
-
 @interface FriendCircleViewController : UIViewController
 
 @end

@@ -13,7 +13,7 @@
 #import "FCItemView.h"
 #import "FCConstants.h"
 
-@interface FCItemTableViewCell()
+@interface FCItemTableViewCell() <FCItemViewDelegate>
 
 @property(nonatomic, strong) FCItemView *itemView;
 
@@ -41,6 +41,7 @@
     self.spaceView.backgroundColor = [UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1.0];
     [self.contentView addSubview:self.spaceView];
     [self.contentView addSubview:self.itemView];
+    self.itemView.delegate = self;
     [self.itemView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView);
         make.right.equalTo(self.contentView);
@@ -61,6 +62,19 @@
 + (CGFloat)heightForCellModel:(FCItemTableViewCellModel *)model {
     CGFloat itemViewHeight = [FCItemView heightForViewModel:model.itemViewModel];
     return itemViewHeight + FC_SPACE_VIEW_HEIGHT;
+}
+
+#pragma mark - FCItemViewDelegate
+- (void)fcItemView:(FCItemView *)itemView commentsDidTapped:(FCICItemCellModel *)model {
+    if ([self.delegate respondsToSelector:@selector(fcItemTableViewCell:commentsDidTapped:)]) {
+        [self.delegate fcItemTableViewCell:self commentsDidTapped:model];
+    }
+}
+
+- (void)fcItemViewCommentsRemark:(FCItemView *)itemView {
+    if ([self.delegate respondsToSelector:@selector(fcItemTableViewCellCommentsRemark:)]) {
+        [self.delegate fcItemTableViewCellCommentsRemark:self];
+    }
 }
 
 @end

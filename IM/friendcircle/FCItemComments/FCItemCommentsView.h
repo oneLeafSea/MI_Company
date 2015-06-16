@@ -9,10 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "FCItemCommentsViewModel.h"
 
+@protocol FCItemCommentsViewDelegate;
+
 @interface FCItemCommentsView : UIView
 
 @property(nonatomic, strong) FCItemCommentsViewModel *model;
+@property(weak) id<FCItemCommentsViewDelegate> delegate;
 
 + (CGFloat)heightForCommentsView:(FCItemCommentsViewModel *)model;
+
+@end
+
+@protocol FCItemCommentsViewDelegate <NSObject>
+
+- (void)fcItemCommentsView:(FCItemCommentsView *)commentsView didSelectAt:(NSInteger)index;
+
+- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView;
 
 @end

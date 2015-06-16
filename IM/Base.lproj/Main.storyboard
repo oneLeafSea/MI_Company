@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I7I-CW-JVN">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -457,8 +456,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="群设置" id="tq8-hR-Chp"/>
                     <connections>
-                        <segue destination="esJ-0q-R8Z" kind="show" id="ORP-8J-WYw"/>
-                        <segue destination="Q8Q-gQ-oOm" kind="show" id="1Mz-Iq-tFg"/>
+                        <segue destination="esJ-0q-R8Z" kind="show" identifier="toGroupItem" id="ORP-8J-WYw"/>
+                        <segue destination="Q8Q-gQ-oOm" kind="show" identifier="toGroupHistory" id="1Mz-Iq-tFg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hha-a0-lLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -700,10 +699,10 @@
                         <segue destination="tcE-mk-naL" kind="show" id="etX-zJ-15p"/>
                         <segue destination="jRg-GN-O4W" kind="show" identifier="RostertoChatview" id="0Uh-dH-4w2"/>
                         <segue destination="0oR-9C-EQ7" kind="presentation" identifier="roster2grpmgr" id="wfv-GS-Jda"/>
-                        <segue destination="85O-vi-Ra3" kind="show" id="DHD-xZ-yBh"/>
+                        <segue destination="85O-vi-Ra3" kind="show" identifier="toGroup" id="DHD-xZ-yBh"/>
                         <segue destination="Ife-pm-7fY" kind="show" id="1Tc-um-wnF"/>
-                        <segue destination="khr-O1-wTr" kind="show" id="UGc-Fv-bvM"/>
-                        <segue destination="k99-9J-c6y" kind="show" id="Ktd-iz-YYr"/>
+                        <segue destination="khr-O1-wTr" kind="show" identifier="ToOS" id="UGc-Fv-bvM"/>
+                        <segue destination="k99-9J-c6y" kind="show" identifier="toProfile" id="Ktd-iz-YYr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3w-OB-LLa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1061,7 +1060,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="功能" id="rAB-kE-AJT"/>
                     <connections>
-                        <segue destination="t8d-J6-FQa" kind="show" id="Gwd-R7-WZP"/>
+                        <segue destination="t8d-J6-FQa" kind="show" identifier="toViewController" id="Gwd-R7-WZP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oaG-Rs-t9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2552,7 +2551,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="PK2-kc-upr" kind="show" id="gd0-Hv-vRj"/>
+                                            <segue destination="PK2-kc-upr" kind="show" identifier="toCommon" id="gd0-Hv-vRj"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="S3D-Xb-aeq">
@@ -2722,7 +2721,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Z9l-sv-nBs" kind="show" id="pBk-8T-PWe"/>
+                        <segue destination="Z9l-sv-nBs" kind="show" identifier="toAddFrd" id="pBk-8T-PWe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pT3-Zd-axZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2842,7 +2841,7 @@
                     <connections>
                         <outlet property="contentTextField" destination="FUP-fi-Lti" id="x9Q-SO-WIy"/>
                         <outlet property="orgTextField" destination="g95-hX-rvw" id="YX7-4Q-T1D"/>
-                        <segue destination="3BI-pW-0hT" kind="show" id="mzQ-pa-ZIu"/>
+                        <segue destination="3BI-pW-0hT" kind="show" identifier="toSearchResult" id="mzQ-pa-ZIu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mu8-8l-EeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2871,7 +2870,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="rightBtn" destination="xbN-Nq-Fwh" id="QIc-wI-cWy"/>
-                        <segue destination="03M-YL-i01" kind="show" id="QgM-Dy-hrh"/>
+                        <segue destination="03M-YL-i01" kind="show" identifier="toChatSetting" id="QgM-Dy-hrh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEw-Nw-TpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3141,7 +3140,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="reqMsgTextView" destination="kXl-rj-iIy" id="8J6-df-ZEo"/>
-                        <segue destination="9av-ga-eRO" kind="show" id="Z57-wp-frl"/>
+                        <segue destination="9av-ga-eRO" kind="show" identifier="toAddFriends" id="Z57-wp-frl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xco-el-mWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3309,7 +3308,7 @@
                         <outlet property="grpLabel" destination="19o-c9-0ig" id="EBd-r3-QxE"/>
                         <outlet property="nameIdLabel" destination="oEa-WX-sbw" id="qgF-tJ-f7J"/>
                         <outlet property="reqMsgLabel" destination="lrg-9k-XoZ" id="RrR-1r-hfm"/>
-                        <segue destination="nO1-EW-fNZ" kind="show" id="Idw-Zg-2OZ"/>
+                        <segue destination="nO1-EW-fNZ" kind="show" identifier="toSelectGroup" id="Idw-Zg-2OZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GX5-qL-9BK" userLabel="First Responder" sceneMemberID="firstResponder"/>

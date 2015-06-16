@@ -54,6 +54,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == self.model.fcicItemCellModels.count) {
+        if ([self.delegate respondsToSelector:@selector(fcItemCommentsViewRemarkCellTapped:)]) {
+            [self.delegate fcItemCommentsViewRemarkCellTapped:self];
+        }
+        return;
+    }
+    [self.delegate fcItemCommentsView:self didSelectAt:indexPath.row];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

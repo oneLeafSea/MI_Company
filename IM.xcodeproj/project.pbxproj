@@ -73,6 +73,8 @@
 		7D1C60291AA6E7D20035A2D2 /* OsOrgVerTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C60281AA6E7D20035A2D2 /* OsOrgVerTb.m */; };
 		7D1C602C1AA6E7E50035A2D2 /* OsItemsTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C602B1AA6E7E50035A2D2 /* OsItemsTb.m */; };
 		7D1C602F1AA6E7F30035A2D2 /* OsItemsVerTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C602E1AA6E7F30035A2D2 /* OsItemsVerTb.m */; };
+		7D1D3B701B2E94EA0043449F /* RTTextInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D3B6F1B2E94EA0043449F /* RTTextInputBar.m */; };
+		7D1D3B761B2E9B480043449F /* RTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D3B751B2E9B480043449F /* RTTextView.m */; };
 		7D244C0E1AAD3C4C0090AA9A /* PwdMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */; };
 		7D244C111AAD41EB0090AA9A /* PwdChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C101AAD41EA0090AA9A /* PwdChangeTableViewController.m */; };
 		7D2893CD1A8093EF0050FF26 /* ChatViewMorePanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2893CC1A8093EF0050FF26 /* ChatViewMorePanelView.m */; };
@@ -494,6 +496,10 @@
 		7D1C602B1AA6E7E50035A2D2 /* OsItemsTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsItemsTb.m; sourceTree = "<group>"; };
 		7D1C602D1AA6E7F30035A2D2 /* OsItemsVerTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsItemsVerTb.h; sourceTree = "<group>"; };
 		7D1C602E1AA6E7F30035A2D2 /* OsItemsVerTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsItemsVerTb.m; sourceTree = "<group>"; };
+		7D1D3B6E1B2E94EA0043449F /* RTTextInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTTextInputBar.h; sourceTree = "<group>"; };
+		7D1D3B6F1B2E94EA0043449F /* RTTextInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTTextInputBar.m; sourceTree = "<group>"; };
+		7D1D3B741B2E9B480043449F /* RTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTTextView.h; sourceTree = "<group>"; };
+		7D1D3B751B2E9B480043449F /* RTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTTextView.m; sourceTree = "<group>"; };
 		7D244C0C1AAD3C4C0090AA9A /* PwdMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdMgr.h; sourceTree = "<group>"; };
 		7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdMgr.m; sourceTree = "<group>"; };
 		7D244C0F1AAD41EA0090AA9A /* PwdChangeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdChangeTableViewController.h; sourceTree = "<group>"; };
@@ -1280,6 +1286,10 @@
 				7D6D50121B27C7660092965E /* FriendCircleViewController.h */,
 				7D6D50131B27C7660092965E /* FriendCircleViewController.m */,
 				7D6D503C1B2818D70092965E /* FCConstants.h */,
+				7D1D3B6E1B2E94EA0043449F /* RTTextInputBar.h */,
+				7D1D3B6F1B2E94EA0043449F /* RTTextInputBar.m */,
+				7D1D3B741B2E9B480043449F /* RTTextView.h */,
+				7D1D3B751B2E9B480043449F /* RTTextView.m */,
 			);
 			path = friendcircle;
 			sourceTree = "<group>";
@@ -2670,6 +2680,7 @@
 				7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */,
 				7DDF93291B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m in Sources */,
 				7DDA90F11B2A6B100005E090 /* FCItemTableViewCell.m in Sources */,
+				7D1D3B701B2E94EA0043449F /* RTTextInputBar.m in Sources */,
 				7D2E0F9E1A830F250099AB04 /* JSQVideoMediaItem.m in Sources */,
 				7D08D02C1A8D92F200F4C8E7 /* ChatMessageSpeakerPanelView.m in Sources */,
 				7DB3FCE91A6DF7A200BFA0E7 /* RosterGrpMgrTableViewCell.m in Sources */,
@@ -2759,6 +2770,7 @@
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
 				7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */,
 				7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */,
+				7D1D3B761B2E9B480043449F /* RTTextView.m in Sources */,
 				7D1C601C1AA6C14E0035A2D2 /* OsQid.m in Sources */,
 				7D7978961B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m in Sources */,
 				7DF3CAB01AF70C7F00D08AE7 /* MLLetterIndexNavigationView.m in Sources */,

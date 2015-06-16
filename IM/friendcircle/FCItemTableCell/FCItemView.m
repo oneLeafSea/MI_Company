@@ -22,7 +22,7 @@
 #define FC_POS_IMG_WIDTH 13
 
 
-@interface FCItemView()
+@interface FCItemView() <FCItemCommentsViewDelegate>
 
 @property(nonatomic, strong) UIImageView *avatarImgView;
 @property(nonatomic, strong) UILabel *nameLbl;
@@ -80,6 +80,7 @@
     self.remarkBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     self.imgsView = [[FCItemImagesView alloc] initWithFrame:CGRectZero];
     self.commentsView = [[FCItemCommentsView alloc] initWithFrame:CGRectZero];
+    self.commentsView.delegate = self;
     
     [self addSubview:self.avatarImgView];
     [self addSubview:self.nameLbl];
@@ -182,6 +183,21 @@
     NSString *str = @"位置";
     CGSize sz = [str boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]} context:nil].size;
     return sz.height;
+}
+
+#pragma mark - FCItemCommentsViewDelegate
+- (void)fcItemCommentsView:(FCItemCommentsView *)commentsView didSelectAt:(NSInteger)index {
+    FCItemCommentsViewModel *m = commentsView.model;
+    FCICItemCellModel *itemModel = [m.fcicItemCellModels objectAtIndex:index];
+    if ([self.delegate respondsToSelector:@selector(fcItemView:commentsDidTapped:)]) {
+        [self.delegate fcItemView:self commentsDidTapped:itemModel];
+    }
+}
+
+- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView {
+    if ([self.delegate respondsToSelector:@selector(fcItemViewCommentsRemark:)]) {
+        [self.delegate fcItemViewCommentsRemark:self];
+    }
 }
 
 @end
