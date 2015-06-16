@@ -75,8 +75,6 @@
 		7D1C602F1AA6E7F30035A2D2 /* OsItemsVerTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C602E1AA6E7F30035A2D2 /* OsItemsVerTb.m */; };
 		7D244C0E1AAD3C4C0090AA9A /* PwdMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */; };
 		7D244C111AAD41EB0090AA9A /* PwdChangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D244C101AAD41EA0090AA9A /* PwdChangeTableViewController.m */; };
-		7D268BFD1ABFE53A0090AD49 /* FcRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */; };
-		7D268C001ABFF4E50090AD49 /* FcImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */; };
 		7D2893CD1A8093EF0050FF26 /* ChatViewMorePanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2893CC1A8093EF0050FF26 /* ChatViewMorePanelView.m */; };
 		7D2893D11A80942C0050FF26 /* ChatViewMorePanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D2893D01A80942C0050FF26 /* ChatViewMorePanelView.xib */; };
 		7D2930891A4D209D003A7004 /* IMConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2930881A4D209D003A7004 /* IMConf.m */; };
@@ -148,6 +146,7 @@
 		7D4D08371AF9C01F0031C035 /* AvatarContainerViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08361AF9C01F0031C035 /* AvatarContainerViewItem.m */; };
 		7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */; };
 		7D4D083C1AF9E4EC0031C035 /* MultiCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */; };
+		7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D51F4E61B29142400234C8F /* FCICRemarkTableViewCell.m */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
 		7D59E44E1A689DA800806018 /* ChatMessageSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44D1A689DA800806018 /* ChatMessageSql.m */; };
 		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
@@ -155,13 +154,26 @@
 		7D60237A1A80BAB3001BDD46 /* ChatViewMorePanelCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6023791A80BAB3001BDD46 /* ChatViewMorePanelCellView.m */; };
 		7D6023801A80F1F0001BDD46 /* ChatMessageMorePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D60237F1A80F1F0001BDD46 /* ChatMessageMorePanelViewController.m */; };
 		7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */; };
+		7D6D50141B27C7660092965E /* FriendCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50131B27C7660092965E /* FriendCircleViewController.m */; };
+		7D6D50181B27CF220092965E /* FuncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50171B27CF220092965E /* FuncViewController.m */; };
+		7D6D501B1B27D0180092965E /* RTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D501A1B27D0180092965E /* RTViewController.m */; };
+		7D6D501E1B27D3210092965E /* UITableViewCell+Extenssion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D501D1B27D3210092965E /* UITableViewCell+Extenssion.m */; };
+		7D6D50331B2803310092965E /* FCItemCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50301B2803310092965E /* FCItemCommentsView.m */; };
+		7D6D50341B2803310092965E /* FCItemCommentsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50321B2803310092965E /* FCItemCommentsViewModel.m */; };
+		7D6D50381B2803780092965E /* FCICItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50371B2803780092965E /* FCICItemCell.m */; };
+		7D6D503B1B2804050092965E /* FCICItemCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D503A1B2804050092965E /* FCICItemCellModel.m */; };
+		7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50401B2831F10092965E /* FCICItemContentView.m */; };
 		7D6FD7141A85EC73001BA1F1 /* ChatMessageVoicePanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6FD7131A85EC73001BA1F1 /* ChatMessageVoicePanel.xib */; };
 		7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */; };
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
 		7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE91AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m */; };
 		7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */; };
 		7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76AB341A5E162000901AD0 /* RosterQid.m */; };
+		7D7978961B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */; };
+		7D7978991B295E8500D614F7 /* FCItemImagesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */; };
 		7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */; };
+		7D7DBC791B29396C00E8B4B2 /* FCItemImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBC781B29396C00E8B4B2 /* FCItemImagesView.m */; };
+		7D7DBC7C1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBC7B1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m */; };
 		7D7E9A6E1AFC7D4B00B41E95 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */; };
 		7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5F81AB66D4100A95FC7 /* system.aiff */; };
 		7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */; };
@@ -279,6 +291,10 @@
 		7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */; };
 		7DD278431A4AC0940012D1F5 /* Roster.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278421A4AC0940012D1F5 /* Roster.m */; };
 		7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278451A4AC1490012D1F5 /* RosterItem.m */; };
+		7DDA90ED1B2A6AF10005E090 /* FCItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA90EA1B2A6AF10005E090 /* FCItemView.m */; };
+		7DDA90EE1B2A6AF10005E090 /* FCItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA90EC1B2A6AF10005E090 /* FCItemViewModel.m */; };
+		7DDA90F11B2A6B100005E090 /* FCItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA90F01B2A6B100005E090 /* FCItemTableViewCell.m */; };
+		7DDA90F41B2A6B420005E090 /* FCItemTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA90F31B2A6B420005E090 /* FCItemTableViewCellModel.m */; };
 		7DDAFB131A5E785E0029D809 /* RosterSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAFB121A5E785E0029D809 /* RosterSectionHeaderView.xib */; };
 		7DDAFB161A5E7CC50029D809 /* RosterSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAFB151A5E7CC50029D809 /* RosterSectionHeaderView.m */; };
 		7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF92F81B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m */; };
@@ -482,10 +498,6 @@
 		7D244C0D1AAD3C4C0090AA9A /* PwdMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdMgr.m; sourceTree = "<group>"; };
 		7D244C0F1AAD41EA0090AA9A /* PwdChangeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdChangeTableViewController.h; sourceTree = "<group>"; };
 		7D244C101AAD41EA0090AA9A /* PwdChangeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdChangeTableViewController.m; sourceTree = "<group>"; };
-		7D268BFB1ABFE53A0090AD49 /* FcRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FcRichTextView.h; sourceTree = "<group>"; };
-		7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FcRichTextView.m; sourceTree = "<group>"; };
-		7D268BFE1ABFF4E50090AD49 /* FcImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FcImageViewer.h; sourceTree = "<group>"; };
-		7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FcImageViewer.m; sourceTree = "<group>"; };
 		7D2893CB1A8093EF0050FF26 /* ChatViewMorePanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewMorePanelView.h; sourceTree = "<group>"; };
 		7D2893CC1A8093EF0050FF26 /* ChatViewMorePanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewMorePanelView.m; sourceTree = "<group>"; };
 		7D2893D01A80942C0050FF26 /* ChatViewMorePanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewMorePanelView.xib; sourceTree = "<group>"; };
@@ -636,6 +648,8 @@
 		7D4D08381AF9E4EC0031C035 /* MultiCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCallViewController.h; sourceTree = "<group>"; };
 		7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCallViewController.m; sourceTree = "<group>"; };
 		7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiCallViewController.xib; sourceTree = "<group>"; };
+		7D51F4E51B29142400234C8F /* FCICRemarkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCICRemarkTableViewCell.h; sourceTree = "<group>"; };
+		7D51F4E61B29142400234C8F /* FCICRemarkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCICRemarkTableViewCell.m; sourceTree = "<group>"; };
 		7D59E4491A689AF200806018 /* ChatMessageTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageTb.h; sourceTree = "<group>"; };
 		7D59E44A1A689AF200806018 /* ChatMessageTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageTb.m; sourceTree = "<group>"; };
 		7D59E44C1A689DA800806018 /* ChatMessageSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageSql.h; sourceTree = "<group>"; };
@@ -649,6 +663,25 @@
 		7D60237F1A80F1F0001BDD46 /* ChatMessageMorePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageMorePanelViewController.m; sourceTree = "<group>"; };
 		7D60EEB01A4C13EC003DA458 /* RosterGroupContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterGroupContainer.h; sourceTree = "<group>"; };
 		7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterGroupContainer.m; sourceTree = "<group>"; };
+		7D6D50121B27C7660092965E /* FriendCircleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCircleViewController.h; sourceTree = "<group>"; };
+		7D6D50131B27C7660092965E /* FriendCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCircleViewController.m; sourceTree = "<group>"; };
+		7D6D50161B27CF220092965E /* FuncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuncViewController.h; sourceTree = "<group>"; };
+		7D6D50171B27CF220092965E /* FuncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuncViewController.m; sourceTree = "<group>"; };
+		7D6D50191B27D0180092965E /* RTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTViewController.h; sourceTree = "<group>"; };
+		7D6D501A1B27D0180092965E /* RTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTViewController.m; sourceTree = "<group>"; };
+		7D6D501C1B27D3210092965E /* UITableViewCell+Extenssion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Extenssion.h"; sourceTree = "<group>"; };
+		7D6D501D1B27D3210092965E /* UITableViewCell+Extenssion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Extenssion.m"; sourceTree = "<group>"; };
+		7D6D502F1B2803310092965E /* FCItemCommentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemCommentsView.h; sourceTree = "<group>"; };
+		7D6D50301B2803310092965E /* FCItemCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemCommentsView.m; sourceTree = "<group>"; };
+		7D6D50311B2803310092965E /* FCItemCommentsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemCommentsViewModel.h; sourceTree = "<group>"; };
+		7D6D50321B2803310092965E /* FCItemCommentsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemCommentsViewModel.m; sourceTree = "<group>"; };
+		7D6D50361B2803780092965E /* FCICItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCICItemCell.h; sourceTree = "<group>"; };
+		7D6D50371B2803780092965E /* FCICItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCICItemCell.m; sourceTree = "<group>"; };
+		7D6D50391B2804050092965E /* FCICItemCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCICItemCellModel.h; sourceTree = "<group>"; };
+		7D6D503A1B2804050092965E /* FCICItemCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCICItemCellModel.m; sourceTree = "<group>"; };
+		7D6D503C1B2818D70092965E /* FCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCConstants.h; sourceTree = "<group>"; };
+		7D6D503F1B2831F10092965E /* FCICItemContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCICItemContentView.h; sourceTree = "<group>"; };
+		7D6D50401B2831F10092965E /* FCICItemContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCICItemContentView.m; sourceTree = "<group>"; };
 		7D6FD7131A85EC73001BA1F1 /* ChatMessageVoicePanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageVoicePanel.xib; sourceTree = "<group>"; };
 		7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterTests.m; sourceTree = "<group>"; };
 		7D74B1241A5A5E9900CE9A66 /* IMAck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAck.h; sourceTree = "<group>"; };
@@ -657,8 +690,16 @@
 		7D76AB2D1A5CC05400901AD0 /* RosterItemNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemNotification.m; sourceTree = "<group>"; };
 		7D76AB331A5E162000901AD0 /* RosterQid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterQid.h; sourceTree = "<group>"; };
 		7D76AB341A5E162000901AD0 /* RosterQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterQid.m; sourceTree = "<group>"; };
+		7D7978941B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCIImagesitemCollectionViewCellModel.h; sourceTree = "<group>"; };
+		7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCIImagesitemCollectionViewCellModel.m; sourceTree = "<group>"; };
+		7D7978971B295E8500D614F7 /* FCItemImagesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemImagesViewModel.h; sourceTree = "<group>"; };
+		7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemImagesViewModel.m; sourceTree = "<group>"; };
 		7D79F62D1AEA13CE005ABF41 /* JSQVideoChatMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoChatMediaItem.h; sourceTree = "<group>"; };
 		7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoChatMediaItem.m; sourceTree = "<group>"; };
+		7D7DBC771B29396C00E8B4B2 /* FCItemImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemImagesView.h; sourceTree = "<group>"; };
+		7D7DBC781B29396C00E8B4B2 /* FCItemImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemImagesView.m; sourceTree = "<group>"; };
+		7D7DBC7A1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCIImagesitemCollectionViewCell.h; sourceTree = "<group>"; };
+		7D7DBC7B1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCIImagesitemCollectionViewCell.m; sourceTree = "<group>"; };
 		7D7E9A6C1AFC7D4B00B41E95 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		7D7EB5F81AB66D4100A95FC7 /* system.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = system.aiff; sourceTree = "<group>"; };
@@ -890,6 +931,14 @@
 		7DD278421A4AC0940012D1F5 /* Roster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Roster.m; sourceTree = "<group>"; };
 		7DD278441A4AC1490012D1F5 /* RosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItem.h; sourceTree = "<group>"; };
 		7DD278451A4AC1490012D1F5 /* RosterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItem.m; sourceTree = "<group>"; };
+		7DDA90E91B2A6AF10005E090 /* FCItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemView.h; sourceTree = "<group>"; };
+		7DDA90EA1B2A6AF10005E090 /* FCItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemView.m; sourceTree = "<group>"; };
+		7DDA90EB1B2A6AF10005E090 /* FCItemViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemViewModel.h; sourceTree = "<group>"; };
+		7DDA90EC1B2A6AF10005E090 /* FCItemViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemViewModel.m; sourceTree = "<group>"; };
+		7DDA90EF1B2A6B100005E090 /* FCItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemTableViewCell.h; sourceTree = "<group>"; };
+		7DDA90F01B2A6B100005E090 /* FCItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemTableViewCell.m; sourceTree = "<group>"; };
+		7DDA90F21B2A6B420005E090 /* FCItemTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemTableViewCellModel.h; sourceTree = "<group>"; };
+		7DDA90F31B2A6B420005E090 /* FCItemTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemTableViewCellModel.m; sourceTree = "<group>"; };
 		7DDAFB121A5E785E0029D809 /* RosterSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RosterSectionHeaderView.xib; sourceTree = "<group>"; };
 		7DDAFB141A5E7CC50029D809 /* RosterSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSectionHeaderView.h; sourceTree = "<group>"; };
 		7DDAFB151A5E7CC50029D809 /* RosterSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionHeaderView.m; sourceTree = "<group>"; };
@@ -1225,10 +1274,12 @@
 		7D268BFA1ABFE4EB0090AD49 /* friendcircle */ = {
 			isa = PBXGroup;
 			children = (
-				7D268BFB1ABFE53A0090AD49 /* FcRichTextView.h */,
-				7D268BFC1ABFE53A0090AD49 /* FcRichTextView.m */,
-				7D268BFE1ABFF4E50090AD49 /* FcImageViewer.h */,
-				7D268BFF1ABFF4E50090AD49 /* FcImageViewer.m */,
+				7DDA90E81B2A6AF10005E090 /* FCItemTableCell */,
+				7D7DBC761B29396C00E8B4B2 /* FCItemImages */,
+				7D6D502E1B2803310092965E /* FCItemComments */,
+				7D6D50121B27C7660092965E /* FriendCircleViewController.h */,
+				7D6D50131B27C7660092965E /* FriendCircleViewController.m */,
+				7D6D503C1B2818D70092965E /* FCConstants.h */,
 			);
 			path = friendcircle;
 			sourceTree = "<group>";
@@ -1559,6 +1610,57 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7D6D50151B27CE620092965E /* func */ = {
+			isa = PBXGroup;
+			children = (
+				7D6D50161B27CF220092965E /* FuncViewController.h */,
+				7D6D50171B27CF220092965E /* FuncViewController.m */,
+			);
+			path = func;
+			sourceTree = "<group>";
+		};
+		7D6D502E1B2803310092965E /* FCItemComments */ = {
+			isa = PBXGroup;
+			children = (
+				7D6D50351B2803560092965E /* FCItemCommentsItemCell */,
+				7D6D502F1B2803310092965E /* FCItemCommentsView.h */,
+				7D6D50301B2803310092965E /* FCItemCommentsView.m */,
+				7D6D50311B2803310092965E /* FCItemCommentsViewModel.h */,
+				7D6D50321B2803310092965E /* FCItemCommentsViewModel.m */,
+				7D51F4E51B29142400234C8F /* FCICRemarkTableViewCell.h */,
+				7D51F4E61B29142400234C8F /* FCICRemarkTableViewCell.m */,
+			);
+			path = FCItemComments;
+			sourceTree = "<group>";
+		};
+		7D6D50351B2803560092965E /* FCItemCommentsItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				7D6D50361B2803780092965E /* FCICItemCell.h */,
+				7D6D50371B2803780092965E /* FCICItemCell.m */,
+				7D6D50391B2804050092965E /* FCICItemCellModel.h */,
+				7D6D503A1B2804050092965E /* FCICItemCellModel.m */,
+				7D6D503F1B2831F10092965E /* FCICItemContentView.h */,
+				7D6D50401B2831F10092965E /* FCICItemContentView.m */,
+			);
+			path = FCItemCommentsItemCell;
+			sourceTree = "<group>";
+		};
+		7D7DBC761B29396C00E8B4B2 /* FCItemImages */ = {
+			isa = PBXGroup;
+			children = (
+				7D7DBC771B29396C00E8B4B2 /* FCItemImagesView.h */,
+				7D7DBC781B29396C00E8B4B2 /* FCItemImagesView.m */,
+				7D7DBC7A1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.h */,
+				7D7DBC7B1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m */,
+				7D7978941B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.h */,
+				7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */,
+				7D7978971B295E8500D614F7 /* FCItemImagesViewModel.h */,
+				7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */,
+			);
+			path = FCItemImages;
+			sourceTree = "<group>";
+		};
 		7D87DACF1AB6975000AD57C6 /* apns */ = {
 			isa = PBXGroup;
 			children = (
@@ -1625,6 +1727,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D6D50151B27CE620092965E /* func */,
 				7DDF92F51B1FDD4C0097C6BD /* vendors */,
 				7DF3CA941AF7095700D08AE7 /* multipleCall */,
 				7D268C011AC00DFD0090AD49 /* webrtc */,
@@ -1727,6 +1830,10 @@
 				7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */,
 				7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */,
 				7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */,
+				7D6D50191B27D0180092965E /* RTViewController.h */,
+				7D6D501A1B27D0180092965E /* RTViewController.m */,
+				7D6D501C1B27D3210092965E /* UITableViewCell+Extenssion.h */,
+				7D6D501D1B27D3210092965E /* UITableViewCell+Extenssion.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1976,6 +2083,21 @@
 				7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		7DDA90E81B2A6AF10005E090 /* FCItemTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				7DDA90E91B2A6AF10005E090 /* FCItemView.h */,
+				7DDA90EA1B2A6AF10005E090 /* FCItemView.m */,
+				7DDA90EB1B2A6AF10005E090 /* FCItemViewModel.h */,
+				7DDA90EC1B2A6AF10005E090 /* FCItemViewModel.m */,
+				7DDA90EF1B2A6B100005E090 /* FCItemTableViewCell.h */,
+				7DDA90F01B2A6B100005E090 /* FCItemTableViewCell.m */,
+				7DDA90F21B2A6B420005E090 /* FCItemTableViewCellModel.h */,
+				7DDA90F31B2A6B420005E090 /* FCItemTableViewCellModel.m */,
+			);
+			path = FCItemTableCell;
 			sourceTree = "<group>";
 		};
 		7DDAFB021A5E3A6C0029D809 /* UI */ = {
@@ -2445,6 +2567,7 @@
 			files = (
 				7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */,
 				7DFE24AB1AA43F5B00C5DD29 /* GroupChatMgr.m in Sources */,
+				7DDA90EE1B2A6AF10005E090 /* FCItemViewModel.m in Sources */,
 				7DB2D6201A6F8DC700004D6C /* RecentTb.m in Sources */,
 				7DB06F491A71E23900DD1943 /* RosterItemAddReqModel.m in Sources */,
 				7DB158A11A42DD5600287BBE /* InputStream.m in Sources */,
@@ -2466,6 +2589,7 @@
 				7D005D751A91BA00006CB54C /* fileBrowserSelectTableViewCell.m in Sources */,
 				7D08D0291A8D92F200F4C8E7 /* ChatMessageRecorderPanelView.m in Sources */,
 				7D2E0F971A830F250099AB04 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				7D6D503B1B2804050092965E /* FCICItemCellModel.m in Sources */,
 				7DB1583C1A42DD5600287BBE /* Encrypt.m in Sources */,
 				7D76AB351A5E162000901AD0 /* RosterQid.m in Sources */,
 				7DB156BD1A42DC0C00287BBE /* AppDelegate.m in Sources */,
@@ -2482,6 +2606,7 @@
 				7DFA2A4A1A90469400BD8F3C /* JSQVoiceMediaOutgoingView.m in Sources */,
 				7D08D0311A8D92F200F4C8E7 /* ChatMessageVolumePanelView.m in Sources */,
 				7D433D171AC555F1008B5A8C /* webrtcbase64.c in Sources */,
+				7D6D50141B27C7660092965E /* FriendCircleViewController.m in Sources */,
 				7D13CB631A78BCDA00FB14B8 /* MineTableViewController.m in Sources */,
 				7D2E0F9D1A830F250099AB04 /* JSQPhotoMediaItem.m in Sources */,
 				7D2E0F981A830F250099AB04 /* JSQLocationMediaItem.m in Sources */,
@@ -2495,9 +2620,11 @@
 				7DB158601A42DD5600287BBE /* RecvPushResp.m in Sources */,
 				7D07BB9D1AA5A56300E78877 /* GroupChatItemListTableViewCell.m in Sources */,
 				7DFE249A1A95D70800C5DD29 /* PresenceNotification.m in Sources */,
+				7D7978991B295E8500D614F7 /* FCItemImagesViewModel.m in Sources */,
 				7DF3CAC31AF7130800D08AE7 /* PopMenuItemView.m in Sources */,
 				7DB1584D1A42DD5600287BBE /* JRBinResponse.m in Sources */,
 				7DDF932B1B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
+				7D6D50331B2803310092965E /* FCItemCommentsView.m in Sources */,
 				7DB2D6191A6F6FFC00004D6C /* RecentViewModle.m in Sources */,
 				7DDF93271B1FDD4C0097C6BD /* CTAssetsViewCell.m in Sources */,
 				7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */,
@@ -2517,7 +2644,6 @@
 				7DB25CA31A76128C00BEDA14 /* LoginProcedures.m in Sources */,
 				7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */,
 				7D81DD871AC25B53000A7EDD /* WebRtcClient.m in Sources */,
-				7D268BFD1ABFE53A0090AD49 /* FcRichTextView.m in Sources */,
 				7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */,
 				7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */,
 				7D2E0F8A1A830F250099AB04 /* UIDevice+JSQMessages.m in Sources */,
@@ -2525,12 +2651,16 @@
 				7DFE24AE1AA43FB700C5DD29 /* GroupChatQid.m in Sources */,
 				7DB31BEA1A6CA6A10051E6CD /* RosterItemAddReqTb.m in Sources */,
 				7D2E0FA11A830F250099AB04 /* JSQMessagesCollectionViewCell.m in Sources */,
+				7D6D501E1B27D3210092965E /* UITableViewCell+Extenssion.m in Sources */,
 				7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */,
 				7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */,
 				7D005D7B1A91FF75006CB54C /* JSQFileMediaIncomingView.m in Sources */,
 				7DB158AE1A42DD5600287BBE /* session.m in Sources */,
 				7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */,
 				7D7E9A6E1AFC7D4B00B41E95 /* UIView+Toast.m in Sources */,
+				7D6D50381B2803780092965E /* FCICItemCell.m in Sources */,
+				7D7DBC7C1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m in Sources */,
+				7D6D50341B2803310092965E /* FCItemCommentsViewModel.m in Sources */,
 				7D2E0FAC1A830F250099AB04 /* JSQMessagesToolbarContentView.m in Sources */,
 				7DB31BF01A6CA6BF0051E6CD /* RosterGrpTb.m in Sources */,
 				7DB1584F1A42DD5600287BBE /* JRListResponse.m in Sources */,
@@ -2539,6 +2669,7 @@
 				7D0CFBEF1A77334700902285 /* Relogin.m in Sources */,
 				7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */,
 				7DDF93291B1FDD4C0097C6BD /* CTAssetsViewControllerTransition.m in Sources */,
+				7DDA90F11B2A6B100005E090 /* FCItemTableViewCell.m in Sources */,
 				7D2E0F9E1A830F250099AB04 /* JSQVideoMediaItem.m in Sources */,
 				7D08D02C1A8D92F200F4C8E7 /* ChatMessageSpeakerPanelView.m in Sources */,
 				7DB3FCE91A6DF7A200BFA0E7 /* RosterGrpMgrTableViewCell.m in Sources */,
@@ -2546,6 +2677,7 @@
 				7D2E0FB41A830F250099AB04 /* README.md in Sources */,
 				7D2E0F931A830F250099AB04 /* JSQMessagesTimestampFormatter.m in Sources */,
 				7D1C60231AA6E7960035A2D2 /* OsSql.m in Sources */,
+				7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */,
 				7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */,
 				7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */,
 				7DF3CAB41AF70C7F00D08AE7 /* MultiSelectSearchResultTableViewCell.m in Sources */,
@@ -2560,7 +2692,6 @@
 				7D119B351AC23EB500AC6CAB /* RTCSessionDescription+WRJSON.m in Sources */,
 				7DB092751A66137E005268A7 /* ChatMessageMgr.m in Sources */,
 				7DFA2A4F1A9049F600BD8F3C /* JSQVoiceMediaIncomingView.m in Sources */,
-				7D268C001ABFF4E50090AD49 /* FcImageViewer.m in Sources */,
 				7D2E0F9F1A830F250099AB04 /* JSQMessagesCellTextView.m in Sources */,
 				7DEA70621AA94335002C2C68 /* OsOrgItemTableViewCell.m in Sources */,
 				7DFE24971A95D04900C5DD29 /* PresenceMgr.m in Sources */,
@@ -2580,6 +2711,7 @@
 				7DB31BED1A6CA6A10051E6CD /* RosterTb.m in Sources */,
 				7D1C60161AA6B47B0035A2D2 /* OsOrg.m in Sources */,
 				7DB669451A5F654500843C72 /* RosterItermTableViewCell.m in Sources */,
+				7D6D501B1B27D0180092965E /* RTViewController.m in Sources */,
 				7D6023801A80F1F0001BDD46 /* ChatMessageMorePanelViewController.m in Sources */,
 				7D2893CD1A8093EF0050FF26 /* ChatViewMorePanelView.m in Sources */,
 				7DD278431A4AC0940012D1F5 /* Roster.m in Sources */,
@@ -2593,6 +2725,7 @@
 				7DB1585C1A42DD5600287BBE /* LoginRequest.m in Sources */,
 				7DF3CAB61AF70C7F00D08AE7 /* MultiSelectTableViewCell.m in Sources */,
 				7D2E0FA81A830F250099AB04 /* JSQMessagesLabel.m in Sources */,
+				7D7DBC791B29396C00E8B4B2 /* FCItemImagesView.m in Sources */,
 				7D005D781A91DC7E006CB54C /* fileBrowserSelectCellModel.m in Sources */,
 				7DFE24A71AA421C000C5DD29 /* AvatarNotifications.m in Sources */,
 				7DFE249D1A95D79100C5DD29 /* PresenceMsg.m in Sources */,
@@ -2624,8 +2757,10 @@
 				7D2E0F9C1A830F250099AB04 /* JSQMessagesBubbleImage.m in Sources */,
 				7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */,
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
+				7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */,
 				7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */,
 				7D1C601C1AA6C14E0035A2D2 /* OsQid.m in Sources */,
+				7D7978961B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m in Sources */,
 				7DF3CAB01AF70C7F00D08AE7 /* MLLetterIndexNavigationView.m in Sources */,
 				7DB1585B1A42DD5600287BBE /* JRReqFrxxDetailParam.m in Sources */,
 				7D04A7E71A7607A200BE1660 /* LoginViewController.m in Sources */,
@@ -2653,6 +2788,7 @@
 				7D2E0FB21A830F250099AB04 /* JSQSystemSoundPlayer.m in Sources */,
 				7D1C60131AA6B4690035A2D2 /* OsItem.m in Sources */,
 				7D2E0F8C1A830F250099AB04 /* UIView+JSQMessages.m in Sources */,
+				7DDA90ED1B2A6AF10005E090 /* FCItemView.m in Sources */,
 				7DB158561A42DD5600287BBE /* JRTableResponse.m in Sources */,
 				7D2E0FAB1A830F250099AB04 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				7D005D2D1A91825D006CB54C /* FileBlock.m in Sources */,
@@ -2670,6 +2806,7 @@
 				7DB2D62C1A6F963F00004D6C /* RecentMsgItem.m in Sources */,
 				7DB251BC1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m in Sources */,
 				7D2E0FA71A830F250099AB04 /* JSQMessagesInputToolbar.m in Sources */,
+				7DDA90F41B2A6B420005E090 /* FCItemTableViewCellModel.m in Sources */,
 				7DB31BF61A6CC04B0051E6CD /* RosterGrpVerTb.m in Sources */,
 				7DDF93221B1FDD4C0097C6BD /* CTAssetsGroupViewController.m in Sources */,
 				7DB158A01A42DD5600287BBE /* Hb.m in Sources */,
@@ -2690,6 +2827,7 @@
 				7D2E0F9B1A830F250099AB04 /* JSQMessagesAvatarImage.m in Sources */,
 				7D2E0FA91A830F250099AB04 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				7DB2D6291A6F95AE00004D6C /* RecentChatMsgItem.m in Sources */,
+				7D6D50181B27CF220092965E /* FuncViewController.m in Sources */,
 				7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */,
 				7D08D0281A8D92F200F4C8E7 /* ChatMessagePlayerPanelView.m in Sources */,
 				7DB158A21A42DD5600287BBE /* Message.m in Sources */,

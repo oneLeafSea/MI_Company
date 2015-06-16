@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I7I-CW-JVN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I7I-CW-JVN">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1048,7 +1049,7 @@
         <!--功能-->
         <scene sceneID="GVL-Fk-JOf">
             <objects>
-                <viewController id="KXv-Li-AHV" sceneMemberID="viewController">
+                <viewController id="KXv-Li-AHV" customClass="FuncViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PEJ-iX-DQK"/>
                         <viewControllerLayoutGuide type="bottom" id="beH-3A-sHQ"/>
@@ -1056,18 +1057,7 @@
                     <view key="view" contentMode="scaleToFill" id="QWs-Ed-xvd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="constructing" translatesAutoresizingMaskIntoConstraints="NO" id="d4t-Dv-3eo">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="bottom" secondItem="beH-3A-sHQ" secondAttribute="top" id="4HD-OO-44D"/>
-                            <constraint firstAttribute="trailing" secondItem="d4t-Dv-3eo" secondAttribute="trailing" id="a3o-jb-nA3"/>
-                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="top" secondItem="PEJ-iX-DQK" secondAttribute="bottom" id="eL4-NC-g1H"/>
-                            <constraint firstItem="d4t-Dv-3eo" firstAttribute="leading" secondItem="QWs-Ed-xvd" secondAttribute="leading" id="kcH-bF-WvV"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="功能" id="rAB-kE-AJT"/>
                     <connections>
@@ -3765,7 +3755,6 @@
         <image name="audioOn" width="13" height="17"/>
         <image name="avatar_default" width="40" height="40"/>
         <image name="beauty" width="100" height="100"/>
-        <image name="constructing" width="1242" height="2208"/>
         <image name="fileBrowser_type_ppt" width="60" height="60"/>
         <image name="fileBrowser_unselected" width="25" height="25"/>
         <image name="function_un" width="30" height="30"/>
