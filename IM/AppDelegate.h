@@ -21,6 +21,8 @@
 
 @property (strong, nonatomic) Relogin *relogin;
 
+- (NSString *)appVersion;
+
 @end
 
 

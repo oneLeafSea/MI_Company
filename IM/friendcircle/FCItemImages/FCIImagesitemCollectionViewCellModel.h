@@ -11,5 +11,6 @@
 @interface FCIImagesitemCollectionViewCellModel : NSObject
 
 @property(nonatomic, strong)NSURL *imgurl;
+@property(nonatomic, strong)NSURL *imgThumbUrl;
 
 @end

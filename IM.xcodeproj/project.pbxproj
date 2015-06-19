@@ -190,10 +190,15 @@
 		7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD891AC25D12000A7EDD /* WebRtcWebSocketChannel.m */; };
 		7D81DD8F1AC272E9000A7EDD /* WebRtcSocketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */; };
 		7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */; };
+		7D8A4F5A1B324E41009E5FFE /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F591B324E41009E5FFE /* NSString+URL.m */; };
+		7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */; };
 		7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */; };
 		7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC11ACA39D2001D67D7 /* call.aif */; };
 		7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC01ACA39C9001D67D7 /* answer.aif */; };
 		7DAB70BF1AC161B5000E81D2 /* WebRtcSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAB70BE1AC161B5000E81D2 /* WebRtcSignalingMessage.m */; };
+		7DADF7001B31161700082C4D /* FCMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DADF6FD1B31161700082C4D /* FCMgr.m */; };
+		7DADF7011B31161700082C4D /* FCQid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DADF6FF1B31161700082C4D /* FCQid.m */; };
+		7DADF7051B31410100082C4D /* RTFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DADF7041B31410100082C4D /* RTFileTransfer.m */; };
 		7DB04C9C1AC39DB60097A106 /* WebRtcNotifyMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB04C9B1AC39DB60097A106 /* WebRtcNotifyMsg.m */; };
 		7DB04C9F1AC3A53E0097A106 /* WebRtcMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB04C9E1AC3A53E0097A106 /* WebRtcMgr.m */; };
 		7DB06F491A71E23900DD1943 /* RosterItemAddReqModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */; };
@@ -729,6 +734,10 @@
 		7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcSocketTest.m; sourceTree = "<group>"; };
 		7D87DAD01AB6976600AD57C6 /* ApnsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApnsMgr.h; sourceTree = "<group>"; };
 		7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApnsMgr.m; sourceTree = "<group>"; };
+		7D8A4F581B324E41009E5FFE /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
+		7D8A4F591B324E41009E5FFE /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
+		7D8A4F5B1B32AB6D009E5FFE /* FCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCModel.h; sourceTree = "<group>"; };
+		7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCModel.m; sourceTree = "<group>"; };
 		7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
 		7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
 		7DA8DEC01ACA39C9001D67D7 /* answer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.aif; sourceTree = "<group>"; };
@@ -737,6 +746,12 @@
 		7DAB70BE1AC161B5000E81D2 /* WebRtcSignalingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcSignalingMessage.m; sourceTree = "<group>"; };
 		7DABB7121A496A7F002D5675 /* 消息.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "消息.md"; sourceTree = "<group>"; };
 		7DABB7131A496A7F002D5675 /* 管理名册.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "管理名册.md"; sourceTree = "<group>"; };
+		7DADF6FC1B31161700082C4D /* FCMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCMgr.h; sourceTree = "<group>"; };
+		7DADF6FD1B31161700082C4D /* FCMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCMgr.m; sourceTree = "<group>"; };
+		7DADF6FE1B31161700082C4D /* FCQid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCQid.h; sourceTree = "<group>"; };
+		7DADF6FF1B31161700082C4D /* FCQid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCQid.m; sourceTree = "<group>"; };
+		7DADF7031B31410100082C4D /* RTFileTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTFileTransfer.h; sourceTree = "<group>"; };
+		7DADF7041B31410100082C4D /* RTFileTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTFileTransfer.m; sourceTree = "<group>"; };
 		7DB04C9A1AC39DB60097A106 /* WebRtcNotifyMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcNotifyMsg.h; sourceTree = "<group>"; };
 		7DB04C9B1AC39DB60097A106 /* WebRtcNotifyMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcNotifyMsg.m; sourceTree = "<group>"; };
 		7DB04C9D1AC3A53E0097A106 /* WebRtcMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcMgr.h; sourceTree = "<group>"; };
@@ -1210,6 +1225,7 @@
 		7D13CB5F1A78714900FB14B8 /* fileMgr */ = {
 			isa = PBXGroup;
 			children = (
+				7DADF7021B3140E300082C4D /* rtFileTransfer */,
 				7D005D341A9182B3006CB54C /* fileBrowser */,
 				7D005D1E1A91825D006CB54C /* fileTransfer */,
 			);
@@ -1280,6 +1296,7 @@
 		7D268BFA1ABFE4EB0090AD49 /* friendcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7DADF6FB1B31161700082C4D /* FCMgr */,
 				7DDA90E81B2A6AF10005E090 /* FCItemTableCell */,
 				7D7DBC761B29396C00E8B4B2 /* FCItemImages */,
 				7D6D502E1B2803310092965E /* FCItemComments */,
@@ -1290,6 +1307,8 @@
 				7D1D3B6F1B2E94EA0043449F /* RTTextInputBar.m */,
 				7D1D3B741B2E9B480043449F /* RTTextView.h */,
 				7D1D3B751B2E9B480043449F /* RTTextView.m */,
+				7D8A4F5B1B32AB6D009E5FFE /* FCModel.h */,
+				7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */,
 			);
 			path = friendcircle;
 			sourceTree = "<group>";
@@ -1689,6 +1708,26 @@
 			path = doc;
 			sourceTree = "<group>";
 		};
+		7DADF6FB1B31161700082C4D /* FCMgr */ = {
+			isa = PBXGroup;
+			children = (
+				7DADF6FC1B31161700082C4D /* FCMgr.h */,
+				7DADF6FD1B31161700082C4D /* FCMgr.m */,
+				7DADF6FE1B31161700082C4D /* FCQid.h */,
+				7DADF6FF1B31161700082C4D /* FCQid.m */,
+			);
+			path = FCMgr;
+			sourceTree = "<group>";
+		};
+		7DADF7021B3140E300082C4D /* rtFileTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				7DADF7031B31410100082C4D /* RTFileTransfer.h */,
+				7DADF7041B31410100082C4D /* RTFileTransfer.m */,
+			);
+			path = rtFileTransfer;
+			sourceTree = "<group>";
+		};
 		7DB0926F1A66017B005268A7 /* chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1844,6 +1883,8 @@
 				7D6D501A1B27D0180092965E /* RTViewController.m */,
 				7D6D501C1B27D3210092965E /* UITableViewCell+Extenssion.h */,
 				7D6D501D1B27D3210092965E /* UITableViewCell+Extenssion.m */,
+				7D8A4F581B324E41009E5FFE /* NSString+URL.h */,
+				7D8A4F591B324E41009E5FFE /* NSString+URL.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2654,6 +2695,7 @@
 				7DB25CA31A76128C00BEDA14 /* LoginProcedures.m in Sources */,
 				7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */,
 				7D81DD871AC25B53000A7EDD /* WebRtcClient.m in Sources */,
+				7D8A4F5A1B324E41009E5FFE /* NSString+URL.m in Sources */,
 				7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */,
 				7D0D94A01A4BE05D00B6588D /* RosterSql.m in Sources */,
 				7D2E0F8A1A830F250099AB04 /* UIDevice+JSQMessages.m in Sources */,
@@ -2692,6 +2734,7 @@
 				7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */,
 				7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */,
 				7DF3CAB41AF70C7F00D08AE7 /* MultiSelectSearchResultTableViewCell.m in Sources */,
+				7DADF7001B31161700082C4D /* FCMgr.m in Sources */,
 				7D2E0F951A830F250099AB04 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */,
 				7D2E10021A83948F0099AB04 /* UIImage+Common.m in Sources */,
@@ -2745,6 +2788,7 @@
 				7D433D1E1AC560CF008B5A8C /* WebrtcSRWebSocket.m in Sources */,
 				7DB158401A42DD5600287BBE /* NSUUID+StringUUID.m in Sources */,
 				7DDF932A1B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m in Sources */,
+				7DADF7051B31410100082C4D /* RTFileTransfer.m in Sources */,
 				7DB158531A42DD5600287BBE /* JRResponse.m in Sources */,
 				7DB158A41A42DD5600287BBE /* MessageKeeper.m in Sources */,
 				7DF3CAC01AF712E500D08AE7 /* PopMenuItem.m in Sources */,
@@ -2826,6 +2870,7 @@
 				7DB53ACC1A64AC260043DA2E /* RosterItemSendReqMsgTableViewController.m in Sources */,
 				7DEA706C1AA99025002C2C68 /* Detail.m in Sources */,
 				7DB158A91A42DD5600287BBE /* Pkg.m in Sources */,
+				7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */,
 				7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */,
 				7DB158AD1A42DD5600287BBE /* ServerTimeMsg.m in Sources */,
 				7DFF639D1A92D39A0001F0A4 /* JSQFileMediaItem.m in Sources */,
@@ -2839,6 +2884,7 @@
 				7D2E0F9B1A830F250099AB04 /* JSQMessagesAvatarImage.m in Sources */,
 				7D2E0FA91A830F250099AB04 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				7DB2D6291A6F95AE00004D6C /* RecentChatMsgItem.m in Sources */,
+				7DADF7011B31161700082C4D /* FCQid.m in Sources */,
 				7D6D50181B27CF220092965E /* FuncViewController.m in Sources */,
 				7D76AB2E1A5CC05400901AD0 /* RosterItemNotification.m in Sources */,
 				7D08D0281A8D92F200F4C8E7 /* ChatMessagePlayerPanelView.m in Sources */,

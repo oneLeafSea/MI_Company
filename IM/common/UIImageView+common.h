@@ -12,4 +12,6 @@
 
 - (void)circle;
 
+- (void)rt_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)image;
+
 @end

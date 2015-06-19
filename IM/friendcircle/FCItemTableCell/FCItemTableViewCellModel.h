@@ -11,6 +11,8 @@
 
 @interface FCItemTableViewCellModel : NSObject
 
+- (instancetype)initWithDict:(NSDictionary *)dict;
+
 @property(nonatomic, strong) FCItemViewModel *itemViewModel;
 
 @end

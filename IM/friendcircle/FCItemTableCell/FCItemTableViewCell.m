@@ -30,7 +30,18 @@
     return self;
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style
+                        model:(FCItemTableViewCellModel *)model
+              reuseIdentifier:(NSString *)reuseIdentifier {
+    if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.model = model;
+        [self setup];
+    }
+    return self;
+}
+
 - (void)setModel:(FCItemTableViewCellModel *)model {
+    _model = model;
     self.itemView.model = model.itemViewModel;
 }
 
@@ -57,6 +68,11 @@
        make.right.equalTo(self.contentView);
    }];
     
+}
+
+- (void)setCurVC:(UIViewController *)curVC {
+    _curVC = curVC;
+    self.itemView.curVC = _curVC;
 }
 
 + (CGFloat)heightForCellModel:(FCItemTableViewCellModel *)model {

@@ -7,6 +7,7 @@
 //
 
 #import "FCICItemCellModel.h"
+#import "AppDelegate.h"
 
 @implementation FCICItemCellModel
 
@@ -14,6 +15,30 @@
     if (self.repliedName.length > 0 && self.repliedUid.length > 0)
         return YES;
     return NO;
+}
+
+- (void)setUid:(NSString *)uid {
+    _uid = [uid copy];
+    if ([_uid isEqualToString:USER.uid]) {
+        self.name = USER.name;
+    } else {
+        self.name = [USER.rosterMgr getItemByUid:_uid].name;
+    }
+}
+
+- (void)setRepliedUid:(NSString *)repliedUid {
+    _repliedUid = repliedUid;
+    if (repliedUid == nil) {
+        _repliedName = nil;
+        _repliedUid = nil;
+        return;
+    }
+    _repliedUid = [_repliedUid copy];
+    if ([_repliedUid isEqualToString:USER.uid]) {
+        self.repliedName = USER.name;
+    } else {
+        self.repliedName = [USER.rosterMgr getItemByUid:_repliedUid].name;
+    }
 }
 
 @end

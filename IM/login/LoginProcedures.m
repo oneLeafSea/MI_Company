@@ -23,6 +23,15 @@
 #import "GroupChat.h"
 #import "ApnsMgr.h"
 
+#import "Encrypt.h"
+#import "NSString+URL.h"
+#import "NSDate+Common.h"
+#import "NSUUID+StringUUID.h"
+
+#import <SDWebImage/SDWebImageDownloader.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+
+
 
 @interface LoginProcedures() <RequestDelegate>
 {
@@ -79,6 +88,18 @@
         
     }];
 }
+
+- (void)setWebImgCfg {
+    SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
+    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString *key = USER.key;
+    NSString *iv = USER.iv;
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    [manager setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
+    [manager setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
+    [manager setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
+}
+
 
 - (void)stop {
     m_stop = YES;
@@ -173,6 +194,7 @@
                 
             }];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
+            [self setWebImgCfg];
 //            [ApnsMgr registerWithIOSToken:@"e34f50d210d3b77bc43692791c605135d044696ee94184b4b309447c0f3728a6" uid:@"gzw" Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:@"http://127.0.0.1:8080/register" completion:^(BOOL finished) {
 //                    DDLogInfo(@"%d", finished);
 //                

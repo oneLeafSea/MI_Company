@@ -11,6 +11,11 @@
 
 @interface FCItemImagesViewModel : NSObject
 
+- (instancetype)initWithPostId:(NSString *)postId
+                     serverUrl:(NSString *)serverUrl
+                thumbServerUrl:(NSString *)thumbServerUrl
+                        imgNum:(NSInteger)imgNum;
+
 @property(nonatomic, strong) NSArray *collectionCellModels;
 
 @property(nonatomic, readonly) BOOL hasImages;

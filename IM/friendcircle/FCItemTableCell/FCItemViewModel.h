@@ -13,15 +13,22 @@
 
 @interface FCItemViewModel : NSObject
 
-@property(nonatomic, strong) NSString *avatarImg;
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *org;
-@property(nonatomic, strong) NSString *time;
-@property(nonatomic, strong) NSString *content;
-@property(nonatomic, strong) NSString *position;
+@property(nonatomic, copy) NSString *avatarImg;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *org;
+@property(nonatomic, copy) NSString *time;
+@property(nonatomic, copy) NSString *content;
+@property(nonatomic, copy) NSString *position;
+@property(nonatomic, copy) NSString *uid;
+@property(nonatomic, copy) NSString *imgNum;
+@property(nonatomic, copy) NSString *modelId;
+@property(nonatomic, copy) NSString *lon;
+@property(nonatomic, copy) NSString *lat;
 
 
 @property(nonatomic, strong) FCItemCommentsViewModel *commentsViewModel;
 @property(nonatomic, strong) FCItemImagesViewModel *imgViewModel;
+
+- (void)addCommentViewModel:(NSDictionary *)dict;
 
 @end

@@ -57,7 +57,7 @@ static const NSString *kTypeBin           = @"bin";
     }
     
     NSString *decStr = [[NSString alloc]initWithData:decRes encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", decStr);
+//    NSLog(@"%@", decStr);
     NSDictionary *dictRes = [NSJSONSerialization objFromJsonString:decStr];
     JRResponseType type = [JRResponseFactory covertFromStr:dictRes[kKeyType]];
     NSDictionary *ext = dictRes[kKeyExt];

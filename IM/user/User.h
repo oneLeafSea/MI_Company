@@ -21,6 +21,7 @@
 #import "DetailMgr.h"
 #import "WebRtcMgr.h"
 #import "ChatMessageHistory.h"
+#import "FCMgr.h"
 
 @class ChatMessageHistory;
 
@@ -46,7 +47,9 @@
 @property(readonly) OsMgr           *osMgr;
 @property(readonly) DetailMgr       *detailMgr;
 @property(readonly) WebRtcMgr       *webRtcMgr;
+@property(readonly) FCMgr           *fcMgr;
 @property(readonly) ChatMessageHistory *msgHistory;
+
 
 @property(readonly) NSDictionary    *cfg;
 
@@ -56,6 +59,8 @@
 @property(readonly) NSString *iv;
 @property(readonly) NSString *token;
 @property(readonly) NSString *name;
+@property(readonly) NSString *org;
+@property(readonly) NSString *orgName;
 @property(nonatomic, strong) NSString *signature;
 
 @property(readonly) NSString *imurl;
@@ -63,10 +68,13 @@
 @property(readonly) NSString *fileCompleteUrl;
 @property(readonly) NSString *fileUploadSvcUrl;
 @property(readonly) NSString *fileCheckUrl;
+@property(readonly) NSString *fileUploadSvcUrl2;
 @property(readonly) NSString *avatarUrl;
 @property(readonly) NSString *avatarCheckUrl;
 @property(readonly) NSString *rssUrl;
 @property(readonly) NSString *iceUrl;
+@property(readonly) NSString *fcImgServerUrl;
+@property(readonly) NSString *fcImgThumbServerUrl;
 
 @property(readonly) NSString *filePath;
 @property(readonly) NSString *userPath;

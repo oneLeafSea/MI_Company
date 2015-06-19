@@ -22,7 +22,7 @@
 #import "NSData+Conversion.h"
 #import "ApnsMgr.h"
 #import "RTCPeerConnectionFactory.h"
-//#import "WebRtcWebSocketChannel.h"
+
 
 
 @interface AppDelegate () {
@@ -55,26 +55,7 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
     [self setupApns];
-
-//    NSURL *url = [NSURL URLWithString:@"ws://10.22.1.153:8088/webrtc"];
-//    WebRtcWebSocketChannel *channel = [[WebRtcWebSocketChannel alloc] initWithUrl:url delegate:self];
-//    [channel connect];
-    
     return YES;
-}
-
-//- (void)channel:(WebRtcWebSocketChannel *)channel
-// didChangeState:(WebRtcWebSocketChannelState)state {
-//    NSLog(@"%d", state);
-//}
-//
-//- (void)channel:(WebRtcWebSocketChannel *)channel
-//didReceiveMessage:(WebRtcSignalingMessage *)message {
-//    
-//}
-
-- (void)timeout {
-//    [audioRecorder stop];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -99,6 +80,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [RTCPeerConnectionFactory deinitializeSSL];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationKick object:nil];
 }
 
 - (void)application:(UIApplication *)application
@@ -144,6 +126,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     UIApplication *app = [UIApplication sharedApplication];
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
     [app registerUserNotificationSettings:settings];
+}
+
+- (NSString *)appVersion {
+    return @"0.1";
 }
 
 @end

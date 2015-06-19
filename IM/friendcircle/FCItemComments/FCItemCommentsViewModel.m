@@ -10,4 +10,11 @@
 
 @implementation FCItemCommentsViewModel
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.fcicItemCellModels = [[NSMutableArray alloc] initWithCapacity:5];
+    }
+    return self;
+}
+
 @end

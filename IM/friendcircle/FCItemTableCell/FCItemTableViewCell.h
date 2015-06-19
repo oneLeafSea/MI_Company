@@ -17,6 +17,10 @@
 @property(weak) id<FCItemTableViewCellDelegate> delegate;
 + (CGFloat)heightForCellModel:(FCItemTableViewCellModel *)model;
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style
+                        model:(FCItemTableViewCellModel *)model
+              reuseIdentifier:(NSString *)reuseIdentifier;
+@property(nonatomic, weak) UIViewController   *curVC;
 @end
 
 

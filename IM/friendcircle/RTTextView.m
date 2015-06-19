@@ -146,6 +146,7 @@ NSString * const RTTextViewSelectedRangeDidChangeNotification =    @"RTTextViewS
 #pragma mark - setter
 - (void)setPlaceholder:(NSString *)placeholder {
     self.placeholderLabel.text = placeholder;
+    [self.placeholderLabel sizeToFit];
     [self setNeedsDisplay];
 }
 

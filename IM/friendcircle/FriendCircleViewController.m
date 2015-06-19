@@ -10,14 +10,28 @@
 #import <Masonry.h>
 #import <DateTools.h>
 #import <MJRefresh.h>
+#import <SDWebImage/SDWebImageDownloader.h>
+
 
 #import "FCItemTableViewCell.h"
 #import "LogLevel.h"
 #import "RTTextInputBar.h"
+#import "AppDelegate.h"
+#import "RTFileTransfer.h"
+#import "NSUUID+StringUUID.h"
+#import "NSString+URL.h"
+#import "Utils.h"
+
+#import "FCModel.h"
 
 
 @interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource, FCItemTableViewCellDelegate, RTTextInputBarDelegate> {
-    NSInteger _dataCount;
+    FCModel *_model;
+    
+    NSString *_ssid;
+    NSString *_sshfxxid;
+    NSString *_replyName;
+    NSString *_replyUid;
 }
 
 @property(nonatomic, strong) UITableView *tableView;
@@ -36,11 +50,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _dataCount = 2;
     self.navigationItem.title = @"朋友圈";
     [self setupTableView];
     [self.view addSubview:self.inputBar];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发帖" style:UIBarButtonItemStylePlain target:self action:@selector(rigthBtnTapped)];
+    [USER.fcMgr getMsgsWithCur:1 pgSz:10 completion:^(BOOL finished, NSDictionary *result) {
+        if (finished) {
+            _model = [[FCModel alloc] initWithDict:result];
+        }
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,32 +81,46 @@
         make.edges.equalTo(self.view);
     }];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _dataCount += 2;
-        sleep(3);
-        [self.tableView reloadData];
+        [USER.fcMgr getMsgsWithCur:1 pgSz:10 completion:^(BOOL finished, NSDictionary *result) {
+            if (finished) {
+                _model = [[FCModel alloc] initWithDict:result];
+            }
+            [self.tableView reloadData];
+        }];
         [self.tableView.header endRefreshing];
     }];
     
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        sleep(3);
-        _dataCount += 2;
-        [self.tableView reloadData];
-        [self.tableView.footer endRefreshing];
+        NSInteger cur = _model.itemModels.count / 10 + 1;
+        [USER.fcMgr getMsgsWithCur:cur pgSz:10 completion:^(BOOL finished, NSDictionary *result) {
+            [_model appendItemsWithDict:result];
+            [self.tableView reloadData];
+            [self.tableView.footer endRefreshing];
+        }];
     }];
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
+#pragma mar - overide
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 #pragma mark -- tableview delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataCount;
+    NSLog(@"%d", _model.itemModels.count);
+    return _model.itemModels.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    FCItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FCItemTableViewCell" forIndexPath:indexPath];
-    cell.model = [self getCellModel];
+//    FCItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FCItemTableViewCell" forIndexPath:indexPath];
+    FCItemTableViewCell* cell = [[FCItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault model:[_model.itemModels objectAtIndex:indexPath.row] reuseIdentifier:@"FCItemTableViewCell"];
+    cell.model = [_model.itemModels objectAtIndex:indexPath.row];
+    cell.curVC = self;
     cell.delegate = self;
+   
     
     return cell;
 }
@@ -96,76 +130,31 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [FCItemTableViewCell heightForCellModel:[self getCellModel]];
-}
-
-- (FCItemTableViewCellModel *) getCellModel {
-    FCICItemCellModel *commentsItemCellModel = [[FCICItemCellModel alloc] init];
-    commentsItemCellModel.name = @"郭志伟";
-    commentsItemCellModel.uid = @"gzw";
-    commentsItemCellModel.content = @":太棒了！我们喜欢在一起玩耍，哈哈哈哈哈哈哈";
-    commentsItemCellModel.repliedName = @"李维";
-    commentsItemCellModel.repliedUid = @"liwei";
-    
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"] ;
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel1 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"] ;
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel2 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"] ;
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel3 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"];
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel4 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"];
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel5 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"];
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel6 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"];
-    
-    FCIImagesitemCollectionViewCellModel *imgCollectionCellModel7 = [[FCIImagesitemCollectionViewCellModel alloc] init];
-    imgCollectionCellModel.imgurl = [[NSURL alloc] initFileURLWithPath:@"http://a2.att.hudong.com/78/39/19300001363696131588399847654.jpg"];
-    
-    
-    FCItemImagesViewModel *imgsViewModel = [[FCItemImagesViewModel alloc] init];
-    imgsViewModel.collectionCellModels = @[imgCollectionCellModel, imgCollectionCellModel1, imgCollectionCellModel2, imgCollectionCellModel3, imgCollectionCellModel4, imgCollectionCellModel5, imgCollectionCellModel6, imgCollectionCellModel7];
-    
-    FCItemCommentsViewModel *commentsViewModel = [[FCItemCommentsViewModel alloc] init];
-    commentsViewModel.fcicItemCellModels = [[NSMutableArray alloc] initWithArray:@[commentsItemCellModel]];
-
-    FCItemViewModel *itemViewModel = [[FCItemViewModel alloc] init];
-    itemViewModel.commentsViewModel = commentsViewModel;
-    itemViewModel.imgViewModel = imgsViewModel;
-    itemViewModel.name = @"郭志伟";
-    itemViewModel.position = @"苏州市";
-    itemViewModel.time = [NSDate timeAgoSinceDate:[NSDate date]];
-    itemViewModel.content = @"这是个测试这是个测试这是个测试这是个测试这是个测试这是个测试这是个测试这是个测试这是个测试这是个测试";
-    itemViewModel.avatarImg = @"avatar_default";
-    
-    
-    FCItemTableViewCellModel *itemCellModel = [[FCItemTableViewCellModel alloc] init];
-    itemCellModel.itemViewModel = itemViewModel;
-    return itemCellModel;
+    return [FCItemTableViewCell heightForCellModel:[_model.itemModels objectAtIndex:indexPath.row]];
 }
 
 //#pragma mark - getter
 - (RTTextInputBar *)inputBar {
     if (!_inputBar) {
         _inputBar = [RTTextInputBar showInView:self.view];
-        _inputBar.textView.placeholder = @"回复郭志伟";
         _inputBar.rtDelegate = self;
     }
     return _inputBar;
 }
 
 - (void)textInputBar:(RTTextInputBar *)inputBar didPressSendBtnWithText:(NSString *)txt {
-    
+    [USER.fcMgr replyMsgWithId:_ssid replyId:_sshfxxid replyUid:_replyUid content:txt completion:^(BOOL finished) {
+        if (finished) {
+            FCItemTableViewCellModel *model = [_model getItemModelByModelId:_ssid];
+            FCICItemCellModel *cicm = [[FCICItemCellModel alloc] init];
+            cicm.uid = USER.uid;
+            cicm.content = txt;
+            cicm.repliedUid = _replyUid;
+            [model.itemViewModel.commentsViewModel.fcicItemCellModels addObject:cicm];
+            [self.tableView reloadData];
+        }
+        
+    }];
 }
 
 #pragma mark -- private method
@@ -176,20 +165,40 @@
 #pragma mark - FCItemTableViewCellDelegate
 - (void)fcItemTableViewCell:(FCItemTableViewCell *)cell commentsDidTapped:(FCICItemCellModel *)model {
     DDLogInfo(@"cell tappped");
+    if ([model.uid isEqualToString:USER.uid]) {
+        return;
+    }
+    _ssid =  cell.model.itemViewModel.modelId;
+    _sshfxxid = model.replyId;
+    _replyUid = model.uid;
+    self.inputBar.textView.placeholder = [NSString stringWithFormat:@"回复%@", model.name];
     [self showTextInputbar];
     
 }
 
 - (void)fcItemTableViewCellCommentsRemark:(FCItemTableViewCell *)cell {
-    DDLogInfo(@"remark tapped");
+    if ([cell.model.itemViewModel.uid isEqualToString:USER.uid]) {
+        return;
+    }
+    _ssid =  cell.model.itemViewModel.modelId;
+    _sshfxxid = nil;
+    _replyUid = nil;
+    self.inputBar.textView.placeholder = [NSString stringWithFormat:@"回复%@", cell.model.itemViewModel.name];
     [self showTextInputbar];
 }
 
 
 - (void)showTextInputbar {
     if (!self.inputBar.textView.isFirstResponder) {
+        self.inputBar.textView.text = @"";
         [self.inputBar.textView becomeFirstResponder];
     }
+}
+
+#pragma mark - actions
+
+- (void)rigthBtnTapped {
+    
 }
 
 @end

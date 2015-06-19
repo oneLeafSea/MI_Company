@@ -117,6 +117,11 @@
         return NO;
     }
     
+    if (![self setupFCMgr]) {
+        DDLogError(@"ERROR: setup fcMgr.");
+        return NO;
+    }
+    
     _fileTransfer = [[FileTransfer alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKick:) name:kNotificationKick object:nil];
@@ -221,6 +226,14 @@
     return YES;
 }
 
+- (BOOL)setupFCMgr {
+    _fcMgr = [[FCMgr alloc]  initWithUser:self];
+    if (!_fcMgr) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)reset {
     _session = nil;
     [self.rosterMgr reset];
@@ -243,6 +256,14 @@
 
 - (NSString *)name {
     return [self.cfg objectForKey:@"name"];
+}
+
+- (NSString *)org {
+    return [self.cfg objectForKey:@"org"];
+}
+
+- (NSString *)orgName {
+    return [self.cfg objectForKey:@"orgname"];
 }
 
 - (NSString *)imurl {
@@ -274,6 +295,18 @@
     return url;
 }
 
+- (NSString *)fcImgServerUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_FILE_DOWN_LARGE"];
+    return url;
+}
+
+- (NSString *)fcImgThumbServerUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_FILE_DOWN_THUMB"];
+    return url;
+}
+
 - (NSString *)signature {
     return @"this is a signature";
 }
@@ -299,6 +332,11 @@
 //    return @"http://10.22.1.112:8040/file/upload/";
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     return [services objectForKey:@"SVC_FILE_UPLOAD"];
+}
+
+- (NSString *)fileUploadSvcUrl2 {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    return [services objectForKey:@"SVC_FILE_UPLOAD2"];
 }
 
 - (NSString *)fileCheckUrl {

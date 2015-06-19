@@ -14,6 +14,9 @@
 #import "FCItemCommentsView.h"
 #import "FCItemImagesView.h"
 #import "FCConstants.h"
+#import "AppDelegate.h"
+#import "NSDate+Common.h"
+#import "NSDate+DateTools.h"
 
 #define FC_POSITION_LBL_FONT 14
 #define FC_CONTENT_TEXT_FONT 14
@@ -48,10 +51,16 @@
 
 - (void)setModel:(FCItemViewModel *)model {
     _model = model;
-    self.avatarImgView.image = [UIImage imageNamed:model.avatarImg];
+    self.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:model.uid];
     self.nameLbl.text = model.name;
-    self.timeLbl.text = model.time;
+    NSDate *date = [NSDate dateWithFormater:@"yyyy-MM-dd HH:mm:ss.SSSSSS" stringTime:model.time];
+    self.timeLbl.text = [date timeAgoSinceNow];
     self.timeLbl.textColor = [UIColor lightGrayColor];
+    if (model.content.length == 0) {
+        self.contentTextView.hidden = YES;
+    } else {
+        self.contentTextView.hidden = NO;
+    }
     self.contentTextView.text = model.content;
     self.contentTextView.lineSpacing = FC_CONTENT_TEXT_LINESPACE;
     self.imgsView.model = model.imgViewModel;
@@ -59,6 +68,8 @@
     self.positionLbl.text = self.model.position;
     [self setupConstraints];
 }
+
+
 
 - (void)setup {
     self.avatarImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avatar_default"]];
@@ -79,6 +90,7 @@
     self.positionLbl.font = [UIFont systemFontOfSize:FC_POSITION_LBL_FONT];
     self.remarkBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     self.imgsView = [[FCItemImagesView alloc] initWithFrame:CGRectZero];
+    self.imgsView.curVC = self.curVC;
     self.commentsView = [[FCItemCommentsView alloc] initWithFrame:CGRectZero];
     self.commentsView.delegate = self;
     
@@ -151,6 +163,11 @@
     
 }
 
+- (void)setCurVC:(UIViewController *)curVC {
+    _curVC = curVC;
+    self.imgsView.curVC = _curVC;
+}
+
 + (CGSize)getContentSz: (NSString *)content {
     CGFloat width = [UIScreen mainScreen].bounds.size.width - FC_COMMENT_LEFT_OFFSET - FC_COMMENT_RIGHT_OFFSET;
     CGSize sz = CGSizeMake(width, CGFLOAT_MAX);
@@ -170,12 +187,10 @@
     }
     
     if (itemViewModel.commentsViewModel.fcicItemCellModels.count > 0) {
-        height += [FCItemView getCommentsViewSz:itemViewModel.commentsViewModel].height + 3 *  + FC_VIEW_INTERVAL + FC_VIEW_INTERVAL;
+        height += [FCItemView getCommentsViewSz:itemViewModel.commentsViewModel].height + 3 * FC_VIEW_INTERVAL + FC_VIEW_INTERVAL;
     } else {
-        height += [FCItemView getCommentsViewSz:itemViewModel.commentsViewModel].height + 4 *  + FC_VIEW_INTERVAL + FC_VIEW_INTERVAL;
+        height += [FCItemView getCommentsViewSz:itemViewModel.commentsViewModel].height + 4 *FC_VIEW_INTERVAL + FC_VIEW_INTERVAL;
     }
-    
-    
     return height;
 }
 
@@ -194,7 +209,7 @@
     }
 }
 
-- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView {
+- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView cellModel:(FCItemCommentsViewModel *)commentsViewModel {
     if ([self.delegate respondsToSelector:@selector(fcItemViewCommentsRemark:)]) {
         [self.delegate fcItemViewCommentsRemark:self];
     }

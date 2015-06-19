@@ -10,12 +10,14 @@
 
 @interface FCICItemCellModel : NSObject
 
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *uid;
-@property(nonatomic, strong) NSString *repliedName;
-@property(nonatomic, strong) NSString *repliedUid;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *uid;
+@property(nonatomic, copy) NSString *repliedName;
+@property(nonatomic, copy) NSString *repliedUid;
+@property(nonatomic, copy) NSString *time;
+@property(nonatomic, copy) NSString *replyId;
 
-@property(nonatomic, strong) NSString *content;
+@property(nonatomic, copy) NSString *content;
 
 @property(nonatomic, readonly) BOOL replied;
 

@@ -17,7 +17,7 @@
 @property(weak) id<FCItemViewDelegate> delegate;
 
 + (CGFloat)heightForViewModel:(FCItemViewModel *)itemViewModel;
-
+@property(nonatomic, weak) UIViewController   *curVC;
 
 @end
 
@@ -27,5 +27,6 @@
 - (void)fcItemView:(FCItemView *)itemView commentsDidTapped:(FCICItemCellModel *)model;
 
 - (void)fcItemViewCommentsRemark:(FCItemView *)itemView;
+
 
 @end

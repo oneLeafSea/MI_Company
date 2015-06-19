@@ -24,6 +24,6 @@
 
 - (void)fcItemCommentsView:(FCItemCommentsView *)commentsView didSelectAt:(NSInteger)index;
 
-- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView;
+- (void)fcItemCommentsViewRemarkCellTapped:(FCItemCommentsView *)commentsView cellModel:(FCItemCommentsViewModel *)commentsViewModel;
 
 @end

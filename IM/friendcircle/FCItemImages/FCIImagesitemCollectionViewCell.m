@@ -8,7 +8,7 @@
 
 #import "FCIImagesitemCollectionViewCell.h"
 #import <Masonry.h>
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImageView+common.h"
 
 @interface FCIImagesitemCollectionViewCell()
 
@@ -35,7 +35,7 @@
 
 - (void)setModel:(FCIImagesitemCollectionViewCellModel *)model {
     _model = model;
-//    [self.imgView sd_setImageWithURL:model.imgurl];
+    [self.imgView rt_setImageWithURL:model.imgThumbUrl placeholderImage:[UIImage imageNamed:@"fc_demo"]];
 }
 
 @end

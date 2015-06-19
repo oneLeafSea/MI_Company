@@ -56,8 +56,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == self.model.fcicItemCellModels.count) {
-        if ([self.delegate respondsToSelector:@selector(fcItemCommentsViewRemarkCellTapped:)]) {
-            [self.delegate fcItemCommentsViewRemarkCellTapped:self];
+        if ([self.delegate respondsToSelector:@selector(fcItemCommentsViewRemarkCellTapped:cellModel:)]) {
+            [self.delegate fcItemCommentsViewRemarkCellTapped:self cellModel:self.model];
         }
         return;
     }
@@ -94,7 +94,8 @@
 }
 
 - (NSInteger)getCellCount {
-    return self.model.fcicItemCellModels.count + 1;
+    NSInteger count = self.model.fcicItemCellModels.count + 1;
+    return count;
 }
 
 + (CGFloat)heightForCommentsView:(FCItemCommentsViewModel *)model {

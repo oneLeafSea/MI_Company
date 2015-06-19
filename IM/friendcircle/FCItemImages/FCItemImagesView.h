@@ -14,5 +14,6 @@
 @property(nonatomic, strong) FCItemImagesViewModel *model;
 
 + (CGFloat) heightForImagesHeight:(FCItemImagesViewModel *)model;
+@property(nonatomic, weak) UIViewController   *curVC;
 
 @end

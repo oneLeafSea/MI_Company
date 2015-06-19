@@ -12,10 +12,12 @@
 
 #import "FCIImagesitemCollectionViewCell.h"
 #import "FCConstants.h"
+#import "MWPhotoBrowser.h"
 
-@interface FCItemImagesView() <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface FCItemImagesView() <UICollectionViewDelegate, UICollectionViewDataSource, MWPhotoBrowserDelegate>
 
 @property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSArray        *photos;
 
 @end
 
@@ -79,6 +81,57 @@
     FCIImagesitemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FCIImagesitemCollectionViewCell" forIndexPath:indexPath];
     cell.model = [self.model.collectionCellModels objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    [self showImgs:indexPath.row];
+}
+
+- (NSArray *)photos {
+    if (!_photos) {
+        NSMutableArray *photos = [[NSMutableArray alloc] initWithCapacity:self.model.collectionCellModels.count];
+        [self.model.collectionCellModels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            FCIImagesitemCollectionViewCellModel *cvcm = obj;
+            MWPhoto *photo = [[MWPhoto alloc] initWithURL:cvcm.imgurl];
+            [photos addObject:photo];
+        }];
+        _photos = photos;
+    }
+    return _photos;
+}
+
+- (void)showImgs:(NSInteger)index {
+    BOOL displayActionButton = NO;
+    BOOL displaySelectionButtons = NO;
+    BOOL displayNavArrows = NO;
+    BOOL enableGrid = YES;
+    BOOL startOnGrid = NO;
+    enableGrid = NO;
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = displayActionButton;
+    browser.displayNavArrows = displayNavArrows;
+    browser.displaySelectionButtons = displaySelectionButtons;
+    browser.alwaysShowControls = displaySelectionButtons;
+    browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    browser.wantsFullScreenLayout = YES;
+#endif
+    browser.enableGrid = enableGrid;
+    browser.startOnGrid = startOnGrid;
+    browser.enableSwipeToDismiss = YES;
+    [browser setCurrentPhotoIndex:index];
+
+    [self.curVC.navigationController pushViewController:browser animated:YES];
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
 }
 
 @end
