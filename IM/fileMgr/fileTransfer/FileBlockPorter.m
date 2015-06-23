@@ -14,6 +14,8 @@
 #import "NSUUID+StringUUID.h"
 #import "NSDate+Common.h"
 #import "Encrypt.h"
+#import "NSString+URL.h"
+
 
 @implementation FileBlockPorter
 
@@ -29,19 +31,19 @@
         NSString *iv = [options objectForKey:@"iv"];
         NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
-                                @"filename":block.fileName,
+                                @"filename":[block.fileName URLEncodedString],
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedInteger:blockData.length],
-                                @"bin":base64Data,
-                                @"timestamp":[[NSDate Now] formatWith:nil],
+                                @"bin":[base64Data URLEncodedString],
+                                @"timestamp":[[[NSDate Now] formatWith:nil] URLEncodedString],
                                 @"filesize":[NSNumber numberWithUnsignedLongLong:block.fileSz]
                                 };
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
-        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
-        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
+        [manager.requestSerializer setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[[options objectForKey:@"token"] URLEncodedString] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             DDLogInfo(@"uploaded fileName:%@ offset:%llu size:%lu", block.fileName, block.offset, (unsigned long)block.size);
@@ -70,16 +72,16 @@
         NSString *iv = [options objectForKey:@"iv"];
         NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
         NSDictionary *params = @{
-                                @"filename":block.fileName,
+                                @"filename":[block.fileName URLEncodedString],
                                 @"offset":[NSNumber numberWithUnsignedLongLong:block.offset],
                                 @"block-size":[NSNumber numberWithUnsignedLongLong:block.size],
-                                @"timestamp":[[NSDate Now] formatWith:nil]
+                                @"timestamp":[[[NSDate Now] formatWith:nil] URLEncodedString]
                                 };
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [manager.requestSerializer setValue:qid forHTTPHeaderField:@"rc-qid"];
-        [manager.requestSerializer setValue:[options objectForKey:@"token"] forHTTPHeaderField:@"rc-token"];
-        [manager.requestSerializer setValue:sign forHTTPHeaderField:@"rc-signature"];
+        [manager.requestSerializer setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
+        [manager.requestSerializer setValue:[[options objectForKey:@"token"] URLEncodedString] forHTTPHeaderField:@"rc-token"];
+        [manager.requestSerializer setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             DDLogInfo(@"downloaded fileName:%@ offset:%llu size:%lu", block.fileName, block.offset, (unsigned long)block.size);

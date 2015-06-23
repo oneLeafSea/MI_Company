@@ -44,14 +44,14 @@
                             key:(NSString *)key
                              iv:(NSString *)iv
                        progress:(void(^)(double progress))progress
-                     completion:(void(^)(BOOL finished))completion {
+                     completion:(void(^)(BOOL finished))cpt {
     
     __block NSString *fileName = [filePath lastPathComponent];
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     NSError *err = nil;
     NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:serverUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSError *error = nil;
-        [formData appendPartWithFileURL:[NSURL URLWithString:serverUrl] name:@"bin" fileName:[fileName URLEncodedString] mimeType:@"application/file" error:&error];
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:@"bin" fileName:[fileName URLEncodedString] mimeType:@"application/file" error:&error];
         if (error) {
             NSAssert(0, @"upload file path error.");
         }
@@ -72,9 +72,14 @@
     AFHTTPRequestOperation *operation =
     [manager HTTPRequestOperationWithRequest:request
                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                         NSLog(@"Success %@", responseObject);
+                                         if (cpt) {
+                                             cpt(YES);
+                                         }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         NSLog(@"Failure %@", error.description);
+                                         if (cpt) {
+                                             cpt(NO);
+                                         }
+                                         
                                      }];
     
     [operation setUploadProgressBlock:^(NSUInteger __unused bytesWritten,
@@ -82,8 +87,9 @@
                                         long long totalBytesExpectedToWrite) {
 
         double p = totalBytesWritten / (double)totalBytesExpectedToWrite;
-        progress(p);
-        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
+        if (progress) {
+             progress(p);
+        }
     }];
     
     [operation start];
@@ -194,7 +200,7 @@
                      progress:(void(^)(double progress))progress
                    completion:(void(^)(BOOL finished))completion {
     NSURL *url = [NSURL URLWithString:[serverUrl stringByAppendingPathComponent:[fileName URLEncodedString]]];
-    NSString *filePath = [fileDir stringByAppendingString:fileName];
+    NSString *filePath = [fileDir stringByAppendingPathComponent:fileName];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
     NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
@@ -207,8 +213,9 @@
     
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         double p = totalBytesRead / (double)totalBytesExpectedToRead;
-        progress(p);
-
+        if (progress) {
+             progress(p);
+        }
     }];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

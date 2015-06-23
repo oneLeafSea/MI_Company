@@ -19,11 +19,11 @@
  * @param completion retrun the result.
  **/
 
-- (void)downloadFileName:(NSString *)fileName
-               urlString:(NSString *)urlString
-          checkUrlString:(NSString *)checkUrlString
-                 options:(NSDictionary *)options
-              completion:(void(^)(BOOL finished, NSError *error))completion;
+//- (void)downloadFileName:(NSString *)fileName
+//               urlString:(NSString *)urlString
+//          checkUrlString:(NSString *)checkUrlString
+//                 options:(NSDictionary *)options
+//              completion:(void(^)(BOOL finished, NSError *error))completion;
 
 /**
  * upload file to file server.
@@ -34,14 +34,14 @@
  * @param completion retrun the result.
  **/
 
-- (void)uploadFileName:(NSString *)fileName
-             urlString:(NSString *)urlString
-        checkUrlString:(NSString *)checkUrlString
-     completeUrlString:(NSString *)completeUrlString
-               options:(NSDictionary *)options
-            completion:(void(^)(BOOL finished, NSError *error))completion;
+//- (void)uploadFileName:(NSString *)fileName
+//             urlString:(NSString *)urlString
+//        checkUrlString:(NSString *)checkUrlString
+//     completeUrlString:(NSString *)completeUrlString
+//               options:(NSDictionary *)options
+//            completion:(void(^)(BOOL finished, NSError *error))completion;
 
 
-- (BOOL)exsitTask:(NSString *)filename;
+//- (BOOL)exsitTask:(NSString *)filename;
 
 @end

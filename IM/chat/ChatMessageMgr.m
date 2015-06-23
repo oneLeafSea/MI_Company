@@ -19,6 +19,7 @@
 #import "UIImage+Common.h"
 #import "NSUUID+StringUUID.h"
 #import "JSQSystemSoundPlayer+JSQMessages.h"
+#import "RTFileTransfer.h"
 
 
 
@@ -102,7 +103,34 @@
               audioPath:(NSString *)audioPath
              completion:(void (^)(BOOL finished, id arguments))completion {
     
-    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv}  completion:^(BOOL finished, NSError *error) {
+//    [USER.fileTransfer uploadFileName:[audioPath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv}  completion:^(BOOL finished, NSError *error) {
+//        if (finished) {
+//            ChatMessage *msg = [[ChatMessage alloc] init];
+//            msg.from = [m_sid copy];
+//            msg.to = [to copy];
+//            msg.time = [[NSDate Now] formatWith:nil];
+//            msg.chatMsgType = msgType;
+//            [msg.body setObject:@"voice" forKey:@"type"];
+//            [msg.body setObject:APP_DELEGATE.user.name forKey:@"fromname"];
+//            [msg.body setObject:[audioPath lastPathComponent] forKey:@"uuid"];
+//            [msg.body setObject:[NSString stringWithFormat:@"%ld", (long)duration] forKey:@"duration"];
+//            [msg.body setObject:[audioPath lastPathComponent] forKey:@"filename"];
+//            unsigned long long filesz = [Utils fileSizeAtPath:audioPath error:nil];
+//            [msg.body setObject:[NSString stringWithFormat:@"%llu", filesz] forKey:@"filesize"];
+//            
+//            if (completion != nil) {
+//                [m_msgBox putMsgId:msg.qid callback:completion];
+//            }
+//            
+//            msg.status = ChatMessageStatusSending;
+//            if (![m_msgTb insertMessage:msg]) {
+//                DDLogError(@"ERROR: Insert voice `message` table.");
+//            }
+//            [m_session post:msg];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+//        }
+//    }];
+    [RTFileTransfer uploadFileWithServerUrl:USER.fileUploadSvcUrl2 filePath:audioPath token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -136,7 +164,34 @@
                              msgType:(ChatMessageType)msgType
                                   to:(NSString *)to
                           completion:(void (^)(BOOL finished, id argument))completion {
-    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+//    [USER.fileTransfer uploadFileName:[filePath lastPathComponent] urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":filePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+//        if (finished) {
+//            ChatMessage *msg = [[ChatMessage alloc] init];
+//            msg.from = [m_sid copy];
+//            msg.to = [to copy];
+//            msg.time = [[NSDate Now] formatWith:nil];
+//            msg.chatMsgType = msgType;
+//            [msg.body setObject:@"file" forKey:@"type"];
+//            [msg.body setObject:APP_DELEGATE.user.name forKey:@"fromname"];
+//            [msg.body setObject:[filePath lastPathComponent] forKey:@"uuid"];
+//            [msg.body setObject:[filePath lastPathComponent] forKey:@"filename"];
+//            unsigned long long filesz = [Utils fileSizeAtPath:filePath error:nil];
+//            [msg.body setObject:[NSString stringWithFormat:@"%llu", filesz] forKey:@"filesize"];
+//            
+//            if (completion != nil) {
+//                [m_msgBox putMsgId:msg.qid callback:completion];
+//            }
+//            
+//            msg.status = ChatMessageStatusSending;
+//            if (![m_msgTb insertMessage:msg]) {
+//                DDLogError(@"ERROR: Insert file `message` table.");
+//            }
+//            [m_session post:msg];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+//        }
+//    }];
+    
+    [RTFileTransfer uploadFileWithServerUrl:USER.fileUploadSvcUrl2 filePath:filePath token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
         if (finished) {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -221,12 +276,12 @@
                          msgType:(ChatMessageType) msgType
                               to:(NSString *)to
                       completion:(void(^)(BOOL finished, id thumberImgPath))cpt {
-    UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage scale:0.1 orientation:UIImageOrientationUp];
+    UIImage * img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage scale:1.0 orientation:UIImageOrientationUp];
     __block NSString *uuidName = [NSString stringWithFormat:@"%@.jpg", [NSUUID uuid]];
     NSString *thumbName = [uuidName stringByAppendingString:@"_thumb"];
    __block  NSString *imagPath = [USER.filePath stringByAppendingPathComponent:uuidName];
     __block NSString *imgName = asset.defaultRepresentation.filename;
-    if (![img saveToPath:imagPath scale:0.1]) {
+    if (![img saveToPath:imagPath scale:1.0]) {
         cpt(NO, nil);
         return;
     }
@@ -237,10 +292,39 @@
         [[NSFileManager defaultManager] removeItemAtPath:imagPath error:nil];
         return;
     }
+//    
+//    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+//        if (!finished) {
+//            cpt(NO, error);
+//        } else {
+//            ChatMessage *msg = [[ChatMessage alloc] init];
+//            msg.from = [m_sid copy];
+//            msg.to = [to copy];
+//            msg.time = [[NSDate Now] formatWith:nil];
+//            msg.chatMsgType = msgType;
+//            [msg.body setObject:@"image" forKey:@"type"];
+//            [msg.body setObject:uuidName forKey:@"uuid"];
+//            unsigned long long fileSz = [Utils fileSizeAtPath:imagPath error:nil];
+//            [msg.body setObject:[NSNumber numberWithUnsignedLongLong:fileSz] forKey:@"filesize"];
+//            [msg.body setObject:USER.name forKey:@"fromname"];
+//            [msg.body setObject:imgName forKey:@"filename"];
+//            
+//            if (cpt != nil) {
+//                [m_msgBox putMsgId:msg.qid callback:cpt];
+//            }
+//            msg.status = ChatMessageStatusSending;
+//            if (![m_msgTb insertMessage:msg]) {
+//                DDLogError(@"ERROR: Insert `message` table.");
+//                return;
+//            }
+//            [m_session post:msg];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+//        }
+//    }];
     
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+    [RTFileTransfer uploadFileWithServerUrl:USER.fileUploadSvcUrl2 filePath:imagPath token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
         if (!finished) {
-            cpt(NO, error);
+            cpt(NO, nil);
         } else {
             ChatMessage *msg = [[ChatMessage alloc] init];
             msg.from = [m_sid copy];
@@ -275,34 +359,63 @@
                            msgType:(ChatMessageType)msgType
                                 to:(NSString *)to
                         completion:(void (^)(BOOL finished, id argument))cpt {
-    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+//    [USER.fileTransfer uploadFileName:uuidName urlString:USER.fileUploadSvcUrl checkUrlString:USER.fileCheckUrl  completeUrlString:USER.fileCompleteUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+//        if (!finished) {
+//            cpt(NO, error);
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                ChatMessage *msg = [[ChatMessage alloc] init];
+//                msg.from = [m_sid copy];
+//                msg.to = [to copy];
+//                msg.time = [[NSDate Now] formatWith:nil];
+//                msg.chatMsgType = msgType;
+//                [msg.body setObject:@"image" forKey:@"type"];
+//                [msg.body setObject:uuidName forKey:@"uuid"];
+//                unsigned long long fileSz = [Utils fileSizeAtPath:imagPath error:nil];
+//                [msg.body setObject:[NSString stringWithFormat:@"%llu", fileSz] forKey:@"filesize"];
+//                [msg.body setObject:USER.name forKey:@"fromname"];
+//                [msg.body setObject:imgName forKey:@"filename"];
+//                
+//                if (cpt != nil) {
+//                    [m_msgBox putMsgId:msg.qid callback:cpt];
+//                }
+//                msg.status = ChatMessageStatusSending;
+//                if (![m_msgTb insertMessage:msg]) {
+//                    DDLogError(@"ERROR: Insert `message` table.");
+//                    return;
+//                }
+//                [m_session post:msg];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
+//            });
+//        }
+//    }];
+    
+    [RTFileTransfer uploadFileWithServerUrl:USER.fileUploadSvcUrl2 filePath:imagPath token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
         if (!finished) {
-            cpt(NO, error);
+            cpt(NO, nil);
         } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                ChatMessage *msg = [[ChatMessage alloc] init];
-                msg.from = [m_sid copy];
-                msg.to = [to copy];
-                msg.time = [[NSDate Now] formatWith:nil];
-                msg.chatMsgType = msgType;
-                [msg.body setObject:@"image" forKey:@"type"];
-                [msg.body setObject:uuidName forKey:@"uuid"];
-                unsigned long long fileSz = [Utils fileSizeAtPath:imagPath error:nil];
-                [msg.body setObject:[NSString stringWithFormat:@"%llu", fileSz] forKey:@"filesize"];
-                [msg.body setObject:USER.name forKey:@"fromname"];
-                [msg.body setObject:imgName forKey:@"filename"];
-                
-                if (cpt != nil) {
-                    [m_msgBox putMsgId:msg.qid callback:cpt];
-                }
-                msg.status = ChatMessageStatusSending;
-                if (![m_msgTb insertMessage:msg]) {
-                    DDLogError(@"ERROR: Insert `message` table.");
-                    return;
-                }
-                [m_session post:msg];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
-            });
+            ChatMessage *msg = [[ChatMessage alloc] init];
+            msg.from = [m_sid copy];
+            msg.to = [to copy];
+            msg.time = [[NSDate Now] formatWith:nil];
+            msg.chatMsgType = msgType;
+            [msg.body setObject:@"image" forKey:@"type"];
+            [msg.body setObject:uuidName forKey:@"uuid"];
+            unsigned long long fileSz = [Utils fileSizeAtPath:imagPath error:nil];
+            [msg.body setObject:[NSString stringWithFormat:@"%llu", fileSz] forKey:@"filesize"];
+            [msg.body setObject:USER.name forKey:@"fromname"];
+            [msg.body setObject:imgName forKey:@"filename"];
+            
+            if (cpt != nil) {
+                [m_msgBox putMsgId:msg.qid callback:cpt];
+            }
+            msg.status = ChatMessageStatusSending;
+            if (![m_msgTb insertMessage:msg]) {
+                DDLogError(@"ERROR: Insert `message` table.");
+                return;
+            }
+            [m_session post:msg];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageSendNewMsg object:msg];
         }
     }];
 }
@@ -354,9 +467,11 @@
             return;
         }
         __block NSString *imagePath = [USER.filePath stringByAppendingPathComponent:uuidName];
-        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":imagePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+        [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:USER.filePath fileName:uuidName token:USER.token key:USER.key iv:USER.iv progress:^(double progress) {
+            
+        } completion:^(BOOL finished) {
             if (!finished) {
-                DDLogError(@"ERROR: download image file error %@", error);
+                DDLogError(@"ERROR: download image file error");
             } else {
                 NSString *thumbPath = [imagePath stringByAppendingString:@"_thumb"];
                 UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
@@ -376,10 +491,11 @@
             return;
         }
         NSString *uuidName = [msg.body objectForKey:@"uuid"];
-        __block NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:uuidName];
-        [USER.fileTransfer downloadFileName:uuidName urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":audioPath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
+        [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:USER.audioPath fileName:uuidName token:USER.token key:USER.key iv:USER.iv progress:^(double progress) {
+            
+        } completion:^(BOOL finished) {
             if (!finished) {
-                DDLogError(@"ERROR: download audio file error %@", error);
+                DDLogError(@"ERROR: download audio file error");
             } else {
                 [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageImageFileReceived object:msg];

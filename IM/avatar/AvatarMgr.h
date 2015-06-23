@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "FileTransfer.h"
+#import "RTFileTransfer.h"
 
 
 @interface AvatarMgr : NSObject
@@ -24,7 +24,6 @@
                      userId:(NSString *)userId
                         url:(NSString *)url
              checkUrlString:(NSString *)checkUrlString
-               fileTransfer:(FileTransfer *)fileTransfer
                  completion:(void(^)(BOOL finished, NSError *error))completion;
 
 - (UIImage *) getAvatarImageByUid:(NSString *)uid;

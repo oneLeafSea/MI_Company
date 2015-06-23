@@ -18,4 +18,6 @@
 
 - (UIImage *)scaleToSize:(CGSize)sz;
 
+-(UIImage*)resizeImageToMaxSize:(CGFloat)max filePath:(NSString *)path;
+
 @end
