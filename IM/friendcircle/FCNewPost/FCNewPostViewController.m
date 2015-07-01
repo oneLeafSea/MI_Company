@@ -61,8 +61,14 @@
         if (finished) {
             [self.view makeToast:@"上传成功."];
             [self.navigationController popViewControllerAnimated:YES];
+            if ([self.delegate respondsToSelector:@selector(FCNewPostViewController:newPostSuccess:)]) {
+                [self.delegate FCNewPostViewController:self newPostSuccess:YES];
+            }
         } else {
             [self.view makeToast:@"上传失败."];
+            if ([self.delegate respondsToSelector:@selector(FCNewPostViewController:newPostSuccess:)]) {
+                [self.delegate FCNewPostViewController:self newPostSuccess:NO];
+            }
         }
        
     }];

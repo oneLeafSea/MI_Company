@@ -78,9 +78,9 @@
     __block NSString *uuid = [NSUUID uuid];
     [imgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIImage *img = obj;
-        NSString *filename = [NSString stringWithFormat:@"%@%d.jpg", uuid, idx+1];
+        NSString *filename = [NSString stringWithFormat:@"%@%u.jpg", uuid, idx+1];
         dispatch_group_enter(serviceGroup);
-        [RTFileTransfer uploadFileWithServerUrl:USER.fcImgUploadUrl Data:UIImageJPEGRepresentation(img, 1.0) fileName:filename token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
+        [RTFileTransfer uploadFileWithServerUrl:USER.fcImgUploadUrl Data:UIImageJPEGRepresentation(img, 0.9) fileName:filename token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
             dispatch_group_leave(serviceGroup);
             if (!finished) {
                 uploadResult = NO;

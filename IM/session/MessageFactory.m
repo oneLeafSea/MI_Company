@@ -123,6 +123,10 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kWebRtcNotifyMsgNotificaiton object:msg];
         }
             break;
+            
+        case IM_NOTIFY_FC: {
+            
+        }
         default:
             break;
     }

@@ -201,9 +201,9 @@
     img = [img fixOrientation];
     img = [self imageWithImage:img scaledToWidth:1080];
    
-    UIImage *small = [UIImage imageWithCGImage:img.CGImage scale:0.1 orientation:UIImageOrientationUp];
+//    UIImage *small = [UIImage imageWithCGImage:img.CGImage scale:0.1 orientation:UIImageOrientationUp];
     NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:self.imgArray];
-    [mutableArray addObject:small];
+    [mutableArray addObject:img];
     self.imgArray = mutableArray;
 }
 

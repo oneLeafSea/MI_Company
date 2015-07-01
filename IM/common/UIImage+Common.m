@@ -13,7 +13,7 @@
 @implementation UIImage (Common)
 
 -(BOOL)saveToPath:(NSString*)path {
-    NSData *imageData = UIImageJPEGRepresentation(self, 0.1);
+    NSData *imageData = UIImageJPEGRepresentation(self, 0.9);
     return [imageData writeToFile:path atomically:YES];
 }
 

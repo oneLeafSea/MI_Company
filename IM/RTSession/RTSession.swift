@@ -98,7 +98,6 @@ import Foundation
     
     private func dequeueWrite(data: NSData) {
         if !self.connected {
-            println("网络已经断开")
             return
         }
         if self.writeQueue == nil {
@@ -158,7 +157,7 @@ import Foundation
         }
     }
     
-    // MARk: delegate
+    // MARK: delegate
     public func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent) {
         if eventCode == NSStreamEvent.HasBytesAvailable {
             if aStream == inputStream {

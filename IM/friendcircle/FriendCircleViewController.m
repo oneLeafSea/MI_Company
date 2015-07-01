@@ -26,7 +26,7 @@
 #import "FCNewPostViewController.h"
 
 
-@interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource, FCItemTableViewCellDelegate, RTTextInputBarDelegate> {
+@interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource, FCItemTableViewCellDelegate, RTTextInputBarDelegate, FCNewPostViewControllerDelegate> {
     FCModel *_model;
     
     NSString *_ssid;
@@ -203,7 +203,18 @@
 
 - (void)rigthBtnTapped {
     FCNewPostViewController *postVC = [[FCNewPostViewController alloc] init];
+    postVC.delegate = self;
     [self.navigationController pushViewController:postVC animated:YES];
+}
+
+#pragma mark - delegate
+- (void)FCNewPostViewController:(FCNewPostViewController *)controller newPostSuccess:(BOOL)success {
+    [USER.fcMgr getMsgsWithCur:1 pgSz:10 completion:^(BOOL finished, NSDictionary *result) {
+        if (finished) {
+            _model = [[FCModel alloc] initWithDict:result];
+        }
+        [self.tableView reloadData];
+    }];
 }
 
 @end

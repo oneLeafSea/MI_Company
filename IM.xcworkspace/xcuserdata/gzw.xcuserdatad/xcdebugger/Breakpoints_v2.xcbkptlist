@@ -186,12 +186,12 @@
                   moduleName = "IM"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gzw/workspace/IOS/IM/IM/multipleCall/popMenu/PopMenu.m"
-                  timestampString = "457403710.150482"
+                  timestampString = "457426752.788022"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "69">
+                  offsetFromSymbolStart = "78">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -201,30 +201,14 @@
                   moduleName = "IM"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gzw/workspace/IOS/IM/IM/multipleCall/popMenu/PopMenu.m"
-                  timestampString = "457403710.150675"
+                  timestampString = "457426752.788162"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "21">
+                  offsetFromSymbolStart = "34">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IM/friendcircle/RTTextInputBar.m"
-            timestampString = "457257205.635618"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-touchesEnded:withEvent:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

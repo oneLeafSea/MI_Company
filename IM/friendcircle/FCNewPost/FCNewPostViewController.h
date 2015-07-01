@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FCNewPostViewControllerDelegate;
+
 @interface FCNewPostViewController : UIViewController
 
-
+@property(weak) id<FCNewPostViewControllerDelegate> delegate;
 
 @end
 
