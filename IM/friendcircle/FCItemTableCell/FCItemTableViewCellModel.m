@@ -8,6 +8,7 @@
 
 #import "FCItemTableViewCellModel.h"
 #import "AppDelegate.h"
+#import "NSString+URL.h"
 
 @implementation FCItemTableViewCellModel
 

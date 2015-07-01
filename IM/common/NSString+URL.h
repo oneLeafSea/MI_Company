@@ -11,4 +11,5 @@
 @interface NSString (URL)
 - (NSString *)URLEncodedString;
 - (NSString *)URLDecodedString;
+//- (NSString *)GBK2UTF8;
 @end

@@ -16,6 +16,7 @@
 @property(nonatomic, copy) NSString *repliedUid;
 @property(nonatomic, copy) NSString *time;
 @property(nonatomic, copy) NSString *replyId;
+@property(nonatomic, copy) NSString *belongToId;
 
 @property(nonatomic, copy) NSString *content;
 

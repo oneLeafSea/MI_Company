@@ -149,6 +149,10 @@
 		7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4D08391AF9E4EC0031C035 /* MultiCallViewController.m */; };
 		7D4D083C1AF9E4EC0031C035 /* MultiCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */; };
 		7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D51F4E61B29142400234C8F /* FCICRemarkTableViewCell.m */; };
+		7D5447C21B4145A90096610B /* RTHb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C01B4145A90096610B /* RTHb.swift */; };
+		7D5447C31B4145A90096610B /* RTSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C11B4145A90096610B /* RTSession.swift */; };
+		7D5447C51B4146A40096610B /* testSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C41B4146A40096610B /* testSwift.swift */; };
+		7D54D68C1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
 		7D59E44E1A689DA800806018 /* ChatMessageSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44D1A689DA800806018 /* ChatMessageSql.m */; };
 		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
@@ -174,6 +178,10 @@
 		7D7978961B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */; };
 		7D7978991B295E8500D614F7 /* FCItemImagesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */; };
 		7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */; };
+		7D7C66731B3907A70025A3DB /* FCNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66721B3907A70025A3DB /* FCNewPostViewController.m */; };
+		7D7C66761B392A9A0025A3DB /* FCNPTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66751B392A9A0025A3DB /* FCNPTextTableViewCell.m */; };
+		7D7C66791B39452E0025A3DB /* FCNPImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66781B39452E0025A3DB /* FCNPImagePickerView.m */; };
+		7D7C667C1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C667B1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.m */; };
 		7D7DBC791B29396C00E8B4B2 /* FCItemImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBC781B29396C00E8B4B2 /* FCItemImagesView.m */; };
 		7D7DBC7C1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DBC7B1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.m */; };
 		7D7E9A6E1AFC7D4B00B41E95 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */; };
@@ -661,6 +669,11 @@
 		7D4D083A1AF9E4EC0031C035 /* MultiCallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiCallViewController.xib; sourceTree = "<group>"; };
 		7D51F4E51B29142400234C8F /* FCICRemarkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCICRemarkTableViewCell.h; sourceTree = "<group>"; };
 		7D51F4E61B29142400234C8F /* FCICRemarkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCICRemarkTableViewCell.m; sourceTree = "<group>"; };
+		7D5447C01B4145A90096610B /* RTHb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTHb.swift; sourceTree = "<group>"; };
+		7D5447C11B4145A90096610B /* RTSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTSession.swift; sourceTree = "<group>"; };
+		7D5447C41B4146A40096610B /* testSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSwift.swift; sourceTree = "<group>"; };
+		7D54D68A1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPImagePickerTableViewCell.h; sourceTree = "<group>"; };
+		7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNPImagePickerTableViewCell.m; sourceTree = "<group>"; };
 		7D59E4491A689AF200806018 /* ChatMessageTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageTb.h; sourceTree = "<group>"; };
 		7D59E44A1A689AF200806018 /* ChatMessageTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageTb.m; sourceTree = "<group>"; };
 		7D59E44C1A689DA800806018 /* ChatMessageSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageSql.h; sourceTree = "<group>"; };
@@ -707,6 +720,14 @@
 		7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemImagesViewModel.m; sourceTree = "<group>"; };
 		7D79F62D1AEA13CE005ABF41 /* JSQVideoChatMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQVideoChatMediaItem.h; sourceTree = "<group>"; };
 		7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoChatMediaItem.m; sourceTree = "<group>"; };
+		7D7C66711B3907A70025A3DB /* FCNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNewPostViewController.h; sourceTree = "<group>"; };
+		7D7C66721B3907A70025A3DB /* FCNewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNewPostViewController.m; sourceTree = "<group>"; };
+		7D7C66741B392A9A0025A3DB /* FCNPTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPTextTableViewCell.h; sourceTree = "<group>"; };
+		7D7C66751B392A9A0025A3DB /* FCNPTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNPTextTableViewCell.m; sourceTree = "<group>"; };
+		7D7C66771B39452E0025A3DB /* FCNPImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPImagePickerView.h; sourceTree = "<group>"; };
+		7D7C66781B39452E0025A3DB /* FCNPImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNPImagePickerView.m; sourceTree = "<group>"; };
+		7D7C667A1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPImagePickerCollectionViewCell.h; sourceTree = "<group>"; };
+		7D7C667B1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNPImagePickerCollectionViewCell.m; sourceTree = "<group>"; };
 		7D7DBC771B29396C00E8B4B2 /* FCItemImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemImagesView.h; sourceTree = "<group>"; };
 		7D7DBC781B29396C00E8B4B2 /* FCItemImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemImagesView.m; sourceTree = "<group>"; };
 		7D7DBC7A1B293C0300E8B4B2 /* FCIImagesitemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCIImagesitemCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1296,6 +1317,7 @@
 		7D268BFA1ABFE4EB0090AD49 /* friendcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7D7C66701B3907880025A3DB /* FCNewPost */,
 				7DADF6FB1B31161700082C4D /* FCMgr */,
 				7DDA90E81B2A6AF10005E090 /* FCItemTableCell */,
 				7D7DBC761B29396C00E8B4B2 /* FCItemImages */,
@@ -1639,6 +1661,16 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7D5447B91B4140330096610B /* RTSession */ = {
+			isa = PBXGroup;
+			children = (
+				7D5447C01B4145A90096610B /* RTHb.swift */,
+				7D5447C11B4145A90096610B /* RTSession.swift */,
+				7D5447C41B4146A40096610B /* testSwift.swift */,
+			);
+			path = RTSession;
+			sourceTree = "<group>";
+		};
 		7D6D50151B27CE620092965E /* func */ = {
 			isa = PBXGroup;
 			children = (
@@ -1673,6 +1705,23 @@
 				7D6D50401B2831F10092965E /* FCICItemContentView.m */,
 			);
 			path = FCItemCommentsItemCell;
+			sourceTree = "<group>";
+		};
+		7D7C66701B3907880025A3DB /* FCNewPost */ = {
+			isa = PBXGroup;
+			children = (
+				7D7C66711B3907A70025A3DB /* FCNewPostViewController.h */,
+				7D7C66721B3907A70025A3DB /* FCNewPostViewController.m */,
+				7D7C66741B392A9A0025A3DB /* FCNPTextTableViewCell.h */,
+				7D7C66751B392A9A0025A3DB /* FCNPTextTableViewCell.m */,
+				7D7C66771B39452E0025A3DB /* FCNPImagePickerView.h */,
+				7D7C66781B39452E0025A3DB /* FCNPImagePickerView.m */,
+				7D7C667A1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.h */,
+				7D7C667B1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.m */,
+				7D54D68A1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.h */,
+				7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */,
+			);
+			path = FCNewPost;
 			sourceTree = "<group>";
 		};
 		7D7DBC761B29396C00E8B4B2 /* FCItemImages */ = {
@@ -1776,6 +1825,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D5447B91B4140330096610B /* RTSession */,
 				7D6D50151B27CE620092965E /* func */,
 				7DDF92F51B1FDD4C0097C6BD /* vendors */,
 				7DF3CA941AF7095700D08AE7 /* multipleCall */,
@@ -2633,10 +2683,12 @@
 				7D07BB8A1AA54B4200E78877 /* GroupChatItem.m in Sources */,
 				7DDF93201B1FDD4C0097C6BD /* CTAssetScrollView.m in Sources */,
 				7DB04C9C1AC39DB60097A106 /* WebRtcNotifyMsg.m in Sources */,
+				7D7C66791B39452E0025A3DB /* FCNPImagePickerView.m in Sources */,
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
 				7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */,
 				7D07BB971AA59C6500E78877 /* GroupChatSettingTableViewController.m in Sources */,
 				7D1C602C1AA6E7E50035A2D2 /* OsItemsTb.m in Sources */,
+				7D5447C31B4145A90096610B /* RTSession.swift in Sources */,
 				7D005D751A91BA00006CB54C /* fileBrowserSelectTableViewCell.m in Sources */,
 				7D08D0291A8D92F200F4C8E7 /* ChatMessageRecorderPanelView.m in Sources */,
 				7D2E0F971A830F250099AB04 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
@@ -2733,6 +2785,7 @@
 				7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */,
 				7D44C4991A6798A6004365D7 /* ChatViewController.m in Sources */,
 				7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */,
+				7D7C66761B392A9A0025A3DB /* FCNPTextTableViewCell.m in Sources */,
 				7DF3CAB41AF70C7F00D08AE7 /* MultiSelectSearchResultTableViewCell.m in Sources */,
 				7DADF7001B31161700082C4D /* FCMgr.m in Sources */,
 				7D2E0F951A830F250099AB04 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
@@ -2740,6 +2793,7 @@
 				7D2E10021A83948F0099AB04 /* UIImage+Common.m in Sources */,
 				7DB0927B1A664DCC005268A7 /* ChatMesssageBox.m in Sources */,
 				7DEA70661AA988CC002C2C68 /* DetailMgr.m in Sources */,
+				7D7C66731B3907A70025A3DB /* FCNewPostViewController.m in Sources */,
 				7D08D02D1A8D92F200F4C8E7 /* ChatMessageSpeakerPanelViewController.m in Sources */,
 				7DFE727E1AA8284100B9F674 /* OsModel.m in Sources */,
 				7D1C60101AA6AAE00035A2D2 /* OsMgr.m in Sources */,
@@ -2769,6 +2823,7 @@
 				7D6023801A80F1F0001BDD46 /* ChatMessageMorePanelViewController.m in Sources */,
 				7D2893CD1A8093EF0050FF26 /* ChatViewMorePanelView.m in Sources */,
 				7DD278431A4AC0940012D1F5 /* Roster.m in Sources */,
+				7D54D68C1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m in Sources */,
 				7DB158A31A42DD5600287BBE /* MessageFactory.m in Sources */,
 				7D119B341AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m in Sources */,
 				7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */,
@@ -2845,6 +2900,7 @@
 				7D1C60131AA6B4690035A2D2 /* OsItem.m in Sources */,
 				7D2E0F8C1A830F250099AB04 /* UIView+JSQMessages.m in Sources */,
 				7DDA90ED1B2A6AF10005E090 /* FCItemView.m in Sources */,
+				7D5447C51B4146A40096610B /* testSwift.swift in Sources */,
 				7DB158561A42DD5600287BBE /* JRTableResponse.m in Sources */,
 				7D2E0FAB1A830F250099AB04 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				7D005D2D1A91825D006CB54C /* FileBlock.m in Sources */,
@@ -2858,6 +2914,7 @@
 				7DDF93261B1FDD4C0097C6BD /* CTAssetsSupplementaryView.m in Sources */,
 				7D4D08371AF9C01F0031C035 /* AvatarContainerViewItem.m in Sources */,
 				7D2E0F871A830F250099AB04 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
+				7D5447C21B4145A90096610B /* RTHb.swift in Sources */,
 				7DDF93251B1FDD4C0097C6BD /* CTAssetsPickerController.m in Sources */,
 				7DB2D62C1A6F963F00004D6C /* RecentMsgItem.m in Sources */,
 				7DB251BC1A63D02F007FC8D4 /* RosterItemReqMsgTableViewController.m in Sources */,
@@ -2879,6 +2936,7 @@
 				7DB092721A6601B9005268A7 /* ChatMessage.m in Sources */,
 				7DB158A81A42DD5600287BBE /* OutputStream.m in Sources */,
 				7DF3CAB11AF70C7F00D08AE7 /* MultiSelectedPanel.m in Sources */,
+				7D7C667C1B3946E20025A3DB /* FCNPImagePickerCollectionViewCell.m in Sources */,
 				7DDAFB161A5E7CC50029D809 /* RosterSectionHeaderView.m in Sources */,
 				7D1C60261AA6E7C40035A2D2 /* OsOrgTb.m in Sources */,
 				7D2E0F9B1A830F250099AB04 /* JSQMessagesAvatarImage.m in Sources */,
@@ -3074,6 +3132,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFJSONRPCClient\"",
@@ -3103,6 +3163,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFJSONRPCClient\"",

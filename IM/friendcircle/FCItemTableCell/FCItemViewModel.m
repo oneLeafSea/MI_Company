@@ -9,6 +9,7 @@
 #import "FCItemViewModel.h"
 #import "AppDelegate.h"
 #import "FCICItemCellModel.h"
+#import "NSString+URL.h"
 
 @implementation FCItemViewModel
 
@@ -46,6 +47,7 @@
     icm.replyId = hfxxid;
     if (sshfxxid.length > 0) {
         icm.repliedUid = [dict objectForKey:@"bhfr"];
+        icm.belongToId = sshfxxid;
     }
     self.time = [dict objectForKey:@"hfsj"];
     [self.commentsViewModel.fcicItemCellModels addObject:icm];

@@ -26,4 +26,11 @@
     return decoded;
 }
 
+//- (NSString *)GBK2UTF8 {
+//    unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//    NSData *responseData =[self dataUsingEncoding:encode ];
+//    NSString *utf8Str = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+//    return utf8Str;
+//}
+
 @end

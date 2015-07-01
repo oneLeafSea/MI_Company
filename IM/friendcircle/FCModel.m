@@ -78,7 +78,7 @@
 
 - (void)appendItemsWithDict:(NSDictionary *)dict {
     [self addMsgsFromDict:dict];
-    [self addMsgsFromDict:dict];
+    [self addRepliesFromDict:dict];
 }
 
 @end

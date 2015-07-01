@@ -20,4 +20,6 @@
 
 -(UIImage*)resizeImageToMaxSize:(CGFloat)max filePath:(NSString *)path;
 
+- (UIImage *)fixOrientation;
+
 @end

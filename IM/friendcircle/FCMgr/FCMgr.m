@@ -17,6 +17,7 @@
 #import "NSUUID+StringUUID.h"
 #import "AppDelegate.h"
 #import "NSDate+Common.h"
+#import "RTFileTransfer.h"
 
 @interface FCMgr() {
     User *_user;
@@ -68,6 +69,90 @@
         }];
     });
 }
+
+- (void)NewPostWithContent:(NSString *)content
+                       imgs:(NSArray *)imgs
+                 completion:(void (^)(BOOL))completion {
+    __block BOOL uploadResult = YES;
+    __block dispatch_group_t serviceGroup = dispatch_group_create();
+    __block NSString *uuid = [NSUUID uuid];
+    [imgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIImage *img = obj;
+        NSString *filename = [NSString stringWithFormat:@"%@%d.jpg", uuid, idx+1];
+        dispatch_group_enter(serviceGroup);
+        [RTFileTransfer uploadFileWithServerUrl:USER.fcImgUploadUrl Data:UIImageJPEGRepresentation(img, 1.0) fileName:filename token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
+            dispatch_group_leave(serviceGroup);
+            if (!finished) {
+                uploadResult = NO;
+            }
+        }];
+    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       dispatch_group_notify(serviceGroup, dispatch_get_main_queue(), ^{
+           if (uploadResult) {
+               INTULocationManager *mgr = [INTULocationManager sharedInstance];
+               __block CLLocation *location = nil;
+               __block NSString *addr = @"未知";
+               __block dispatch_group_t locateGrp = dispatch_group_create();
+               dispatch_group_enter(locateGrp);
+               [mgr requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock timeout:10 block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                   if (status == INTULocationStatusSuccess) {
+                       location = currentLocation;
+                       CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
+                       dispatch_group_enter(locateGrp);
+                       [reverseGeocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+                           if (error) {
+                               DDLogError(@"ERROR: %@", error);
+                           } else {
+                               CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
+                               addr = [NSString stringWithFormat:@"%@%@%@", myPlacemark.locality, myPlacemark.subLocality, myPlacemark.thoroughfare];
+                           }
+                           dispatch_group_leave(locateGrp);
+                       }];
+                   }
+                   dispatch_group_leave(locateGrp);
+               }];
+               dispatch_group_notify(locateGrp, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                   __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:_user.imurl]];
+                   JRReqMethod *m = [[JRReqMethod alloc] initWithService:@"SVC_IM"];
+                   JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_PYQ_INSERT_MSG token:_user.token key:_user.key iv:_user.iv];
+                   [param.params setObject:uuid forKey:@"id"];
+                   [param.params setObject:content forKey:@"content"];
+                   [param.params setObject:[NSString stringWithFormat:@"%d", imgs.count] forKey:@"imgnum"];
+                   [param.params setObject:USER.org forKey:@"org"];
+                   [param.params setObject:addr forKey:@"addr"];
+                   if (location) {
+                       [param.params setObject:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"lon"];
+                       [param.params setObject:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"lat"];
+                   }
+                   [param.params setObject:@"iphone" forKey:@"platform"];
+                   [param.params setObject:[APP_DELEGATE appVersion] forKey:@"version"];__block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
+                   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                       [session request:req success:^(JRReqest *request, JRResponse *resp) {
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               completion(YES);
+                           });
+                           
+                       } failure:^(JRReqest *request, NSError *error) {
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               completion(NO);
+                           });
+                       } cancel:^(JRReqest *request) {
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               completion(NO);
+                           });
+                       }];
+                   });
+               });
+               
+           } else {
+               completion(NO);
+           }
+           
+       });
+    });
+}
+
 
 - (void)postANewMsg {
     INTULocationManager *mgr = [INTULocationManager sharedInstance];

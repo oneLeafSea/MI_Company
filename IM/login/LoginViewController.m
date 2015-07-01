@@ -106,15 +106,7 @@
     if (suc) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"mainController"];
-        [UIView beginAnimations:nil context:NULL];
-        APP_DELEGATE.window.rootViewController = mainController;
-//        [self presentViewController:mainController animated:YES completion:nil];
-        
-        [UIView setAnimationDuration:0.8];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        //    [UIView setAnimationTransition:UIViewAnimationCurveEaseInOut forView:self.view cache:YES];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView commitAnimations];
+        [self changeRootViewController:mainController];
     } else {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [Utils alertWithTip:error];
@@ -122,6 +114,28 @@
     m_loginProc = nil;
     
 }
+
+- (void)changeRootViewController:(UIViewController*)viewController {
+    
+    if (!self.view.window.rootViewController) {
+        self.view.window.rootViewController = viewController;
+        return;
+    }
+    
+    UIView *snapShot = [self.view.window snapshotViewAfterScreenUpdates:YES];
+    
+    [viewController.view addSubview:snapShot];
+    
+    self.view.window.rootViewController = viewController;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        snapShot.layer.opacity = 0;
+        snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5);
+    } completion:^(BOOL finished) {
+        [snapShot removeFromSuperview];
+    }];
+}
+
 
 - (void)loginProcedures:(LoginProcedures *)proc getRoster:(BOOL)suc {
     if (!suc) {

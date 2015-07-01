@@ -22,6 +22,7 @@
 #import "NSData+Conversion.h"
 #import "ApnsMgr.h"
 #import "RTCPeerConnectionFactory.h"
+#import "IM-swift.h"
 
 
 

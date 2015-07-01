@@ -20,6 +20,11 @@
 
 - (void)postANewMsg;
 
+- (void)NewPostWithContent:(NSString *)content
+                    imgs:(NSArray *)imgs
+                completion:(void(^)(BOOL finished))completion;
+
+
 - (void)replyMsgWithId:(NSString *)msgId
                replyId:(NSString *)replyId
               replyUid:(NSString *)replyUid

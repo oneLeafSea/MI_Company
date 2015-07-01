@@ -23,6 +23,7 @@
 #import "Utils.h"
 
 #import "FCModel.h"
+#import "FCNewPostViewController.h"
 
 
 @interface FriendCircleViewController () <UITableViewDelegate, UITableViewDataSource, FCItemTableViewCellDelegate, RTTextInputBarDelegate> {
@@ -136,7 +137,7 @@
 //#pragma mark - getter
 - (RTTextInputBar *)inputBar {
     if (!_inputBar) {
-        _inputBar = [RTTextInputBar showInView:self.view];
+        _inputBar = [RTTextInputBar showInView:self.tableView];
         _inputBar.rtDelegate = self;
     }
     return _inputBar;
@@ -153,7 +154,6 @@
             [model.itemViewModel.commentsViewModel.fcicItemCellModels addObject:cicm];
             [self.tableView reloadData];
         }
-        
     }];
 }
 
@@ -169,7 +169,11 @@
         return;
     }
     _ssid =  cell.model.itemViewModel.modelId;
-    _sshfxxid = model.replyId;
+    if (model.replied) {
+        _sshfxxid = model.belongToId;
+    } else {
+        _sshfxxid = model.replyId;
+    }
     _replyUid = model.uid;
     self.inputBar.textView.placeholder = [NSString stringWithFormat:@"回复%@", model.name];
     [self showTextInputbar];
@@ -198,7 +202,8 @@
 #pragma mark - actions
 
 - (void)rigthBtnTapped {
-    
+    FCNewPostViewController *postVC = [[FCNewPostViewController alloc] init];
+    [self.navigationController pushViewController:postVC animated:YES];
 }
 
 @end

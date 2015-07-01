@@ -284,16 +284,16 @@
     JSQMessage *msg = [self.data.messages objectAtIndex:indexPath.item];
     
     if (msg.isMediaMessage) {
-        if ([msg.media isKindOfClass:[JSQPhotoMediaItem class]]) {
-            DDLogInfo(@"Photo Msg.");
-        }
-        if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
-            DDLogInfo(@"Voice msg");
-        }
-        
-        if ([msg.media isKindOfClass:[JSQFileMediaItem class]]) {
-            DDLogInfo(@"File msg");
-        }
+//        if ([msg.media isKindOfClass:[JSQPhotoMediaItem class]]) {
+//            DDLogInfo(@"Photo Msg.");
+//        }
+//        if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
+//            DDLogInfo(@"Voice msg");
+//        }
+//        
+//        if ([msg.media isKindOfClass:[JSQFileMediaItem class]]) {
+//            DDLogInfo(@"File msg");
+//        }
     } else {
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];
@@ -443,6 +443,7 @@
                                                                       text:text];
                 [self.data.messages addObject:message];
                 [self finishReceivingMessageAnimated:YES];
+                [self scrollToBottomAnimated:YES];
             });
         }
         
@@ -452,6 +453,7 @@
                 item = [self addPhotoMsgWithPath:nil outgoing:NO uid:msg.from displayName:[msg.body objectForKey:@"fromname"] msgId:nil];
                 item.msgId = msg.qid;
                 [self finishReceivingMessageAnimated:YES];
+                [self scrollToBottomAnimated:YES];
             });
         }
         

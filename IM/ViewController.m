@@ -19,7 +19,7 @@
 
 static NSString *ip = @"http://10.22.1.112:8040/" ;
 
-@interface ViewController () <LoginProceduresDelegate> {
+@interface ViewController () {
     LoginProcedures *m_lp;
     NSString *uid;
     NSString *name;

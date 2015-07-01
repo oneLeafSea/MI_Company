@@ -140,6 +140,16 @@
     self.rightMarginWC.constant = [self rt_appropriateRightButtonMargin];
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint localPoint = [touch locationInView:self];
+    if (CGRectContainsPoint(self.frame, localPoint)) {
+        [super touchesEnded:touches withEvent:event];
+    } else {
+        [self.textView resignFirstResponder];
+    }
+}
+
 - (CGFloat)rt_appropriateRightButtonWidth
 {
     NSString *title = [self.rightButton titleForState:UIControlStateNormal];

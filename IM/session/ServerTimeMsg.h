@@ -13,4 +13,5 @@
 - (instancetype)initWithTime:(NSString *)time;
 
 @property(nonatomic, readonly) NSString *svrTime;
+
 @end

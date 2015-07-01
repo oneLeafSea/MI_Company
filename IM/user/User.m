@@ -301,6 +301,12 @@
     return url;
 }
 
+- (NSString *)fcImgUploadUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_PYQ_UPLOAD2"];
+    return url;
+}
+
 - (NSString *)fcImgThumbServerUrl {
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_FILE_DOWN_THUMB"];

@@ -75,6 +75,7 @@
     self.replyLbl = [[UILabel alloc] initWithFrame:CGRectZero];
     self.replyLbl.text = @"回复";
     self.replyLbl.font = [UIFont systemFontOfSize:FCICITEMCELL_FONT_SIZE];
+
     self.contentLbl = [[FCICItemContentView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:self.nameLbl];
     [self.contentView addSubview:self.repliedNameLbl];
@@ -107,6 +108,7 @@
            make.left.equalTo(self.nameLbl.mas_right);
            make.top.equalTo(self.nameLbl);
        }];
+        self.replyLbl.hidden = NO;
         [self.repliedNameLbl mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.replyLbl.mas_right);
             make.top.equalTo(self.replyLbl);
@@ -127,6 +129,7 @@
             make.height.equalTo([NSNumber numberWithDouble:0]);
             make.width.equalTo([NSNumber numberWithDouble:0]);
         }];
+        self.replyLbl.hidden = YES;
         [self.repliedNameLbl mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.replyLbl.mas_right);
             make.bottom.equalTo(self.replyLbl);
