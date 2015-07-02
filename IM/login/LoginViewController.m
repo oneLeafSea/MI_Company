@@ -42,8 +42,15 @@
     [_bgImgView addGestureRecognizer:avatarTap];
     BOOL isLan = [IMConf isLAN];
     self.lanSwitch.on = isLan;
+    [self loadUserId];
    
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)loadUserId {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [ud objectForKey:@"userId"];
+    self.userTextField.text = userId;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -63,14 +70,14 @@
     
 }
 - (IBAction)switchTapped:(UISwitch *)sender {
-    if (sender.on) {
-        [IMConf setIPAndPort:@"10.22.1.47" port:8000];
-        [IMConf setLAN:YES];
-        
-    } else {
-        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
-        [IMConf setLAN:NO];
-    }
+//    if (sender.on) {
+//        [IMConf setIPAndPort:@"10.22.1.47" port:8000];
+//        [IMConf setLAN:YES];
+//        
+//    } else {
+//        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
+//        [IMConf setLAN:NO];
+//    }
 }
 
 - (IBAction)login:(id)sender {
@@ -108,7 +115,6 @@
         UITabBarController *mainController = [storyboard instantiateViewControllerWithIdentifier:@"mainController"];
         [self changeRootViewController:mainController];
     } else {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [Utils alertWithTip:error];
     }
     m_loginProc = nil;

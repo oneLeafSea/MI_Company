@@ -186,12 +186,12 @@
                   moduleName = "IM"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gzw/workspace/IOS/IM/IM/multipleCall/popMenu/PopMenu.m"
-                  timestampString = "457426752.788022"
+                  timestampString = "457495977.155868"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "78">
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -201,12 +201,12 @@
                   moduleName = "IM"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gzw/workspace/IOS/IM/IM/multipleCall/popMenu/PopMenu.m"
-                  timestampString = "457426752.788162"
+                  timestampString = "457495977.156008"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "34">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>

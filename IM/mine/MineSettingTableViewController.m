@@ -8,6 +8,9 @@
 
 #import "MineSettingTableViewController.h"
 #import "PwdChangeTableViewController.h"
+#import "Appdelegate.h"
+#import "LoginViewController.h"
+#import "IMConf.h"
 
 @interface MineSettingTableViewController ()
 
@@ -39,6 +42,15 @@
     if (indexPath.row == 2) {
         PwdChangeTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PwdChangeTableViewController"];
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.row == 6) {
+        [APP_DELEGATE.user.session disconnect];
+        [APP_DELEGATE.user reset];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"pwd"];
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [APP_DELEGATE changeRootViewController:loginVC];
     }
 }
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+
+#import <arpa/inet.h>
 #import "LogLevel.h"
 #import "DDFileLogger.h"
 #import "NSUUID+StringUUID.h"
@@ -23,13 +25,18 @@
 #import "ApnsMgr.h"
 #import "RTCPeerConnectionFactory.h"
 #import "IM-swift.h"
+#import "LoginProcedures.h"
+#import "LoginNotification.h"
+#import "WelcomeViewController.h"
 
 
 
-@interface AppDelegate () {
+@interface AppDelegate () <LoginProceduresDelegate> {
     FileTransferTask *m_fileTask;
     FileTransfer *m_fileTransfer;
      AVAudioRecorder *m;
+    LoginProcedures *_loginProc;
+    NSCondition *_lock;
 }
 
 
@@ -39,12 +46,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [RTCPeerConnectionFactory initializeSSL];
-    if ([IMConf isLAN]) {
-        [IMConf setIPAndPort:@"10.22.1.47" port:8000];
-    } else {
-        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
-    }
+    [IMConf checkLAN];
     
     [self initLogger];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -56,8 +60,48 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
     [self setupApns];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *uid = [ud objectForKey:@"userId"];
+    NSString *pwd = [ud objectForKey:@"pwd"];
+    if (uid && pwd) {
+        _lock = [[NSCondition alloc] init];
+        _loginProc = [[LoginProcedures alloc] init];
+        _loginProc.delegate = self;
+        [_loginProc loginWithUserId:uid pwd:pwd timeout:30];
+        WelcomeViewController *wvc = [[WelcomeViewController alloc] init];
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = wvc;
+        [self.window makeKeyAndVisible];
+        return YES;
+    }
+   
     return YES;
 }
+
+- (void)changeRootViewController:(UIViewController*)viewController {
+    
+    if (!self.window.rootViewController) {
+        self.window.rootViewController = viewController;
+        return;
+    }
+    
+    UIView *snapShot = [self.window snapshotViewAfterScreenUpdates:YES];
+    
+    [viewController.view addSubview:snapShot];
+    
+    self.window.rootViewController = viewController;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        snapShot.layer.opacity = 0;
+        snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5);
+    } completion:^(BOOL finished) {
+        [snapShot removeFromSuperview];
+    }];
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -131,6 +175,26 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 
 - (NSString *)appVersion {
     return @"0.1";
+}
+
+- (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {
+    
+}
+
+- (void)loginProcedures:(LoginProcedures *)proc login:(BOOL)suc error:(NSString *)error {
+    
+}
+
+- (void)loginProcedures:(LoginProcedures *)proc recvPush:(BOOL)suc error:(NSString *)error {
+    
+}
+
+- (void)loginProceduresConnectFail:(LoginProcedures *)proc timeout:(BOOL)timeout error:(NSError *)error {
+    
+}
+
+- (void)loginProcedures:(LoginProcedures *)proc getRoster:(BOOL)suc {
+    
 }
 
 @end

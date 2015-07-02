@@ -13,10 +13,13 @@
 @property(readonly) NSString *IP;
 @property(readonly) UInt32   port;
 
-+(void) setIPAndPort:(NSString *)IP port:(UInt32)port;
++ (void)setIPAndPort:(NSString *)IP port:(UInt32)port;
 
-+(void) setLAN:(BOOL) Lan;
+//+(void) setLAN:(BOOL) Lan;
 
-+(BOOL) isLAN;
++ (BOOL)isLAN;
+
+
++ (void)checkLAN;
 
 @end

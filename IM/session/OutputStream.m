@@ -121,6 +121,8 @@ static const NSUInteger kTimeoutDefault  = 120;
 - (void)ost_close {
     DDLogInfo(@"close the outputstream.");
     [self stop];
+    [m_os close];
+    [m_os removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     m_end = YES;
 }
 

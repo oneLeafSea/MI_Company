@@ -80,6 +80,8 @@ static const NSUInteger kRunLoopInterval = 1;
 
 - (void)ist_close {
     DDLogInfo(@"close the inputstream.");
+    [m_is close];
+    [m_is removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     m_end = YES;
 }
 

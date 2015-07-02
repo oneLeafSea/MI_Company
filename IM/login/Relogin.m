@@ -13,6 +13,7 @@
 #import "Reachability.h"
 #import "LogLevel.h"
 #import "AppDelegate.h"
+#import "IMConf.h"
 
 @interface Relogin() <LoginProceduresDelegate> {
     LoginProcedures *m_loginProc;
@@ -72,7 +73,7 @@
                     [m_loginProc removeObservers];
                 }
                 [APP_DELEGATE.user reset];
-//                APP_DELEGATE.user = nil;
+                [IMConf checkLAN];
                 m_loginProc = [[LoginProcedures alloc] init];
                 m_loginProc.delegate = self;
                 if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
@@ -108,6 +109,7 @@
             }
             [APP_DELEGATE.user reset];
             APP_DELEGATE.user = nil;
+            
             m_loginProc = [[LoginProcedures alloc] init];
             m_loginProc.delegate = self;
             if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {

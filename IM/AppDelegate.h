@@ -23,6 +23,8 @@
 
 - (NSString *)appVersion;
 
+- (void)changeRootViewController:(UIViewController*)viewController;
+
 @end
 
 
