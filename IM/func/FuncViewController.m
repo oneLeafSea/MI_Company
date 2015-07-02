@@ -10,6 +10,8 @@
 #import "UITableViewCell+Extenssion.h"
 #import <Masonry.h>
 #import "FriendCircleViewController.h"
+#import "FuncFcTableViewCell.h"
+#import "AppDelegate.h"
 
 @interface FuncViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -36,6 +38,7 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:240 / 255.0 alpha:1.0];
+    [self.tableView registerClass:[FuncFcTableViewCell class] forCellReuseIdentifier:@"FuncFcTableViewCell"];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -54,7 +57,12 @@
     }
     
     if (indexPath.row == 1) {
-        return [self getFuncCellWithTitle:@"朋友圈" image:[UIImage imageNamed:@"fc_log"]];
+        FuncFcTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FuncFcTableViewCell" forIndexPath:indexPath];
+        cell.badgeShow = USER.fcMgr.hasNewNotification;
+        cell.imageView.image = [UIImage imageNamed:@"fc_log"];
+        cell.textLabel.text = @"朋友圈";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
     }
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"demo"];

@@ -10,8 +10,9 @@
 #import "AppDelegate.h"
 #import "session.h"
 #import "LoginNotification.h"
+#import "SignatureViewController.h"
 
-@interface MineTableViewController ()
+@interface MineTableViewController ()<SignatureViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImgView;
 @property (weak, nonatomic) IBOutlet UILabel *signLbl;
 @property (weak, nonatomic) IBOutlet UILabel *sexLbl;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLbl;
 @property (weak, nonatomic) IBOutlet UILabel *telLbl;
 @property (weak, nonatomic) IBOutlet UILabel *emailLbl;
+
+@property(nonatomic, strong) NSString *sign;
 
 @end
 
@@ -34,7 +37,8 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:USER.uid];
-    self.signLbl.text = [USER.rosterMgr signature];
+    self.sign = [USER.rosterMgr signature];
+    self.signLbl.text = self.sign;
     NSString *sex = [USER.mineDetail.data objectForKey:@"sex"];
     self.sexLbl.text = [sex isEqual:@"1"] ? @"男" : @"女";
     self.positionLbl.text = [USER.mineDetail.data objectForKey:@"position"];
@@ -49,13 +53,18 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 2) {
+        SignatureViewController *svc = [[SignatureViewController alloc] init];
+        svc.delegate = self;
+        [self.navigationController pushViewController:svc animated:YES];
+    }
 }
 
 - (void)handleSessionDied:(NSNotification *)notificaiton {
@@ -68,6 +77,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.statusLbl.text = @"在线";
     });
+}
+
+- (void)signatureViewController:(SignatureViewController *)signVC DidChanged:(NSString *)txt {
+    self.sign = [txt copy];
+    self.signLbl.text = self.sign;
+    [self.tableView reloadData];
 }
 
 @end

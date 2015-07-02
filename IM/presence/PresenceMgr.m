@@ -42,6 +42,12 @@
     [USER.session post:msg];
 }
 
+- (void)postMsgWithPresenceType:(NSString *)presencetype presenceShow:(NSString *)presenceShow sign:(NSString *)sign {
+    PresenceMsg *msg = [[PresenceMsg alloc] initWithPresenceType:presencetype show:presenceShow];
+    msg.sign = sign;
+    [USER.session post:msg];
+}
+
 - (NSArray *)getPresenceMsgArrayByUid:(NSString *)uid {
     return [m_presenceInfo objectForKey:uid];
 }
@@ -89,7 +95,7 @@
             [self ackPresenceWithUid:msg.from toRes:msg.from_res];
         }
         
-        if ([msg.presenceType isEqualToString:kPresenceTypeState]) {
+        if ([msg.presenceType isEqualToString:kPresenceTypeUpdate]) {
             DDLogInfo(@"INFO: presence state.");
         }
         

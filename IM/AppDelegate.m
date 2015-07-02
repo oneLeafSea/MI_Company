@@ -36,7 +36,6 @@
     FileTransfer *m_fileTransfer;
      AVAudioRecorder *m;
     LoginProcedures *_loginProc;
-    NSCondition *_lock;
 }
 
 
@@ -65,7 +64,6 @@
     NSString *uid = [ud objectForKey:@"userId"];
     NSString *pwd = [ud objectForKey:@"pwd"];
     if (uid && pwd) {
-        _lock = [[NSCondition alloc] init];
         _loginProc = [[LoginProcedures alloc] init];
         _loginProc.delegate = self;
         [_loginProc loginWithUserId:uid pwd:pwd timeout:30];
@@ -182,19 +180,27 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (void)loginProcedures:(LoginProcedures *)proc login:(BOOL)suc error:(NSString *)error {
-    
+    if (!suc) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginFail object:nil];
+    }
 }
 
 - (void)loginProcedures:(LoginProcedures *)proc recvPush:(BOOL)suc error:(NSString *)error {
-    
+    if (!suc) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginFail object:nil];
+    }
 }
 
 - (void)loginProceduresConnectFail:(LoginProcedures *)proc timeout:(BOOL)timeout error:(NSError *)error {
-    
+    if (error) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginFail object:nil];
+    }
 }
 
 - (void)loginProcedures:(LoginProcedures *)proc getRoster:(BOOL)suc {
-    
+    if (!suc) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginFail object:nil];
+    }
 }
 
 @end

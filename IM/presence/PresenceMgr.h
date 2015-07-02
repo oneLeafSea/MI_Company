@@ -13,6 +13,8 @@
 
 - (void)postMsgWithPresenceType:(NSString *)presencetype presenceShow:(NSString *)presenceShow;
 
+- (void)postMsgWithPresenceType:(NSString *)presencetype presenceShow:(NSString *)presenceShow sign:(NSString *)sign;
+
 
 - (NSArray *)getPresenceMsgArrayByUid:(NSString *)uid;
 

@@ -24,7 +24,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationLoginFail object:nil];
 }
 
 - (void)viewDidLoad {
@@ -36,7 +36,7 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginSucess:) name:kNotificationLoginSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginFail:) name:kNotificationReloginFail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginFail:) name:kNotificationLoginFail object:nil];
     
 }
 

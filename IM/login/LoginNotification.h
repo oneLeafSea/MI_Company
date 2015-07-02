@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *kNotificationLoginSuccess;
+extern NSString *kNotificationLoginFail;
 extern NSString *kNotificationLogoff;
 extern NSString *kNotificationReloging;
 extern NSString *kNotificationReloginFail;

@@ -10,7 +10,7 @@
 
 extern NSString *kPresenceTypeOnline;
 extern NSString *kPresenceTypeLeave;
-extern NSString *kPresenceTypeState;
+extern NSString *kPresenceTypeUpdate;
 extern NSString *kPresenceTypeAck;
 
 extern NSString *kPresenceShowOnline;
@@ -34,5 +34,6 @@ extern NSString *kPresenceShowXa;
 @property(readonly) NSString *from_res;
 @property NSString *to;
 @property NSString *to_res;
+@property(nonatomic, copy) NSString *sign;
 
 @end

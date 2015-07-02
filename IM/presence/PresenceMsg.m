@@ -12,7 +12,7 @@
 
 NSString *kPresenceTypeOnline = @"online";
 NSString *kPresenceTypeLeave = @"leave";
-NSString *kPresenceTypeState = @"state";
+NSString *kPresenceTypeUpdate = @"update";
 NSString *kPresenceTypeAck = @"ack";
 
 
@@ -59,13 +59,15 @@ NSString *kPresenceShowXa = @"xa";
                    @"type" : self.presenceType,
                    @"show" : self.show,
                    @"to"   : self.to,
-                   @"to_res" : self.to_res
+                   @"to_res" : self.to_res,
+                   @"sign": self.sign ? self.sign : @""
                    };
     } else {
         dict = @{
                    @"msgid": self.qid,
                    @"type" : self.presenceType,
-                   @"show" : self.show
+                   @"show" : self.show,
+                   @"sign": self.sign ? self.sign : @""
                    };
     }
     

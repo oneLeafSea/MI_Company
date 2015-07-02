@@ -9,6 +9,7 @@
 #import "LoginNotification.h"
 
 NSString *kNotificationLoginSuccess = @"cn.com.rooten.im.login.success";
+NSString *kNotificationLoginFail = @"cn.com.rooten.im.login.fail";
 NSString *kNotificationLogoff = @"cn.com.rooten.im.login.logoff";
 NSString *kNotificationReloging = @"cn.com.rooten.im.login.relogging";
 NSString *kNotificationReloginFail = @"cn.com.rooten.im.login.relogfail";

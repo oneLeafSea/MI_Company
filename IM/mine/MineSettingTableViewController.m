@@ -48,6 +48,7 @@
         [APP_DELEGATE.user.session disconnect];
         [APP_DELEGATE.user reset];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"pwd"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         LoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [APP_DELEGATE changeRootViewController:loginVC];

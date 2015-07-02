@@ -54,6 +54,7 @@
     self.navigationItem.title = @"朋友圈";
     [self setupTableView];
     [self.view addSubview:self.inputBar];
+    [USER.fcMgr resetNewNotifcatinFlag];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发帖" style:UIBarButtonItemStylePlain target:self action:@selector(rigthBtnTapped)];
     [USER.fcMgr getMsgsWithCur:1 pgSz:10 completion:^(BOOL finished, NSDictionary *result) {
@@ -109,7 +110,6 @@
 
 #pragma mark -- tableview delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%d", _model.itemModels.count);
     return _model.itemModels.count;
 }
 

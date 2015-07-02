@@ -18,8 +18,6 @@
                   pgSz:(NSUInteger)pgSz
             completion:(void(^)(BOOL finished, NSDictionary *result))completion;
 
-- (void)postANewMsg;
-
 - (void)NewPostWithContent:(NSString *)content
                     imgs:(NSArray *)imgs
                 completion:(void(^)(BOOL finished))completion;
@@ -30,5 +28,10 @@
               replyUid:(NSString *)replyUid
                content:(NSString *)content
             completion:(void(^)(BOOL finished))completion;
+
+
+- (void)resetNewNotifcatinFlag;
+
+@property(nonatomic) BOOL hasNewNotification;
 
 @end

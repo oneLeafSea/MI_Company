@@ -178,6 +178,9 @@
 		7D7978991B295E8500D614F7 /* FCItemImagesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */; };
 		7D79F62F1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */; };
 		7D7C58541B44C45F00125264 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58531B44C45E00125264 /* WelcomeViewController.m */; };
+		7D7C58571B44DC6200125264 /* FCNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58561B44DC6200125264 /* FCNotification.m */; };
+		7D7C585A1B44E1CF00125264 /* FuncFcTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58591B44E1CF00125264 /* FuncFcTableViewCell.m */; };
+		7D7C585D1B450B9500125264 /* SignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C585C1B450B9500125264 /* SignatureViewController.m */; };
 		7D7C66731B3907A70025A3DB /* FCNewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66721B3907A70025A3DB /* FCNewPostViewController.m */; };
 		7D7C66761B392A9A0025A3DB /* FCNPTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66751B392A9A0025A3DB /* FCNPTextTableViewCell.m */; };
 		7D7C66791B39452E0025A3DB /* FCNPImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C66781B39452E0025A3DB /* FCNPImagePickerView.m */; };
@@ -721,6 +724,12 @@
 		7D79F62E1AEA13CE005ABF41 /* JSQVideoChatMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQVideoChatMediaItem.m; sourceTree = "<group>"; };
 		7D7C58521B44C45E00125264 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7D7C58531B44C45E00125264 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		7D7C58551B44DC6200125264 /* FCNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNotification.h; sourceTree = "<group>"; };
+		7D7C58561B44DC6200125264 /* FCNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNotification.m; sourceTree = "<group>"; };
+		7D7C58581B44E1CF00125264 /* FuncFcTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuncFcTableViewCell.h; sourceTree = "<group>"; };
+		7D7C58591B44E1CF00125264 /* FuncFcTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuncFcTableViewCell.m; sourceTree = "<group>"; };
+		7D7C585B1B450B9500125264 /* SignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureViewController.h; sourceTree = "<group>"; };
+		7D7C585C1B450B9500125264 /* SignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureViewController.m; sourceTree = "<group>"; };
 		7D7C66711B3907A70025A3DB /* FCNewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNewPostViewController.h; sourceTree = "<group>"; };
 		7D7C66721B3907A70025A3DB /* FCNewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCNewPostViewController.m; sourceTree = "<group>"; };
 		7D7C66741B392A9A0025A3DB /* FCNPTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPTextTableViewCell.h; sourceTree = "<group>"; };
@@ -1263,6 +1272,8 @@
 				7DEA706E1AA99F7B002C2C68 /* MineSettingTableViewController.m */,
 				7D3015AA1ABBBCA1007205BB /* MineSettingCommonTableViewController.h */,
 				7D3015AB1ABBBCA1007205BB /* MineSettingCommonTableViewController.m */,
+				7D7C585B1B450B9500125264 /* SignatureViewController.h */,
+				7D7C585C1B450B9500125264 /* SignatureViewController.m */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -1332,6 +1343,8 @@
 				7D1D3B751B2E9B480043449F /* RTTextView.m */,
 				7D8A4F5B1B32AB6D009E5FFE /* FCModel.h */,
 				7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */,
+				7D7C58551B44DC6200125264 /* FCNotification.h */,
+				7D7C58561B44DC6200125264 /* FCNotification.m */,
 			);
 			path = friendcircle;
 			sourceTree = "<group>";
@@ -1676,6 +1689,8 @@
 			children = (
 				7D6D50161B27CF220092965E /* FuncViewController.h */,
 				7D6D50171B27CF220092965E /* FuncViewController.m */,
+				7D7C58581B44E1CF00125264 /* FuncFcTableViewCell.h */,
+				7D7C58591B44E1CF00125264 /* FuncFcTableViewCell.m */,
 			);
 			path = func;
 			sourceTree = "<group>";
@@ -2838,6 +2853,7 @@
 				7DF3CAB61AF70C7F00D08AE7 /* MultiSelectTableViewCell.m in Sources */,
 				7D2E0FA81A830F250099AB04 /* JSQMessagesLabel.m in Sources */,
 				7D7DBC791B29396C00E8B4B2 /* FCItemImagesView.m in Sources */,
+				7D7C585A1B44E1CF00125264 /* FuncFcTableViewCell.m in Sources */,
 				7D005D781A91DC7E006CB54C /* fileBrowserSelectCellModel.m in Sources */,
 				7DFE24A71AA421C000C5DD29 /* AvatarNotifications.m in Sources */,
 				7DFE249D1A95D79100C5DD29 /* PresenceMsg.m in Sources */,
@@ -2926,6 +2942,7 @@
 				7DDF93221B1FDD4C0097C6BD /* CTAssetsGroupViewController.m in Sources */,
 				7DB158A01A42DD5600287BBE /* Hb.m in Sources */,
 				7D13DDCD1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m in Sources */,
+				7D7C585D1B450B9500125264 /* SignatureViewController.m in Sources */,
 				7DB53ACC1A64AC260043DA2E /* RosterItemSendReqMsgTableViewController.m in Sources */,
 				7DEA706C1AA99025002C2C68 /* Detail.m in Sources */,
 				7DB158A91A42DD5600287BBE /* Pkg.m in Sources */,
@@ -2955,6 +2972,7 @@
 				7DB3FCEF1A6E4F2300BFA0E7 /* RosterGrpMgrHeadView.m in Sources */,
 				7DEA70691AA98B37002C2C68 /* detailQid.m in Sources */,
 				7D005D2E1A91825D006CB54C /* FileBlockPorter.m in Sources */,
+				7D7C58571B44DC6200125264 /* FCNotification.m in Sources */,
 				7D244C0E1AAD3C4C0090AA9A /* PwdMgr.m in Sources */,
 				7DB156C31A42DC0C00287BBE /* ViewController.m in Sources */,
 				7DB53AD21A64B8EC0043DA2E /* RosterGroupSelectTableViewController.m in Sources */,
