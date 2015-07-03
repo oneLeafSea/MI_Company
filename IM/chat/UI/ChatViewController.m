@@ -165,7 +165,7 @@
                                                           text:text];
     [self.data.messages addObject:message];
     [APP_DELEGATE.user.msgMgr sendTextMesage:text msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id arguments) {
-        NSLog(@"send to %@, %@", self.talkingId, text);
+        DDLogInfo(@"send to %@, %@", self.talkingId, text);
         
     }];
     [self finishSendingMessageAnimated:YES];

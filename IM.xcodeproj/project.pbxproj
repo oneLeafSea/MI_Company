@@ -203,6 +203,7 @@
 		7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */; };
 		7D8A4F5A1B324E41009E5FFE /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F591B324E41009E5FFE /* NSString+URL.m */; };
 		7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */; };
+		7D9319B91B4666A10014A532 /* RTSeparatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9319B81B4666A10014A532 /* RTSeparatorCell.m */; };
 		7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */; };
 		7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC11ACA39D2001D67D7 /* call.aif */; };
 		7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC01ACA39C9001D67D7 /* answer.aif */; };
@@ -307,6 +308,7 @@
 		7DB6694D1A5F708900843C72 /* RosterSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6694C1A5F708900843C72 /* RosterSection.m */; };
 		7DBD4ABD1AB2DAB1005C618A /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */; };
 		7DBE4FCA1A523FCB0002B5BE /* RosterNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */; };
+		7DC191A81B461DA6004EA04D /* RIIViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC191A71B461DA6004EA04D /* RIIViewcontroller.m */; };
 		7DD278431A4AC0940012D1F5 /* Roster.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278421A4AC0940012D1F5 /* Roster.m */; };
 		7DD278461A4AC1490012D1F5 /* RosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD278451A4AC1490012D1F5 /* RosterItem.m */; };
 		7DDA90ED1B2A6AF10005E090 /* FCItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA90EA1B2A6AF10005E090 /* FCItemView.m */; };
@@ -769,6 +771,8 @@
 		7D8A4F591B324E41009E5FFE /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
 		7D8A4F5B1B32AB6D009E5FFE /* FCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCModel.h; sourceTree = "<group>"; };
 		7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCModel.m; sourceTree = "<group>"; };
+		7D9319B71B4666A10014A532 /* RTSeparatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSeparatorCell.h; sourceTree = "<group>"; };
+		7D9319B81B4666A10014A532 /* RTSeparatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSeparatorCell.m; sourceTree = "<group>"; };
 		7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
 		7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
 		7DA8DEC01ACA39C9001D67D7 /* answer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.aif; sourceTree = "<group>"; };
@@ -979,6 +983,8 @@
 		7DBD4ABC1AB2DAB1005C618A /* NSData+Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Conversion.m"; sourceTree = "<group>"; };
 		7DBE4FC81A523FCB0002B5BE /* RosterNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterNotification.h; sourceTree = "<group>"; };
 		7DBE4FC91A523FCB0002B5BE /* RosterNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterNotification.m; sourceTree = "<group>"; };
+		7DC191A61B461DA6004EA04D /* RIIViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIIViewcontroller.h; sourceTree = "<group>"; };
+		7DC191A71B461DA6004EA04D /* RIIViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIIViewcontroller.m; sourceTree = "<group>"; };
 		7DD278411A4AC0940012D1F5 /* Roster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roster.h; sourceTree = "<group>"; };
 		7DD278421A4AC0940012D1F5 /* Roster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Roster.m; sourceTree = "<group>"; };
 		7DD278441A4AC1490012D1F5 /* RosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItem.h; sourceTree = "<group>"; };
@@ -2023,6 +2029,7 @@
 		7DB157AC1A42DD5600287BBE /* roster */ = {
 			isa = PBXGroup;
 			children = (
+				7DC191A51B461D91004EA04D /* RosterItemInfo */,
 				7DB31BE11A6CA6A10051E6CD /* tb */,
 				7DDAFB021A5E3A6C0029D809 /* UI */,
 				7DB157AD1A42DD5600287BBE /* requests */,
@@ -2201,6 +2208,17 @@
 				7DB06F481A71E23900DD1943 /* RosterItemAddReqModel.m */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		7DC191A51B461D91004EA04D /* RosterItemInfo */ = {
+			isa = PBXGroup;
+			children = (
+				7DC191A61B461DA6004EA04D /* RIIViewcontroller.h */,
+				7DC191A71B461DA6004EA04D /* RIIViewcontroller.m */,
+				7D9319B71B4666A10014A532 /* RTSeparatorCell.h */,
+				7D9319B81B4666A10014A532 /* RTSeparatorCell.m */,
+			);
+			path = RosterItemInfo;
 			sourceTree = "<group>";
 		};
 		7DDA90E81B2A6AF10005E090 /* FCItemTableCell */ = {
@@ -2878,6 +2896,7 @@
 				7DB1589C1A42DD5600287BBE /* RosterItemAddResult.m in Sources */,
 				7DDF931D1B1FDD4C0097C6BD /* ALAsset+isEqual.m in Sources */,
 				7D302CFB1A7746F5004C6BD5 /* Reachability.m in Sources */,
+				7D9319B91B4666A10014A532 /* RTSeparatorCell.m in Sources */,
 				7D44C49D1A6798EB004365D7 /* ChatModel.m in Sources */,
 				7DF3CAB81AF70C7F00D08AE7 /* MultiSelectViewController.m in Sources */,
 				7DF3CACC1AF7607300D08AE7 /* MultiCallClient.m in Sources */,
@@ -2944,6 +2963,7 @@
 				7D13DDCD1AC91387000E3C03 /* WebRtcRecvViewChatViewController.m in Sources */,
 				7D7C585D1B450B9500125264 /* SignatureViewController.m in Sources */,
 				7DB53ACC1A64AC260043DA2E /* RosterItemSendReqMsgTableViewController.m in Sources */,
+				7DC191A81B461DA6004EA04D /* RIIViewcontroller.m in Sources */,
 				7DEA706C1AA99025002C2C68 /* Detail.m in Sources */,
 				7DB158A91A42DD5600287BBE /* Pkg.m in Sources */,
 				7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */,

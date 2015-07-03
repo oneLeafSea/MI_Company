@@ -181,9 +181,9 @@
 }
 
 - (void)fcItemTableViewCellCommentsRemark:(FCItemTableViewCell *)cell {
-    if ([cell.model.itemViewModel.uid isEqualToString:USER.uid]) {
-        return;
-    }
+//    if ([cell.model.itemViewModel.uid isEqualToString:USER.uid]) {
+//        return;
+//    }
     _ssid =  cell.model.itemViewModel.modelId;
     _sshfxxid = nil;
     _replyUid = nil;

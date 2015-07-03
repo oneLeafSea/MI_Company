@@ -43,12 +43,15 @@
     self.sexLbl.text = [sex isEqual:@"1"] ? @"男" : @"女";
     self.positionLbl.text = [USER.mineDetail.data objectForKey:@"position"];
     self.addressLbl.text = [USER.mineDetail.data objectForKey:@"address"];
+    self.addressLbl.numberOfLines = 0;
+    self.addressLbl.textAlignment = NSTextAlignmentRight;
     self.statusLbl.text = USER.session.isConnected ? @"在线" : @"离线";
     self.telLbl.text = [USER.mineDetail.data objectForKey:@"cellphone"];
     self.emailLbl.text = [USER.mineDetail.data objectForKey:@"email"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSessionDied:) name:kSessionDied object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginSuccess:) name:kNotificationLoginSuccess object:nil];
-    
+    self.tableView.estimatedRowHeight = 44;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {

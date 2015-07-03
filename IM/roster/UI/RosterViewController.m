@@ -29,6 +29,7 @@
 #import "MultiCallClient.h"
 #import "NSUUID+StringUUID.h"
 #import "MultiCallViewController.h"
+#import "RIIViewcontroller.h"
 
 @interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate> {
     NSMutableArray *m_Sections;
@@ -225,7 +226,9 @@
     }
     
     NSInteger index = indexPath.section - 1;
+    
     ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//    RIIViewcontroller *vc = [[RIIViewcontroller alloc] init];
     RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
     vc.talkingId = item.uid;
