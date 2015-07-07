@@ -555,7 +555,7 @@ didSetSessionDescriptionWithError:(NSError *)error {
 #pragma mark - default
 
 - (RTCMediaConstraints *)defaultMediaStreamConstraints {
-    NSArray *mandatoryConstraints = @[[[RTCPair alloc] initWithKey:@"maxWidth" value:@"640"]];
+    NSArray *mandatoryConstraints = @[[[RTCPair alloc] initWithKey:@"maxWidth" value:@"360"]];
     RTCMediaConstraints* constraints =
     [[RTCMediaConstraints alloc]
      initWithMandatoryConstraints:mandatoryConstraints

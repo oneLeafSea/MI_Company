@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AppRTC/RTCEAGLVideoView.h>
+#import "RTCEAGLVideoView.h"
 #import "webrtcClient.h"
 
 
