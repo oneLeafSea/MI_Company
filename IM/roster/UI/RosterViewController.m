@@ -15,7 +15,7 @@
 #import "RosterSection.h"
 #import "RosterItemSearchTableViewController.h"
 #import "RosterNotification.h"
-#import "ChatViewController.h"
+#import "RTChatViewController.h"
 #import "ReloginTipView.h"
 #import "LoginNotification.h"
 #import "GroupChatListTableViewController.h"

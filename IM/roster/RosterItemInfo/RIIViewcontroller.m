@@ -12,7 +12,7 @@
 #import <RKTabView.h>
 
 #import "AppDelegate.h"
-#import "ChatViewController.h"
+#import "RTChatViewController.h"
 #import "RTSeparatorCell.h"
 
 @interface RIIViewcontroller() <UITableViewDataSource, UITableViewDelegate> {
@@ -89,7 +89,7 @@
 
 - (void)toChatViewController {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    RTChatViewController *vc = [[RTChatViewController alloc] init];
     vc.talkingId = self.talkingId;
     vc.talkingname = self.talkingname;
     [self.navigationController pushViewController:vc animated:YES];

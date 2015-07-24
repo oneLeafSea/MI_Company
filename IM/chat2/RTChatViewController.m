@@ -130,8 +130,9 @@
         } completion:^(BOOL finished) {
            
             CGFloat newTableViewHeight = self.collectionView.contentSize.height;
-            [UIView setAnimationsEnabled:YES];
+            
             self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight + 10);
+            [UIView setAnimationsEnabled:YES];
         }];
     });
 }

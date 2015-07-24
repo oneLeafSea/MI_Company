@@ -14,8 +14,6 @@
 #import "AppDelegate.h"
 #import "RosterNotification.h"
 #import "IMAck.h"
-#import "ChatMessageMorePanelViewController.h"
-#import "ChatMessageMorePanelItemMode.h"
 #import "RTFileView.h"
 #import "UIColor+RTMessages.h"
 
@@ -25,7 +23,6 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
     LoginProcedures *m_lp;
     NSString *uid;
     NSString *name;
-    ChatMessageMorePanelViewController *panelController;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "ChatMessageNotification.h"
 #import "ChatMessage.h"
-#import "JSQMessage.h"
+#import "RTMessage.h"
 #import "ChatMessageControllerInfo.h"
 #import "ChatSettingTableViewController.h"
 #import "ChatMessageMorePanelViewController.h"
@@ -24,12 +24,12 @@
 #import "MWPhotoBrowser.h"
 #import "ChatMessageVoicePanelViewController.h"
 #import "AudioPlayer.h"
-#import "JSQFileMediaItem.h"
+#import "RTFileMediaItem.h"
 #import "fileBrowerNavigationViewController.h"
 #import "NSDate+Common.h"
 
-#import "JSQVoiceMediaItem.h"
-#import "JSQVideoChatMediaItem.h"
+#import "RTAudioMediaItem.h"
+#import "RTVideoMediaItem.h"
 
 
 @interface ChatHistoryMessageViewController ()<MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UIActionSheetDelegate> {
@@ -83,7 +83,7 @@
                     [delIndexs addObject:[NSIndexPath indexPathForRow:n inSection:0]];
                 }
                 [self.collectionView deleteItemsAtIndexPaths:delIndexs];
-                self.data = [[ChatModel alloc] initWithMsgs:chatMsgs];
+                self.data = [[RTChatModel alloc] initWithMsgs:chatMsgs];
                 NSInteger count = [chatMsgs count];
                 NSMutableArray *idxArr = [[NSMutableArray alloc] init];
                 for (int n = 0; n < count; n++) {
@@ -111,7 +111,7 @@
         [m_refreshControl beginRefreshing];
         [USER.msgHistory getHistoryMessageWithTalkingId:self.talkingId chatMsgType:_chatMsgType completion:^(BOOL finished, NSArray *chatMsgs) {
             if (finished) {
-                self.data = [[ChatModel alloc] initWithMsgs:chatMsgs];
+                self.data = [[RTChatModel alloc] initWithMsgs:chatMsgs];
                 [self.collectionView reloadData];
                 [self scrollToBottomAnimated:NO];
             }
@@ -136,9 +136,9 @@
 - (void)handleMediaMsg:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
         ChatMessage *msg = (ChatMessage *)notification.object;
-        for (JSQMessage *m in self.data.messages) {
-            if ([m.media isKindOfClass:[JSQPhotoMediaItem class]]) {
-                JSQPhotoMediaItem *item = (JSQPhotoMediaItem *)m.media;
+        for (RTMessage *m in self.data.messages) {
+            if ([m.media isKindOfClass:[RTPhotoMediaItem class]]) {
+                RTPhotoMediaItem *item = (RTPhotoMediaItem *)m.media;
                 if ([msg.qid isEqualToString:item.msgId]) {
                     item.imgPath = [USER.filePath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
                     NSString *thumbPath = [item.imgPath stringByAppendingString:@"_thumb"];
@@ -147,8 +147,8 @@
                 }
             }
             
-            if ([m.media isKindOfClass:[JSQVoiceMediaItem class]]) {
-                JSQVoiceMediaItem *item = (JSQVoiceMediaItem *)m.media;
+            if ([m.media isKindOfClass:[RTVoiceMediaItem class]]) {
+                RTVoiceMediaItem *item = (RTVoiceMediaItem *)m.media;
                 if ([msg.qid isEqualToString:item.msgId]) {
                     item.isReady = YES;
                     [self.collectionView reloadData];
@@ -160,14 +160,14 @@
 }
 
 
-- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<RTMessageData>)collectionView:(RTMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.data.messages objectAtIndex:indexPath.item];
 }
 
-- (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<RTMessageBubbleImageDataSource>)collectionView:(RTMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.data.outgoingBubbleImageData;
@@ -176,40 +176,40 @@
     return self.data.incomingBubbleImageData;
 }
 
-- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+- (id<RTMessageAvatarImageDataSource>)collectionView:(RTMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     UIImage *img = [USER.avatarMgr getAvatarImageByUid:message.senderId];
-    JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:img
-                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    RTMessagesAvatarImage *mineImage = [RTMessagesAvatarImageFactory avatarImageWithImage:img
+                                                                                   diameter:kRTMessagesCollectionViewAvatarSizeDefault];
     return mineImage;
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(RTMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     if (indexPath.item == 0) {
-        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        return [[RTMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
-    JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+    RTMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
     
     if ([message.date timeIntervalSinceDate:previousMessage.date] > 60) {
-        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        return [[RTMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     return nil;
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(RTMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return nil;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+        RTMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:message.senderId]) {
             return nil;
         }
@@ -218,7 +218,7 @@
     return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSAttributedString *)collectionView:(RTMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
@@ -230,20 +230,20 @@
     return self.data.messages.count;
 }
 
-- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(RTMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    JSQMessage *msg = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessagesCollectionViewCell *cell = (RTMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    RTMessage *msg = [self.data.messages objectAtIndex:indexPath.item];
     
     if (msg.isMediaMessage) {
-        if ([msg.media isKindOfClass:[JSQPhotoMediaItem class]]) {
+        if ([msg.media isKindOfClass:[RTPhotoMediaItem class]]) {
 //            DDLogInfo(@"Photo Msg.");
         }
-        if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
+        if ([msg.media isKindOfClass:[RTVoiceMediaItem class]]) {
 //            DDLogInfo(@"Voice msg");
         }
         
-        if ([msg.media isKindOfClass:[JSQFileMediaItem class]]) {
+        if ([msg.media isKindOfClass:[RTFileMediaItem class]]) {
 //            DDLogInfo(@"File msg");
         }
     } else {
@@ -261,42 +261,42 @@
     return cell;
 }
 
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(RTMessagesCollectionView *)collectionView
+                   layout:(RTMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.item == 0) {
-        return kJSQMessagesCollectionViewAvatarSizeDefault;
+        return kRTMessagesCollectionViewAvatarSizeDefault;
     }
     
-    JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
-    JSQMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     if ([message.date timeIntervalSinceDate:previousMessage.date] > 60) {
-        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+        return kRTMessagesCollectionViewCellLabelHeightDefault;
     }
     return 0.0f;
 }
 
 
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(RTMessagesCollectionView *)collectionView
+                   layout:(RTMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *currentMessage = [self.data.messages objectAtIndex:indexPath.item];
+    RTMessage *currentMessage = [self.data.messages objectAtIndex:indexPath.item];
     if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
+        RTMessage *previousMessage = [self.data.messages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
             return 0.0f;
         }
     }
     
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    return kRTMessagesCollectionViewCellLabelHeightDefault;
 }
 
-- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
-                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(RTMessagesCollectionView *)collectionView
+                   layout:(RTMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return 0.0f;
 }
@@ -304,29 +304,29 @@
 
 #pragma mark - Responding to collection view tap events
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView
-                header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
+- (void)collectionView:(RTMessagesCollectionView *)collectionView
+                header:(RTMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
     NSLog(@"Load earlier messages!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped avatar!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *msg = [self.data.messages objectAtIndex:indexPath.row];
-    if ([msg.media isKindOfClass:[JSQPhotoMediaItem class]]) {
-        JSQPhotoMediaItem *item = (JSQPhotoMediaItem *)msg.media;
+    RTMessage *msg = [self.data.messages objectAtIndex:indexPath.row];
+    if ([msg.media isKindOfClass:[RTPhotoMediaItem class]]) {
+        RTPhotoMediaItem *item = (RTPhotoMediaItem *)msg.media;
         if (item.imgPath) {
             [self showImageWithPath:item.imgPath];
         }
     }
     
-    if ([msg.media isKindOfClass:[JSQVoiceMediaItem class]]) {
-        JSQVoiceMediaItem *item = (JSQVoiceMediaItem *)msg.media;
+    if ([msg.media isKindOfClass:[RTVoiceMediaItem class]]) {
+        RTVoiceMediaItem *item = (RTVoiceMediaItem *)msg.media;
         if (item.isReady) {
             if (item.playing) {
                 item.playing = NO;
@@ -343,36 +343,36 @@
     NSLog(@"Tapped message bubble!");
 }
 
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
-    [self jsq_setToolbarBottomLayoutGuideConstant:0];
+    [self rt_setToolbarBottomLayoutGuideConstant:0];
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
 }
 
-- (JSQPhotoMediaItem *)addPhotoMsgWithPath:(NSString *)thumbImgPath
+- (RTPhotoMediaItem *)addPhotoMsgWithPath:(NSString *)thumbImgPath
                                   outgoing:(BOOL)outgoing
                                        uid:(NSString *)uid
                                displayName:(NSString *)name
                                      msgId:(NSString *)msgId{
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithMaskAsOutgoing:outgoing];
+    RTPhotoMediaItem *photoItem = [[RTPhotoMediaItem alloc] initWithMaskAsOutgoing:outgoing];
     photoItem.msgId = [msgId copy];
     photoItem.image = thumbImgPath ? [UIImage imageWithContentsOfFile:thumbImgPath] : nil;
-    JSQMessage *photoMessage = [JSQMessage messageWithSenderId:uid
+    RTMessage *photoMessage = [RTMessage messageWithSenderId:uid
                                                    displayName:name
                                                          media:photoItem];
     [self.data.messages addObject:photoMessage];
     return photoItem;
 }
 
-- (JSQVoiceMediaItem *)addVoiceMsgWithPath:(NSString *)voicePath
+- (RTAudioMediaItem *)addVoiceMsgWithPath:(NSString *)voicePath
                                   outgoing:(BOOL)outgoing
                                   duration:(double)duration
                                        uid:(NSString *)uid
                                displayName:(NSString *)name
                                      msgId:(NSString *)msgId {
-    JSQVoiceMediaItem *voiceItem = [[JSQVoiceMediaItem alloc] initWithFilePath:voicePath isReady:YES duration:duration outgoing:outgoing msgId:msgId];
-    JSQMessage *voiceMsg = [JSQMessage messageWithSenderId:uid displayName:name media:voiceItem];
+    RTAudioMediaItem *voiceItem = [[RTAudioMediaItem alloc] initWithMaskAsOutgoing:outgoing];
+    RTMessage *voiceMsg = [RTMessage messageWithSenderId:uid displayName:name media:voiceItem];
     [self.data.messages addObject:voiceMsg];
     return voiceItem;
 }
@@ -384,8 +384,8 @@
     NSString* sz = [msg.body objectForKey:@"filesize"];
     NSString *fileName = [msg.body objectForKey:@"filename"];
     unsigned long long filesz = [sz integerValue];
-    JSQFileMediaItem *fileItem = [[JSQFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
-    JSQMessage *fileMsg = [JSQMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
+    RTFileMediaItem *fileItem = [[RTFileMediaItem alloc] initWithFilePath:filePath fileSz:filesz uuid:uuid fileName:fileName isReady:isDownloaded outgoing:[msg.from isEqualToString:USER.uid] ? YES : NO];
+    RTMessage *fileMsg = [RTMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:fileItem];
     [self.data.messages addObject:fileMsg];
 }
 
@@ -403,9 +403,9 @@
     __block NSUInteger index = 0;
     __block BOOL found = NO;
     [self.data.messages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        JSQMessage *m = obj;
-        if ([m.media isKindOfClass:[JSQPhotoMediaItem class]]) {
-            JSQPhotoMediaItem *item = (JSQPhotoMediaItem*)m.media;
+        RTMessage *m = obj;
+        if ([m.media isKindOfClass:[RTPhotoMediaItem class]]) {
+            RTPhotoMediaItem *item = (RTPhotoMediaItem*)m.media;
             if (item.imgPath) {
                 MWPhoto *photo = [MWPhoto photoWithURL:[NSURL fileURLWithPath:item.imgPath]];
                 [self.photos addObject:photo];

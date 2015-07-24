@@ -27,6 +27,9 @@ typedef void(^RTSystemSoundPlayerCompletionBlock)(void);
 + (RTSystemSoundPlayer *)sharedPlayer;
 
 - (void)toggleSoundPlayerOn:(BOOL)on;
+- (void)toggleSoundPlayerVibrateOn:(BOOL)on;
+
+@property (assign, nonatomic, readonly) BOOL vibrateOn;
 
 - (void)playSoundWithFilename:(NSString *)filename fileExtension:(NSString *)fileExtension;
 

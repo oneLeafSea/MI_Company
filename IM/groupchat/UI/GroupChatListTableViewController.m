@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "GroupChatListTableViewCell.h"
 #import "GroupChat.h"
-#import "ChatViewController.h"
+#import "RTChatViewController.h"
 
 @interface GroupChatListTableViewController ()
 
@@ -73,7 +73,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    RTChatViewController *vc = [[RTChatViewController alloc] init];
     NSArray *grpChatList = USER.groupChatMgr.grpChatList.grpChatList;
     GroupChat *grp = [grpChatList objectAtIndex:indexPath.row];
     vc.talkingId = grp.gid;

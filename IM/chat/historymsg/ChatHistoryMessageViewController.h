@@ -6,16 +6,16 @@
 //  Copyright (c) 2015年 rooten. All rights reserved.
 //
 
-#import "JSQMessagesViewController.h"
+#import "RTMessagesViewController.h"
 
-#import "JSQMessages.h"
-#import "ChatModel.h"
+#import "RTMessages.h"
+#import "RTChatModel.h"
 #import "ChatMessage.h"
 
-@interface ChatHistoryMessageViewController : JSQMessagesViewController
+@interface ChatHistoryMessageViewController : RTMessagesViewController
 
 
-@property(nonatomic, strong) ChatModel *data;
+@property(nonatomic, strong) RTChatModel *data;
 @property(nonatomic, strong) NSString *talkingId;
 @property(nonatomic, strong) NSString *talkingname;
 @property ChatMessageType chatMsgType;

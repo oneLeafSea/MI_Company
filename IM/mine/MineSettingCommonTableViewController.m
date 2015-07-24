@@ -7,7 +7,7 @@
 //
 
 #import "MineSettingCommonTableViewController.h"
-#import "JSQSystemSoundPlayer.h"
+#import "RTSystemSoundPlayer.h"
 
 @interface MineSettingCommonTableViewController() {
     
@@ -21,18 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    soundSwitch.on = [JSQSystemSoundPlayer sharedPlayer].on;
-    vibrateSwitch.on = [JSQSystemSoundPlayer sharedPlayer].vibrateOn;
+    soundSwitch.on = [RTSystemSoundPlayer sharedPlayer].on;
+    vibrateSwitch.on = [RTSystemSoundPlayer sharedPlayer].vibrateOn;
     
 }
 
 
 - (IBAction)SoundSwitchTapped:(UISwitch *)sender {
-    [[JSQSystemSoundPlayer sharedPlayer] toggleSoundPlayerOn:sender.on];
+    [[RTSystemSoundPlayer sharedPlayer] toggleSoundPlayerOn:sender.on];
 }
 
 - (IBAction)VibrateSwitchTapped:(UISwitch *)sender {
-    [[JSQSystemSoundPlayer sharedPlayer] toggleSoundPlayerVibrateOn:sender.on];
+    [[RTSystemSoundPlayer sharedPlayer] toggleSoundPlayerVibrateOn:sender.on];
 }
 
 @end

@@ -12,6 +12,8 @@
 #import <UIKit/UIKit.h>
 
 static NSString * const kRTSystemSoundPlayerUserDefaultsKey = @"kRTSystemSoundPlayerUserDefaultsKey";
+//Vibrate
+static NSString * const kRTSystemSoundPlayerUserDefaultsVibrateKey = @"kRTSystemSoundPlayerUserDefaultsVibrateKey";
 
 NSString * const kRTSystemSoundTypeCAF = @"caf";
 NSString * const kRTSystemSoundTypeAIF = @"aif";
@@ -85,6 +87,7 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     if (self) {
         _bundle = [NSBundle mainBundle];
         _on = [self readSoundPlayerOnFromUserDefaults];
+        _vibrateOn = [self readSoundPlayerViOnFromUserVibrateDefaults];
         _sounds = [[NSMutableDictionary alloc] init];
         _completionBlocks = [[NSMutableDictionary alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -161,6 +164,19 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     return [setting boolValue];
 }
 
+- (BOOL)readSoundPlayerViOnFromUserVibrateDefaults
+{
+    NSNumber *setting = [[NSUserDefaults standardUserDefaults] objectForKey:kRTSystemSoundPlayerUserDefaultsVibrateKey];
+    
+    if (!setting) {
+        [self toggleSoundPlayerVibrateOn:YES];
+        return YES;
+    }
+    
+    
+    return [setting boolValue];
+}
+
 #pragma mark - Public API
 
 - (void)toggleSoundPlayerOn:(BOOL)on
@@ -174,6 +190,13 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     if (!on) {
         [self stopAllSounds];
     }
+}
+
+- (void)toggleSoundPlayerVibrateOn:(BOOL)on {
+    _vibrateOn = on;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[NSNumber numberWithBool:on] forKey:kRTSystemSoundPlayerUserDefaultsVibrateKey];
+    [userDefaults synchronize];
 }
 
 - (void)playSoundWithFilename:(NSString *)filename fileExtension:(NSString *)extension

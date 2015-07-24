@@ -15,7 +15,7 @@
 #import "OsOrgItemTableViewCell.h"
 #import "OsItem.h"
 #import "RosterItemReqMsgTableViewController.h"
-#import "ChatViewController.h"
+#import "RTChatViewController.h"
 
 @interface OsViewController () <OsNavigationTableViewCellDelegate, OsOrgItemTableViewCellDelegate> {
     
@@ -186,7 +186,7 @@
     if (indexPath.row > hasSeporator ? m_curSubOrgs.count + 1 : m_curSubOrgs.count) {
         NSInteger index = hasSeporator ? indexPath.row - 1 - 1 - m_curSubOrgs.count : indexPath.row - 1 - m_curSubOrgs.count;
         OsItem *item = [m_curOrgItems objectAtIndex:index];
-        ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
+        RTChatViewController *vc = [[RTChatViewController alloc] init];
         vc.talkingId = item.uid;
         vc.talkingname = item.name;
         vc.chatMsgType = ChatMessageTypeNormal;

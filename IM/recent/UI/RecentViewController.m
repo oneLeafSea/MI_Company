@@ -16,7 +16,7 @@
 #import "RecentMsgItem.h"
 #import "MessageConstants.h"
 #import "RTChatViewController.h"
-#import "JSQMessagesTimestampFormatter.h"
+#import "RTMessagesTimestampFormatter.h"
 #import "NSDate+Common.h"
 #import "ChatMessageControllerInfo.h"
 #import "RosterNotification.h"
@@ -159,8 +159,8 @@ static NSString *kChatMessageTypeNomal = @"0";
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSSS"];
         NSDate *date = [dateFormat dateFromString:item.time];
-        NSString *relativeDate = [[JSQMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
-        NSString *time = [[JSQMessagesTimestampFormatter sharedFormatter] timeForDate:date];
+        NSString *relativeDate = [[RTMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
+        NSString *time = [[RTMessagesTimestampFormatter sharedFormatter] timeForDate:date];
         chatCell.timeLbl.text = [NSString stringWithFormat:@"%@ %@", relativeDate, time];
         cell = chatCell;
         return cell;
