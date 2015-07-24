@@ -16,6 +16,8 @@
 
 - (BOOL) updateWithMsgId:(NSString *)msgId status:(ChatMessageStatus) status;
 
+- (BOOL) updateSendingMsgToFail;
+
 - (BOOL) updateWithMsgId:(NSString *)msgId time:(NSString *)time;
 
 - (BOOL) insertMessage:(ChatMessage *)msg;

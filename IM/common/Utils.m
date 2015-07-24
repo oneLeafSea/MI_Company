@@ -99,6 +99,18 @@
     return arr;
 }
 
++ (NSString *)encodeBase64String:(NSString *)string {
+    NSData *encodeData = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64String = [encodeData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return base64String;
+}
+
++ (NSString *)decodeBase64String:(NSString *)base64String {
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64String options:0];
+    NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+    return decodedString;
+}
+
 + (NSString *)uuid {
     NSUUID *uuid = [NSUUID UUID];
     NSString *ret = [uuid UUIDString];

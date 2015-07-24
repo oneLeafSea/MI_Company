@@ -40,6 +40,11 @@ NSString *kSQLChatMessageUpdateStatus = @"UPDATE `tb_message` SET "
                                          " WHERE "
                                          "msgid = ?";
 
+NSString *kSQLChatMessageUpdateSendingMsgToFail = @"UPDATE `tb_message` SET "
+                                                    "status = ?"
+                                                    " WHERE "
+                                                    "status = ?";
+
 NSString *kSQLChatMessageUpdateTime = @"UPDATE `tb_message` SET "
                                             "time = ?"
                                             " WHERE "

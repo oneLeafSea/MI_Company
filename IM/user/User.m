@@ -272,6 +272,12 @@
     return url;
 }
 
+- (NSString *)imgThumbServerUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_MSG_IMG_THUMB"];
+    return url;
+}
+
 - (NSString *)avatarUrl {
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     return [services objectForKey:@"SVC_FILE_DOWN_AVATAR"];

@@ -58,6 +58,17 @@
     return ret;
 }
 
+- (BOOL) updateSendingMsgToFail {
+    __block BOOL ret = YES;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLChatMessageUpdateSendingMsgToFail, [NSNumber numberWithUnsignedInt:ChatMessageStatusSendError], [NSNumber numberWithUnsignedInt:ChatMessageStatusSending]];
+        if (!ret) {
+            *rollback = YES;
+        }
+    }];
+    return ret;
+}
+
 
 - (BOOL) updateWithMsgId:(NSString *)msgId time:(NSString *)time {
     __block BOOL ret = YES;

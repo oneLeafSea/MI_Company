@@ -2095,7 +2095,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3t-eD-Pn3" userLabel="RemoteView" customClass="RTCEAGLVideoView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="N3t-eD-Pn3" userLabel="RemoteView" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -2251,7 +2251,7 @@
                                     <constraint firstAttribute="width" constant="309" id="YHG-7D-aBm"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pe-8t-84s" userLabel="LocalView" customClass="RTCEAGLVideoView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1pe-8t-84s" userLabel="LocalView" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="494" y="361" width="100" height="170"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -2328,7 +2328,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IgP-c1-ptH" userLabel="RemoteView" customClass="RTCEAGLVideoView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="IgP-c1-ptH" userLabel="RemoteView" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -2403,7 +2403,7 @@
                                     <constraint firstAttribute="height" constant="119" id="dlO-de-I8m"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxg-aS-c8A" userLabel="LocalView" customClass="RTCEAGLVideoView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="jxg-aS-c8A" userLabel="LocalView" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="484" y="361" width="100" height="170"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -2861,15 +2861,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="聊天界面" id="uWt-Aa-GEb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="xbN-Nq-Fwh">
-                            <connections>
-                                <action selector="toChatSetting:" destination="jRg-GN-O4W" id="QJJ-yx-emw"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="聊天界面" id="uWt-Aa-GEb"/>
                     <connections>
-                        <outlet property="rightBtn" destination="xbN-Nq-Fwh" id="QIc-wI-cWy"/>
                         <segue destination="03M-YL-i01" kind="show" identifier="toChatSetting" id="QgM-Dy-hrh"/>
                     </connections>
                 </viewController>

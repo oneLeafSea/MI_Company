@@ -133,7 +133,7 @@
             maxgid = intGid;
         }
     }];
-    return [NSString stringWithFormat:@"%d", maxgid+1];
+    return [NSString stringWithFormat:@"%ld", maxgid+1];
 }
 
 - (NSNumber *)genWeight {

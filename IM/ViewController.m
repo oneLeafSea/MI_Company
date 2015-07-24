@@ -16,6 +16,8 @@
 #import "IMAck.h"
 #import "ChatMessageMorePanelViewController.h"
 #import "ChatMessageMorePanelItemMode.h"
+#import "RTFileView.h"
+#import "UIColor+RTMessages.h"
 
 static NSString *ip = @"http://10.22.1.112:8040/" ;
 
@@ -58,17 +60,24 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
 //    break;
 //default:
 //    break;
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    ChatMessageMorePanelItemMode *item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"照片" imageName:@"chatmsg_pic" target:self selector:@selector(handlePanel)];
-    [arr addObject:item];
-    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"视频" imageName:@"chatmsg_video" target:self selector:@selector(handlePanel)];
-    [arr addObject:item];
-    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"文件" imageName:@"chatmsg_folder" target:self selector:@selector(handlePanel)];
-    [arr addObject:item];
+//    NSMutableArray *arr = [[NSMutableArray alloc] init];
+//    ChatMessageMorePanelItemMode *item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"照片" imageName:@"chatmsg_pic" target:self selector:@selector(handlePanel)];
+//    [arr addObject:item];
+//    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"视频" imageName:@"chatmsg_video" target:self selector:@selector(handlePanel)];
+//    [arr addObject:item];
+//    item = [[ChatMessageMorePanelItemMode alloc] initWithTitle:@"文件" imageName:@"chatmsg_folder" target:self selector:@selector(handlePanel)];
+//    [arr addObject:item];
+//    
+//    panelController = [[ChatMessageMorePanelViewController alloc] initWithPanelItems:arr];
+//    [self.view addSubview:panelController.view];
+//    panelController.view.frame = CGRectMake(0, self.view.frame.size.height - 270, self.view.frame.size.width, 270);
     
-    panelController = [[ChatMessageMorePanelViewController alloc] initWithPanelItems:arr];
-    [self.view addSubview:panelController.view];
-    panelController.view.frame = CGRectMake(0, self.view.frame.size.height - 270, self.view.frame.size.width, 270);
+    RTFileView *fileView = [[RTFileView alloc] initWithFrame:CGRectMake(0, 300, 210, 80) isOutgoing:NO];
+    fileView.fileNameLabel.text = @"许洋洋.avi";
+    fileView.fileSzLabel.text = @"1.5M";
+    fileView.statusLabel.text = @"未下载";
+    
+    [self.view addSubview:fileView];
 
 }
 
@@ -90,7 +99,7 @@ static NSString *ip = @"http://10.22.1.112:8040/" ;
         [APP_DELEGATE.user reset];
     }
     m_lp = [[LoginProcedures alloc]init];
-    m_lp.delegate = self;
+//    m_lp.delegate = self;
 #if (TARGET_IPHONE_SIMULATOR)
     [m_lp loginWithUserId:@"gzw" pwd:@"8" timeout:30];
 //    [m_lp loginWithUserId:@"wjw" pwd:@"12345" timeout:30];

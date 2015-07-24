@@ -37,4 +37,17 @@
     [self sd_setImageWithURL:url placeholderImage:image];
 }
 
+- (void)rt_setImageWithURL:(NSURL *)url {
+    SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
+    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString *key = USER.key;
+    NSString *iv = USER.iv;
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    [manager setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
+    [manager setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
+    [manager setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
+    [self sd_setImageWithURL:url];
+}
+
+
 @end

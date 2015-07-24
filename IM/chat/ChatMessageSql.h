@@ -13,6 +13,7 @@ extern NSString *kSQLChatMessageCreate;
 extern NSString *kSQLChatMessageInsert;
 
 extern NSString *kSQLChatMessageUpdateStatus;
+extern NSString *kSQLChatMessageUpdateSendingMsgToFail;
 extern NSString *kSQLChatMessageUpdateTime;
 
 extern NSString *KSQLChatMessageGetMsg;

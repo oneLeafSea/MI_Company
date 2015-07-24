@@ -15,7 +15,7 @@
 #import "RecentViewModle.h"
 #import "RecentMsgItem.h"
 #import "MessageConstants.h"
-#import "ChatViewController.h"
+#import "RTChatViewController.h"
 #import "JSQMessagesTimestampFormatter.h"
 #import "NSDate+Common.h"
 #import "ChatMessageControllerInfo.h"
@@ -119,7 +119,12 @@ static NSString *kChatMessageTypeNomal = @"0";
         }
         
         if ([[body objectForKey:@"type"] isEqualToString:@"text"]) {
-            chatCell.lastMsgLbl.text = [body objectForKey:@"content"];
+            NSString *content = [body objectForKey:@"content"];
+            NSNumber *b64 = [body objectForKey:@"b64"];
+            if ([b64 boolValue]) {
+                content = [Utils decodeBase64String:content];
+            }
+            chatCell.lastMsgLbl.text = content;
         }
         
         if ([[body objectForKey:@"type"] isEqualToString:@"image"]) {
@@ -198,7 +203,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RecentMsgItem *item = [m_modle.msgList objectAtIndex:indexPath.row];
     if (item.msgtype == IM_MESSAGE) {
-        ChatViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatViewController"];
+        RTChatViewController *vc = [[RTChatViewController alloc] init];
         
         NSDictionary *cnt = [item dictContent];
         NSDictionary *body = [cnt objectForKey:@"body"];

@@ -60,6 +60,7 @@
 }
 
 - (BOOL)playWithPath:(NSString *)path completion:(void(^)(BOOL finished))completion {
+    [self stop];
     m_completion = completion;
     return [self playWithPath:path];
 }

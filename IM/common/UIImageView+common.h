@@ -14,4 +14,6 @@
 
 - (void)rt_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)image;
 
+- (void)rt_setImageWithURL:(NSURL *)url;
+
 @end

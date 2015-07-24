@@ -47,8 +47,8 @@
     __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:_user.imurl]];
     JRReqMethod *m = [[JRReqMethod alloc] initWithService:@"SVC_IM"];
     JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_PYQ_GET_MSGS token:_user.token key:_user.key iv:_user.iv];
-    [param.params setObject:[NSString stringWithFormat:@"%d", cur] forKey:@"cur"];
-    [param.params setObject:[NSString stringWithFormat:@"%d", pgSz] forKey:@"pagesize"];
+    [param.params setObject:[NSString stringWithFormat:@"%lu", (unsigned long)cur] forKey:@"cur"];
+    [param.params setObject:[NSString stringWithFormat:@"%lu", (unsigned long)pgSz] forKey:@"pagesize"];
     __block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [session request:req success:^(JRReqest *request, JRResponse *resp) {
@@ -102,7 +102,7 @@
     __block NSString *uuid = [NSUUID uuid];
     [imgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIImage *img = obj;
-        NSString *filename = [NSString stringWithFormat:@"%@%u.jpg", uuid, idx+1];
+        NSString *filename = [NSString stringWithFormat:@"%@%lu.jpg", uuid, idx+1];
         dispatch_group_enter(serviceGroup);
         [RTFileTransfer uploadFileWithServerUrl:USER.fcImgUploadUrl Data:UIImageJPEGRepresentation(img, 0.9) fileName:filename token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
             dispatch_group_leave(serviceGroup);

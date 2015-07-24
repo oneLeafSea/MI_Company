@@ -180,7 +180,7 @@ webrtc_b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsi
 	if (datalength >= targsize)
 		return (-1);
 	target[datalength] = '\0';	/* Returned value doesn't count \0. */
-	return (datalength);
+	return (int)datalength;
 }
 //#endif /* !defined(HAVE_B64_NTOP) && !defined(HAVE___B64_NTOP) */
 

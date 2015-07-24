@@ -26,6 +26,9 @@
 + (NSDictionary*)dictFromJsonData:(NSData *)data;
 + (NSArray *)arrayFromJsonData:(NSData *)data;
 
++ (NSString *)encodeBase64String:(NSString *)string;
++ (NSString *)decodeBase64String:(NSString *)string;
+
 + (NSString *)uuid;
 
 + (void)alertWithTip:(NSString *)tip;

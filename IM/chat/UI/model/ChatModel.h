@@ -14,7 +14,6 @@
 
 - (instancetype)initWithMsgs:(NSArray *)msgs;
 
-@property (nonatomic, strong) NSDictionary *avatars;
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;

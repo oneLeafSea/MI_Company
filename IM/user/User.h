@@ -76,6 +76,7 @@
 @property(readonly) NSString *fcImgServerUrl;
 @property(readonly) NSString *fcImgThumbServerUrl;
 @property(readonly) NSString *fcImgUploadUrl;
+@property(readonly) NSString *imgThumbServerUrl;
 
 @property(readonly) NSString *filePath;
 @property(readonly) NSString *userPath;

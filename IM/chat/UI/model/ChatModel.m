@@ -26,14 +26,6 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 {
     self = [super init];
     if (self) {
-        
-        JSQMessagesAvatarImage *mineImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"male"]
-                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-        
-        self.avatars = @{
-                         @"gzw":mineImage,
-                         @"xyy":mineImage
-                         };
         self.messages = [[NSMutableArray alloc] init];
         JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
         self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -110,12 +102,6 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             
             if (!isReady) {
                 if ([msg.from isEqualToString:USER.uid]) {
-//                    [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
-//                        if (finished) {
-//                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
-//                        }
-//                    }];
                     [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:voicePath fileName:uuid token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
                         if (finished) {
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
@@ -123,12 +109,6 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                         }
                     }];
                 } else {
-//                    [USER.fileTransfer downloadFileName:uuid urlString:USER.fileDownloadSvcUrl checkUrlString:USER.fileCheckUrl options:@{@"token":USER.token, @"signature":USER.signature, @"path":voicePath, @"key":USER.key, @"iv":USER.iv} completion:^(BOOL finished, NSError *error) {
-//                        if (finished) {
-//                            [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageMediaMsgDownload object:msg];
-//                        }
-//                    }];
                     [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:voicePath fileName:uuid token:USER.token key:USER.key iv:USER.iv progress:nil completion:^(BOOL finished) {
                         if (finished) {
                             [USER.msgMgr updateMsgWithId:msg.qid status:ChatMessageStatusRecved];
@@ -166,7 +146,7 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             BOOL connected = [n boolValue];
             NSUInteger interval = [[msg.body objectForKey:@"interval"] integerValue];
             if (connected) {
-                tip = [NSString stringWithFormat:@"通话时长%02d:%02d", interval/60, interval%60];
+                tip = [NSString stringWithFormat:@"通话时长%02lu:%02lu", interval/60, interval%60];
             }
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             JSQVideoChatMediaItem *item = [[JSQVideoChatMediaItem alloc] initWithTip:tip];

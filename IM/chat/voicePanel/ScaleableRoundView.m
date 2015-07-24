@@ -116,15 +116,6 @@
     
 }
 
-//- (void)setRatio:(CGFloat)ratio {
-////    [self scaleToRatio:ratio];
-//    CGFloat x = self.frame.origin.x - (self.frame.size.width - ratio * self.frame.size.width) / 2;
-//    CGFloat y = self.frame.origin.y - (self.frame.size.height - ratio * self.frame.size.height) / 2;
-//    CGFloat w = self.frame.size.width * ratio;
-//    CGFloat h = self.frame.size.height * ratio;
-//    
-//    self.frame = CGRectMake(x, y, w, h);
-//}
 
 - (void)scaleToRatio:(CGFloat) ratio {
     POPBasicAnimation *scaleAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
