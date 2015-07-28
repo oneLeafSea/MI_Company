@@ -69,15 +69,18 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloging object:nil];
             DDLogInfo(@"do reconnect to server.");
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (m_loginProc) {
-                    [m_loginProc removeObservers];
-                }
-                [APP_DELEGATE.user reset];
-                [IMConf checkLAN];
-                m_loginProc = [[LoginProcedures alloc] init];
-                m_loginProc.delegate = self;
-                if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloginFail object:nil];
+                if (APP_DELEGATE.reachability.currentReachabilityStatus != NotReachable) {
+                    if (m_loginProc) {
+                        [m_loginProc removeObservers];
+                    }
+//                    [APP_DELEGATE.user reset];
+                    [IMConf checkLAN];
+                    m_loginProc = [[LoginProcedures alloc] init];
+                    m_loginProc.delegate = self;
+                    
+                    if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloginFail object:nil];
+                    }
                 }
             });
         } else {
@@ -107,8 +110,8 @@
             if (m_loginProc) {
                 [m_loginProc removeObservers];
             }
-            [APP_DELEGATE.user reset];
-            APP_DELEGATE.user = nil;
+//            [APP_DELEGATE.user reset];
+//            APP_DELEGATE.user = nil;
             
             m_loginProc = [[LoginProcedures alloc] init];
             m_loginProc.delegate = self;

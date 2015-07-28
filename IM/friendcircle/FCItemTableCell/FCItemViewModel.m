@@ -49,6 +49,7 @@
         icm.repliedUid = [dict objectForKey:@"bhfr"];
         icm.belongToId = sshfxxid;
     }
+    icm.name = [dict objectForKey:@"hfrxm"];
     self.time = [dict objectForKey:@"hfsj"];
     [self.commentsViewModel.fcicItemCellModels addObject:icm];
 }

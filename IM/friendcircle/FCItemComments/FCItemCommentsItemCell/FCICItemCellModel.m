@@ -22,7 +22,7 @@
     if ([_uid isEqualToString:USER.uid]) {
         self.name = USER.name;
     } else {
-        self.name = [USER.rosterMgr getItemByUid:_uid].name;
+//        self.name = [USER.osMgr getItemInfoByUid:_uid].name;
     }
 }
 
@@ -37,7 +37,7 @@
     if ([_repliedUid isEqualToString:USER.uid]) {
         self.repliedName = USER.name;
     } else {
-        self.repliedName = [USER.rosterMgr getItemByUid:_repliedUid].name;
+        self.repliedName = [USER.osMgr getItemInfoByUid:_uid].name;
     }
 }
 

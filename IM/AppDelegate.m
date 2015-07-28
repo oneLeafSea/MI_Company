@@ -171,6 +171,14 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [app registerUserNotificationSettings:settings];
 }
 
+- (void)setUser:(User *)user {
+    if (_user) {
+        [_user reset];
+        _user = nil;
+    }
+    _user = user;
+}
+
 - (NSString *)appVersion {
     return @"0.1";
 }

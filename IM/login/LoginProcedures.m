@@ -200,6 +200,10 @@
                 }];
                 
             }];
+            
+            [USER.osMgr syncOrgStructWithWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+                
+            }];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
             [self setWebImgCfg];
             [self saveUseIdAndPwd];

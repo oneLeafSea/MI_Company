@@ -25,6 +25,7 @@
 #import "RTAudioMediaItem.h"
 #import "ChatMessageNotification.h"
 #import "ChatMessageControllerInfo.h"
+#import "UIView+Toast.h"
 
 @interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
 
@@ -141,6 +142,10 @@
                                 senderId:(NSString *)senderId
                        senderDisplayName:(NSString *)senderDisplayName
                                     date:(NSDate *)date {
+    if (!USER.session.isConnected) {
+        [Utils alertWithTip:@"程序处于离线状态，暂时无法发送消息。"];
+        return;
+    }
     if (text.length == 0) {
         return;
     }
@@ -156,7 +161,6 @@
     }];
     [self finishSendingMessageAnimated:YES];
 }
-
 
 
 - (id<RTMessageData>)collectionView:(RTMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -361,6 +365,10 @@
 }
 
 - (void) getPhotoFromImgLib {
+    if (!USER.session.isConnected) {
+        [Utils alertWithTip:@"程序处于离线状态，暂时无法发送消息。"];
+        return;
+    }
     self.isMoreKeyboard = NO;
     CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
     picker.assetsFilter = [ALAssetsFilter allPhotos];
@@ -377,6 +385,10 @@
 
 
 - (void) takeAPicture {
+    if (!USER.session.isConnected) {
+        [Utils alertWithTip:@"程序处于离线状态，暂时无法发送消息。"];
+        return;
+    }
     self.isMoreKeyboard = NO;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
@@ -398,6 +410,10 @@
 }
 
 - (void)videoChat {
+    if (!USER.session.isConnected) {
+        [self.collectionView makeToast:@"程序处于离线状态，暂时无法发送消息。"];
+        return;
+    }
     [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
 }
 
