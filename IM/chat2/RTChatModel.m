@@ -52,11 +52,17 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
     [msgs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ChatMessage *msg = obj;
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
-            NSNumber *b64 = [msg.body objectForKey:@"content"];
+            NSNumber *b64 = [msg.body objectForKey:@"b64"];
             BOOL b = [b64 boolValue];
             NSString *content = [msg.body objectForKey:@"content"];
             if (b) {
-                content = [Utils decodeBase64String:content];
+                NSString *t = [Utils decodeBase64String:content];
+                if (t.length == 0) {
+                    content = [Utils decodeBase64String:content];
+                    NSLog(@"error");
+                } else {
+                    content = t;
+                }
             }
             if (content == nil) {
                 return;

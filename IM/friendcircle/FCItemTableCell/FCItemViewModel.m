@@ -18,7 +18,7 @@
     if ([_uid isEqualToString:USER.uid]) {
         self.name = USER.name;
     } else {
-        self.name = [USER.rosterMgr getItemByUid:_uid].name;
+//        self.name = [USER.rosterMgr getItemByUid:_uid].name;
     }
     
 }

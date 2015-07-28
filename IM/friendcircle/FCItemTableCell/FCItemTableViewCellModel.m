@@ -44,6 +44,7 @@
     self.itemViewModel.imgNum = [dict objectForKey:@"imgnum"];
     self.itemViewModel.lat = [dict objectForKey:@"lat"];
     self.itemViewModel.lon = [dict objectForKey:@"lon"];
+    self.itemViewModel.name = [dict objectForKey:@"cjrxm"];
     return YES;
 }
 

@@ -101,7 +101,7 @@
 
 + (NSString *)encodeBase64String:(NSString *)string {
     NSData *encodeData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *base64String = [encodeData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *base64String = [encodeData base64EncodedStringWithOptions:0];
     return base64String;
 }
 
