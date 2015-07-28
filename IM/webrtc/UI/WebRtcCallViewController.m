@@ -200,6 +200,7 @@
     [m_timer invalidate];
     m_timer = nil;
     [[AudioPlayer sharePlayer] stop];
+
     [self disconnect];
     [self dismissViewControllerAnimated:YES completion:^{
         [APP_DELEGATE.user.webRtcMgr setbusy:NO];

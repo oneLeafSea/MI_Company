@@ -239,6 +239,8 @@
     [self.rosterMgr reset];
     [self.msgMgr reset];
     [self.recentMsg reset];
+    _webRtcMgr = nil;
+    _fcMgr = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationKick object:nil];
 }
 
