@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "FCICItemCellModel.h"
 #import "NSString+URL.h"
+#import "Utils.h"
 
 @implementation FCItemViewModel
 
@@ -18,7 +19,7 @@
     if ([_uid isEqualToString:USER.uid]) {
         self.name = USER.name;
     } else {
-//        self.name = [USER.rosterMgr getItemByUid:_uid].name;
+        self.name = [USER.osMgr getItemInfoByUid:_uid].name;
     }
     
 }
@@ -42,6 +43,10 @@
     FCICItemCellModel *icm = [[FCICItemCellModel alloc] init];
     icm.uid = [dict objectForKey:@"hfr"];
     icm.content = [dict objectForKey:@"content"];
+    NSString *content = [Utils decodeBase64String:icm.content];
+    if (content.length > 0) {
+        icm.content = content;
+    }
     NSString *sshfxxid = [dict objectForKey:@"sshfxxid"];
     NSString *hfxxid = [dict objectForKey:@"hfxxid"];
     icm.replyId = hfxxid;

@@ -56,7 +56,8 @@
     FCNPImagePickerTableViewCell *pickerCell = (FCNPImagePickerTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     [txtCell.txtView resignFirstResponder];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [USER.fcMgr NewPostWithContent:txtCell.text imgs:pickerCell.imgArray completion:^(BOOL finished) {
+    NSString *content = [Utils encodeBase64String:txtCell.text];
+    [USER.fcMgr NewPostWithContent:content imgs:pickerCell.imgArray completion:^(BOOL finished) {
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if (finished) {
             [self.view makeToast:@"上传成功."];

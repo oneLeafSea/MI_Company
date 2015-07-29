@@ -144,7 +144,8 @@
 }
 
 - (void)textInputBar:(RTTextInputBar *)inputBar didPressSendBtnWithText:(NSString *)txt {
-    [USER.fcMgr replyMsgWithId:_ssid replyId:_sshfxxid replyUid:_replyUid content:txt completion:^(BOOL finished) {
+    NSString *content = [Utils encodeBase64String:txt];
+    [USER.fcMgr replyMsgWithId:_ssid replyId:_sshfxxid replyUid:_replyUid content:content completion:^(BOOL finished) {
         if (finished) {
             FCItemTableViewCellModel *model = [_model getItemModelByModelId:_ssid];
             FCICItemCellModel *cicm = [[FCICItemCellModel alloc] init];

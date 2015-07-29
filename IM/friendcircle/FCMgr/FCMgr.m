@@ -129,7 +129,11 @@
                                DDLogError(@"ERROR: %@", error);
                            } else {
                                CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
-                               addr = [NSString stringWithFormat:@"%@%@%@", myPlacemark.locality, myPlacemark.subLocality, myPlacemark.thoroughfare];
+                               if (myPlacemark.thoroughfare.length > 0) {
+                                   addr = [NSString stringWithFormat:@"%@%@%@", myPlacemark.locality, myPlacemark.subLocality, myPlacemark.thoroughfare];
+                               } else {
+                                   addr = [NSString stringWithFormat:@"%@%@", myPlacemark.locality, myPlacemark.subLocality];
+                               }
                            }
                            dispatch_group_leave(locateGrp);
                        }];

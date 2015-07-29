@@ -92,7 +92,7 @@
     _model = model;
     self.nameLbl.text = model.name;
     self.repliedNameLbl.text = model.repliedName;
-    self.contentLbl.text = model.content;
+    self.contentLbl.text = [NSString stringWithFormat:@":%@", model.content];
     [self setupConstraints];
     [self layoutIfNeeded];
 }
