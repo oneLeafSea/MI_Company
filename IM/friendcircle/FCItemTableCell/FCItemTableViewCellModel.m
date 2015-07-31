@@ -9,6 +9,7 @@
 #import "FCItemTableViewCellModel.h"
 #import "AppDelegate.h"
 #import "NSString+URL.h"
+#import "Utils.h"
 
 @implementation FCItemTableViewCellModel
 
@@ -40,6 +41,10 @@
     self.itemViewModel.org = [dict objectForKey:@"cjrjgbm"];
     self.itemViewModel.time = [dict objectForKey:@"cjsj"];
     self.itemViewModel.content = [dict objectForKey:@"content"];
+    NSString *content = [Utils decodeBase64String:self.itemViewModel.content];
+    if (content.length > 0) {
+        self.itemViewModel.content = content;
+    }
     self.itemViewModel.modelId = [dict objectForKey:@"id"];
     self.itemViewModel.imgNum = [dict objectForKey:@"imgnum"];
     self.itemViewModel.lat = [dict objectForKey:@"lat"];

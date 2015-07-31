@@ -66,6 +66,7 @@
     self.imgsView.model = model.imgViewModel;
     self.commentsView.model = model.commentsViewModel;
     self.positionLbl.text = self.model.position;
+    self.positionLbl.textColor = [UIColor lightGrayColor];
     [self setupConstraints];
 }
 

@@ -88,7 +88,6 @@
 }
 
 - (void)toChatViewController {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     RTChatViewController *vc = [[RTChatViewController alloc] init];
     vc.talkingId = self.talkingId;
     vc.talkingname = self.talkingname;

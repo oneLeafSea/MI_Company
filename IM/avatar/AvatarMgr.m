@@ -80,6 +80,9 @@
         }];
         
     }
+    if (!img) {
+        img = [UIImage imageNamed:@"avatar_default"];
+    }
     return img;
 }
 
