@@ -114,8 +114,8 @@
 #pragma mark - override
 - (void)loadMoreMessage {
     dispatch_sync(dispatch_get_main_queue(), ^{
-        
-        __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
+        __block NSInteger l = 0;
+//        __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
         [UIView setAnimationsEnabled:NO];
         [self.collectionView performBatchUpdates:^{
             NSInteger preCount = self.data.messages.count;
@@ -123,6 +123,7 @@
             self.data = [[RTChatModel alloc] initWithMsgs:msgs];
             NSInteger count = [self.data.messages count];
             NSInteger left = count - preCount;
+            l = left;
             NSMutableArray *idxArr = [[NSMutableArray alloc] init];
             for (int n = 0; n < left; n++) {
                 [idxArr addObject:[NSIndexPath indexPathForRow:n inSection:0]];
@@ -130,9 +131,12 @@
             [self.collectionView insertItemsAtIndexPaths:idxArr];
         } completion:^(BOOL finished) {
            
-            CGFloat newTableViewHeight = self.collectionView.contentSize.height;
+//            CGFloat newTableViewHeight = self.collectionView.contentSize.height;
+            if (l > 0) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+            }
             
-            self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight + 10);
+//            self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight + 10);
             [UIView setAnimationsEnabled:YES];
         }];
     });

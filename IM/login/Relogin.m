@@ -153,6 +153,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloginFail object:nil];
     [m_loginProc stop];
     m_loginProc = nil;
+    if (APP_DELEGATE.reachability.currentReachabilityStatus != NotReachable) {
+        m_loginProc = [[LoginProcedures alloc] init];
+        m_loginProc.delegate = self;
+        if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloginFail object:nil];
+        }
+    }
 }
 
 - (void)loginProcedures:(LoginProcedures *)proc getRoster:(BOOL)suc {

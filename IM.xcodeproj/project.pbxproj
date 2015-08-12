@@ -209,6 +209,7 @@
 		7D8A4F5A1B324E41009E5FFE /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F591B324E41009E5FFE /* NSString+URL.m */; };
 		7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */; };
 		7D9319B91B4666A10014A532 /* RTSeparatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9319B81B4666A10014A532 /* RTSeparatorCell.m */; };
+		7D954BB41B7AE7DC00D18B17 /* UIColor+Hexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D954BB31B7AE7DC00D18B17 /* UIColor+Hexadecimal.m */; };
 		7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */; };
 		7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC11ACA39D2001D67D7 /* call.aif */; };
 		7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC01ACA39C9001D67D7 /* answer.aif */; };
@@ -772,6 +773,8 @@
 		7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCModel.m; sourceTree = "<group>"; };
 		7D9319B71B4666A10014A532 /* RTSeparatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSeparatorCell.h; sourceTree = "<group>"; };
 		7D9319B81B4666A10014A532 /* RTSeparatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSeparatorCell.m; sourceTree = "<group>"; };
+		7D954BB21B7AE7DC00D18B17 /* UIColor+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hexadecimal.h"; sourceTree = "<group>"; };
+		7D954BB31B7AE7DC00D18B17 /* UIColor+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hexadecimal.m"; sourceTree = "<group>"; };
 		7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
 		7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
 		7DA8DEC01ACA39C9001D67D7 /* answer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.aif; sourceTree = "<group>"; };
@@ -1887,6 +1890,8 @@
 		7DB156E01A42DD5500287BBE /* common */ = {
 			isa = PBXGroup;
 			children = (
+				7D954BB21B7AE7DC00D18B17 /* UIColor+Hexadecimal.h */,
+				7D954BB31B7AE7DC00D18B17 /* UIColor+Hexadecimal.m */,
 				7D7E9A6C1AFC7D4B00B41E95 /* UIView+Toast.h */,
 				7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */,
 				7D0871451A79FB5400DCBBCA /* FileHash.h */,
@@ -2661,6 +2666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */,
+				7D954BB41B7AE7DC00D18B17 /* UIColor+Hexadecimal.m in Sources */,
 				7DFE24AB1AA43F5B00C5DD29 /* GroupChatMgr.m in Sources */,
 				7DDA90EE1B2A6AF10005E090 /* FCItemViewModel.m in Sources */,
 				7DB2D6201A6F8DC700004D6C /* RecentTb.m in Sources */,

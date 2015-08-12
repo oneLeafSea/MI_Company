@@ -122,7 +122,7 @@
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]};
     if (indexPath.row == 0) {
         CGSize sz = [org.jgmc sizeWithAttributes:attributes];
-        return CGSizeMake(sz.width, 55);
+        return CGSizeMake(sz.width + 15, 55);
     }
     
     if (indexPath.row == 100 - 1) {

@@ -61,6 +61,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *IP = [ud objectForKey:@"IP"];
     NSNumber *port = [ud objectForKey:@"port"];
+    NSLog(@"IP: %@, port:%@", IP, port);
     if (!IP || !port) {
         DDLogError(@"ERROR: IP or port is nil.");
         return NO;

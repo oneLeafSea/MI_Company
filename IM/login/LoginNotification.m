@@ -14,4 +14,3 @@ NSString *kNotificationLogoff = @"cn.com.rooten.im.login.logoff";
 NSString *kNotificationReloging = @"cn.com.rooten.im.login.relogging";
 NSString *kNotificationReloginFail = @"cn.com.rooten.im.login.relogfail";
 NSString *kNotificationReloginSuccess = @"cn.com.rooten.im.login.reloginSucess";
-
