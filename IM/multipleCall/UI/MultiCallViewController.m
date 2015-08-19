@@ -46,6 +46,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kWebRtcNotifyMsgNotificaiton object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -61,6 +62,7 @@
         [self.cli createRoomId:self.roomId session:USER.session talkingUids:self.talkingUids];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMsg:) name:kWebRtcNotifyMsgNotificaiton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -229,6 +231,10 @@
             });
         }
     }
+}
+
+- (void)handleEnterBackground:(NSNotification *)notification {
+    [self close];
 }
 
 @end

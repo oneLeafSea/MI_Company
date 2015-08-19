@@ -77,6 +77,7 @@
 
 - (void)dealloc {
     DDLogInfo(@"WebRtcRecvViewChatViewController");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -93,6 +94,7 @@
     [[AudioPlayer sharePlayer] playWithPath:path];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
     m_remoteVideoEnable = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -335,5 +337,13 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
         [self.view layoutIfNeeded];
     }];
 
+}
+
+- (void)handleEnterBackground:(NSNotification *)notification {
+    [self disconnect];
+    [self disconnect];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+    }];
 }
 @end

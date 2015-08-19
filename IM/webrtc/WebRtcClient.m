@@ -528,6 +528,27 @@ didSetSessionDescriptionWithError:(NSError *)error {
             return;
         }
         DDLogInfo(@"设置 sdp 成功。");
+//        if (self.invited) {
+//            if (self.peerConnection.localDescription) {
+//                WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
+//                answerMsg.sessionDescription = _peerConnection.localDescription;
+//                [m_channel sendData:[answerMsg JSONData]];
+//                _ready = YES;
+//                [self drainMessageQueueIfReady];
+//            } else {
+//                [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
+//            }
+//        } else {
+//            if (self.peerConnection.remoteDescription) {
+//                _ready = YES;
+//                [self drainMessageQueueIfReady];
+//            } else {
+//                WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
+//                offerMsg.sessionDescription = _peerConnection.localDescription;
+//                NSLog(@"type: %@", offerMsg.sessionDescription.type);
+//                [m_channel sendData:[offerMsg JSONData]];
+//            }
+//        }
         if (self.invited) {
             if (self.peerConnection.localDescription) {
                 WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
@@ -539,16 +560,16 @@ didSetSessionDescriptionWithError:(NSError *)error {
                 [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
             }
         } else {
-            if (self.peerConnection.remoteDescription) {
+            if (self.peerConnection.localDescription && !self.peerConnection.remoteDescription) {
                 _ready = YES;
                 [self drainMessageQueueIfReady];
-            } else {
                 WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
                 offerMsg.sessionDescription = _peerConnection.localDescription;
                 NSLog(@"type: %@", offerMsg.sessionDescription.type);
                 [m_channel sendData:[offerMsg JSONData]];
             }
         }
+
     });
 }
 

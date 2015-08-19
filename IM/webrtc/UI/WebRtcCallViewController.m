@@ -73,6 +73,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kWebRtcNotifyMsgNotificaiton object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -116,6 +117,7 @@
     
 //    m_callTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleCallTimeout) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMsg:) name:kWebRtcNotifyMsgNotificaiton object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -365,6 +367,16 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
             });
         }
     }
+}
+
+- (void)handleEnterBackground:(NSNotification *)notification {
+    [self disconnect];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+        [[AudioPlayer sharePlayer] stop];
+    }];
+
+    
 }
 
 @end

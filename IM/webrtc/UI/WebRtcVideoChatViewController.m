@@ -104,6 +104,10 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
     
 }
 
+- (void)WebRtcClient:(WebRtcClient *)client videoEnabled:(BOOL)enable {
+    
+}
+
 #pragma mark -RTCEAGLVideoViewDelegate
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size {
 }
