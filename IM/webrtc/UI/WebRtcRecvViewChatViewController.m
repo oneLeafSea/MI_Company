@@ -340,10 +340,9 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 }
 
 - (void)handleEnterBackground:(NSNotification *)notification {
-    [self disconnect];
-    [self disconnect];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [APP_DELEGATE.user.webRtcMgr setbusy:NO];
-    }];
+//    [self disconnect];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        [APP_DELEGATE.user.webRtcMgr setbusy:NO];
+//    }];
 }
 @end

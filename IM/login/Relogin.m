@@ -73,7 +73,6 @@
                     if (m_loginProc) {
                         [m_loginProc removeObservers];
                     }
-//                    [APP_DELEGATE.user reset];
                     [IMConf checkLAN];
                     m_loginProc = [[LoginProcedures alloc] init];
                     m_loginProc.delegate = self;

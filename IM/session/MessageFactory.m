@@ -55,6 +55,10 @@
             msg = loginResp;
         }
             break;
+            
+//        case MSG_HB:
+//            DDLogInfo(@"INFO:<-- HB from server.");
+//            break;
         case PUSH_KICK:
         {
             NSString *kickInfo = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];

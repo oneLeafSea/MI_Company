@@ -8,6 +8,7 @@
 
 #import "Session.h"
 
+#import <UIKit/UIKit.h>
 
 #import "InputStream.h"
 #import "OutputStream.h"
@@ -109,6 +110,7 @@ typedef NSMutableDictionary RequestMap;
     
     if (m_tls) {
         [input setProperty:NSStreamSocketSecurityLevelTLSv1 forKey:NSStreamSocketSecurityLevelKey];
+        [input setProperty:NSStreamNetworkServiceTypeVoIP forKey:NSStreamNetworkServiceType];
         [ouput setProperty:NSStreamSocketSecurityLevelTLSv1 forKey:NSStreamSocketSecurityLevelKey];
         NSDictionary *settings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                   [NSNumber numberWithBool:NO], kCFStreamSSLValidatesCertificateChain,
@@ -131,6 +133,14 @@ typedef NSMutableDictionary RequestMap;
     m_is.delegate = self;
     [m_is open];
     [m_os open];
+//    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    BOOL ret = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{
+        DDLogInfo(@"INFO: send hb");
+        [m_os sendHB];
+    }];
+    if (!ret) {
+        DDLogWarn(@"WARN: install keeping live.");
+    }
 }
 
 - (void)disconnect {

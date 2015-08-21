@@ -96,7 +96,8 @@
             RosterItem *ri = [USER getRosterInfoByUid:from];
             m_roomId = [msg.rid copy];
             m_invitedId = [msg.from copy];
-            NSString *tip = [NSString stringWithFormat:@"%@想和你多人通话！", ri.name];
+             NSString *tip = [NSString stringWithFormat:@"%@想和你多人通话！", ri.name];
+            [self showNotificationWithTitle:@"多人通话" body:tip];
             m_av = [[UIAlertView alloc] initWithTitle:@"多人通话" message:tip delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"接听", nil];
             [m_av show];
         });
@@ -105,6 +106,10 @@
     
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *from = msg.from;
+        RosterItem *ri = [USER getRosterInfoByUid:from];
+        NSString *tip = [NSString stringWithFormat:@"%@想和你视频通话！", ri.name];
+        [self showNotificationWithTitle:@"多人通话" body:tip];
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WebRtcRecvViewChatViewController *recvController =[sb instantiateViewControllerWithIdentifier:@"WebRtcRecvViewChatViewController"];
         recvController.rid = msg.rid;
@@ -114,6 +119,29 @@
         [APP_DELEGATE.window.rootViewController presentViewController:recvController animated:YES completion:nil];
     });
     
+}
+
+- (void)showNotificationWithTitle:(NSString *)title body:(NSString *)body {
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
+    NSDate *itemDate = [calendar dateFromComponents:dateComps];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = itemDate;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    localNotif.alertBody = body;
+    localNotif.alertAction = @"查看消息";
+//    localNotif.alertTitle = title;
+    
+    localNotif.soundName = @"answer.aif";
+    localNotif.applicationIconBadgeNumber++;
+    
+    //    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
+    //    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 - (void)sendDeviceReceived:(NSString *)rid {

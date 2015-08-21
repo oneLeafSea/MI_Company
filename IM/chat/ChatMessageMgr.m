@@ -345,10 +345,64 @@
     [m_msgTb updateSendingMsgToFail];
 }
 
+- (void)scheduleNotificationWithinterval:(int)minutesBefore {
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
+    //    [dateComps setDay:item.day];
+    //    [dateComps setMonth:item.month];
+    //    [dateComps setYear:item.year];
+    //    [dateComps setHour:item.hour];
+    //    [dateComps setMinute:item.minute];
+    NSDate *itemDate = [calendar dateFromComponents:dateComps];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = itemDate;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ in %i minutes.", nil),
+                            @"ceshi", minutesBefore];
+    localNotif.alertAction = NSLocalizedString(@"View Details", nil);
+    localNotif.alertTitle = NSLocalizedString(@"Item Due", nil);
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = 1;
+    
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
+    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
+- (void)showNotificationWithTitle:(NSString *)title body:(NSString *)body {
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
+    NSDate *itemDate = [calendar dateFromComponents:dateComps];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = itemDate;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    localNotif.alertBody = body;
+    localNotif.alertAction = @"查看消息";
+    localNotif.alertTitle = title;
+    
+    localNotif.soundName = @"msn.aiff";
+    localNotif.applicationIconBadgeNumber++;
+    
+//    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
+//    localNotif.userInfo = infoDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
 - (void)handleNewMsg:(NSNotification *)notification {
     [RTSystemSoundPlayer rt_playMessageReceivedAlert];
     [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
-    ChatMessage *msg = notification.object;
+    
+    __block ChatMessage *msg = notification.object;
     
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
         if (![m_msgTb insertMessage:msg]) {
@@ -357,12 +411,23 @@
             IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __block NSString *content = [msg.body objectForKey:@"content"];
+                NSNumber *b64 = [msg.body objectForKey:@"b64"];
+                if ([b64 boolValue]) {
+                    content = [Utils decodeBase64String:content];
+                }
+                NSString *name = [msg.body objectForKey:@"fromname"];
+                [self showNotificationWithTitle:@"文本消息" body:[NSString stringWithFormat:@"%@:%@", name, content]];
+            });
+            return;
         }
     }
     
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
         msg.status = ChatMessageStatusRecved;
-        NSString *uuidName = [msg.body objectForKey:@"uuid"];
+        __block NSString *uuidName = [msg.body objectForKey:@"uuid"];
         if (!uuidName) {
             DDLogError(@"ERROR: uuidName is nil");
             return;
@@ -372,6 +437,11 @@
             IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 NSString *name = [msg.body objectForKey:@"fromname"];
+                [self showNotificationWithTitle:@"图像" body:[NSString stringWithFormat:@"%@:[图片]", name]];
+            });
         }
     }
     
@@ -382,6 +452,12 @@
             IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
             [m_session post:ack];
             return;
+        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *name = [msg.body objectForKey:@"fromname"];
+                [self showNotificationWithTitle:@"音频" body:[NSString stringWithFormat:@"%@:[音频]", name]];
+            });
         }
         NSString *uuidName = [msg.body objectForKey:@"uuid"];
         [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:USER.audioPath fileName:uuidName token:USER.token key:USER.key iv:USER.iv progress:^(double progress) {
