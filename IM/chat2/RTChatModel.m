@@ -90,7 +90,8 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                 photoItem.orgUrl = [NSURL fileURLWithPath:[USER.filePath stringByAppendingPathComponent:uuid]];
             } else if (photoItem.status == RTPhotoMediaItemStatusRecved ||
                        photoItem.status == RTPhotoMediaItemStatusRecvError ||
-                       photoItem.status == RTPhotoMediaItemStatusRecving){
+                       photoItem.status == RTPhotoMediaItemStatusRecving ||
+                       photoItem.status == RTPhotoMediaItemStatusUnkown){
                 NSString *thumbUrl = [USER.imgThumbServerUrl stringByAppendingPathComponent:uuid];
                 photoItem.thumbUrl = [NSURL URLWithString:thumbUrl];
                 photoItem.orgUrl = [NSURL URLWithString:[USER.fileDownloadSvcUrl stringByAppendingPathComponent:uuid]];
@@ -114,6 +115,15 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             voiceItem.status = (UInt32)msg.status;
             voiceItem.audioUrl = voicePath;
             voiceItem.duration = duration;
+            if (voiceItem.status == RTPhotoMediaItemStatusUnkown) {
+                if (![[NSFileManager defaultManager] fileExistsAtPath:voiceItem.audioUrl]) {
+                    [RTFileTransfer downFileWithServerUrl:USER.fileDownloadSvcUrl fileDir:USER.audioPath fileName:uuid token:USER.token key:USER.key iv:USER.iv progress:^(double progress) {
+                        
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+                }
+            }
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             RTMessage *voiceMsg = [[RTMessage alloc] initWithSenderId:msg.from senderDisplayName:[msg.body objectForKey:@"fromname"] date:date media:voiceItem];
             [self.messages addObject:voiceMsg];

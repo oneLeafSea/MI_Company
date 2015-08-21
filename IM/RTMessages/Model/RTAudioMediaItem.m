@@ -60,7 +60,7 @@
 }
 
 - (void)setPlaying:(BOOL)playing {
-    if (self.status == RTAudioMediaItemtatusSent || self.status == RTAudioMediaItemStatusRecved) {
+    if (self.status == RTAudioMediaItemtatusSent || self.status == RTAudioMediaItemStatusRecved || self.status == RTAudioMediaItemStatusUnkown) {
         _playing = playing;
         self.audioView.playing = playing;
         if (playing) {

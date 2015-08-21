@@ -387,7 +387,7 @@
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.alertBody = body;
     localNotif.alertAction = @"查看消息";
-    localNotif.alertTitle = title;
+//    localNotif.alertTitle = title;
     
     localNotif.soundName = @"msn.aiff";
     localNotif.applicationIconBadgeNumber++;

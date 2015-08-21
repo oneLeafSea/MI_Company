@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) NSMutableArray *photos;
 
+@property (nonatomic, strong) NSString    *curLastMsgId;
+
 @end
 
 @implementation RTChatViewController
@@ -57,9 +59,18 @@
     UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"转发"
                                                       action:@selector(forward:)];
     [UIMenuController sharedMenuController].menuItems = @[menuItem];
-    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:50 offset:0];
-    self.data = [[RTChatModel alloc] initWithMsgs:msgs];
-    self.automaticallyScrollsToMostRecentMessage = YES;
+    [USER.msgHistory getHistoryMessageWithTalkingId:self.talkingId chatMsgType:self.chatMsgType completion:^(BOOL finished, NSArray *chatMsgs) {
+        NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:20 offset:0];
+        if (msgs.count > 0) {
+            ChatMessage *lastMsg = [msgs objectAtIndex:0];
+            self.curLastMsgId = [lastMsg.qid copy];
+        }
+        self.data = [[RTChatModel alloc] initWithMsgs:msgs];
+        [self.collectionView reloadData];
+        [self scrollToBottomAnimated:NO];
+    }];
+    
+    self.automaticallyScrollsToMostRecentMessage = NO;
     [self setAudioDirectory:USER.audioPath];
     [self registerNotification];
 }
@@ -73,6 +84,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageControllerWillDismiss object:info];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 - (void)dealloc {
     [self unregisterNotification];
 }
@@ -113,31 +127,41 @@
 
 #pragma mark - override
 - (void)loadMoreMessage {
+    if (self.data.messages.count == 0) {
+        return;
+    }
     dispatch_sync(dispatch_get_main_queue(), ^{
         __block NSInteger l = 0;
-//        __block CGFloat oldTableViewHeight = self.collectionView.contentSize.height;
         [UIView setAnimationsEnabled:NO];
         [self.collectionView performBatchUpdates:^{
             NSInteger preCount = self.data.messages.count;
-            NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 50) offset:0];
-            self.data = [[RTChatModel alloc] initWithMsgs:msgs];
-            NSInteger count = [self.data.messages count];
-            NSInteger left = count - preCount;
-            l = left;
-            NSMutableArray *idxArr = [[NSMutableArray alloc] init];
-            for (int n = 0; n < left; n++) {
-                [idxArr addObject:[NSIndexPath indexPathForRow:n inSection:0]];
+            if (self.data.messages.count > 0) {
+                [USER.msgHistory getHistoryMessageWithMsgId:self.curLastMsgId chatMsgType:self.chatMsgType talkingId:self.talkingId completion:^(BOOL finished, NSArray *chatMsgs) {
+                    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 20) offset:0];
+                    if (msgs.count > 0) {
+                        ChatMessage *lastMsg = [msgs objectAtIndex:0];
+                        self.curLastMsgId = [lastMsg.qid copy];
+                    }
+                    self.data = [[RTChatModel alloc] initWithMsgs:msgs];
+                    NSInteger count = [self.data.messages count];
+                    NSInteger left = count - preCount;
+                    l = left;
+                    NSMutableArray *idxArr = [[NSMutableArray alloc] init];
+                    for (int n = 0; n < left; n++) {
+                        [idxArr addObject:[NSIndexPath indexPathForRow:n inSection:0]];
+                    }
+                    [self.collectionView insertItemsAtIndexPaths:idxArr];
+                    if (l > 0) {
+                        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                    }
+                    [UIView setAnimationsEnabled:YES];
+                }];
             }
-            [self.collectionView insertItemsAtIndexPaths:idxArr];
         } completion:^(BOOL finished) {
-           
-//            CGFloat newTableViewHeight = self.collectionView.contentSize.height;
-            if (l > 0) {
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-            }
-            
-//            self.collectionView.contentOffset = CGPointMake(0, newTableViewHeight - oldTableViewHeight + 10);
-            [UIView setAnimationsEnabled:YES];
+//            if (l > 0) {
+//                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+//            }
+//            [UIView setAnimationsEnabled:YES];
         }];
     });
 }

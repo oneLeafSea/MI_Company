@@ -65,6 +65,7 @@
 - (UIImageView *)imgView {
     if (!_imgView) {
         _imgView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _imgView.contentMode = UIViewContentModeScaleAspectFill;
         _imgView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _imgView;
