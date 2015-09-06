@@ -20,6 +20,7 @@
 #import "RTFileTransfer.h"
 #import "RTAudioMediaItem.h"
 #import "Utils.h"
+#import "UIColor+Hexadecimal.h"
 
 static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 
@@ -35,8 +36,8 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
 - (void)setup {
     self.messages = [[NSMutableArray alloc] init];
     RTMessagesBubbleImageFactory *bubbleFactory = [[RTMessagesBubbleImageFactory alloc] init];
-    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor rt_messageBubbleLightGrayColor]];
-    self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor rt_messageBubbleGreenColor]];
+    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor whiteColor]];
+    self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor colorWithHex:@"#b2e866"]];
 }
 
 - (instancetype)initWithMsgs:(NSArray *)msgs {

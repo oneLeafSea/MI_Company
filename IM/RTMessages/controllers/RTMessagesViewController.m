@@ -58,7 +58,7 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
 @property (assign, nonatomic) BOOL isRecordkeyboard;
 
 
-@property (assign, nonatomic) BOOL loadingMoreMessage;
+@property (assign, atomic) BOOL loadingMoreMessage;
 
 
 - (void)rt_configureMessagesViewController;
@@ -273,14 +273,14 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
     }
 }
 
-- (void)setLoadingMoreMessage:(BOOL)loadingMoreMessage {
-    _loadingMoreMessage = loadingMoreMessage;
-    if (_loadingMoreMessage) {
-        self.showLoadEarlierMessagesHeader = YES;
-    } else {
-        self.showLoadEarlierMessagesHeader = NO;
-    }
-}
+//- (void)setLoadingMoreMessage:(BOOL)loadingMoreMessage {
+//    _loadingMoreMessage = loadingMoreMessage;
+//    if (_loadingMoreMessage) {
+//        self.showLoadEarlierMessagesHeader = YES;
+//    } else {
+//        self.showLoadEarlierMessagesHeader = NO;
+//    }
+//}
 
 #pragma mark - View lifecycle
 
@@ -414,9 +414,7 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[RTMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:animated];
-    }
+    [self scrollToBottomAnimated:animated];
 }
 
 - (void)finishReceivingMessage
@@ -739,12 +737,14 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
 
 - (void)loadMoreMessagesScrollTotop {
     self.loadingMoreMessage = YES;
+    self.showLoadEarlierMessagesHeader = self.loadingMoreMessage;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadMoreMessage];
         sleep(1); // 加载速度过快会反复调用。
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.loadingMoreMessage = NO;
+            self.showLoadEarlierMessagesHeader = self.loadingMoreMessage;
         });
     });
 }
@@ -789,9 +789,7 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
     
     [textView becomeFirstResponder];
     
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        [self scrollToBottomAnimated:YES];
-    }
+    [self scrollToBottomAnimated:YES];
 }
 
 - (void)textViewDidChange:(UITextView *)textView

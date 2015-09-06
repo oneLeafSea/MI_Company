@@ -26,6 +26,9 @@
 #import "ChatMessageNotification.h"
 #import "ChatMessageControllerInfo.h"
 #import "UIView+Toast.h"
+#import "UIColor+Hexadecimal.h"
+#import "ChatSettingTableViewController.h"
+#import "GroupChatSettingTableViewController.h"
 
 @interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
 
@@ -49,6 +52,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.collectionView.backgroundColor = [UIColor colorWithHex:@"#f4f4f4"];
     self.senderId = USER.uid;
     self.senderDisplayName = USER.name;
     [self setupRightBarItem];
@@ -109,7 +113,17 @@
 
 #pragma mark - actions
 - (void)rightBarButtonItemTapped:(id) sender {
-    [self finishSendingMessageAnimated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    if (self.chatMsgType == ChatMessageTypeNormal) {
+        ChatSettingTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatSettingTableViewController"];
+        vc.rosterItem = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingId];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        GroupChat *grpChat = [USER.groupChatMgr getGrpChatByGid:self.talkingId];
+        GroupChatSettingTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"GroupChatSettingTableViewController"];
+        vc.grp = grpChat;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)customAction:(id)sender {
@@ -152,7 +166,7 @@
                     }
                     [self.collectionView insertItemsAtIndexPaths:idxArr];
                     if (l > 0) {
-                        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
                     }
                     [UIView setAnimationsEnabled:YES];
                 }];
@@ -212,8 +226,7 @@
 {
     RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
     UIImage *img = [USER.avatarMgr getAvatarImageByUid:message.senderId];
-    RTMessagesAvatarImage *mineImage = [RTMessagesAvatarImageFactory avatarImageWithImage:img
-                                                                                   diameter:kRTMessagesCollectionViewAvatarSizeDefault];
+    RTMessagesAvatarImage *mineImage = [RTMessagesAvatarImageFactory roundCornerAvatarImage:img];
     return mineImage;
 }
 
@@ -372,7 +385,7 @@
             cell.textView.textColor = [UIColor blackColor];
         }
         else {
-            cell.textView.textColor = [UIColor whiteColor];
+            cell.textView.textColor = [UIColor blackColor];
         }
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
@@ -606,7 +619,7 @@
 
 - (void)showImgsWithFirstImgUrl:(NSURL *)url {
     _photos = [[NSMutableArray alloc] init];
-    BOOL displayActionButton = YES;
+    BOOL displayActionButton = NO;
     BOOL displaySelectionButtons = NO;
     BOOL displayNavArrows = NO;
     BOOL enableGrid = NO;
@@ -642,7 +655,7 @@
 #endif
     browser.enableGrid = enableGrid;
     browser.startOnGrid = startOnGrid;
-    browser.enableSwipeToDismiss = YES;
+    browser.enableSwipeToDismiss = NO;
     [browser setCurrentPhotoIndex:index];
     [self.navigationController pushViewController:browser animated:YES];
 }

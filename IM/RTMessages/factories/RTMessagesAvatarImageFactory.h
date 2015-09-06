@@ -22,6 +22,8 @@
 
 + (UIImage *)circularAvatarHighlightedImage:(UIImage *)image withDiameter:(NSUInteger)diameter;
 
++ (RTMessagesAvatarImage *)roundCornerAvatarImage:(UIImage *)image;
+
 + (RTMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
                                         backgroundColor:(UIColor *)backgroundColor
                                               textColor:(UIColor *)textColor

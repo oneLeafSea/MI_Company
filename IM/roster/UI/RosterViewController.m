@@ -31,14 +31,18 @@
 #import "MultiCallViewController.h"
 #import "RIIViewcontroller.h"
 #import "RTChatViewController.h"
+#import "UIColor+Hexadecimal.h"
+#import "SearchPeopleViewController.h"
 
-@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate> {
+@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, SearchPeopleViewControllerDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
     __weak IBOutlet UITableView *m_table;
     
 }
 @property (nonatomic, strong) PopMenu *popMenu;
+
+@property(nonatomic, strong) UISearchController *searchController;
 @end
 
 @implementation RosterViewController
@@ -67,6 +71,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
+    
+    SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
+    spVC.delegate = self;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:spVC];
+    self.searchController.searchResultsUpdater = spVC;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.scopeButtonTitles =   @[@"联系人", @"通讯录"];
+    self.searchController.searchBar.delegate = spVC;
+    self.searchController.searchBar.barTintColor = [UIColor colorWithHex:@"#EFEFF4"];
+    self.searchController.searchBar.layer.borderWidth = 1;
+    
+    self.searchController.searchBar.layer.borderColor = [[UIColor colorWithHex:@"#EFEFF4"] CGColor];
+    self.searchController.searchBar.tintColor = [UIColor colorWithHex:@"#02C1D2"];
+    m_table.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,12 +95,24 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.searchController.searchBar.scopeButtonTitles = nil;
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
    
+    
+}
+
+- (void)SearchPeopleViewController:(SearchPeopleViewController *)vc didSelectPeople:(OsItem *)item {
+    [self.searchController dismissViewControllerAnimated:YES completion:^{
+        self.searchController.searchBar.text = nil;
+        RTChatViewController *chatVc = [[RTChatViewController alloc] init];
+        chatVc.talkingId = item.uid;
+        chatVc.talkingname = item.name;
+        [self.navigationController pushViewController:chatVc animated:YES];
+    }];
     
 }
 
@@ -106,6 +137,16 @@
     m_Sections = sections;
 }
 
+- (UITableViewCell *)getRosterTitleCell {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"rosterTitleCell"];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = @"联系人";
+    cell.textLabel.textColor = [UIColor colorWithHex:@"#808080"];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    return cell;
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return m_groups.count + 1;
@@ -114,7 +155,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 2;
+        return 3;
     }
     
     NSInteger index = section -1;
@@ -176,6 +217,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        return 25;
+    }
     return 60;
 }
 
@@ -190,6 +234,11 @@
     if (indexPath.section == 0 && indexPath.row == 1) {
         static NSString *osCellId = @"organizationStructureCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:osCellId forIndexPath:indexPath];
+        return cell;
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        UITableViewCell *cell = [self getRosterTitleCell];
         return cell;
     }
     
@@ -223,6 +272,10 @@
     if (indexPath.section == 0 && indexPath.row == 1) {
         OsViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"OsViewController"];
         [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    if (indexPath.section == 0 && indexPath.row == 2) {
         return;
     }
     

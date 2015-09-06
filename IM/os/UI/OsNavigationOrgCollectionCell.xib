@@ -13,10 +13,10 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总经理办公室" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGN-q7-Mt2">
                     <rect key="frame" x="28" y="0.0" width="103" height="55"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0078431372549019607" green="0.75686274509803919" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="os_right" translatesAutoresizingMaskIntoConstraints="NO" id="VKy-l7-krF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="os_right" translatesAutoresizingMaskIntoConstraints="NO" id="VKy-l7-krF">
                     <rect key="frame" x="0.0" y="18" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="wRY-r8-M8d"/>

@@ -1,19 +1,19 @@
 //
-//  GroupChatListTableViewCell.m
+//  RosterItemGrpTableViewCell.m
 //  IM
 //
-//  Created by 郭志伟 on 15-3-3.
+//  Created by 郭志伟 on 15/9/1.
 //  Copyright (c) 2015年 rooten. All rights reserved.
 //
 
-#import "GroupChatListTableViewCell.h"
+#import "RosterItemGrpTableViewCell.h"
 
-@implementation GroupChatListTableViewCell
+@implementation RosterItemGrpTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
-    self.logoImgView.layer.cornerRadius = 5;
-    self.logoImgView.layer.masksToBounds = YES;
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarImageView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

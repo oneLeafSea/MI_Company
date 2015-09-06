@@ -22,6 +22,9 @@
 #import "LogLevel.h"
 #import "WebRtcNotifyMsg.h"
 
+static CGFloat const kLocalVideoViewSize = 120;
+static CGFloat const kLocalVideoViewPadding = 8;
+
 @interface WebRtcCallViewController () <WebRtcClientDelegate, RTCEAGLVideoViewDelegate> {
 //    NSTimer *m_callTimer;
 //    NSInteger m_callTimerStick;
@@ -61,6 +64,8 @@
 
 @property (assign, nonatomic) CGSize localVideoSize;
 @property (assign, nonatomic) CGSize remoteVideoSize;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *remoteViewToTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *remoteViewToBottomConstraint;
 
 @property (strong, nonatomic) WebRtcClient *client;
 @property (nonatomic, strong) NSString *rid;
@@ -83,6 +88,9 @@
     [self.avatarImgView circle];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
     self.localView.hidden = YES;
+    self.remoteView.delegate = self;
+    self.localView.delegate = self;
+    self.view.backgroundColor = [UIColor blackColor];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleButtonContainer)];
     [tapGestureRecognizer setNumberOfTapsRequired:1];
@@ -94,15 +102,9 @@
     [self.client createRoomWithId:_rid Completion:^(BOOL finished) {
         if (finished) {
             [USER.session post:msg];
-//            self.bgImgView.hidden =YES;
-//            self.avatarView.hidden = YES;
         } else {
             [self disconnect];
             [[AudioPlayer sharePlayer] stop];
-//            if (m_callTimer) {
-//                [m_callTimer invalidate];
-//                m_callTimer = nil;
-//            }
             [self dismissViewControllerAnimated:YES completion:^{
                 [USER.webRtcMgr setbusy:NO];
                 [Utils alertWithTip:@"连接信令服务器失败。"];
@@ -137,6 +139,50 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)layoutSubviews {
+    CGRect bounds = self.remoteView.bounds;
+    if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
+        // Aspect fill remote video into bounds.
+        CGRect remoteVideoFrame =
+        AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
+        CGFloat scale = 1;
+        if (remoteVideoFrame.size.width > remoteVideoFrame.size.height) {
+            // Scale by height.
+            scale = bounds.size.height / remoteVideoFrame.size.height;
+        } else {
+            // Scale by width.
+            scale = bounds.size.width / remoteVideoFrame.size.width;
+        }
+        CGFloat height = self.remoteView.frame.size.height;
+        remoteVideoFrame.size.height *= scale;
+        remoteVideoFrame.size.width *= scale;
+        self.remoteViewToBottomConstraint.constant = (height - remoteVideoFrame.size.height)/2;
+        self.remoteViewToTopConstraint.constant = (height - remoteVideoFrame.size.height)/2;
+        self.remoteView.frame = remoteVideoFrame;
+        self.remoteView.center =
+        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+    } else {
+        self.remoteView.frame = bounds;
+    }
+    
+    if (_localVideoSize.width && _localVideoSize.height > 0) {
+        // Aspect fit local video view into a square box.
+        CGRect localVideoFrame =
+        CGRectMake(0, 0, kLocalVideoViewSize, kLocalVideoViewSize);
+        localVideoFrame =
+        AVMakeRectWithAspectRatioInsideRect(_localVideoSize, localVideoFrame);
+        
+        // Place the view in the bottom right.
+        localVideoFrame.origin.x = CGRectGetMaxX(bounds)
+        - localVideoFrame.size.width - kLocalVideoViewPadding;
+        localVideoFrame.origin.y = CGRectGetMaxY(bounds)
+        - localVideoFrame.size.height - kLocalVideoViewPadding;
+        self.localView.frame = localVideoFrame;
+    } else {
+        self.localView.frame = bounds;
+    }
 }
 
 - (void)disconnect {
@@ -326,11 +372,13 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
                 [self.localViewBottomContaint setConstant:containerHeight/2.0f - videoFrame.size.height/2.0f]; //center
                 [self.localViewRightConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
             }
+            [self layoutSubviews];
         } else if (videoView == self.remoteView) {
             //Resize Remote View
             self.remoteVideoSize = size;
+            [self layoutSubviews];
         }
-        [self.view layoutIfNeeded];
+//        [self.view layoutIfNeeded];
     }];
     
 }

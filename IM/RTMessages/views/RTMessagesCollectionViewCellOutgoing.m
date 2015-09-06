@@ -14,6 +14,7 @@
     [super awakeFromNib];
     self.messageBubbleTopLabel.textAlignment = NSTextAlignmentRight;
     self.cellBottomLabel.textAlignment = NSTextAlignmentRight;
+    
 //    [self.contentView addSubview:self.indicatorView];
 //    [self setupIndicatorViewConstraints];
 }

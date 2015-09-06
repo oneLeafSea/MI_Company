@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *theNewPwdTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *confirmPwdTextField;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
 @end
 
@@ -26,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+    self.tipLabel.numberOfLines = 0;
+    [self.tipLabel sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {

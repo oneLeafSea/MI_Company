@@ -188,9 +188,12 @@
                 [self.delegate loginProcedures:self recvPush:err ? NO:YES error:err];
             }
             
-            NSMutableArray *uids = [[NSMutableArray alloc] initWithArray:[USER.rosterMgr getRosterAllUids]];
-            [uids addObject:USER.uid];
-            [USER.avatarMgr getAvatarsByUserIds:uids];
+            [USER.avatarMgr syncAvatarVerWithCompletion:^(BOOL finished, NSError *error) {
+                NSMutableArray *uids = [[NSMutableArray alloc] initWithArray:[USER.rosterMgr getRosterAllUids]];
+                [uids addObject:USER.uid];
+                [USER.avatarMgr getAvatarsByUserIds:uids];
+            }];
+            
             [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
             [USER.groupChatMgr.grpChatList.grpChatList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 __block GroupChat *gc = obj;
@@ -205,6 +208,8 @@
             [USER.osMgr syncOrgStructWithWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
                 
             }];
+            
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
             [self setWebImgCfg];
             [self saveUseIdAndPwd];

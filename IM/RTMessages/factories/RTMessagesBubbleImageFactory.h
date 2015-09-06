@@ -20,4 +20,9 @@
 
 - (RTMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
+- (RTMessagesBubbleImage *)outgoingMessagesRoundCornerBubbleImageWithColor:(UIColor *)color;
+
+- (RTMessagesBubbleImage *)incomingMessagesRoundCornerBubbleImageWithColor:(UIColor *)color;
+
+
 @end

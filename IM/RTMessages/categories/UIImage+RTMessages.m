@@ -28,6 +28,7 @@
         
         CGContextClipToMask(context, imageRect, self.CGImage);
         CGContextSetFillColorWithColor(context, maskColor.CGColor);
+        CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
         CGContextFillRect(context, imageRect);
         
         newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -38,7 +39,7 @@
 }
 
 + (UIImage *)rt_bubbleCompactImage {
-    return [UIImage rt_bubbleImageFromBundleWithName:@"bubble_min"];
+    return [UIImage rt_bubbleImageFromBundleWithName:@"bubble_rc"];
 }
 
 

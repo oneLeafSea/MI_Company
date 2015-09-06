@@ -9,6 +9,7 @@
 #import "RTAudioView.h"
 #import "UIColor+RTMessages.h"
 #import <Masonry/Masonry.h>
+#import "UIColor+Hexadecimal.h"
 
 @interface RTAudioView()
 
@@ -27,9 +28,9 @@
     [self setupConstraints];
     
     if (self.isOutgoing) {
-        self.backgroundColor = [UIColor rt_messageBubbleLightGrayColor];
+        self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor rt_messageBubbleGreenColor];
+        self.backgroundColor = [UIColor colorWithHex:@"#b2e866"];
     }
     
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesture:)];

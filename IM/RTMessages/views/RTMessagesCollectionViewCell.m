@@ -85,6 +85,10 @@ static NSMutableSet *rtMessagesCollectionViewCellActions = nil;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor whiteColor];
+    self.avatarImageView.layer.cornerRadius = 5;
+    self.avatarContainerView.layer.masksToBounds = YES;
+    self.avatarContainerView.layer.cornerRadius = 5;
+    self.avatarContainerView.layer.masksToBounds = YES;
     
     self.cellTopLabelHeightConstraint.constant = 0.0f;
     self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;

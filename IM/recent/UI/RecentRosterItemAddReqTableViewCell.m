@@ -19,6 +19,8 @@
 - (void)awakeFromNib {
     // Initialization code
     m_badgeView = [[JSBadgeView alloc] initWithParentView:self.avatarImgView alignment:JSBadgeViewAlignmentTopRight];
+    self.avatarImgView.layer.cornerRadius = 5;
+    self.avatarImgView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -55,6 +55,7 @@
 - (NSArray *)getSubOrgs:(NSString *)jgbm;
 - (NSArray *)getOrgItemsByJgbm:(NSString *)jgbm;
 - (OsItem *)getItemInfoByUid:(NSString *)uid;
+- (NSString *)getOrgNameByOrgId:(NSString *)orgId;
 
 @property(atomic) NSString *orgVer;
 @property(atomic) NSArray  *org;

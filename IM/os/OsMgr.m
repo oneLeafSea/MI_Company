@@ -420,6 +420,18 @@
     }];
 }
 
+- (NSString *)getOrgNameByOrgId:(NSString *)orgId {
+    __block NSString *orgName = nil;
+    [self.org enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        OsOrg *org = obj;
+        if ([org.jgbm isEqualToString:orgId]) {
+            orgName = org.jgmc;
+            *stop = YES;
+        }
+    }];
+    return orgName;
+}
+
 - (OsOrg *)rootOrg {
     return [m_OrgTb getRootOrg];
 }

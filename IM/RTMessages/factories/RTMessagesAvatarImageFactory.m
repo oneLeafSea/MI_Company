@@ -81,6 +81,11 @@
                                               placeholderImage:avatarImage];
 }
 
++ (RTMessagesAvatarImage *)roundCornerAvatarImage:(UIImage *)image {
+    RTMessagesAvatarImage *avatarImg = [[RTMessagesAvatarImage alloc] initWithAvatarImage:image highlightedImage:image placeholderImage:[UIImage imageNamed:@"avatar_default"]];
+    return avatarImg;
+}
+
 #pragma mark - Private
 
 + (UIImage *)rt_imageWitInitials:(NSString *)initials

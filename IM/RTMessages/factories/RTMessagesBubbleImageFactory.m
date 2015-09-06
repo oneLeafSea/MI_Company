@@ -65,6 +65,15 @@
     return [self rt_messagesBubbleImageWithColor:color flippedForIncoming:YES];
 }
 
+
+- (RTMessagesBubbleImage *)outgoingMessagesRoundCornerBubbleImageWithColor:(UIColor *)color {
+    return nil;
+}
+
+- (RTMessagesBubbleImage *)incomingMessagesRoundCornerBubbleImageWithColor:(UIColor *)color {
+    return nil;
+}
+
 #pragma mark - Private
 - (UIEdgeInsets)rt_centerPointEdgeInsetsForImageSize:(CGSize)bubbleImageSize {
     CGPoint center = CGPointMake(bubbleImageSize.width / 2.0f, bubbleImageSize.height / 2.0f);

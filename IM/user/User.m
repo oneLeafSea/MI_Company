@@ -179,7 +179,7 @@
 }
 
 - (BOOL)setupAvatarMgr {
-    _avatarMgr = [[AvatarMgr alloc] initWithAvatarPath:_avatarPath];
+    _avatarMgr = [[AvatarMgr alloc] initWithAvatarPath:_avatarPath dbq:self.dbq];
     if (!_avatarMgr) {
         return NO;
     }

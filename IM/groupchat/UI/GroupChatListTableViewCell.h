@@ -10,5 +10,6 @@
 
 @interface GroupChatListTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *grpName;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
 
 @end

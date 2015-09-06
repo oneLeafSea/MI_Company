@@ -27,14 +27,18 @@
 #import "AvatarNotifications.h"
 #import "OsItem.h"
 #import "PresenceMsg.h"
+#import "UIColor+Hexadecimal.h"
+#import "SearchPeopleViewController.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
-@interface RecentViewController () {
+@interface RecentViewController () <SearchPeopleViewControllerDelegate>{
     
     __weak IBOutlet UITableView *m_tableView;
     RecentViewModle *m_modle;
 }
+
+@property(nonatomic, strong) UISearchController *searchController;
 
 @end
 
@@ -50,6 +54,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -69,14 +74,29 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotReachable:) name:kReachabilityChangedNotification object:nil];
     
+    SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
+    spVC.delegate = self;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:spVC];
+    self.searchController.searchResultsUpdater = spVC;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.scopeButtonTitles =   @[@"联系人", @"通讯录"];
+    self.searchController.searchBar.delegate = spVC;
+    self.searchController.searchBar.barTintColor = [UIColor colorWithHex:@"#EFEFF4"];
+    self.searchController.searchBar.layer.borderWidth = 1;
+    
+    self.searchController.searchBar.layer.borderColor = [[UIColor colorWithHex:@"#EFEFF4"] CGColor];
+    self.searchController.searchBar.tintColor = [UIColor colorWithHex:@"#02C1D2"];
+    m_tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
     
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.searchController.searchBar.scopeButtonTitles = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -88,6 +108,21 @@ static NSString *kChatMessageTypeNomal = @"0";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)SearchPeopleViewController:(SearchPeopleViewController *)vc didSelectPeople:(OsItem *)item {
+    [self.searchController dismissViewControllerAnimated:YES completion:^{
+        self.searchController.searchBar.text = nil;
+        RTChatViewController *chatVc = [[RTChatViewController alloc] init];
+        chatVc.talkingId = item.uid;
+        chatVc.talkingname = item.name;
+        [self.navigationController pushViewController:chatVc animated:YES];
+    }];
+    
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -336,6 +371,19 @@ static NSString *kChatMessageTypeNomal = @"0";
         reloginTipView.indicatorView.hidden = YES;
         self.navigationItem.titleView = reloginTipView;
     });
+}
+
+- (void)handleNotReachable:(NSNotification *)notification {
+    Reachability* noteObject = notification.object;
+    if (noteObject.currentReachabilityStatus == NotReachable) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ReloginTipView *reloginTipView = [[[NSBundle mainBundle] loadNibNamed:@"ReloginTipView" owner:self options:nil] objectAtIndex:0];
+            reloginTipView.connErrLbl.hidden = NO;
+            reloginTipView.textLabel.hidden = YES;
+            reloginTipView.indicatorView.hidden = YES;
+            self.navigationItem.titleView = reloginTipView;
+        });
+    }
 }
 
 #pragma mark - handle avatar notification
