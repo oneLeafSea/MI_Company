@@ -29,6 +29,8 @@
 #import "UIColor+Hexadecimal.h"
 #import "ChatSettingTableViewController.h"
 #import "GroupChatSettingTableViewController.h"
+#import "loglevel.h"
+#import "DetailTableViewController.h"
 
 @interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
 
@@ -144,7 +146,9 @@
     if (self.data.messages.count == 0) {
         return;
     }
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         __block NSInteger l = 0;
         [UIView setAnimationsEnabled:NO];
         [self.collectionView performBatchUpdates:^{
@@ -169,6 +173,7 @@
                         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:l - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
                     }
                     [UIView setAnimationsEnabled:YES];
+                    dispatch_semaphore_signal(sem);
                 }];
             }
         } completion:^(BOOL finished) {
@@ -178,6 +183,8 @@
 //            [UIView setAnimationsEnabled:YES];
         }];
     });
+    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    
 }
 
 - (void)didPressReturnKeyWithMessageText:(NSString *)text
@@ -364,6 +371,19 @@
     
 }
 
+- (void)collectionView:(RTMessagesCollectionView *)collectionView
+ didTapAvatarImageView:(UIImageView *)avatarImageView
+           atIndexPath:(NSIndexPath *)indexPath {
+    [super collectionView:collectionView didTapAvatarImageView:avatarImageView atIndexPath:indexPath];
+    UIStoryboard *mainSb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DetailTableViewController *vc = [mainSb instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    vc.uid = message.senderId;
+    vc.name = message.senderDisplayName;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -400,7 +420,10 @@
     [self.morePanelView registerItemWithTitle:@"拍照" image:[UIImage imageNamed:@"chatmsg_camera"] target:self action:@selector(takeAPicture)];
     [self.morePanelView registerItemWithTitle:@"照片" image:[UIImage imageNamed:@"chatmsg_pic"] target:self action:@selector(getPhotoFromImgLib)];
 //    [self.morePanelView registerItemWithTitle:@"通话" image:[UIImage imageNamed:@"chatmsg_phone"] target:self action:@selector(getPhotoFromImgLib)];
-    [self.morePanelView registerItemWithTitle:@"视频" image:[UIImage imageNamed:@"chatmsg_video"] target:self action:@selector(videoChat)];
+    if (self.chatMsgType == ChatMessageTypeNormal) {
+        [self.morePanelView registerItemWithTitle:@"视频" image:[UIImage imageNamed:@"chatmsg_video"] target:self action:@selector(videoChat)];
+    }
+    
 //    [self.morePanelView registerItemWithTitle:@"文件" image:[UIImage imageNamed:@"chatmsg_folder"] target:self action:@selector(getPhotoFromImgLib)];
     
 }

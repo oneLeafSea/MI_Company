@@ -22,6 +22,9 @@
     m_badgeView = [[JSBadgeView alloc] initWithParentView:badgeViewContainer alignment:JSBadgeViewAlignmentCenter];
     self.avatarImgView.layer.cornerRadius = 5.0;
     _avatarImgView.layer.masksToBounds = YES;
+    self.avatarImgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarImgVieDidTapped:)];
+    [self.avatarImgView addGestureRecognizer:tapGesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,6 +35,12 @@
 
 - (void)setBadgeText:(NSString *)badgeText {
     m_badgeView.badgeText = badgeText;
+}
+
+- (void)avatarImgVieDidTapped:(UITapGestureRecognizer *)gesture {
+    if ([self.delegate respondsToSelector:@selector(RecentChatMsgItemTableViewCell:avatarImgViewDidTapped:)]) {
+        [self.delegate RecentChatMsgItemTableViewCell:self avatarImgViewDidTapped:self.avatarImgView];
+    }
 }
 
 @end

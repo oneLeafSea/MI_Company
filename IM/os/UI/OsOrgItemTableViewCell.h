@@ -25,4 +25,6 @@
 
 - (void)OsOrgItemTableViewCell:(OsOrgItemTableViewCell *)cell orgItem:(OsItem *)item;
 
+- (void)OsOrgItemTableViewCell:(OsOrgItemTableViewCell *)cell avatarDidSelectWithItem:(OsItem *)item;
+
 @end

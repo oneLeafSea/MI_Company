@@ -29,10 +29,11 @@
 #import "PresenceMsg.h"
 #import "UIColor+Hexadecimal.h"
 #import "SearchPeopleViewController.h"
+#import "DetailTableViewController.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
-@interface RecentViewController () <SearchPeopleViewControllerDelegate>{
+@interface RecentViewController () <SearchPeopleViewControllerDelegate, RecentChatMsgItemTableViewCellDelegate>{
     
     __weak IBOutlet UITableView *m_tableView;
     RecentViewModle *m_modle;
@@ -137,6 +138,8 @@ static NSString *kChatMessageTypeNomal = @"0";
         RecentChatMsgItemTableViewCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"RecentChatMsgItemCell" forIndexPath:indexPath];
         NSDictionary *cnt = [item dictContent];
         NSDictionary *body = [cnt objectForKey:@"body"];
+        chatCell.tag = indexPath.row;
+        chatCell.delegate = self;
         
         if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
             NSString *name = [body objectForKey:@"fromname"];
@@ -389,6 +392,26 @@ static NSString *kChatMessageTypeNomal = @"0";
 #pragma mark - handle avatar notification
 - (void)handleAvatarDownloaded:(NSNotification *)notification {
     [m_tableView reloadData];
+}
+
+#pragma mark - RecentChatMsgItemTableViewCellDelegate
+
+- (void)RecentChatMsgItemTableViewCell:(RecentChatMsgItemTableViewCell *)cell avatarImgViewDidTapped:(UIImageView *)avatarImgView {
+    RecentMsgItem *item = [m_modle.msgList objectAtIndex:cell.tag];
+    if (item.msgtype == IM_MESSAGE) {
+        NSDictionary *cnt = [item dictContent];
+        NSDictionary *body = [cnt objectForKey:@"body"];
+        if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
+            DetailTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+            vc.uid = item.from;
+            vc.name = [body objectForKey:@"fromname"];
+            if ([item.from isEqualToString:APP_DELEGATE.user.uid]) {
+                vc.name = [APP_DELEGATE.user.rosterMgr getItemByUid:item.to].name;
+                vc.uid = item.to;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 @end

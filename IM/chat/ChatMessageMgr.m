@@ -399,7 +399,7 @@
 }
 
 - (void)handleNewMsg:(NSNotification *)notification {
-    [RTSystemSoundPlayer rt_playMessageReceivedAlert];
+    [RTSystemSoundPlayer rt_playMessageReceivedSound];
     [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
     
     __block ChatMessage *msg = notification.object;

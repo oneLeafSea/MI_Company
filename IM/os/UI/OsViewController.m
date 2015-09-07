@@ -16,6 +16,7 @@
 #import "OsItem.h"
 #import "RosterItemReqMsgTableViewController.h"
 #import "RTChatViewController.h"
+#import "DetailTableViewController.h"
 
 @interface OsViewController () <OsNavigationTableViewCellDelegate, OsOrgItemTableViewCellDelegate> {
     
@@ -147,7 +148,7 @@
         cell.nameLbl.text = item.name;
         cell.item = item;
         cell.delegate = self;
-        if ([USER.rosterMgr exsitsItemByUid:item.uid]) {
+        if ([USER.rosterMgr exsitsItemByUid:item.uid] || [USER.uid isEqualToString:item.uid]) {
             cell.addbtn.hidden = YES;
         } else {
             cell.addbtn.hidden = NO;
@@ -169,9 +170,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.row == m_curSubOrgs.count + 1) {
-//        return;
-//    }
     
     if (indexPath.row < m_curSubOrgs.count + 1) {
         NSInteger index = indexPath.row - 1;
@@ -186,6 +184,9 @@
     if (indexPath.row > hasSeporator ? m_curSubOrgs.count + 1 : m_curSubOrgs.count) {
         NSInteger index = hasSeporator ? indexPath.row - 1 - 1 - m_curSubOrgs.count : indexPath.row - 1 - m_curSubOrgs.count;
         OsItem *item = [m_curOrgItems objectAtIndex:index];
+        if ([item.uid isEqualToString:USER.uid]) {
+            return;
+        }
         RTChatViewController *vc = [[RTChatViewController alloc] init];
         vc.talkingId = item.uid;
         vc.talkingname = item.name;
@@ -206,6 +207,14 @@
 - (void)OsOrgItemTableViewCell:(OsOrgItemTableViewCell *)cell orgItem:(OsItem *)item {
     RosterItemReqMsgTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RosterItemReqMsgTableViewController"];
     vc.itemInfo = @{@"uname":item.uid, @"name":item.name};
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)OsOrgItemTableViewCell:(OsOrgItemTableViewCell *)cell avatarDidSelectWithItem:(OsItem *)item {
+    DetailTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+    vc.uid = item.uid;
+    vc.name = item.name;
+    vc.navigationItem.title = item.name;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -33,6 +33,7 @@
 #import "RTChatViewController.h"
 #import "UIColor+Hexadecimal.h"
 #import "SearchPeopleViewController.h"
+#import "DetailTableViewController.h"
 
 @interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, SearchPeopleViewControllerDelegate> {
     NSMutableArray *m_Sections;
@@ -247,6 +248,8 @@
     RosterItermTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     RosterGroup *g = [m_groups objectAtIndex:index];
     RosterItem* item = [g.items objectAtIndex:indexPath.row];
+    cell.item = item;
+    cell.delegate = self;
     cell.nameLabel.text = item.name;
     if ([USER.presenceMgr isOnline:item.uid]) {
         cell.signatureLabel.text = [NSString stringWithFormat:@"[在线]%@", item.sign];
@@ -414,6 +417,15 @@
     vc.invited = NO;
     vc.talkingUids = uids;
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - RosterItermTableViewCellDelegate
+- (void)RosterItermTableViewCell:(RosterItermTableViewCell *)cell AvatarDidSelectedWithItem:(RosterItem *)item {
+    DetailTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+    vc.uid = item.uid;
+    vc.name = item.name;
+    vc.navigationItem.title = item.name;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

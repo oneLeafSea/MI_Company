@@ -102,6 +102,7 @@
 		7D51F7481B61C30400F1CCEF /* ChatMessageHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D51F7461B61C30400F1CCEF /* ChatMessageHistory.m */; };
 		7D532BF81B58A40E00D61205 /* RTFileMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D532BF71B58A40E00D61205 /* RTFileMediaItem.m */; };
 		7D532BFB1B58AC0600D61205 /* RTFileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D532BFA1B58AC0600D61205 /* RTFileView.m */; };
+		7D53F0151B9D248B008B47E7 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D53F0131B9D248B008B47E7 /* DetailTableViewController.m */; };
 		7D5447C21B4145A90096610B /* RTHb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C01B4145A90096610B /* RTHb.swift */; };
 		7D5447C31B4145A90096610B /* RTSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C11B4145A90096610B /* RTSession.swift */; };
 		7D54D68C1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */; };
@@ -577,6 +578,8 @@
 		7D532BF71B58A40E00D61205 /* RTFileMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTFileMediaItem.m; sourceTree = "<group>"; };
 		7D532BF91B58AC0600D61205 /* RTFileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTFileView.h; sourceTree = "<group>"; };
 		7D532BFA1B58AC0600D61205 /* RTFileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTFileView.m; sourceTree = "<group>"; };
+		7D53F0121B9D248B008B47E7 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		7D53F0131B9D248B008B47E7 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		7D5447C01B4145A90096610B /* RTHb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTHb.swift; sourceTree = "<group>"; };
 		7D5447C11B4145A90096610B /* RTSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTSession.swift; sourceTree = "<group>"; };
 		7D54D68A1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPImagePickerTableViewCell.h; sourceTree = "<group>"; };
@@ -2335,6 +2338,8 @@
 				7DEA70681AA98B37002C2C68 /* detailQid.m */,
 				7DEA706A1AA99025002C2C68 /* Detail.h */,
 				7DEA706B1AA99025002C2C68 /* Detail.m */,
+				7D53F0121B9D248B008B47E7 /* DetailTableViewController.h */,
+				7D53F0131B9D248B008B47E7 /* DetailTableViewController.m */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -2824,6 +2829,7 @@
 				7D1C60231AA6E7960035A2D2 /* OsSql.m in Sources */,
 				7D7669DA1B54E12B0072399B /* RTScaleableRoundView.m in Sources */,
 				7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */,
+				7D53F0151B9D248B008B47E7 /* DetailTableViewController.m in Sources */,
 				7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */,
 				7D7C66761B392A9A0025A3DB /* FCNPTextTableViewCell.m in Sources */,
 				7DF3CAB41AF70C7F00D08AE7 /* MultiSelectSearchResultTableViewCell.m in Sources */,

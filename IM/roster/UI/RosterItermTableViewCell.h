@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RosterItem.h"
+
+@protocol RosterItermTableViewCellDelegate;
 
 @interface RosterItermTableViewCell : UITableViewCell
 
@@ -15,5 +18,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *signatureLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *maskView;
+
+@property(weak, nonatomic) RosterItem *item;
+@property(weak) id<RosterItermTableViewCellDelegate> delegate;
+
+@end
+
+@protocol RosterItermTableViewCellDelegate <NSObject>
+
+- (void)RosterItermTableViewCell:(RosterItermTableViewCell *)cell AvatarDidSelectedWithItem:(RosterItem *)item;
 
 @end

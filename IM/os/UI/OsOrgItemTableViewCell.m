@@ -7,6 +7,7 @@
 //
 
 #import "OsOrgItemTableViewCell.h"
+#import "UIColor+Hexadecimal.h"
 
 @implementation OsOrgItemTableViewCell
 
@@ -14,6 +15,13 @@
     // Initialization code
     self.avatarImagView.layer.cornerRadius = 5;
     self.avatarImagView.layer.masksToBounds = YES;
+    self.avatarImagView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarImageViewTapped:)];
+    [self.avatarImagView addGestureRecognizer:tapGesture];
+    self.addbtn.layer.masksToBounds = YES;
+    self.addbtn.layer.cornerRadius = 5.0f;
+    self.addbtn.layer.borderWidth = 1.0f;
+    self.addbtn.layer.borderColor = [UIColor colorWithHex:@"#c8c7cc"].CGColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,6 +33,12 @@
 - (IBAction)addBtnPressed:(id)sender {
     if ([self.delegate respondsToSelector:@selector(OsOrgItemTableViewCell:orgItem:)]) {
         [self.delegate OsOrgItemTableViewCell:self orgItem:self.item];
+    }
+}
+
+- (void)avatarImageViewTapped:(UIGestureRecognizer *)guesture {
+    if ([self.delegate respondsToSelector:@selector(OsOrgItemTableViewCell:avatarDidSelectWithItem:)]) {
+        [self.delegate OsOrgItemTableViewCell:self avatarDidSelectWithItem:self.item];
     }
 }
 

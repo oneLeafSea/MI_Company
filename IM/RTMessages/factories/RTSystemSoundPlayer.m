@@ -235,7 +235,7 @@ static void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
 
 - (void)playVibrateSound
 {
-    if (self.on) {
+    if (self.vibrateOn) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }

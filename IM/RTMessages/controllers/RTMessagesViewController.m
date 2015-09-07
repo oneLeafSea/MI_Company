@@ -34,6 +34,7 @@
 #import "UIButton+RTMessages.h"
 #import "UIImage+RTMessages.h"
 #import "RTMorePanelView.h"
+#import "UIColor+Hexadecimal.h"
 
 static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservingContext;
 
@@ -142,6 +143,7 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
     [self rt_updateCollectionViewInsets];
     
     self.emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 252) dataSource:self];
+    self.emojiKeyboardView.segmentsBar.tintColor = [UIColor colorWithHex:@"#02C1D2"];
     self.emojiKeyboardView.delegate = self;
     self.emojiKeyboardView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     

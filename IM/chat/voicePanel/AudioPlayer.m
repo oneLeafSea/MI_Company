@@ -36,7 +36,9 @@
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
 //    [[AVAudioSession sharedInstance] setCategory :AVAudioSessionCategoryAmbient error:nil];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
-    [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+    if (![self hasHeadset]) {
+        [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+    }
     m_player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&err];
     m_player.meteringEnabled = YES;
     m_player.delegate = self;
@@ -124,5 +126,20 @@
     }
 }
 
+- (BOOL)hasHeadset {
+#if TARGET_IPHONE_SIMULATOR
+#warning *** Simulator mode: audio session code works only on a device
+    return NO;
+#else
+    AVAudioSessionRouteDescription *route = [[AVAudioSession sharedInstance] currentRoute];
+    
+    BOOL headphonesLocated = NO;
+    for( AVAudioSessionPortDescription *portDescription in route.outputs )
+    {
+        headphonesLocated |= ( [portDescription.portType isEqualToString:AVAudioSessionPortHeadphones] );
+    }
+    return headphonesLocated;
+#endif
+}
 
 @end
