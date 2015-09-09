@@ -19,11 +19,14 @@
 //static NSString *kWebrtcUrl = @"wss://10.22.1.117:8088/webrtc";
 
 @interface WebRtcMgr()<UIAlertViewDelegate> {
-    BOOL m_busy;
     NSString *m_roomId;
     UIAlertView *m_av;
     NSString *m_invitedId;
+    NSString *m_talkingId;
 }
+@property (atomic) BOOL busy;
+
+@property(nonatomic) UIViewController *recvVc;
 @end
 
 @implementation WebRtcMgr
@@ -48,8 +51,9 @@
 }
 
 - (void)inviteUid:(NSString *)uid  session:(Session *)s {
-    m_busy = YES;
+    self.busy = YES;
     __block NSString *webrtcUrl = USER.rssUrl;
+    m_talkingId = [uid copy];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebRtcCallViewController *vc = [sb instantiateViewControllerWithIdentifier:@"WebRtcCallViewController"];
     vc.serverUrl = [NSURL URLWithString:webrtcUrl];
@@ -63,27 +67,33 @@
 - (void)handleWebRtcNotification:(NSNotification *)notification {
     __block NSString *webrtcUrl = USER.rssUrl;
     __block WebRtcNotifyMsg *msg = notification.object;
-    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"] || [[msg.content objectForKey:@"type"] isEqualToString:@"reject"] ||
-        [[msg.content objectForKey:@"type"] isEqualToString:@"close"]) {
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"busy"] || [[msg.content objectForKey:@"type"] isEqualToString:@"reject"]) {
         return;
     }
     
-    if ([[msg.content objectForKey:@"type"] isEqualToString:@"handle"]) {
+    if ([[msg.content objectForKey:@"type"] isEqualToString:@"handle"] || [[msg.content objectForKey:@"type"] isEqualToString:@"close"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[AudioPlayer sharePlayer] stop];
             if (m_av.visible) {
                 [m_av dismissWithClickedButtonIndex:4 animated:YES];
             }
+            if (self.recvVc) {
+                [self.recvVc dismissViewControllerAnimated:YES completion:^{
+                    self.recvVc = nil;
+                }];
+            }
+            self.busy = NO;
         });
+        return;
     }
     
-    if (m_busy) {
+    if (self.busy) {
         WebRtcNotifyMsg *ack = [[WebRtcNotifyMsg alloc] initWithFrom:_uid to:msg.from rid:msg.rid];
         ack.contentType = @"busy";
         [USER.session post:ack];
         return;
     }
-    m_busy = YES;
+    self.busy = YES;
     
   
     
@@ -116,6 +126,7 @@
         recvController.uid = self.uid;
         recvController.serverUrl = [NSURL URLWithString:webrtcUrl];
         recvController.talkingUid = msg.from;
+        self.recvVc = recvController;
         [APP_DELEGATE.window.rootViewController presentViewController:recvController animated:YES completion:nil];
     });
     
@@ -133,13 +144,9 @@
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.alertBody = body;
     localNotif.alertAction = @"查看消息";
-//    localNotif.alertTitle = title;
     
     localNotif.soundName = @"answer.aif";
     localNotif.applicationIconBadgeNumber++;
-    
-    //    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
-    //    localNotif.userInfo = infoDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
@@ -164,14 +171,31 @@
 }
 
 - (void)setbusy:(BOOL)busy {
-    m_busy = busy;
+    self.busy = busy;
+}
+
+
+- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf {
+    NSString *to = self.uid;
+    if (isSelf) {
+        to = USER.uid;
+    }
+    WebRtcNotifyMsg *nm = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:to rid:m_roomId];
+    nm.contentType = type;
+    [USER.session post:nm];
+}
+
+- (void)sendCloseSignalWithTalkingId:(NSString *)talkingId roomId:(NSString *)rid {
+    WebRtcNotifyMsg *nm = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:talkingId rid:rid];
+    nm.contentType = @"close";
+    [USER.session post:nm];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[AudioPlayer sharePlayer] stop];
     switch (buttonIndex) {
         case 0:
-            m_busy = NO;
+            self.busy = NO;
             [self sendDeviceReceived:m_roomId];
             [self reject];
             break;
@@ -185,7 +209,7 @@
             break;
             
         default:
-            m_busy = NO;
+            self.busy = NO;
             break;
     }
 }

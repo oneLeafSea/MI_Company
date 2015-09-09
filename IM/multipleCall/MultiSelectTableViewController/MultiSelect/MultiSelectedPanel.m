@@ -127,6 +127,9 @@
     
     MultiSelectItem *item = self.selectedItems[indexPath.row];
     UIImage *img = [UIImage imageWithContentsOfFile:item.imageURL.path];
+    if (!img) {
+        img = [UIImage imageNamed:@"avatar_default"];
+    }
     imageView.image = img;
     
     return cell;

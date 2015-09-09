@@ -1308,7 +1308,13 @@
                             <outlet property="delegate" destination="85O-vi-Ra3" id="DWG-2Y-9dK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="群组" id="Aiy-0k-aOf"/>
+                    <navigationItem key="navigationItem" title="群组" id="Aiy-0k-aOf">
+                        <barButtonItem key="rightBarButtonItem" image="group_add" id="f68-Lt-Khf">
+                            <connections>
+                                <action selector="rightBarItemTapped:" destination="85O-vi-Ra3" id="p4f-fc-ATU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXi-76-FOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4182,6 +4188,7 @@
         <image name="fileBrowser_type_ppt" width="60" height="60"/>
         <image name="fileBrowser_unselected" width="25" height="25"/>
         <image name="function_un" width="30" height="30"/>
+        <image name="group_add" width="22" height="22"/>
         <image name="groupchat_logo" width="48" height="48"/>
         <image name="hangup" width="25" height="9"/>
         <image name="line" width="596" height="2"/>

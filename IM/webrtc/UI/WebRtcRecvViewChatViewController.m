@@ -162,6 +162,7 @@
 
 - (IBAction)answerBtnTapped:(id)sender {
     [[AudioPlayer sharePlayer] stop];
+    [USER.webRtcMgr sendSignalWithType:@"handle" isSelf:YES];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleButtonContainer)];
     [tapGestureRecognizer setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGestureRecognizer];

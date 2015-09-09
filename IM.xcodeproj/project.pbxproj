@@ -123,6 +123,11 @@
 		7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D50401B2831F10092965E /* FCICItemContentView.m */; };
 		7D7141941B5DC9020083A22B /* RTChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7141931B5DC9020083A22B /* RTChatModel.m */; };
 		7D71C48B1A4CEE4C003C2B14 /* RosterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */; };
+		7D747E3A1BA0034500B215AE /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D747E391BA0034500B215AE /* UIColor+Theme.m */; };
+		7D747E3F1BA00D7800B215AE /* GroupChatInviteMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D747E3E1BA00D7800B215AE /* GroupChatInviteMsg.m */; };
+		7D747E421BA0248D00B215AE /* GroupChatDelMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D747E411BA0248D00B215AE /* GroupChatDelMsg.m */; };
+		7D747E451BA028D500B215AE /* GroupChatQuitMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D747E441BA028D500B215AE /* GroupChatQuitMsg.m */; };
+		7D747E4B1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D747E4A1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m */; };
 		7D74B1261A5A5E9900CE9A66 /* IMAck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D74B1251A5A5E9900CE9A66 /* IMAck.m */; };
 		7D75DB2E1AEF2E2700518BEE /* OsNavigationOrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE91AA84DA60023EF49 /* OsNavigationOrgCollectionCell.m */; };
 		7D7668D71B54A41E0072399B /* RTMessagesAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D76686F1B54A41E0072399B /* RTMessagesAssets.bundle */; };
@@ -618,6 +623,16 @@
 		7D7141921B5DC9020083A22B /* RTChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTChatModel.h; sourceTree = "<group>"; };
 		7D7141931B5DC9020083A22B /* RTChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTChatModel.m; sourceTree = "<group>"; };
 		7D71C48A1A4CEE4C003C2B14 /* RosterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterTests.m; sourceTree = "<group>"; };
+		7D747E381BA0034500B215AE /* UIColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Theme.h"; sourceTree = "<group>"; };
+		7D747E391BA0034500B215AE /* UIColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Theme.m"; sourceTree = "<group>"; };
+		7D747E3D1BA00D7800B215AE /* GroupChatInviteMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatInviteMsg.h; sourceTree = "<group>"; };
+		7D747E3E1BA00D7800B215AE /* GroupChatInviteMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatInviteMsg.m; sourceTree = "<group>"; };
+		7D747E401BA0248D00B215AE /* GroupChatDelMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatDelMsg.h; sourceTree = "<group>"; };
+		7D747E411BA0248D00B215AE /* GroupChatDelMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatDelMsg.m; sourceTree = "<group>"; };
+		7D747E431BA028D500B215AE /* GroupChatQuitMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatQuitMsg.h; sourceTree = "<group>"; };
+		7D747E441BA028D500B215AE /* GroupChatQuitMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatQuitMsg.m; sourceTree = "<group>"; };
+		7D747E491BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatSettingForPrivateViewController.h; sourceTree = "<group>"; };
+		7D747E4A1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatSettingForPrivateViewController.m; sourceTree = "<group>"; };
 		7D74B1241A5A5E9900CE9A66 /* IMAck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAck.h; sourceTree = "<group>"; };
 		7D74B1251A5A5E9900CE9A66 /* IMAck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAck.m; sourceTree = "<group>"; };
 		7D76686F1B54A41E0072399B /* RTMessagesAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RTMessagesAssets.bundle; sourceTree = "<group>"; };
@@ -1246,6 +1261,8 @@
 				7D07BB991AA5A4F500E78877 /* GroupChatItemListViewController.m */,
 				7D07BB9B1AA5A56300E78877 /* GroupChatItemListTableViewCell.h */,
 				7D07BB9C1AA5A56300E78877 /* GroupChatItemListTableViewCell.m */,
+				7D747E491BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.h */,
+				7D747E4A1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1957,6 +1974,8 @@
 				7D6D501D1B27D3210092965E /* UITableViewCell+Extenssion.m */,
 				7D8A4F581B324E41009E5FFE /* NSString+URL.h */,
 				7D8A4F591B324E41009E5FFE /* NSString+URL.m */,
+				7D747E381BA0034500B215AE /* UIColor+Theme.h */,
+				7D747E391BA0034500B215AE /* UIColor+Theme.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2467,6 +2486,12 @@
 				7DFE24B31AA450B000C5DD29 /* GroupChatList.m */,
 				7D07BB881AA54B4200E78877 /* GroupChatItem.h */,
 				7D07BB891AA54B4200E78877 /* GroupChatItem.m */,
+				7D747E3D1BA00D7800B215AE /* GroupChatInviteMsg.h */,
+				7D747E3E1BA00D7800B215AE /* GroupChatInviteMsg.m */,
+				7D747E401BA0248D00B215AE /* GroupChatDelMsg.h */,
+				7D747E411BA0248D00B215AE /* GroupChatDelMsg.m */,
+				7D747E431BA028D500B215AE /* GroupChatQuitMsg.h */,
+				7D747E441BA028D500B215AE /* GroupChatQuitMsg.m */,
 			);
 			path = groupchat;
 			sourceTree = "<group>";
@@ -2743,6 +2768,7 @@
 				7D5447C31B4145A90096610B /* RTSession.swift in Sources */,
 				7D005D751A91BA00006CB54C /* fileBrowserSelectTableViewCell.m in Sources */,
 				7D08D0291A8D92F200F4C8E7 /* ChatMessageRecorderPanelView.m in Sources */,
+				7D747E451BA028D500B215AE /* GroupChatQuitMsg.m in Sources */,
 				7D7668FF1B54A41E0072399B /* RTMessagesInputToolbar.m in Sources */,
 				7D6D503B1B2804050092965E /* FCICItemCellModel.m in Sources */,
 				7DB1583C1A42DD5600287BBE /* Encrypt.m in Sources */,
@@ -2782,6 +2808,7 @@
 				7D7668EE1B54A41E0072399B /* RTMessage.m in Sources */,
 				7D7668E41B54A41E0072399B /* RTMessagesBubbleImageFactory.m in Sources */,
 				7DDF93271B1FDD4C0097C6BD /* CTAssetsViewCell.m in Sources */,
+				7D747E4B1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m in Sources */,
 				7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */,
 				7D1C60191AA6C1350035A2D2 /* OsNotification.m in Sources */,
 				7DB158AB1A42DD5600287BBE /* Request.m in Sources */,
@@ -2886,6 +2913,7 @@
 				7DB158A31A42DD5600287BBE /* MessageFactory.m in Sources */,
 				7D7668EC1B54A41E0072399B /* RTLocationMediaItem.m in Sources */,
 				7D119B341AC23EB500AC6CAB /* RTCICECandidate+WRJSON.m in Sources */,
+				7D747E3F1BA00D7800B215AE /* GroupChatInviteMsg.m in Sources */,
 				7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */,
 				7DB1585D1A42DD5600287BBE /* LoginResp.m in Sources */,
 				7DB669421A5F63EF00843C72 /* RosterViewController.m in Sources */,
@@ -2911,6 +2939,7 @@
 				7DADF7051B31410100082C4D /* RTFileTransfer.m in Sources */,
 				7D8A7BB11B957B75006657C6 /* RosterItemGrpTableViewCell.m in Sources */,
 				7DB158531A42DD5600287BBE /* JRResponse.m in Sources */,
+				7D747E3A1BA0034500B215AE /* UIColor+Theme.m in Sources */,
 				7DB158A41A42DD5600287BBE /* MessageKeeper.m in Sources */,
 				7DF3CAC01AF712E500D08AE7 /* PopMenuItem.m in Sources */,
 				7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */,
@@ -3049,6 +3078,7 @@
 				7DB1585A1A42DD5600287BBE /* JRreqFrbhParam.m in Sources */,
 				7DB1583E1A42DD5600287BBE /* NSDate+Common.m in Sources */,
 				7DB251B91A63B5BA007FC8D4 /* RosterItemSearchResultItemTableViewCell.m in Sources */,
+				7D747E421BA0248D00B215AE /* GroupChatDelMsg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

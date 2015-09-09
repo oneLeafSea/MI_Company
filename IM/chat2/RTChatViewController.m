@@ -31,6 +31,7 @@
 #import "GroupChatSettingTableViewController.h"
 #import "loglevel.h"
 #import "DetailTableViewController.h"
+#import "GroupChatSettingForPrivateViewController.h"
 
 @interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
 
@@ -122,10 +123,18 @@
         vc.rosterItem = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingId];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
+        
         GroupChat *grpChat = [USER.groupChatMgr getGrpChatByGid:self.talkingId];
-        GroupChatSettingTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"GroupChatSettingTableViewController"];
-        vc.grp = grpChat;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (grpChat.type == GropuChatypePublic) {
+            GroupChatSettingTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"GroupChatSettingTableViewController"];
+            vc.grp = grpChat;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            GroupChatSettingForPrivateViewController *vc = [[GroupChatSettingForPrivateViewController alloc] init];
+            vc.grp = grpChat;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
     }
 }
 

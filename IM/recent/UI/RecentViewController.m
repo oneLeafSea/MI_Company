@@ -154,6 +154,11 @@ static NSString *kChatMessageTypeNomal = @"0";
         } else {
             GroupChat *grp = [USER.groupChatMgr getGrpChatByGid:item.to];
             chatCell.avatarImgView.userInteractionEnabled = NO;
+            if (grp.type == GropuChatypePrivate) {
+                chatCell.avatarImgView.image = [UIImage imageNamed:@"groupchat_private"];
+            } else if (grp.type == GropuChatypePublic) {
+                chatCell.avatarImgView.image = [UIImage imageNamed:@"groupchat_logo"];
+            }
             chatCell.nameLbl.text = grp.gname;
         }
         
@@ -184,8 +189,6 @@ static NSString *kChatMessageTypeNomal = @"0";
         
         if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
              chatCell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:uid];
-        } else {
-            chatCell.avatarImgView.image = [UIImage imageNamed:@"groupchat_logo"];
         }
        
         

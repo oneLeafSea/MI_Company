@@ -242,6 +242,9 @@
         MultiSelectItem *item = ((NSArray*)self.dict[self.keys[indexPath.section]])[indexPath.row];
         
         UIImage *img = [UIImage imageWithContentsOfFile:item.imageURL.path];
+        if (!img) {
+            img = [UIImage imageNamed:@"avatar_default"];
+        }
         [cell.cellImageView setImage:img];
         cell.label.text = item.name;
         if (item.disabled) {

@@ -209,7 +209,6 @@
                 
             }];
             
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
             [self setWebImgCfg];
             [self saveUseIdAndPwd];

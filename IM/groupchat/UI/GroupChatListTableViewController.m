@@ -11,8 +11,16 @@
 #import "GroupChatListTableViewCell.h"
 #import "GroupChat.h"
 #import "RTChatViewController.h"
+#import "MultiSelectViewController.h"
+#import "UIColor+Theme.h"
+#import "UIAlertController+Blocks.h"
+#import "Utils.h"
+#import "LogLevel.h"
+#import "MBProgressHUD.h"
+#import "UIView+toast.h"
 
-@interface GroupChatListTableViewController ()
+@interface GroupChatListTableViewController () <MultiSelectViewControllerDelegate, UIAlertViewDelegate>
+@property(nonatomic, strong) NSArray *selectedArray;
 
 @end
 
@@ -65,6 +73,12 @@
     NSArray *grpChatList = USER.groupChatMgr.grpChatList.grpChatList;
     GroupChat *grp = [grpChatList objectAtIndex:indexPath.row];
     cell.grpName.text = grp.gname;
+    if (grp.type == GropuChatypePrivate) {
+        cell.logoImgView.image = [UIImage imageNamed:@"groupchat_private"];
+    } else if (grp.type == GropuChatypePublic) {
+        cell.logoImgView.image = [UIImage imageNamed:@"groupchat_logo"];
+    }
+    
     return cell;
 }
 
@@ -81,50 +95,101 @@
     vc.chatMsgType = ChatMessageTypeGroupChat;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (IBAction)rightBarItemTapped:(id)sender {
+    MultiSelectViewController *vc = [[MultiSelectViewController alloc]init];
+//    NSArray *rosterItems = [USER.rosterMgr allRosterItems];
+    NSArray *osItems = USER.osMgr.items;
+    NSMutableArray *multiItems = [[NSMutableArray alloc] init];
+    [osItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        OsItem *osItem = obj;
+        MultiSelectItem *item = [[MultiSelectItem alloc] init];
+        item.uid = osItem.uid;
+        item.name = osItem.name;
+        if ([item.uid isEqualToString:USER.uid]) {
+            return;
+        }
+        item.imageURL = [NSURL fileURLWithPath:[USER.avatarMgr.avatarPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", osItem.uid]]];
+        [multiItems addObject:item];
+    }];
+    vc.items = multiItems;
+    vc.delegate = self;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    navController.navigationBar.barTintColor = [UIColor themeColor];
+    navController.navigationBar.tintColor = [UIColor whiteColor];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],NSForegroundColorAttributeName,
+                                               nil];
+    navController.navigationBar.titleTextAttributes = navbarTitleTextAttributes;
+    [self.navigationController presentViewController:navController animated:YES completion:nil];;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)MultiSelectViewController:(MultiSelectViewController *)controller didConfirmWithSelectedItems:(NSArray *)selectedItems {
+    if (selectedItems.count == 0) {
+        return;
+    }
+    NSMutableArray *ma = [[NSMutableArray alloc] init];
+    [selectedItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MultiSelectItem *item = obj;
+        [ma addObject:item.uid];
+    }];
+    self.selectedArray = ma;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"群组名称"
+                                                    message:@"请填写群组名称"
+                                                   delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        UITextField *txtField = [alertView textFieldAtIndex:0];
+        NSString *gname = [txtField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (gname.length == 0) {
+            [Utils alertWithTip:@"创建失败，群组名称不能为空！"];
+            return;
+        }
+        
+        [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+        [USER.groupChatMgr createTempGroupWithGName:gname fname:USER.name token:USER.token signatrue:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(NSString *gid, BOOL finished) {
+            
+            if (finished) {
+                [USER.groupChatMgr getGroupListWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+                    if (finished) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.tableView reloadData];
+                        });
+                        
+                        [USER.groupChatMgr invitePeers:self.selectedArray toGid:gid gname:gname session:USER.session completion:^(BOOL finished) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [MBProgressHUD hideHUDForView:self.view.window animated:YES];
+                                if (finished) {
+                                    [Utils alertWithTip:@"创建并且发出邀请成功！"];
+                                } else {
+                                    [Utils alertWithTip:@"邀请失败！"];
+                                }
+                            });
+                                                   }];
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUDForView:self.view.window animated:YES];
+                            [Utils alertWithTip:@"更新群列表错误！"];
+                        });
+                        DDLogInfo(@"创建失败！");
+                    }
+                }];
+                DDLogInfo(@"创建群成功！");
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view.window animated:YES];
+                    [Utils alertWithTip:@"创建群组失败！"];
+                });
+                DDLogInfo(@"创建失败！");
+            }
+        }];
+        
+    }
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

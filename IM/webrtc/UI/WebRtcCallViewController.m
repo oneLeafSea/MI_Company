@@ -216,6 +216,7 @@ static CGFloat const kLocalVideoViewPadding = 8;
     [[AudioPlayer sharePlayer] stop];
 
     [self disconnect];
+    [USER.webRtcMgr sendCloseSignalWithTalkingId:self.talkingUid roomId:self.rid];
     [self dismissViewControllerAnimated:YES completion:^{
         [APP_DELEGATE.user.webRtcMgr setbusy:NO];
     }];

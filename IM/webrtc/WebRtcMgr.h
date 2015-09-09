@@ -15,6 +15,11 @@
 
 - (void)setbusy:(BOOL)busy;
 
+- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf;
+
+- (void)sendCloseSignalWithTalkingId:(NSString *)talkingId roomId:(NSString *)rid;
+
+
 @property(nonatomic, readonly) NSString *uid;
 
 - (void)inviteUid:(NSString *)uid session:(Session *)session;

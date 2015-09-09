@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GroupChatList.h"
 #import "GroupChat.h"
+#import "session.h"
 
 @interface GroupChatMgr : NSObject
 
@@ -35,8 +36,32 @@
                               url:(NSString *)url
                        completion:(void(^)(BOOL finished))completion;
 
+- (void)createTempGroupWithGName:(NSString *)gName
+                           fname:(NSString *)fName
+                          token:(NSString *)token
+                      signatrue:(NSString *)signature
+                            key:(NSString *)key
+                             iv:(NSString *)iv
+                            url:(NSString *)url
+                     completion:(void(^)(NSString* gid, BOOL finished))completion;
 
-@property(readonly) GroupChatList *grpChatList;
+- (void)invitePeers:(NSArray *)peers
+              toGid:(NSString *)gid
+              gname:(NSString *)gname
+            session:(Session *)session
+         completion:(void(^)(BOOL finished))completion;
+
+- (void)delGrpWithGid:(NSString *)gid
+              session:(Session *)session
+           completion:(void(^)(BOOL finished))completion;
+
+- (void)quitGrpWithGid:(NSString *)gid
+               session:(Session *)session
+            completion:(void(^)(BOOL finished))completion;
+
+
+
+@property(strong, atomic) GroupChatList *grpChatList;
 
 - (GroupChat *)getGrpChatByGid:(NSString *)gid;
 
