@@ -143,46 +143,12 @@ static CGFloat const kLocalVideoViewPadding = 8;
 
 - (void)layoutSubviews {
     CGRect bounds = self.remoteView.bounds;
-    if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
-        // Aspect fill remote video into bounds.
-        CGRect remoteVideoFrame =
-        AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
-        CGFloat scale = 1;
-        if (remoteVideoFrame.size.width > remoteVideoFrame.size.height) {
-            // Scale by height.
-            scale = bounds.size.height / remoteVideoFrame.size.height;
-        } else {
-            // Scale by width.
-            scale = bounds.size.width / remoteVideoFrame.size.width;
-        }
-        CGFloat height = self.remoteView.frame.size.height;
-        remoteVideoFrame.size.height *= scale;
-        remoteVideoFrame.size.width *= scale;
-        self.remoteViewToBottomConstraint.constant = (height - remoteVideoFrame.size.height)/2;
-        self.remoteViewToTopConstraint.constant = (height - remoteVideoFrame.size.height)/2;
-        self.remoteView.frame = remoteVideoFrame;
-        self.remoteView.center =
-        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-    } else {
-        self.remoteView.frame = bounds;
-    }
-    
-    if (_localVideoSize.width && _localVideoSize.height > 0) {
-        // Aspect fit local video view into a square box.
-        CGRect localVideoFrame =
-        CGRectMake(0, 0, kLocalVideoViewSize, kLocalVideoViewSize);
-        localVideoFrame =
-        AVMakeRectWithAspectRatioInsideRect(_localVideoSize, localVideoFrame);
-        
-        // Place the view in the bottom right.
-        localVideoFrame.origin.x = CGRectGetMaxX(bounds)
-        - localVideoFrame.size.width - kLocalVideoViewPadding;
-        localVideoFrame.origin.y = CGRectGetMaxY(bounds)
-        - localVideoFrame.size.height - kLocalVideoViewPadding;
-        self.localView.frame = localVideoFrame;
-    } else {
-        self.localView.frame = bounds;
-    }
+    CGRect remoteVideoFrame =
+    AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
+    CGFloat height = bounds.size.width * remoteVideoFrame.size.height / remoteVideoFrame.size.width;
+    self.remoteViewToBottomConstraint.constant = (self.view.bounds.size.height - height)/2;
+    self.remoteViewToTopConstraint.constant = (self.view.bounds.size.height - height)/2;
+    [self.remoteView layoutSubviews];
 }
 
 - (void)disconnect {
@@ -340,7 +306,7 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 
 - (void)updateTimeLbl {
     m_timeStick++;
-    self.timeLbl.text = [NSString stringWithFormat:@"%02d:%02d", m_timeStick / 60, m_timeStick % 60];
+    self.timeLbl.text = [NSString stringWithFormat:@"%02ld:%02ld", m_timeStick / 60, m_timeStick % 60];
 }
 
 #pragma mark - RTCEAGLVideoViewDelegate

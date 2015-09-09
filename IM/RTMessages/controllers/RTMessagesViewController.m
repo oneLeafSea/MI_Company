@@ -708,6 +708,10 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
     self.isEmotejKeyboard = NO;
 }
 
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didLongPressedAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 - (void)collectionView:(RTMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath {
     [self.inputToolbar.contentView.textView resignFirstResponder];
     self.isEmotejKeyboard = NO;

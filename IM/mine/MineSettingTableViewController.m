@@ -11,6 +11,7 @@
 #import "Appdelegate.h"
 #import "LoginViewController.h"
 #import "IMConf.h"
+#import "AboutTableViewController.h"
 
 @interface MineSettingTableViewController ()
 
@@ -41,6 +42,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 2) {
         PwdChangeTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PwdChangeTableViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.row == 4) {
+        AboutTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutTableViewController"];
         [self.navigationController pushViewController:vc animated:YES];
     }
     

@@ -103,6 +103,7 @@
 		7D532BF81B58A40E00D61205 /* RTFileMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D532BF71B58A40E00D61205 /* RTFileMediaItem.m */; };
 		7D532BFB1B58AC0600D61205 /* RTFileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D532BFA1B58AC0600D61205 /* RTFileView.m */; };
 		7D53F0151B9D248B008B47E7 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D53F0131B9D248B008B47E7 /* DetailTableViewController.m */; };
+		7D53F01A1B9D5A18008B47E7 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D53F0191B9D5A18008B47E7 /* AboutTableViewController.m */; };
 		7D5447C21B4145A90096610B /* RTHb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C01B4145A90096610B /* RTHb.swift */; };
 		7D5447C31B4145A90096610B /* RTSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5447C11B4145A90096610B /* RTSession.swift */; };
 		7D54D68C1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */; };
@@ -160,7 +161,6 @@
 		7D7668F81B54A41E0072399B /* RTMessagesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7668BC1B54A41E0072399B /* RTMessagesCollectionViewCell.m */; };
 		7D7668F91B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7668BE1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.m */; };
 		7D7668FA1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7668BF1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.xib */; };
-		7D7668FB1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming_.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7668C01B54A41E0072399B /* RTMessagesCollectionViewCellIncoming_.xib */; };
 		7D7668FC1B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7668C21B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.m */; };
 		7D7668FD1B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7668C31B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib */; };
 		7D7668FE1B54A41E0072399B /* RTMessagesComposerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7668C51B54A41E0072399B /* RTMessagesComposerTextView.m */; };
@@ -580,6 +580,8 @@
 		7D532BFA1B58AC0600D61205 /* RTFileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTFileView.m; sourceTree = "<group>"; };
 		7D53F0121B9D248B008B47E7 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
 		7D53F0131B9D248B008B47E7 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		7D53F0181B9D5A18008B47E7 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
+		7D53F0191B9D5A18008B47E7 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
 		7D5447C01B4145A90096610B /* RTHb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTHb.swift; sourceTree = "<group>"; };
 		7D5447C11B4145A90096610B /* RTSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTSession.swift; sourceTree = "<group>"; };
 		7D54D68A1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNPImagePickerTableViewCell.h; sourceTree = "<group>"; };
@@ -693,7 +695,6 @@
 		7D7668BD1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTMessagesCollectionViewCellIncoming.h; sourceTree = "<group>"; };
 		7D7668BE1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTMessagesCollectionViewCellIncoming.m; sourceTree = "<group>"; };
 		7D7668BF1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RTMessagesCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
-		7D7668C01B54A41E0072399B /* RTMessagesCollectionViewCellIncoming_.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RTMessagesCollectionViewCellIncoming_.xib; sourceTree = "<group>"; };
 		7D7668C11B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTMessagesCollectionViewCellOutgoing.h; sourceTree = "<group>"; };
 		7D7668C21B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTMessagesCollectionViewCellOutgoing.m; sourceTree = "<group>"; };
 		7D7668C31B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RTMessagesCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
@@ -1471,6 +1472,15 @@
 			path = historymsg;
 			sourceTree = "<group>";
 		};
+		7D53F0171B9D5A03008B47E7 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				7D53F0181B9D5A18008B47E7 /* AboutTableViewController.h */,
+				7D53F0191B9D5A18008B47E7 /* AboutTableViewController.m */,
+			);
+			path = about;
+			sourceTree = "<group>";
+		};
 		7D5447B91B4140330096610B /* RTSession */ = {
 			isa = PBXGroup;
 			children = (
@@ -1664,7 +1674,6 @@
 				7D7668BD1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.h */,
 				7D7668BE1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.m */,
 				7D7668BF1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming.xib */,
-				7D7668C01B54A41E0072399B /* RTMessagesCollectionViewCellIncoming_.xib */,
 				7D7668C11B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.h */,
 				7D7668C21B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.m */,
 				7D7668C31B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib */,
@@ -1832,6 +1841,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D53F0171B9D5A03008B47E7 /* about */,
 				7D76686D1B54A41E0072399B /* RTMessages */,
 				7D7669CE1B54B2360072399B /* chat2 */,
 				7D5447B91B4140330096610B /* RTSession */,
@@ -2632,7 +2642,6 @@
 				7D7FCDF41AA850010023EF49 /* OsNavigationTableViewCell.xib in Resources */,
 				7D7FCDE21AA849370023EF49 /* OsNavigationRootCollectionCell.xib in Resources */,
 				7D7FCDEF1AA84E140023EF49 /* OsNavigationSelOrgCollectionCell.xib in Resources */,
-				7D7668FB1B54A41E0072399B /* RTMessagesCollectionViewCellIncoming_.xib in Resources */,
 				7D7668FD1B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib in Resources */,
 				7D7669021B54A41E0072399B /* RTMessagesLoadEarlierHeaderView.xib in Resources */,
 				7DB156CB1A42DC0C00287BBE /* LaunchScreen.xib in Resources */,
@@ -2727,6 +2736,7 @@
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
 				7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */,
 				7D07BB971AA59C6500E78877 /* GroupChatSettingTableViewController.m in Sources */,
+				7D53F01A1B9D5A18008B47E7 /* AboutTableViewController.m in Sources */,
 				7D1C602C1AA6E7E50035A2D2 /* OsItemsTb.m in Sources */,
 				7D7668E91B54A41E0072399B /* RTMessagesCollectionViewFlowLayout.m in Sources */,
 				7D7669D11B54B27C0072399B /* RTChatViewController.m in Sources */,

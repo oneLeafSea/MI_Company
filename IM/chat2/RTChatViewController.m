@@ -106,7 +106,8 @@
 }
 
 - (void)setupRightBarItem {
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(rightBarButtonItemTapped:)];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chatmsg_rightbarItem"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemTapped:)];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
@@ -384,6 +385,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didLongPressedAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath {
+    [super collectionView:collectionView didLongPressedAvatarImageView:avatarImageView atIndexPath:indexPath];
+    RTMessage *message = [self.data.messages objectAtIndex:indexPath.item];
+    self.inputToolbar.contentView.textView.text = [NSString stringWithFormat:@"%@@%@ ", self.inputToolbar.contentView.textView.text, message.senderDisplayName];
+}
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -394,7 +400,6 @@
 - (UICollectionViewCell *)collectionView:(RTMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RTMessagesCollectionViewCell *cell = (RTMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
     
     
     RTMessage *msg = [self.data.messages objectAtIndex:indexPath.row];
@@ -592,6 +597,7 @@
 
 #pragma UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    DDLogCInfo(@"1");
     //This creates a filepath with the current date/time as the name to save the image
     NSString *imgName = [NSString stringWithFormat:@"%@.jpg", [NSUUID uuid]];
     NSString *fileSavePath = [USER.filePath stringByAppendingPathComponent:imgName];
@@ -599,7 +605,7 @@
     NSURL *orgUrl = [NSURL fileURLWithPath:fileSavePath];
     NSURL *thumbUrl = [NSURL fileURLWithPath:thumbFilePath];
     UIImage *Img = nil;
-    
+    DDLogCInfo(@"2");
     //This checks to see if the image was edited, if it was it saves the edited version as a .jpg
     if ([info objectForKey:UIImagePickerControllerEditedImage]) {
         Img = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -608,11 +614,12 @@
         Img = [info objectForKey:UIImagePickerControllerOriginalImage];
         
     }
-    
+    DDLogCInfo(@"3");
     [Img saveToPath:fileSavePath scale:1.0];
     [Img saveToPath:thumbFilePath sz:CGSizeMake(100.0f, 100.0f)];
-    
+    DDLogCInfo(@"4");
     [picker dismissViewControllerAnimated:YES completion:^{
+        DDLogCInfo(@"5");
         __block RTPhotoMediaItem * item = [[RTPhotoMediaItem alloc] initWithMaskAsOutgoing:YES];
         item.orgUrl = orgUrl;
         item.thumbUrl = thumbUrl;
@@ -625,6 +632,7 @@
         [self finishSendingMessageAnimated:YES];
         [USER.msgMgr sendImageMesageWithImgPath:fileSavePath uuidName:imgName imgName:imgName  msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
             if (finished) {
+                DDLogCInfo(@"6");
                 item.status = RTPhotoMediaItemStatusSent;
                 photoMessage.status = RTMessageStatusSent;
             } else {
@@ -632,9 +640,11 @@
                 photoMessage.status = RTMessageStatusSendError;
             }
             [self finishSendingMessageAnimated:NO];
+            DDLogCInfo(@"7");
         }];
         
     }];
+    DDLogCInfo(@"8");
 }
 
 

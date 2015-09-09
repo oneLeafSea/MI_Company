@@ -55,10 +55,10 @@
     FCNPTextTableViewCell *txtCell = (FCNPTextTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     FCNPImagePickerTableViewCell *pickerCell = (FCNPImagePickerTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     [txtCell.txtView resignFirstResponder];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
     NSString *content = [Utils encodeBase64String:txtCell.text];
     [USER.fcMgr NewPostWithContent:content imgs:pickerCell.imgArray completion:^(BOOL finished) {
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         [MBProgressHUD hideAllHUDsForView:self.view.window animated:YES];
         if (finished) {
             [self.view makeToast:@"上传成功."];
             [self.navigationController popViewControllerAnimated:YES];

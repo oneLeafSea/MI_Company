@@ -68,9 +68,13 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             if (content == nil) {
                 return;
             }
+            NSString *displayName = [msg.body objectForKey:@"fromname"];
+            if (displayName == nil) {
+                displayName = @"未知";
+            }
             NSDate *date = [NSDate dateWithFormater:kDateFormater stringTime:msg.time];
             RTMessage *rtMsg = [[RTMessage alloc] initWithSenderId:msg.from
-                                                    senderDisplayName:[msg.body objectForKey:@"fromname"]
+                                                    senderDisplayName:displayName
                                                                  date:date
                                                               text:content];
             
@@ -97,10 +101,12 @@ static NSString *kDateFormater = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
                 photoItem.thumbUrl = [NSURL URLWithString:thumbUrl];
                 photoItem.orgUrl = [NSURL URLWithString:[USER.fileDownloadSvcUrl stringByAppendingPathComponent:uuid]];
             }
-            
+            NSString *displayName = [msg.body objectForKey:@"fromname"];
+            if (displayName.length == 0) {
+                displayName = @"未知";
+            }
             RTMessage *rtMsg = [[RTMessage alloc] initWithSenderId:msg.from
-                                                 senderDisplayName:[msg.body
-                                                                    objectForKey:@"fromname"]
+                                                 senderDisplayName:displayName
                                                               date:date
                                                              media:photoItem];
             [self.messages addObject:rtMsg];

@@ -186,7 +186,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (NSString *)appVersion {
-    return @"0.1";
+    return @"1.0.0";
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {

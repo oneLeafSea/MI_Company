@@ -118,6 +118,16 @@
                       atIndexPath:indexPath];
 }
 
+- (void)messagesCollectionViewCellDidLongPressedAvatar:(RTMessagesCollectionViewCell *)cell {
+    NSIndexPath *indexPath = [self indexPathForCell:cell];
+    if (indexPath == nil) {
+        return;
+    }
+    [self.delegate collectionView:self
+            didLongPressedAvatarImageView:cell.avatarImageView
+                      atIndexPath:indexPath];
+}
+
 - (void)messagesCollectionViewCellDidTapMessageBubble:(RTMessagesCollectionViewCell *)cell {
     NSIndexPath *indexPath = [self indexPathForCell:cell];
     if (indexPath == nil) {

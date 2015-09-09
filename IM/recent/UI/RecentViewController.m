@@ -153,6 +153,7 @@ static NSString *kChatMessageTypeNomal = @"0";
             chatCell.nameLbl.text = name;
         } else {
             GroupChat *grp = [USER.groupChatMgr getGrpChatByGid:item.to];
+            chatCell.avatarImgView.userInteractionEnabled = NO;
             chatCell.nameLbl.text = grp.gname;
         }
         

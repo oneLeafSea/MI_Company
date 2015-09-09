@@ -27,6 +27,8 @@
 
 - (void)collectionView:(RTMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath;
 
+- (void)collectionView:(RTMessagesCollectionView *)collectionView didLongPressedAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath;
+
 
 - (void)collectionView:(RTMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath;
 

@@ -67,6 +67,8 @@
 
 @property (assign, nonatomic) CGSize localVideoSize;
 @property (assign, nonatomic) CGSize remoteVideoSize;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *remoteViewToTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *remoteViewToBottomConstraint;
 
 
 @property (strong, nonatomic) WebRtcClient *client;
@@ -89,6 +91,8 @@
     self.topView.hidden = YES;
     self.bottomView.hidden = YES;
     self.localView.hidden = YES;
+    self.remoteView.delegate = self;
+    self.localView.delegate = self;
     [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
     [[AudioPlayer sharePlayer] playWithPath:path];
@@ -183,7 +187,7 @@
 
 - (void)handleTimer {
     m_timeStick++;
-    self.timeLbl.text = [NSString stringWithFormat:@"%02d:%02d", m_timeStick / 60, m_timeStick % 60];
+    self.timeLbl.text = [NSString stringWithFormat:@"%02ld:%02ld", m_timeStick / 60, m_timeStick % 60];
 }
 
 
@@ -301,6 +305,16 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
     }
 }
 
+- (void)layoutSubviews {
+    CGRect bounds = self.remoteView.bounds;
+    CGRect remoteVideoFrame =
+    AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
+    CGFloat height = bounds.size.width * remoteVideoFrame.size.height / remoteVideoFrame.size.width;
+    self.remoteViewToBottomConstraint.constant = (self.view.bounds.size.height - height)/2;
+    self.remoteViewToTopConstraint.constant = (self.view.bounds.size.height - height)/2;
+    [self.remoteView layoutSubviews];
+}
+
 #pragma mark - RTCEAGLVideoViewDelegate
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size {
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -309,7 +323,6 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
         CGFloat containerHeight = self.view.frame.size.height;
         CGSize defaultAspectRatio = CGSizeMake(4, 3);
         if (videoView == self.localView) {
-            //Resize the Local View depending if it is full screen or thumbnail
             self.localVideoSize = size;
             CGSize aspectRatio = CGSizeEqualToSize(size, CGSizeZero) ? defaultAspectRatio : size;
             CGRect videoRect = self.view.bounds;
@@ -331,12 +344,14 @@ didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
                 [self.localViewBottomContaint setConstant:containerHeight/2.0f - videoFrame.size.height/2.0f]; //center
                 [self.localViewRightConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
             }
+            [self layoutSubviews];
         } else if (videoView == self.remoteView) {
+            //Resize Remote View
             self.remoteVideoSize = size;
+            [self layoutSubviews];
         }
-        [self.view layoutIfNeeded];
+        //        [self.view layoutIfNeeded];
     }];
-
 }
 
 - (void)handleEnterBackground:(NSNotification *)notification {

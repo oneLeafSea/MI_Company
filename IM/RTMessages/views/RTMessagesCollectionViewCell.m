@@ -49,6 +49,7 @@ static NSMutableSet *rtMessagesCollectionViewCellActions = nil;
 @property (assign, nonatomic) CGSize avatarViewSize;
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
 
+
 - (void)rt_handleTapGesture:(UITapGestureRecognizer *)tap;
 - (void)rt_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant;
 
@@ -102,12 +103,14 @@ static NSMutableSet *rtMessagesCollectionViewCellActions = nil;
     self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     
+    
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rt_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+
 }
 
 - (void)dealloc {
@@ -295,6 +298,8 @@ static NSMutableSet *rtMessagesCollectionViewCellActions = nil;
         [self.delegate messagesCollectionViewCellDidTapCell:self atPosition:touchPt];
     }
 }
+
+
 
 - (void)rt_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant {
     if (constraint.constant == constant) {

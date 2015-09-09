@@ -177,15 +177,15 @@
     }];
     __block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
     [session request:req success:^(JRReqest *request, JRResponse *resp) {
-        NSLog(@"INFO:update grp time suc.");
+        DDLogInfo(@"INFO:update grp time suc.");
         [[UIApplication sharedApplication]  endBackgroundTask: m_task];
         m_task = UIBackgroundTaskInvalid;
     } failure:^(JRReqest *request, NSError *error) {
-        NSLog(@"INFO:update grp time fail.");
+        DDLogInfo(@"INFO:update grp time fail.");
         [[UIApplication sharedApplication]  endBackgroundTask: m_task];
         m_task = UIBackgroundTaskInvalid;
     } cancel:^(JRReqest *request) {
-        NSLog(@"INFO:update grp time fail.");
+        DDLogInfo(@"INFO:update grp time fail.");
         [[UIApplication sharedApplication]  endBackgroundTask: m_task];
         m_task = UIBackgroundTaskInvalid;
     }];
@@ -193,7 +193,7 @@
 
 - (void)handleWillEnterBackground:(NSNotification *)notification {
     m_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        NSLog(@"INFO: background end.");
+        DDLogInfo(@"INFO: background end.");
         [[UIApplication sharedApplication]  endBackgroundTask: m_task];
         m_task = UIBackgroundTaskInvalid;
     }];

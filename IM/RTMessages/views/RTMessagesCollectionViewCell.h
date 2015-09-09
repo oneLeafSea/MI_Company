@@ -17,6 +17,8 @@
 
 - (void)messagesCollectionViewCellDidTapAvatar:(RTMessagesCollectionViewCell *)cell;
 
+- (void)messagesCollectionViewCellDidLongPressedAvatar:(RTMessagesCollectionViewCell *)cell;
+
 - (void)messagesCollectionViewCellDidTapMessageBubble:(RTMessagesCollectionViewCell *)cell;
 
 - (void)messagesCollectionViewCellDidTapCell:(RTMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
