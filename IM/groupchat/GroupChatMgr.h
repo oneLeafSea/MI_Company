@@ -10,6 +10,9 @@
 #import "GroupChatList.h"
 #import "GroupChat.h"
 #import "session.h"
+#import <FMDB.h>
+
+extern NSString *kGroupChatListChangedNotification;
 
 @interface GroupChatMgr : NSObject
 
@@ -59,7 +62,9 @@
                session:(Session *)session
             completion:(void(^)(BOOL finished))completion;
 
+- (instancetype)initWithDqb:(FMDatabaseQueue *)dbq;
 
+- (instancetype)init NS_UNAVAILABLE;
 
 @property(strong, atomic) GroupChatList *grpChatList;
 

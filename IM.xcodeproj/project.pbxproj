@@ -188,6 +188,11 @@
 		7D7870221B5CB8E000C61791 /* RTAudioMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7870211B5CB8E000C61791 /* RTAudioMediaItem.m */; };
 		7D7978961B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */; };
 		7D7978991B295E8500D614F7 /* FCItemImagesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */; };
+		7D7BDEAF1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7BDEAE1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.m */; };
+		7D7BDEB81BA2B83B00E86E88 /* GroupChatNotificationTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7BDEB71BA2B83B00E86E88 /* GroupChatNotificationTb.m */; };
+		7D7BDEBB1BA2BC5E00E86E88 /* GroupChatSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7BDEBA1BA2BC5E00E86E88 /* GroupChatSql.m */; };
+		7D7BDEBE1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7BDEBD1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m */; };
+		7D7BDEC11BA2CADB00E86E88 /* GroupChatNotificaitonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7BDEC01BA2CADB00E86E88 /* GroupChatNotificaitonCell.m */; };
 		7D7C58541B44C45F00125264 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58531B44C45E00125264 /* WelcomeViewController.m */; };
 		7D7C58571B44DC6200125264 /* FCNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58561B44DC6200125264 /* FCNotification.m */; };
 		7D7C585A1B44E1CF00125264 /* FuncFcTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C58591B44E1CF00125264 /* FuncFcTableViewCell.m */; };
@@ -212,6 +217,7 @@
 		7D81DD8A1AC25D12000A7EDD /* WebRtcWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD891AC25D12000A7EDD /* WebRtcWebSocketChannel.m */; };
 		7D81DD8F1AC272E9000A7EDD /* WebRtcSocketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */; };
 		7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */; };
+		7D89E2471BA11027003CB547 /* RTVideoChatMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D89E2461BA11027003CB547 /* RTVideoChatMediaItem.m */; };
 		7D8A4F5A1B324E41009E5FFE /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F591B324E41009E5FFE /* NSString+URL.m */; };
 		7D8A4F5D1B32AB6D009E5FFE /* FCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A4F5C1B32AB6D009E5FFE /* FCModel.m */; };
 		7D8A7BAB1B9548D4006657C6 /* SearchPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A7BAA1B9548D4006657C6 /* SearchPeopleViewController.m */; };
@@ -358,6 +364,8 @@
 		7DDF932A1B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93161B1FDD4C0097C6BD /* NSBundle+CTAssetsPickerController.m */; };
 		7DDF932B1B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF93181B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m */; };
 		7DDF932C1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF931A1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m */; };
+		7DE2F03C1BA15F3100AED700 /* GroupChatNotifyMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE2F03B1BA15F3100AED700 /* GroupChatNotifyMsg.m */; };
+		7DE2F03F1BA1606700AED700 /* GroupNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE2F03E1BA1606700AED700 /* GroupNotification.m */; };
 		7DEA705F1AA94326002C2C68 /* OsOrgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA705E1AA94326002C2C68 /* OsOrgTableViewCell.m */; };
 		7DEA70621AA94335002C2C68 /* OsOrgItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA70611AA94335002C2C68 /* OsOrgItemTableViewCell.m */; };
 		7DEA70661AA988CC002C2C68 /* DetailMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA70651AA988CC002C2C68 /* DetailMgr.m */; };
@@ -750,6 +758,16 @@
 		7D7978951B295A9D00D614F7 /* FCIImagesitemCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCIImagesitemCollectionViewCellModel.m; sourceTree = "<group>"; };
 		7D7978971B295E8500D614F7 /* FCItemImagesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCItemImagesViewModel.h; sourceTree = "<group>"; };
 		7D7978981B295E8500D614F7 /* FCItemImagesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCItemImagesViewModel.m; sourceTree = "<group>"; };
+		7D7BDEAD1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentGrpNotifyTableViewCell.h; sourceTree = "<group>"; };
+		7D7BDEAE1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentGrpNotifyTableViewCell.m; sourceTree = "<group>"; };
+		7D7BDEB61BA2B83B00E86E88 /* GroupChatNotificationTb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatNotificationTb.h; sourceTree = "<group>"; };
+		7D7BDEB71BA2B83B00E86E88 /* GroupChatNotificationTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatNotificationTb.m; sourceTree = "<group>"; };
+		7D7BDEB91BA2BC5E00E86E88 /* GroupChatSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatSql.h; sourceTree = "<group>"; };
+		7D7BDEBA1BA2BC5E00E86E88 /* GroupChatSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatSql.m; sourceTree = "<group>"; };
+		7D7BDEBC1BA2C71600E86E88 /* GroupChatNotificaitonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatNotificaitonViewController.h; sourceTree = "<group>"; };
+		7D7BDEBD1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatNotificaitonViewController.m; sourceTree = "<group>"; };
+		7D7BDEBF1BA2CADB00E86E88 /* GroupChatNotificaitonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatNotificaitonCell.h; sourceTree = "<group>"; };
+		7D7BDEC01BA2CADB00E86E88 /* GroupChatNotificaitonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatNotificaitonCell.m; sourceTree = "<group>"; };
 		7D7C58521B44C45E00125264 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7D7C58531B44C45E00125264 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		7D7C58551B44DC6200125264 /* FCNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCNotification.h; sourceTree = "<group>"; };
@@ -793,6 +811,8 @@
 		7D81DD8E1AC272E9000A7EDD /* WebRtcSocketTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcSocketTest.m; sourceTree = "<group>"; };
 		7D87DAD01AB6976600AD57C6 /* ApnsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApnsMgr.h; sourceTree = "<group>"; };
 		7D87DAD11AB6976600AD57C6 /* ApnsMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApnsMgr.m; sourceTree = "<group>"; };
+		7D89E2451BA11027003CB547 /* RTVideoChatMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTVideoChatMediaItem.h; sourceTree = "<group>"; };
+		7D89E2461BA11027003CB547 /* RTVideoChatMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTVideoChatMediaItem.m; sourceTree = "<group>"; };
 		7D8A4F581B324E41009E5FFE /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
 		7D8A4F591B324E41009E5FFE /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
 		7D8A4F5B1B32AB6D009E5FFE /* FCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCModel.h; sourceTree = "<group>"; };
@@ -1086,6 +1106,10 @@
 		7DDF93181B1FDD4C0097C6BD /* NSDateFormatter+timeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+timeIntervalFormatter.m"; sourceTree = "<group>"; };
 		7DDF93191B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CTAssetsPickerController.h"; sourceTree = "<group>"; };
 		7DDF931A1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CTAssetsPickerController.m"; sourceTree = "<group>"; };
+		7DE2F03A1BA15F3100AED700 /* GroupChatNotifyMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatNotifyMsg.h; sourceTree = "<group>"; };
+		7DE2F03B1BA15F3100AED700 /* GroupChatNotifyMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatNotifyMsg.m; sourceTree = "<group>"; };
+		7DE2F03D1BA1606700AED700 /* GroupNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupNotification.h; sourceTree = "<group>"; };
+		7DE2F03E1BA1606700AED700 /* GroupNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupNotification.m; sourceTree = "<group>"; };
 		7DEA705D1AA94326002C2C68 /* OsOrgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsOrgTableViewCell.h; sourceTree = "<group>"; };
 		7DEA705E1AA94326002C2C68 /* OsOrgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsOrgTableViewCell.m; sourceTree = "<group>"; };
 		7DEA70601AA94335002C2C68 /* OsOrgItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsOrgItemTableViewCell.h; sourceTree = "<group>"; };
@@ -1263,6 +1287,10 @@
 				7D07BB9C1AA5A56300E78877 /* GroupChatItemListTableViewCell.m */,
 				7D747E491BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.h */,
 				7D747E4A1BA02B2A00B215AE /* GroupChatSettingForPrivateViewController.m */,
+				7D7BDEBC1BA2C71600E86E88 /* GroupChatNotificaitonViewController.h */,
+				7D7BDEBD1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m */,
+				7D7BDEBF1BA2CADB00E86E88 /* GroupChatNotificaitonCell.h */,
+				7D7BDEC01BA2CADB00E86E88 /* GroupChatNotificaitonCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1670,6 +1698,8 @@
 				7D7870211B5CB8E000C61791 /* RTAudioMediaItem.m */,
 				7D039DBF1B5CDC4E00EBB313 /* RTPhotoView.h */,
 				7D039DC01B5CDC4E00EBB313 /* RTPhotoView.m */,
+				7D89E2451BA11027003CB547 /* RTVideoChatMediaItem.h */,
+				7D89E2461BA11027003CB547 /* RTVideoChatMediaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1738,6 +1768,17 @@
 				7D7141931B5DC9020083A22B /* RTChatModel.m */,
 			);
 			path = chat2;
+			sourceTree = "<group>";
+		};
+		7D7BDEB51BA2B83B00E86E88 /* tb */ = {
+			isa = PBXGroup;
+			children = (
+				7D7BDEB61BA2B83B00E86E88 /* GroupChatNotificationTb.h */,
+				7D7BDEB71BA2B83B00E86E88 /* GroupChatNotificationTb.m */,
+				7D7BDEB91BA2BC5E00E86E88 /* GroupChatSql.h */,
+				7D7BDEBA1BA2BC5E00E86E88 /* GroupChatSql.m */,
+			);
+			path = tb;
 			sourceTree = "<group>";
 		};
 		7D7C66701B3907880025A3DB /* FCNewPost */ = {
@@ -2174,6 +2215,8 @@
 				7D8A7BAA1B9548D4006657C6 /* SearchPeopleViewController.m */,
 				7D8A7BAC1B954F81006657C6 /* SearchPeopleTableViewCell.h */,
 				7D8A7BAD1B954F81006657C6 /* SearchPeopleTableViewCell.m */,
+				7D7BDEAD1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.h */,
+				7D7BDEAE1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2475,6 +2518,7 @@
 		7DFE24A81AA43EEC00C5DD29 /* groupchat */ = {
 			isa = PBXGroup;
 			children = (
+				7D7BDEB51BA2B83B00E86E88 /* tb */,
 				7D07BB8E1AA5614D00E78877 /* UI */,
 				7DFE24A91AA43F5B00C5DD29 /* GroupChatMgr.h */,
 				7DFE24AA1AA43F5B00C5DD29 /* GroupChatMgr.m */,
@@ -2492,6 +2536,10 @@
 				7D747E411BA0248D00B215AE /* GroupChatDelMsg.m */,
 				7D747E431BA028D500B215AE /* GroupChatQuitMsg.h */,
 				7D747E441BA028D500B215AE /* GroupChatQuitMsg.m */,
+				7DE2F03A1BA15F3100AED700 /* GroupChatNotifyMsg.h */,
+				7DE2F03B1BA15F3100AED700 /* GroupChatNotifyMsg.m */,
+				7DE2F03D1BA1606700AED700 /* GroupNotification.h */,
+				7DE2F03E1BA1606700AED700 /* GroupNotification.m */,
 			);
 			path = groupchat;
 			sourceTree = "<group>";
@@ -2851,6 +2899,7 @@
 				7D0CFBEF1A77334700902285 /* Relogin.m in Sources */,
 				7DDF931B1B1FDD4C0097C6BD /* ALAsset+accessibilityLabel.m in Sources */,
 				7D7669011B54A41E0072399B /* RTMessagesLoadEarlierHeaderView.m in Sources */,
+				7D7BDEBE1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m in Sources */,
 				7D7669031B54A41E0072399B /* RTMessagesMediaPlaceholderView.m in Sources */,
 				7D9499E21B968E76005C4B3C /* AvatarTb.m in Sources */,
 				7D7668EA1B54A41E0072399B /* RTMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
@@ -2863,6 +2912,7 @@
 				7D7668D91B54A41E0072399B /* NSString+RTMessages.m in Sources */,
 				7DB3FCE91A6DF7A200BFA0E7 /* RosterGrpMgrTableViewCell.m in Sources */,
 				7DF3CAAF1AF70C7F00D08AE7 /* MLLetterIndexNavigationItem.m in Sources */,
+				7DE2F03C1BA15F3100AED700 /* GroupChatNotifyMsg.m in Sources */,
 				7D1C60231AA6E7960035A2D2 /* OsSql.m in Sources */,
 				7D7669DA1B54E12B0072399B /* RTScaleableRoundView.m in Sources */,
 				7D51F4E71B29142400234C8F /* FCICRemarkTableViewCell.m in Sources */,
@@ -2871,6 +2921,7 @@
 				7D7C66761B392A9A0025A3DB /* FCNPTextTableViewCell.m in Sources */,
 				7DF3CAB41AF70C7F00D08AE7 /* MultiSelectSearchResultTableViewCell.m in Sources */,
 				7D7668E61B54A41E0072399B /* RTMessagesTimestampFormatter.m in Sources */,
+				7D7BDEC11BA2CADB00E86E88 /* GroupChatNotificaitonCell.m in Sources */,
 				7DADF7001B31161700082C4D /* FCMgr.m in Sources */,
 				7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */,
 				7D2E10021A83948F0099AB04 /* UIImage+Common.m in Sources */,
@@ -2921,6 +2972,7 @@
 				7DB251B01A637D00007FC8D4 /* RosterItemAddTableViewController.m in Sources */,
 				7DB1585C1A42DD5600287BBE /* LoginRequest.m in Sources */,
 				7D7668EB1B54A41E0072399B /* RTMessagesCollectionViewLayoutAttributes.m in Sources */,
+				7D7BDEAF1BA2765900E86E88 /* RecentGrpNotifyTableViewCell.m in Sources */,
 				7DF3CAB61AF70C7F00D08AE7 /* MultiSelectTableViewCell.m in Sources */,
 				7D039DC11B5CDC4E00EBB313 /* RTPhotoView.m in Sources */,
 				7D7DBC791B29396C00E8B4B2 /* FCItemImagesView.m in Sources */,
@@ -2940,13 +2992,16 @@
 				7D8A7BB11B957B75006657C6 /* RosterItemGrpTableViewCell.m in Sources */,
 				7DB158531A42DD5600287BBE /* JRResponse.m in Sources */,
 				7D747E3A1BA0034500B215AE /* UIColor+Theme.m in Sources */,
+				7D89E2471BA11027003CB547 /* RTVideoChatMediaItem.m in Sources */,
 				7DB158A41A42DD5600287BBE /* MessageKeeper.m in Sources */,
 				7DF3CAC01AF712E500D08AE7 /* PopMenuItem.m in Sources */,
 				7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */,
 				7D7668DC1B54A41E0072399B /* UIColor+RTMessages.m in Sources */,
 				7DDF932C1B1FDD4C0097C6BD /* UIImage+CTAssetsPickerController.m in Sources */,
 				7D7FCDF21AA84FEE0023EF49 /* OsNavigationTableViewCell.m in Sources */,
+				7D7BDEBB1BA2BC5E00E86E88 /* GroupChatSql.m in Sources */,
 				7DB1585E1A42DD5600287BBE /* LogoutRequest.m in Sources */,
+				7DE2F03F1BA1606700AED700 /* GroupNotification.m in Sources */,
 				7DDF93281B1FDD4C0097C6BD /* CTAssetsViewController.m in Sources */,
 				7DDF931E1B1FDD4C0097C6BD /* ALAssetsGroup+isEqual.m in Sources */,
 				7DB1589C1A42DD5600287BBE /* RosterItemAddResult.m in Sources */,
@@ -2957,6 +3012,7 @@
 				7D9319B91B4666A10014A532 /* RTSeparatorCell.m in Sources */,
 				7DF3CAB81AF70C7F00D08AE7 /* MultiSelectViewController.m in Sources */,
 				7DF3CACC1AF7607300D08AE7 /* MultiCallClient.m in Sources */,
+				7D7BDEB81BA2B83B00E86E88 /* GroupChatNotificationTb.m in Sources */,
 				7D005D721A91B9DF006CB54C /* fileBrowserViewController.m in Sources */,
 				7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */,
 				7D7668F31B54A41E0072399B /* AGEmojiKeyBoardView.m in Sources */,

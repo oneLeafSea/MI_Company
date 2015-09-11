@@ -15,7 +15,7 @@
 
 - (void)setbusy:(BOOL)busy;
 
-- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf;
+- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf roomId:(NSString *)roomId;
 
 - (void)sendCloseSignalWithTalkingId:(NSString *)talkingId roomId:(NSString *)rid;
 

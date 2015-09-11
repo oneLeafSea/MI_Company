@@ -71,6 +71,11 @@ NSString *kSQLRecentChatMsgBadgeUpdate = @"UPDATE `tb_recent` SET "
                                           " WHERE "
                                           "(`from` = ? OR `to` = ?) AND `msgtype` = 196609 AND ext = ?;";
 
+NSString *kSQLRecentGrpNotifyBageUpdate = @"UPDATE `tb_recent` SET "
+                                            "`badge` = ?"
+                                            " WHERE "
+                                            "`msgtype` = 200708;";
+
 NSString *kSQLRecentMsgBadgeSum = @"SELECT SUM(`badge`) AS `sum` FROM `tb_recent`";
 
 NSString *kSQLRecentDelMsgItemByMsgId = @"DELETE FROM `tb_recent` WHERE `msgid` = ?;";

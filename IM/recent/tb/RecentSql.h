@@ -38,3 +38,5 @@ extern NSString *kSQLRecentExsitMsgType;
 extern NSString *kSQLRecentUpdateRosterItemAddReqBadge;
 
 extern NSString *kSQLRecentGetFirstBageWithMsgType;
+
+extern NSString *kSQLRecentGrpNotifyBageUpdate;

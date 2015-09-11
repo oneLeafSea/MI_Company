@@ -338,6 +338,66 @@
                                             <outlet property="timeLbl" destination="2sk-sO-DPM" id="afX-aj-Oes"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentGrpNotifyTableViewCell" rowHeight="60" id="ljM-05-ppg" customClass="RecentGrpNotifyTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ljM-05-ppg" id="Huz-7y-eIK">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recent_grp_notify" translatesAutoresizingMaskIntoConstraints="NO" id="QVA-le-8pD">
+                                                    <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="gR1-4s-G0Y"/>
+                                                        <constraint firstAttribute="width" constant="44" id="hLD-yg-afx"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ko-Rq-vPq">
+                                                    <rect key="frame" x="60" y="8" width="51" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0R-LK-imH">
+                                                    <rect key="frame" x="60" y="35" width="28" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-12-13" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7L-iC-2mf">
+                                                    <rect key="frame" x="527" y="8" width="65" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GI4-TA-5XO">
+                                                    <rect key="frame" x="562" y="29" width="25" height="25"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="GLC-JU-NY9"/>
+                                                        <constraint firstAttribute="height" constant="25" id="VNe-ey-rzo"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GI4-TA-5XO" secondAttribute="trailing" constant="5" id="0vl-qq-oLe"/>
+                                                <constraint firstItem="QVA-le-8pD" firstAttribute="leading" secondItem="Huz-7y-eIK" secondAttribute="leadingMargin" id="5Rd-Jf-dqO"/>
+                                                <constraint firstAttribute="centerY" secondItem="QVA-le-8pD" secondAttribute="centerY" id="ChT-TF-jKH"/>
+                                                <constraint firstItem="l0R-LK-imH" firstAttribute="leading" secondItem="QVA-le-8pD" secondAttribute="trailing" constant="8" id="Ipg-6M-fvo"/>
+                                                <constraint firstItem="QVA-le-8pD" firstAttribute="bottom" secondItem="l0R-LK-imH" secondAttribute="bottom" id="KB4-3Q-5VN"/>
+                                                <constraint firstItem="s7L-iC-2mf" firstAttribute="trailing" secondItem="Huz-7y-eIK" secondAttribute="trailingMargin" id="PBL-kv-8ml"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GI4-TA-5XO" secondAttribute="bottom" constant="-2.5" id="PCK-7N-upP"/>
+                                                <constraint firstItem="5ko-Rq-vPq" firstAttribute="leading" secondItem="QVA-le-8pD" secondAttribute="trailing" constant="8" id="Vn8-7Q-cvl"/>
+                                                <constraint firstItem="QVA-le-8pD" firstAttribute="top" secondItem="5ko-Rq-vPq" secondAttribute="top" id="oAN-Aa-qcG"/>
+                                                <constraint firstItem="s7L-iC-2mf" firstAttribute="top" secondItem="5ko-Rq-vPq" secondAttribute="top" id="uq2-q1-6fb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImgView" destination="QVA-le-8pD" id="Qcp-b5-QRN"/>
+                                            <outlet property="badgeContainerView" destination="GI4-TA-5XO" id="X5X-cS-j7F"/>
+                                            <outlet property="msgLabel" destination="l0R-LK-imH" id="dMY-7i-LYf"/>
+                                            <outlet property="timestampLabel" destination="s7L-iC-2mf" id="O03-1y-OEN"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="f6z-6W-qyd" id="sjk-YR-m1j"/>
@@ -4195,6 +4255,7 @@
         <image name="login_bg" width="1244" height="2208"/>
         <image name="male" width="44" height="44"/>
         <image name="mine_un" width="30" height="30"/>
+        <image name="recent_grp_notify" width="44" height="44"/>
         <image name="recent_un" width="30" height="30"/>
         <image name="roster_menu" width="22" height="22"/>
         <image name="roster_newFriend" width="28" height="28"/>

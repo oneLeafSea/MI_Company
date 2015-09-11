@@ -22,6 +22,10 @@
 #import "GroupChatQuitMsg.h"
 #import "IMAck.h"
 #import "MessageConstants.h"
+#import "GroupNotification.h"
+#import "GroupChatNotificationTb.h"
+
+NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListChangedNotification";
 
 @interface GroupChatMgr() {
     UIBackgroundTaskIdentifier m_task;
@@ -30,6 +34,9 @@
 @property(nonatomic, strong) void (^inviteCallback)(BOOL);
 @property(nonatomic, strong) void (^delCallback)(BOOL);
 @property(nonatomic, strong) void (^quitCallback)(BOOL);
+@property(nonatomic, strong) FMDatabaseQueue *dbq;
+
+@property(nonatomic, strong) GroupChatNotificationTb *notifyTb;
 
 @end
 
@@ -38,14 +45,28 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kIMAckNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatNotification object:nil];
 }
 
-- (instancetype)init
+- (instancetype)init NS_UNAVAILABLE
 {
     self = [super init];
     if (self) {
+        
+    }
+    return self;
+}
+
+- (instancetype)initWithDqb:(FMDatabaseQueue *)dbq {
+    if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAckMessage:) name:kIMAckNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupChatNotification:) name:kGroupChatNotification object:nil];
+        self.dbq = dbq;
+        self.notifyTb = [[GroupChatNotificationTb alloc] initWithDbq:dbq];
+        if (self.notifyTb == nil) {
+            self = nil;
+        }
     }
     return self;
 }
@@ -66,19 +87,29 @@
                 JRTableResponse *tbResp = (JRTableResponse *)resp;
                 self.grpChatList = [[GroupChatList alloc] initWithGrpInfo:tbResp.result];
                 if (self.grpChatList) {
-                    completion(YES);
+                    if (completion) {
+                        completion(YES);
+                    }
                 } else {
-                    completion(NO);
+                    if (completion) {
+                        completion(NO);
+                    }
                 }
             } else {
-                completion(NO);
+                if (completion) {
+                    completion(NO);
+                }
             }
             
         } failure:^(JRReqest *request, NSError *error) {
-            completion(NO);
+            if (completion) {
+                completion(NO);
+            }
             
         } cancel:^(JRReqest *request) {
-            completion(NO);
+            if (completion) {
+                completion(NO);
+            }
         }];
     });
     
@@ -278,40 +309,53 @@
 }
 
 - (void)handleAckMessage:(NSNotification *)notifiction {
-    IMAck *ack = notifiction.object;
-    if (ack.ackType == IM_CHATROOM) {
-        if (ack.error == nil) {
-            if (self.inviteCallback) {
-                self.inviteCallback(YES);
-                self.inviteCallback = nil;
-            }
-            if (self.delCallback) {
-                self.delCallback(YES);
-                self.delCallback = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        IMAck *ack = notifiction.object;
+        if (ack.ackType == IM_CHATROOM) {
+            if (ack.error == nil) {
+                if (self.inviteCallback) {
+                    self.inviteCallback(YES);
+                    self.inviteCallback = nil;
+                }
+                if (self.delCallback) {
+                    self.delCallback(YES);
+                    self.delCallback = nil;
+                    
+                }
+                
+                if (self.quitCallback) {
+                    self.quitCallback(YES);
+                    self.quitCallback = nil;
+                }
+                
+            } else {
+                if (self.inviteCallback) {
+                    self.inviteCallback(NO);
+                    self.inviteCallback = nil;
+                }
+                if (self.delCallback) {
+                    self.delCallback(NO);
+                    self.delCallback = nil;
+                }
+                
+                if (self.quitCallback) {
+                    self.quitCallback(NO);
+                    self.quitCallback = nil;
+                }
             }
             
-            if (self.quitCallback) {
-                self.quitCallback(YES);
-                self.quitCallback = nil;
-            }
-            
-        } else {
-            if (self.inviteCallback) {
-                self.inviteCallback(NO);
-                self.inviteCallback = nil;
-            }
-            if (self.delCallback) {
-                self.delCallback(NO);
-                self.delCallback = nil;
-            }
-            
-            if (self.quitCallback) {
-                self.quitCallback(NO);
-                self.quitCallback = nil;
-            }
         }
-        
+    });
+    
+}
+
+- (void)handleGroupChatNotification:(NSNotification *)notification {
+    GroupChatNotifyMsg *msg = notification.object;
+    if ([msg isKindOfClass:[GroupChatNotifyMsg class]]) {
+        IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
+        [USER.session post:ack];
     }
+    
 }
 
 @end

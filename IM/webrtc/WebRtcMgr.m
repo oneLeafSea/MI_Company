@@ -175,12 +175,12 @@
 }
 
 
-- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf {
+- (void)sendSignalWithType:(NSString *)type isSelf:(BOOL)isSelf roomId:(NSString *)roomId {
     NSString *to = self.uid;
     if (isSelf) {
         to = USER.uid;
     }
-    WebRtcNotifyMsg *nm = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:to rid:m_roomId];
+    WebRtcNotifyMsg *nm = [[WebRtcNotifyMsg alloc] initWithFrom:USER.uid to:to rid:roomId];
     nm.contentType = type;
     [USER.session post:nm];
 }

@@ -32,8 +32,10 @@
 #import "loglevel.h"
 #import "DetailTableViewController.h"
 #import "GroupChatSettingForPrivateViewController.h"
+#import "RTVideoChatMediaItem.h"
+#import "AudioPlayer.h"
 
-@interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate>
+@interface RTChatViewController() <MWPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) RTChatModel    *data;
 
@@ -89,6 +91,8 @@
     info.talkingName = [self.talkingname copy];
     info.msgType = self.chatMsgType;
     [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageControllerWillDismiss object:info];
+    [[AudioPlayer sharePlayer] stop];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -108,11 +112,9 @@
 
 - (void)setupRightBarItem {
     
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chatmsg_rightbarItem"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemTapped:)];
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithImage:self.chatMsgType == ChatMessageTypeGroupChat ? [UIImage imageNamed:@"chatmsg_rightbarItem"] : [UIImage imageNamed:@"chatmsg_normal_setting"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemTapped:)];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
-
-#pragma mark - private method
 
 
 #pragma mark - actions
@@ -165,7 +167,7 @@
             NSInteger preCount = self.data.messages.count;
             if (self.data.messages.count > 0) {
                 [USER.msgHistory getHistoryMessageWithMsgId:self.curLastMsgId chatMsgType:self.chatMsgType talkingId:self.talkingId completion:^(BOOL finished, NSArray *chatMsgs) {
-                    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 20) offset:0];
+                    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:(UInt32)(self.data.messages.count + 30) offset:0];
                     if (msgs.count > 0) {
                         ChatMessage *lastMsg = [msgs objectAtIndex:0];
                         self.curLastMsgId = [lastMsg.qid copy];
@@ -377,7 +379,10 @@
         audioItem.playing = !audioItem.playing;
         return;
     }
-    
+    if ([msg.media isKindOfClass:[RTVideoChatMediaItem class]]) {
+        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"通话" otherButtonTitles:nil];
+        [as showInView:self.view];
+    }
     
 }
 
@@ -798,6 +803,14 @@
         });
     }
 
+}
+
+#pragma makr -UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [USER.webRtcMgr inviteUid:self.talkingId session:USER.session];
+    }
 }
 
 @end

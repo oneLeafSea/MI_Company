@@ -10,7 +10,6 @@
 
 @protocol LoginRequestDelegate;
 
-
 @interface LoginRequest : Request
 
 - (instancetype)initWithUserId:(NSString *)userId pwd:(NSString *)pwd;

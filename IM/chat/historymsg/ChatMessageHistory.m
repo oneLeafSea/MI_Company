@@ -14,7 +14,7 @@
 
 static NSString * const kQid = @"QID_IM_GET_GROUP_MSG_HISTORY";
 static NSString *const  kNormalQid = @"QID_IM_GET_ROSTER_MSG_HISTORY";
-static NSUInteger   kDefaultPageSize = 20;
+static NSUInteger   kDefaultPageSize = 30;
 
 @interface ChatMessageHistory() {
     __weak User *_user;

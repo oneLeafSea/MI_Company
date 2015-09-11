@@ -187,7 +187,7 @@
 }
 
 - (BOOL)setupGroupChatMgr {
-    _groupChatMgr = [[GroupChatMgr alloc] init];
+    _groupChatMgr = [[GroupChatMgr alloc] initWithDqb:self.dbq];
     if (!_groupChatMgr) {
         return NO;
     }

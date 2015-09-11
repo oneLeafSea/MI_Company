@@ -19,11 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,12 +35,5 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-//    if (indexPath.row == 2) {
-//        ChatHistoryMessageViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ChatHistoryMessageViewController"];
-//        vc.talkingId = self.grp.gid;
-//        vc.talkingname = self.grp.gname;
-//        vc.chatMsgType = ChatMessageTypeGroupChat;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
 }
 @end

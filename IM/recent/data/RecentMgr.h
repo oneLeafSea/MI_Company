@@ -12,6 +12,7 @@
 #import "ChatMessage.h"
 #import "RecentMsgItem.h"
 #import "RosterItemAddRequest.h"
+#import "GroupChatNotifyMsg.h"
 
 @interface RecentMgr : NSObject
 
@@ -26,6 +27,10 @@
 - (BOOL) updateSendChatMsg:(ChatMessage *) msg;
 
 - (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *)fromOrTo chatmsgType:(UInt32) chatMsgtype;
+
+- (BOOL)updateGrpChatNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fname;
+
+- (BOOL)updateGrpChatNotifyBadge:(NSString *)badge;
 
 - (NSInteger) getMsgBadgeSum;
 

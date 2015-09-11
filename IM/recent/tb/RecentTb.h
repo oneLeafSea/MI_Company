@@ -30,6 +30,8 @@
 
 - (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *) fromOrTo chatmsgType:(UInt32) chatMsgtype;
 
+- (BOOL) updateRecentGrpNtifyBadge:(NSString *)badge;
+
 - (NSInteger) getMsgBadgeSum;
 
 - (BOOL) delMsgItem:(RecentMsgItem *)item;

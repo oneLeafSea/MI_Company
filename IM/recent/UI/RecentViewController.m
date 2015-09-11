@@ -30,6 +30,11 @@
 #import "UIColor+Hexadecimal.h"
 #import "SearchPeopleViewController.h"
 #import "DetailTableViewController.h"
+#import "GroupNotification.h"
+#import "GroupChatNotifyMsg.h"
+#import "RecentGrpNotifyTableViewCell.h"
+#import "NSDate+Common.h"
+#import "GroupChatNotificaitonViewController.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
@@ -56,6 +61,8 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatListChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -76,6 +83,8 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotReachable:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupListChangedNotification:) name:kGroupChatListChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupChatNotification:) name:kGroupChatNotification object:nil];
     
     SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
     spVC.delegate = self;
@@ -223,7 +232,25 @@ static NSString *kChatMessageTypeNomal = @"0";
             rosterReqCell.badgeText = nil;
         }
         cell = rosterReqCell;
+    }
+    
+    if (item.msgtype == IM_CHATROOM) {
+        RecentGrpNotifyTableViewCell *notifyCell = [tableView dequeueReusableCellWithIdentifier:@"RecentGrpNotifyTableViewCell" forIndexPath:indexPath];
+        notifyCell.msgLabel.text = item.content;
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSSS"];
+        NSDate *date = [dateFormat dateFromString:item.time];
+        NSString *relativeDate = [[RTMessagesTimestampFormatter sharedFormatter] relativeDateForDate:date];
+        notifyCell.timestampLabel.text = relativeDate;
+        NSInteger badge = [item.badge integerValue];
+        if (badge != 0) {
+            notifyCell.badgeText = item.badge;
+        } else {
+            notifyCell.badgeText = nil;
+        }
+        cell = notifyCell;
     } else {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"unkown cell"];
         DDLogError(@"unkown cell");
     }
     
@@ -267,6 +294,15 @@ static NSString *kChatMessageTypeNomal = @"0";
     
     if (item.msgtype == IM_ROSTER_ITEM_ADD_REQUEST) {
         UIViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"RosterItemAddReqTableViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (item.msgtype == IM_CHATROOM) {
+        [USER.recentMsg updateGrpChatNotifyBadge:@"0"];
+        [self initModelData];
+        [self updateTabItem];
+        [m_tableView reloadData];
+        GroupChatNotificaitonViewController *vc = [[GroupChatNotificaitonViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -391,6 +427,44 @@ static NSString *kChatMessageTypeNomal = @"0";
             self.navigationItem.titleView = reloginTipView;
         });
     }
+}
+
+- (void)handleGroupListChangedNotification:(NSNotification *)notification {
+    __block NSString *gid = notification.object;
+    __block  RecentMsgItem *rmItem = nil;
+    if ([gid isKindOfClass:[NSString class]]) {
+        [m_modle.msgList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            RecentMsgItem *item = obj;
+            NSString *ID = item.from;
+            if ([item.from isEqualToString:USER.uid]) {
+                ID = item.to;
+            }
+            if (item.ext && [item.ext isEqualToString:[NSString stringWithFormat:@"%d", (unsigned int)ChatMessageTypeGroupChat]]) {
+                rmItem = item;
+                *stop = YES;
+            }
+        }];
+        if (rmItem) {
+            [USER.recentMsg delMsgItem:rmItem];
+            [self initModelData];
+            [self updateTabItem];
+            [m_tableView reloadData];
+        }
+    }
+}
+
+- (void)handleGroupChatNotification:(NSNotification *)notification {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        GroupChatNotifyMsg *msg = notification.object;
+        if ([msg isKindOfClass:[GroupChatNotifyMsg class]]) {
+            NSString *fromName = [USER.osMgr getItemInfoByUid:msg.from].name;
+            [USER.recentMsg updateGrpChatNotifyMsg:msg fromName:fromName];
+            [self initModelData];
+            [self updateTabItem];
+            [m_tableView reloadData];
+        }
+    });
 }
 
 #pragma mark - handle avatar notification

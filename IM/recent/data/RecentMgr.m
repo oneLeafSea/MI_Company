@@ -153,8 +153,8 @@ static NSString *kChatMessageTypeNomal = @"0";
     RecentMsgItem *item = [self cnvtRecentMsgItemWithRosterItemAddReq:req];
     BOOL ret = YES;
     if ([m_recentTb exsitmsgType:req.type]) {
-        NSInteger badge = [m_recentTb getFirstBadgeWithMsgType:req.type];
-        item.badge = [NSString stringWithFormat:@"%ld", badge + 1];
+        NSInteger badge = [m_recentTb getFirstBadgeWithMsgType:req.type] + 1;
+        item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
         ret = [m_recentTb updateItem:item msgtyp:req.type];
     } else {
         ret = [m_recentTb insertItem:item];
@@ -195,6 +195,38 @@ static NSString *kChatMessageTypeNomal = @"0";
     item.ext = @"";
     item.badge = @"0";
     return item;
+}
+
+- (BOOL)updateGrpChatNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fname {
+    NSParameterAssert(msg.from);
+//    NSParameterAssert(msg.to);
+    NSParameterAssert(msg.qid);
+    NSParameterAssert(msg.gid);
+    NSParameterAssert(msg.notifytype);
+    
+    RecentMsgItem *item = [[RecentMsgItem alloc] init];
+    item.msgid = msg.qid;
+    item.msgtype = msg.type;
+    item.from = msg.from;
+    item.to = msg.to;
+    item.time = [[NSDate Now] formatWith:nil];
+    if ([msg.notifytype isEqualToString:@"invent"]) {
+        item.content = [NSString stringWithFormat:@"%@邀请你加入%@群", fname, msg.gname];
+    }
+    BOOL ret = YES;
+    if ([m_recentTb exsitmsgType:msg.type]) {
+        NSInteger badge = [m_recentTb getFirstBadgeWithMsgType:msg.type] + 1;
+        item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
+        ret = [m_recentTb updateItem:item msgtyp:msg.type];
+    } else {
+        ret = [m_recentTb insertItem:item];
+    }
+    return ret;
+    
+}
+
+- (BOOL)updateGrpChatNotifyBadge:(NSString *)badge {
+    return [m_recentTb updateRecentGrpNtifyBadge:badge];
 }
 
 - (void)reset {

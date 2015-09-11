@@ -168,6 +168,14 @@
     return ret;
 }
 
+- (BOOL) updateRecentGrpNtifyBadge:(NSString *)badge {
+    __block BOOL ret = YES;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLRecentGrpNotifyBageUpdate, badge];
+    }];
+    return ret;
+}
+
 - (NSInteger) getMsgBadgeSum {
     __block NSInteger ret = 0;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {

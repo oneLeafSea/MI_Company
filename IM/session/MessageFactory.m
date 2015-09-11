@@ -31,6 +31,8 @@
 #import "PresenceMsg.h"
 #import "PresenceNotification.h"
 #import "WebRtcNotifyMsg.h"
+#import "GroupChatNotifyMsg.h"
+#import "GroupNotification.h"
 
 @interface MessageFactory()
 @end
@@ -130,6 +132,13 @@
             
         case IM_NOTIFY_FC: {
             
+        }
+            break;
+        case IM_CHATROOM: {
+            GroupChatNotifyMsg *msg = [[GroupChatNotifyMsg alloc] initWithData:data];
+            if (msg) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kGroupChatNotification object:msg];
+            }
         }
         default:
             break;
