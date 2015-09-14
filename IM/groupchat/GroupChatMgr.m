@@ -24,6 +24,7 @@
 #import "MessageConstants.h"
 #import "GroupNotification.h"
 #import "GroupChatNotificationTb.h"
+#import "GroupChatAcceptMsg.h"
 
 NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListChangedNotification";
 
@@ -34,6 +35,7 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
 @property(nonatomic, strong) void (^inviteCallback)(BOOL);
 @property(nonatomic, strong) void (^delCallback)(BOOL);
 @property(nonatomic, strong) void (^quitCallback)(BOOL);
+@property(nonatomic, strong) void (^acceptCallback)(BOOL);
 @property(nonatomic, strong) FMDatabaseQueue *dbq;
 
 @property(nonatomic, strong) GroupChatNotificationTb *notifyTb;
@@ -270,6 +272,10 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
     }];
 }
 
+- (NSArray *)getNotificationCellModels {
+    return [self.notifyTb getInvitationNotifcations];
+}
+
 - (void)handleWillEnterBackground:(NSNotification *)notification {
     m_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         DDLogInfo(@"INFO: background end.");
@@ -308,6 +314,23 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
     [session post:quitMsg];
 }
 
+- (void)acceptGrpWithGid:(NSString *)gid
+                   msgid:(NSString *)msgid
+                 session:(Session *)session
+              completion:(void(^)(BOOL finished))completion {
+    GroupChatAcceptMsg *acceptMsg = [[GroupChatAcceptMsg alloc] initWithGid:gid msgid:msgid];
+    self.acceptCallback = completion;
+    [session post:acceptMsg];
+}
+
+- (void)updateNotificationProcessedWithGid:(NSString *)gid {
+    [self.notifyTb updateNotificationProcessedWithGid:gid];
+}
+
+- (void)clearNotificationDb {
+    [self.notifyTb clearDb];
+}
+
 - (void)handleAckMessage:(NSNotification *)notifiction {
     dispatch_async(dispatch_get_main_queue(), ^{
         IMAck *ack = notifiction.object;
@@ -328,6 +351,11 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
                     self.quitCallback = nil;
                 }
                 
+                if (self.acceptCallback) {
+                    self.acceptCallback(YES);
+                    self.acceptCallback = nil;
+                }
+                
             } else {
                 if (self.inviteCallback) {
                     self.inviteCallback(NO);
@@ -342,6 +370,11 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
                     self.quitCallback(NO);
                     self.quitCallback = nil;
                 }
+                
+                if (self.acceptCallback) {
+                    self.acceptCallback(NO);
+                    self.acceptCallback = nil;
+                }
             }
             
         }
@@ -351,8 +384,10 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
 
 - (void)handleGroupChatNotification:(NSNotification *)notification {
     GroupChatNotifyMsg *msg = notification.object;
+    NSString *fname = [USER.osMgr getItemInfoByUid:msg.from].name;
+    [self.notifyTb insertNotification:msg fromname:fname];
     if ([msg isKindOfClass:[GroupChatNotifyMsg class]]) {
-        IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
+        IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:IM_CHATROOM_ACK time:[NSDate stringNow] err:nil];
         [USER.session post:ack];
     }
     

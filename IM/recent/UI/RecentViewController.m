@@ -439,7 +439,7 @@ static NSString *kChatMessageTypeNomal = @"0";
             if ([item.from isEqualToString:USER.uid]) {
                 ID = item.to;
             }
-            if (item.ext && [item.ext isEqualToString:[NSString stringWithFormat:@"%d", (unsigned int)ChatMessageTypeGroupChat]]) {
+            if ([item.ext isKindOfClass:[NSString class]] && [item.ext isEqualToString:[NSString stringWithFormat:@"%d", (unsigned int)ChatMessageTypeGroupChat]]) {
                 rmItem = item;
                 *stop = YES;
             }
@@ -459,6 +459,9 @@ static NSString *kChatMessageTypeNomal = @"0";
         GroupChatNotifyMsg *msg = notification.object;
         if ([msg isKindOfClass:[GroupChatNotifyMsg class]]) {
             NSString *fromName = [USER.osMgr getItemInfoByUid:msg.from].name;
+            if (msg.gname == nil) {
+                msg.gname = [USER.groupChatMgr getGrpChatByGid:msg.gid].gname;
+            }
             [USER.recentMsg updateGrpChatNotifyMsg:msg fromName:fromName];
             [self initModelData];
             [self updateTabItem];

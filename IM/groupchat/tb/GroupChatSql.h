@@ -9,3 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kSqlGroupChatNotifyCreate;
+extern NSString * const kSqlGroupChatNotifyInsert;
+extern NSString * const kSqlGroupChatNotifyInvitation;
+extern NSString * const kSqlGroupChatNotifyUpdate;
+extern NSString * const kSqlGroupChatNotifyClear;

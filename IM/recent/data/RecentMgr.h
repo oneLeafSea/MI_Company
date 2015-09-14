@@ -30,6 +30,8 @@
 
 - (BOOL)updateGrpChatNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fname;
 
+- (RecentMsgItem *)convertToRecentMsgItemWithGrpNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fromName;
+
 - (BOOL)updateGrpChatNotifyBadge:(NSString *)badge;
 
 - (NSInteger) getMsgBadgeSum;

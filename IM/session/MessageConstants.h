@@ -33,6 +33,7 @@ typedef NS_ENUM(UInt32, IM) {
     IM_ROSTER_ITEM_ADD_RESULT,
     IM_ROSTER_ITEM_DEL_REQUEST,
     IM_CHATROOM                  = 0x00031004,
+    IM_CHATROOM_ACK              = 0x00031005,
     
     IM_NOTIFY_ROSTER_ADD         = 0x00040000,      // 加好友成功通知
     IM_NOTIFY_ROSTER_DEL,                            // 删除好友通知

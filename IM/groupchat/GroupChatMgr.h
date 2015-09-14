@@ -62,6 +62,18 @@ extern NSString *kGroupChatListChangedNotification;
                session:(Session *)session
             completion:(void(^)(BOOL finished))completion;
 
+- (void)acceptGrpWithGid:(NSString *)gid
+                   msgid:(NSString *)msgid
+                 session:(Session *)session
+              completion:(void(^)(BOOL finished))completion;
+
+- (void)updateNotificationProcessedWithGid: (NSString *)gid;
+
+- (void)clearNotificationDb;
+
+
+- (NSArray *)getNotificationCellModels;
+
 - (instancetype)initWithDqb:(FMDatabaseQueue *)dbq;
 
 - (instancetype)init NS_UNAVAILABLE;

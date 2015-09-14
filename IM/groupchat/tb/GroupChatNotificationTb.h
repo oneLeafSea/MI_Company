@@ -8,10 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
+#import "GroupChatNotifyMsg.h"
+
 
 @interface GroupChatNotificationTb : NSObject
 
 - (instancetype)initWithDbq:(FMDatabaseQueue *)dbq;
 - (instancetype)init NS_UNAVAILABLE;
+
+- (BOOL)insertNotification:(GroupChatNotifyMsg *) msg fromname:(NSString *)fromname;
+- (NSArray *)getInvitationNotifcations;
+
+- (BOOL)updateNotificationProcessedWithGid:(NSString *)gid;
+
+- (BOOL)clearDb;
 
 @end

@@ -16,7 +16,7 @@
 @property(nonatomic, readonly) NSString *from_res;
 @property(nonatomic, readonly) NSString *to;
 @property(nonatomic, readonly) NSString *gid;
-@property(nonatomic, readonly) NSString *gname;
+@property(nonatomic, strong) NSString *gname;
 @property(nonatomic, readonly) NSString *notifytype;
 
 @end

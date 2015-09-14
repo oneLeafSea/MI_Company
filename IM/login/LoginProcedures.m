@@ -188,16 +188,20 @@
                 [self.delegate loginProcedures:self recvPush:err ? NO:YES error:err];
             }
             
+            dispatch_group_t waitGroup = dispatch_group_create();
+            
+            dispatch_group_enter(waitGroup);
             [USER.avatarMgr syncAvatarVerWithCompletion:^(BOOL finished, NSError *error) {
                 NSMutableArray *uids = [[NSMutableArray alloc] initWithArray:[USER.rosterMgr getRosterAllUids]];
                 [uids addObject:USER.uid];
                 [USER.avatarMgr getAvatarsByUserIds:uids];
+                dispatch_group_leave(waitGroup);
             }];
             
-            [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
             [USER.groupChatMgr.grpChatList.grpChatList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 __block GroupChat *gc = obj;
                 [USER.groupChatMgr getGroupOfflineMsgWithGid:gc.gid Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+                    
                     if (!finished) {
                         DDLogError(@"ERROR: get {gid:%@, gname:%@} offline msg error.", gc.gid, gc.gname);
                     }
@@ -205,13 +209,22 @@
                 
             }];
             
+            dispatch_group_enter(waitGroup);
             [USER.osMgr syncOrgStructWithWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
-                
+                dispatch_group_leave(waitGroup);
             }];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
-            [self setWebImgCfg];
-            [self saveUseIdAndPwd];
+            
+            
+            dispatch_group_notify(waitGroup,dispatch_get_main_queue(),^{
+                [USER.presenceMgr postMsgWithPresenceType:kPresenceTypeOnline presenceShow:kPresenceShowOnline];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoginSuccess object:nil];
+                [self setWebImgCfg];
+                [self saveUseIdAndPwd];
+            });
+            
+            
+           
 //            [ApnsMgr registerWithIOSToken:@"e34f50d210d3b77bc43692791c605135d044696ee94184b4b309447c0f3728a6" uid:@"gzw" Token:USER.token signature:USER.signature key:USER.key iv:USER.iv url:@"http://127.0.0.1:8080/register" completion:^(BOOL finished) {
 //                    DDLogInfo(@"%d", finished);
 //                

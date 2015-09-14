@@ -198,21 +198,7 @@ static NSString *kChatMessageTypeNomal = @"0";
 }
 
 - (BOOL)updateGrpChatNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fname {
-    NSParameterAssert(msg.from);
-//    NSParameterAssert(msg.to);
-    NSParameterAssert(msg.qid);
-    NSParameterAssert(msg.gid);
-    NSParameterAssert(msg.notifytype);
-    
-    RecentMsgItem *item = [[RecentMsgItem alloc] init];
-    item.msgid = msg.qid;
-    item.msgtype = msg.type;
-    item.from = msg.from;
-    item.to = msg.to;
-    item.time = [[NSDate Now] formatWith:nil];
-    if ([msg.notifytype isEqualToString:@"invent"]) {
-        item.content = [NSString stringWithFormat:@"%@邀请你加入%@群", fname, msg.gname];
-    }
+    RecentMsgItem *item = [self convertToRecentMsgItemWithGrpNotifyMsg:msg fromName:fname];
     BOOL ret = YES;
     if ([m_recentTb exsitmsgType:msg.type]) {
         NSInteger badge = [m_recentTb getFirstBadgeWithMsgType:msg.type] + 1;
@@ -223,6 +209,31 @@ static NSString *kChatMessageTypeNomal = @"0";
     }
     return ret;
     
+}
+
+- (RecentMsgItem *)convertToRecentMsgItemWithGrpNotifyMsg:(GroupChatNotifyMsg *)msg fromName:(NSString *)fname {
+    NSParameterAssert(msg.from);
+    //    NSParameterAssert(msg.to);
+    NSParameterAssert(msg.qid);
+    NSParameterAssert(msg.gid);
+    NSParameterAssert(msg.notifytype);
+    
+    RecentMsgItem *item = [[RecentMsgItem alloc] init];
+    item.msgid = msg.qid;
+    item.msgtype = msg.type;
+    item.from = msg.from;
+    item.to = msg.to ? msg.to : @"";
+    item.time = [[NSDate Now] formatWith:nil];
+    if ([msg.notifytype isEqualToString:@"invent"]) {
+        item.content = [NSString stringWithFormat:@"%@邀请你加入%@群", fname, msg.gname];
+    } else if ([msg.notifytype isEqualToString:@"del"]) {
+        item.content = [NSString stringWithFormat:@"%@解散了%@群", fname, msg.gname];
+    } else if ([msg.notifytype isEqualToString:@"leave"]) {
+        item.content = [NSString stringWithFormat:@"%@退出了%@群", fname, msg.gname];
+    } else {
+        item.content = @"未知类型的通知!";
+    }
+    return item;
 }
 
 - (BOOL)updateGrpChatNotifyBadge:(NSString *)badge {

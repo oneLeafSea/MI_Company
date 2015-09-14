@@ -206,6 +206,8 @@
 		7D7E9A6E1AFC7D4B00B41E95 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */; };
 		7D7EB5F91AB66D4100A95FC7 /* system.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5F81AB66D4100A95FC7 /* system.aiff */; };
 		7D7EB5FB1AB66DF600A95FC7 /* msn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */; };
+		7D7FBD2F1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FBD2E1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.m */; };
+		7D7FBD321BA68CE800C3369D /* GroupChatAcceptMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FBD311BA68CE800C3369D /* GroupChatAcceptMsg.m */; };
 		7D7FCDE21AA849370023EF49 /* OsNavigationRootCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */; };
 		7D7FCDE51AA849650023EF49 /* OsNavigationRootCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE41AA849650023EF49 /* OsNavigationRootCollectionCell.m */; };
 		7D7FCDE71AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7FCDE61AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib */; };
@@ -792,6 +794,10 @@
 		7D7E9A6D1AFC7D4B00B41E95 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		7D7EB5F81AB66D4100A95FC7 /* system.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = system.aiff; sourceTree = "<group>"; };
 		7D7EB5FA1AB66DF600A95FC7 /* msn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = msn.aiff; sourceTree = "<group>"; };
+		7D7FBD2D1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatNoitificaiontCellModel.h; sourceTree = "<group>"; };
+		7D7FBD2E1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatNoitificaiontCellModel.m; sourceTree = "<group>"; };
+		7D7FBD301BA68CE800C3369D /* GroupChatAcceptMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatAcceptMsg.h; sourceTree = "<group>"; };
+		7D7FBD311BA68CE800C3369D /* GroupChatAcceptMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatAcceptMsg.m; sourceTree = "<group>"; };
 		7D7FCDE11AA849370023EF49 /* OsNavigationRootCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OsNavigationRootCollectionCell.xib; sourceTree = "<group>"; };
 		7D7FCDE31AA849650023EF49 /* OsNavigationRootCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsNavigationRootCollectionCell.h; sourceTree = "<group>"; };
 		7D7FCDE41AA849650023EF49 /* OsNavigationRootCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OsNavigationRootCollectionCell.m; sourceTree = "<group>"; };
@@ -1291,6 +1297,8 @@
 				7D7BDEBD1BA2C71600E86E88 /* GroupChatNotificaitonViewController.m */,
 				7D7BDEBF1BA2CADB00E86E88 /* GroupChatNotificaitonCell.h */,
 				7D7BDEC01BA2CADB00E86E88 /* GroupChatNotificaitonCell.m */,
+				7D7FBD2D1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.h */,
+				7D7FBD2E1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2540,6 +2548,8 @@
 				7DE2F03B1BA15F3100AED700 /* GroupChatNotifyMsg.m */,
 				7DE2F03D1BA1606700AED700 /* GroupNotification.h */,
 				7DE2F03E1BA1606700AED700 /* GroupNotification.m */,
+				7D7FBD301BA68CE800C3369D /* GroupChatAcceptMsg.h */,
+				7D7FBD311BA68CE800C3369D /* GroupChatAcceptMsg.m */,
 			);
 			path = groupchat;
 			sourceTree = "<group>";
@@ -2842,6 +2852,7 @@
 				7DB06F4C1A71EF7A00DD1943 /* RosterItemAddReqTableViewCell.m in Sources */,
 				7DFE24931A948AFB00C5DD29 /* fileBrowerNavigationViewController.m in Sources */,
 				7DB158601A42DD5600287BBE /* RecvPushResp.m in Sources */,
+				7D7FBD2F1BA66E3900C3369D /* GroupChatNoitificaiontCellModel.m in Sources */,
 				7D07BB9D1AA5A56300E78877 /* GroupChatItemListTableViewCell.m in Sources */,
 				7D8A7BAE1B954F81006657C6 /* SearchPeopleTableViewCell.m in Sources */,
 				7DFE249A1A95D70800C5DD29 /* PresenceNotification.m in Sources */,
@@ -2923,6 +2934,7 @@
 				7D7668E61B54A41E0072399B /* RTMessagesTimestampFormatter.m in Sources */,
 				7D7BDEC11BA2CADB00E86E88 /* GroupChatNotificaitonCell.m in Sources */,
 				7DADF7001B31161700082C4D /* FCMgr.m in Sources */,
+				7D7FBD321BA68CE800C3369D /* GroupChatAcceptMsg.m in Sources */,
 				7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */,
 				7D2E10021A83948F0099AB04 /* UIImage+Common.m in Sources */,
 				7D78701F1B5CA10F00C61791 /* RTAudioView.m in Sources */,

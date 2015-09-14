@@ -170,7 +170,7 @@
                                     [Utils alertWithTip:@"邀请失败！"];
                                 }
                             });
-                                                   }];
+                        }];
                     } else {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [MBProgressHUD hideHUDForView:self.view.window animated:YES];
