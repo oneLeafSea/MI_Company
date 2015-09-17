@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Reachability.h"
+
 @interface IMConf : NSObject
 
 @property(readonly) NSString *IP;
@@ -19,6 +21,6 @@
 + (BOOL)isLAN;
 
 
-+ (void)checkLAN;
++ (void)checkLAN:(Reachability *)reach;
 
 @end

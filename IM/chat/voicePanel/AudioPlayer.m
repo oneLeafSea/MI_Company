@@ -36,7 +36,7 @@
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
 //    [[AVAudioSession sharedInstance] setCategory :AVAudioSessionCategoryAmbient error:nil];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
-    if (![self hasHeadset]) {
+    if ([self hasHeadset]) {
         [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
     }
     m_player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&err];

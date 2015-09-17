@@ -22,8 +22,6 @@
 #import "LogLevel.h"
 #import "WebRtcNotifyMsg.h"
 
-static CGFloat const kLocalVideoViewSize = 120;
-static CGFloat const kLocalVideoViewPadding = 8;
 
 @interface WebRtcCallViewController () <WebRtcClientDelegate, RTCEAGLVideoViewDelegate> {
 //    NSTimer *m_callTimer;
@@ -113,11 +111,8 @@ static CGFloat const kLocalVideoViewPadding = 8;
     }];
     
     
-    [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"call" ofType:@"aif"];
-    [[AudioPlayer sharePlayer] playWithPath:path];
     
-//    m_callTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleCallTimeout) userInfo:nil repeats:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMsg:) name:kWebRtcNotifyMsgNotificaiton object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
 }
@@ -134,6 +129,13 @@ static CGFloat const kLocalVideoViewPadding = 8;
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     [USER.msgMgr InsertVideoChatWithFrom:USER.uid fromName:USER.name to:self.talkingUid msgId:[NSUUID uuid] connected:[self.client isConnected] interval:m_timeStick];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"call" ofType:@"aif"];
+    [[AudioPlayer sharePlayer] playWithPath:path];
 }
 
 - (void)didReceiveMemoryWarning {

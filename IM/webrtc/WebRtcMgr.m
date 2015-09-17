@@ -116,6 +116,9 @@
     
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
+        [[AudioPlayer sharePlayer] playWithPath:path];
         NSString *from = msg.from;
         RosterItem *ri = [USER getRosterInfoByUid:from];
         NSString *tip = [NSString stringWithFormat:@"%@想和你视频通话！", ri.name];

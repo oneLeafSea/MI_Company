@@ -68,6 +68,17 @@
     UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"转发"
                                                       action:@selector(forward:)];
     [UIMenuController sharedMenuController].menuItems = @[menuItem];
+    NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:20 offset:0];
+    if (msgs.count > 0) {
+        ChatMessage *lastMsg = [msgs objectAtIndex:0];
+        self.curLastMsgId = [lastMsg.qid copy];
+    }
+    self.data = [[RTChatModel alloc] initWithMsgs:msgs];
+    
+    self.automaticallyScrollsToMostRecentMessage = NO;
+    [self setAudioDirectory:USER.audioPath];
+    [self registerNotification];
+    
     [USER.msgHistory getHistoryMessageWithTalkingId:self.talkingId chatMsgType:self.chatMsgType completion:^(BOOL finished, NSArray *chatMsgs) {
         NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:20 offset:0];
         if (msgs.count > 0) {
@@ -78,10 +89,6 @@
         [self.collectionView reloadData];
         [self scrollToBottomAnimated:NO];
     }];
-    
-    self.automaticallyScrollsToMostRecentMessage = NO;
-    [self setAudioDirectory:USER.audioPath];
-    [self registerNotification];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -98,6 +105,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
+
 - (void)dealloc {
     [self unregisterNotification];
 }

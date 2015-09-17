@@ -16,28 +16,6 @@
 
 @implementation RTFileTransfer
 
-+ (void)uploadFileWithServerUrl:(NSString *)serverUrl {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    __block UIImage *img = [UIImage imageNamed:@"fc_demo"];
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
-    NSString *key = USER.key;
-    NSString *iv = USER.iv;
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-    NSString *fileName = [@"这是个中文4.png" URLEncodedString];
-    [manager.requestSerializer setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
-    [manager.requestSerializer setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
-    [manager.requestSerializer setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
-    [manager.requestSerializer setValue:fileName forHTTPHeaderField:@"rc-fn"];
-    
-    [manager POST:serverUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"bin" fileName:fileName mimeType:@"img/png"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Response: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
-
 + (void)uploadFileWithServerUrl:(NSString *)serverUrl
                        filePath:(NSString *)filePath
                           token:(NSString *)token
@@ -151,53 +129,6 @@
     [operation start];
 }
 
-//+ (void)downFileWithServerUrl:(NSString *)serverUrl {
-//    NSString *strUrl = [NSString stringWithFormat:@"http://10.22.1.112:8040/file/download/%@", [@"这是个中文4.png" URLEncodedString]];
-//    NSURL *url = [NSURL URLWithString:strUrl];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
-//    NSString *key = USER.key;
-//    NSString *iv = USER.iv;
-//    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-//    [request setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
-//    [request setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
-//    [request setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
-//
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//
-//    NSString *fullPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[url lastPathComponent] URLDecodedString]];
-//    
-//    [operation setOutputStream:[NSOutputStream outputStreamToFileAtPath:fullPath append:NO]];
-//    
-//    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-//        NSLog(@"bytesRead: %u, totalBytesRead: %lld, totalBytesExpectedToRead: %lld", bytesRead, totalBytesRead, totalBytesExpectedToRead);
-//    }];
-//    
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSLog(@"RES: %@", [[[operation response] allHeaderFields] description]);
-//        
-//        NSError *error;
-//        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:fullPath error:&error];
-//        
-//        if (error) {
-//            NSLog(@"ERR: %@", [error description]);
-//        } else {
-//            NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
-//            long long fileSize = [fileSizeNumber longLongValue];
-//            
-//            NSLog(@"%@", [NSString stringWithFormat:@"%lld", fileSize]);
-//        }
-//        
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"ERR: %@", [error description]);
-//    }];
-//    
-//    [operation start];
-//}
-
-
 + (void)downFileWithServerUrl:(NSString *)serverUrl
                       fileDir:(NSString *)fileDir
                      fileName:(NSString *)fileName
@@ -207,7 +138,9 @@
                      progress:(void(^)(double progress))progress
                    completion:(void(^)(BOOL finished))completion {
     NSURL *url = [NSURL URLWithString:[serverUrl stringByAppendingPathComponent:[fileName URLEncodedString]]];
+
     NSString *filePath = [fileDir stringByAppendingPathComponent:fileName];
+    NSString *fileTmpPath = [filePath stringByAppendingString:@".tmp"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
     NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
@@ -216,7 +149,7 @@
     [request setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
-    [operation setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:NO]];
+    [operation setOutputStream:[NSOutputStream outputStreamToFileAtPath:fileTmpPath append:NO]];
     
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         double p = totalBytesRead / (double)totalBytesExpectedToRead;
@@ -227,11 +160,12 @@
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error;
-        [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
+        [[NSFileManager defaultManager] attributesOfItemAtPath:fileTmpPath error:&error];
             
         if (error) {
             completion(NO);
         } else {
+            [[NSFileManager defaultManager] moveItemAtPath:fileTmpPath toPath:filePath error:nil];
             completion(YES);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

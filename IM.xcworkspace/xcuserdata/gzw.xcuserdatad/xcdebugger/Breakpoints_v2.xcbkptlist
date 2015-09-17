@@ -6,17 +6,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IM/webrtc/WebRtcNotifyMsg.m"
-            timestampString = "463655100.420858"
+            filePath = "IM/avatar/AvatarMgr.m"
+            timestampString = "463977423.023547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-pkgData"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-getAvatarWithToken:key:iv:signature:userId:url:checkUrlString:completion:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AvatarMgr getAvatarWithToken:key:iv:signature:userId:url:checkUrlString:completion:]"
+                  moduleName = "IM"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gzw/workspace/IOS/IM/IM/avatar/AvatarMgr.m"
+                  timestampString = "463977736.705106"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "222">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__86-[AvatarMgr getAvatarWithToken:key:iv:signature:userId:url:checkUrlString:completion:]_block_invoke"
+                  moduleName = "IM"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gzw/workspace/IOS/IM/IM/avatar/AvatarMgr.m"
+                  timestampString = "463977736.705257"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "18">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

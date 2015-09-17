@@ -345,6 +345,7 @@ static NSString *kChatMessageTypeNomal = @"0";
 
 - (void)handleSendNewMessage:(NSNotification *)notificaiton {
     ChatMessage *msg = notificaiton.object;
+    
     if (![APP_DELEGATE.user.recentMsg updateSendChatMsg:msg]) {
         DDLogWarn(@"WARN: update send msg to recent table.");
     }

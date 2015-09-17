@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.versionLabel.text = [NSString stringWithFormat:@"版本号：%@", [APP_DELEGATE appVersion]];
     self.tableView.estimatedRowHeight = 60.0;
+    self.tableView.sectionHeaderHeight = 15.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 

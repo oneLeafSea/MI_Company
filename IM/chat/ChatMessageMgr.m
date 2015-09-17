@@ -387,21 +387,14 @@
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.alertBody = body;
     localNotif.alertAction = @"查看消息";
-//    localNotif.alertTitle = title;
     
     localNotif.soundName = @"msn.aiff";
     localNotif.applicationIconBadgeNumber++;
-    
-//    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
-//    localNotif.userInfo = infoDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 - (void)handleNewMsg:(NSNotification *)notification {
-    [RTSystemSoundPlayer rt_playMessageReceivedSound];
-    [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
-    
     __block ChatMessage *msg = notification.object;
     
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
@@ -421,7 +414,6 @@
                 NSString *name = [msg.body objectForKey:@"fromname"];
                 [self showNotificationWithTitle:@"文本消息" body:[NSString stringWithFormat:@"%@:%@", name, content]];
             });
-            return;
         }
     }
     
@@ -453,7 +445,6 @@
             [m_session post:ack];
             return;
         } else {
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSString *name = [msg.body objectForKey:@"fromname"];
                 [self showNotificationWithTitle:@"音频" body:[NSString stringWithFormat:@"%@:[音频]", name]];
@@ -478,7 +469,10 @@
             DDLogError(@"ERROR: insert file msg table.");
         }
     }
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [RTSystemSoundPlayer rt_playMessageReceivedSound];
+        [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
+    });
     IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
     [m_session post:ack];
 }

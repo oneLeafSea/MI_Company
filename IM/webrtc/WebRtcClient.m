@@ -221,12 +221,17 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 }
 
 - (void)createPeerConnection {
+    DDLogCInfo(@"1");
     RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
+    DDLogCInfo(@"2");
     _peerConnection = [_factory peerConnectionWithICEServers:_iceServers
                                                  constraints:constraints
                                                     delegate:self];
+    DDLogCInfo(@"3");
     RTCMediaStream *localStream = [self createLocalMediaStream];
+    DDLogCInfo(@"4");
     [_peerConnection addStream:localStream];
+    DDLogCInfo(@"5");
 }
 
 - (void)drainMessageQueueIfReady {
@@ -270,15 +275,18 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 
 
 - (RTCMediaStream *)createLocalMediaStream {
+    DDLogCInfo(@"11");
     RTCMediaStream* localStream = [_factory mediaStreamWithLabel:@"ARDAMS"];
-    
+    DDLogCInfo(@"12");
     RTCVideoTrack *localVideoTrack = [self createLocalVideoTrack];
+    DDLogCInfo(@"13");
     if (localVideoTrack) {
         [localStream addVideoTrack:localVideoTrack];
         [_delegate WebRtcClient:self didReceiveLocalVideoTrack:localVideoTrack];
     }
-    
+    DDLogCInfo(@"14");
     [localStream addAudioTrack:[_factory audioTrackWithID:@"ARDAMSa0"]];
+    DDLogCInfo(@"15");
     return localStream;
 }
 
@@ -291,7 +299,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     
     RTCVideoTrack *localVideoTrack = nil;
 #if !TARGET_IPHONE_SIMULATOR && TARGET_OS_IPHONE
-    
+    DDLogCInfo(@"21");
     NSString *cameraID = nil;
     for (AVCaptureDevice *captureDevice in
          [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
@@ -300,12 +308,16 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
             break;
         }
     }
+    DDLogCInfo(@"22");
     NSAssert(cameraID, @"Unable to get the front camera id");
-    
+    DDLogCInfo(@"23");
     RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:cameraID];
+    DDLogCInfo(@"24");
     RTCMediaConstraints *mediaConstraints = [self defaultMediaStreamConstraints];
     RTCVideoSource *videoSource = [_factory videoSourceWithCapturer:capturer constraints:mediaConstraints];
+    DDLogCInfo(@"25");
     localVideoTrack = [_factory videoTrackWithID:@"ARDAMSv0" source:videoSource];
+    DDLogCInfo(@"26");
     [localVideoTrack setEnabled:NO];
 #endif
     return localVideoTrack;
@@ -315,6 +327,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
     if (_state == kWebRtcClientStateDisconnected) {
         return;
     }
+    [_peerConnection close];
      _peerConnection = nil;
     [m_channel disconnect];
     m_channel = nil;
@@ -331,12 +344,13 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
 - (void)processOfferMessage:(WebRtcSessionDescriptionMessage *)sdpMsg {
     DDLogInfo(@"收到offer。");
     [self createPeerConnection];
+    DDLogCInfo(@"createPeerConnection");
     _talkingUid = sdpMsg.from;
     m_toRes = [sdpMsg.fromRes copy];
     RTCSessionDescription *description = sdpMsg.sessionDescription;
     [_peerConnection setRemoteDescriptionWithDelegate:self
                                    sessionDescription:description];
-     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    DDLogCInfo(@"createPeerConnection");
 }
 
 - (void)processJoinMesssage:(WebRtcJoinRoomMessage *)joinMsg {

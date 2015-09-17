@@ -124,7 +124,7 @@ static inline void SRFastLog(NSString *format, ...);
 static NSString *newSHA1String(const char *bytes, size_t length) {
     uint8_t md[CC_SHA1_DIGEST_LENGTH];
     
-    CC_SHA1(bytes, length, md);
+    CC_SHA1(bytes, (CC_LONG)length, md);
     
     size_t buffer_size = ((sizeof(md) * 3 + 2) / 2);
     

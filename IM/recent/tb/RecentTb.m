@@ -98,6 +98,7 @@
         if (rs.next) {
             ret = YES;
         }
+        [rs close];
     }];
     return ret;
 }
@@ -110,6 +111,7 @@
             if (rs.next) {
                 ret = YES;
             }
+            [rs close];
         }];
     } else {
         [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
@@ -117,6 +119,7 @@
             if (rs.next) {
                 ret = YES;
             }
+            [rs close];
         }];
     }
     
@@ -153,6 +156,7 @@
             }
             
         }
+        [rs close];
     }];
     return ret;
 }
@@ -189,6 +193,7 @@
                 ret = [str integerValue];
             }
         }
+        [rs close];
     }];
     return ret;
 }
@@ -211,6 +216,7 @@
         if (!rs.next) {
             ret = NO;
         }
+        [rs close];
     }];
     return ret;
 }
@@ -231,6 +237,7 @@
             NSNumber *b = [rs objectForColumnName:@"badge"];
             badge = [b integerValue];
         }
+        [rs close];
     }];
     return badge;
 }

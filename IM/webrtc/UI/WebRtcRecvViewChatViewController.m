@@ -93,9 +93,6 @@
     self.localView.hidden = YES;
     self.remoteView.delegate = self;
     self.localView.delegate = self;
-    [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
-    [[AudioPlayer sharePlayer] playWithPath:path];
     self.nameLbl.text = [APP_DELEGATE.user.rosterMgr getItemByUid:self.talkingUid].name;
     m_remoteVideoEnable = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -109,6 +106,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     [USER.msgMgr InsertVideoChatWithFrom:self.talkingUid fromName:self.nameLbl.text to:USER.uid msgId:[NSUUID uuid] connected:[self.client isConnected] interval:m_timeStick];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[AudioPlayer sharePlayer] setNumberOfLoop:-1];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"aif"];
+    [[AudioPlayer sharePlayer] playWithPath:path];
 }
 
 - (void)didReceiveMemoryWarning {

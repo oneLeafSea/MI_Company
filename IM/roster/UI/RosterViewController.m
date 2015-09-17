@@ -35,7 +35,7 @@
 #import "SearchPeopleViewController.h"
 #import "DetailTableViewController.h"
 
-@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, SearchPeopleViewControllerDelegate> {
+@interface RosterViewController () <RosterSectionHeaderViewDelegate, UITableViewDelegate, MultiSelectViewControllerDelegate, SearchPeopleViewControllerDelegate, RosterItermTableViewCellDelegate> {
     NSMutableArray *m_Sections;
     NSArray *m_groups;
     __weak IBOutlet UITableView *m_table;

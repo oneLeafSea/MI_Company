@@ -25,6 +25,7 @@
 #import "GroupNotification.h"
 #import "GroupChatNotificationTb.h"
 #import "GroupChatAcceptMsg.h"
+#import "RTSystemSoundPlayer+RTMessages.h"
 
 NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListChangedNotification";
 
@@ -383,6 +384,8 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
 }
 
 - (void)handleGroupChatNotification:(NSNotification *)notification {
+    [RTSystemSoundPlayer rt_playMessageReceivedSound];
+    [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
     GroupChatNotifyMsg *msg = notification.object;
     NSString *fname = [USER.osMgr getItemInfoByUid:msg.from].name;
     [self.notifyTb insertNotification:msg fromname:fname];

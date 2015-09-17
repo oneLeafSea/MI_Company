@@ -79,7 +79,7 @@
                     if (m_loginProc) {
                         [m_loginProc removeObservers];
                     }
-                    [IMConf checkLAN];
+                    [IMConf checkLAN:APP_DELEGATE.reachability];
                     self.logining = YES;
                     m_loginProc = [[LoginProcedures alloc] init];
                     m_loginProc.delegate = self;
@@ -175,7 +175,7 @@
 
 - (void)handleAppEnterForground:(NSNotification *)notification {
     if (!USER.session.isConnected && APP_DELEGATE.reachability.currentReachabilityStatus != NotReachable && !USER.kick && self.uid != nil && self.pwd != nil) {
-        [IMConf checkLAN];
+        [IMConf checkLAN:APP_DELEGATE.reachability];
         m_loginProc = [[LoginProcedures alloc] init];
         m_loginProc.delegate = self;
         

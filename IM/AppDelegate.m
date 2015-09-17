@@ -28,6 +28,7 @@
 #import "LoginProcedures.h"
 #import "LoginNotification.h"
 #import "WelcomeViewController.h"
+#import "SDImageCache.h"
 
 
 
@@ -49,20 +50,24 @@
     UIUserNotificationType types = UIUserNotificationTypeBadge |
     UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
     
+    
     UIUserNotificationSettings *settings =
     [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    
-    [RTCPeerConnectionFactory initializeSSL];
-    [IMConf checkLAN];
-    
-    [self initLogger];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     _reachability = [Reachability reachabilityForInternetConnection];
     if (![_reachability startNotifier]) {
         NSAssert(NO, @"Reachablitiy errror!");
     }
+    
+    [SDImageCache sharedImageCache].maxCacheAge = 60 * 60 * 24 * 30; // 一个月
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
+    [RTCPeerConnectionFactory initializeSSL];
+    [IMConf checkLAN:_reachability];
+    
+    [self initLogger];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     self.relogin = [[Relogin alloc] init];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];

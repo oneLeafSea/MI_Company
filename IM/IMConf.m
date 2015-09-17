@@ -47,7 +47,11 @@
     [ud setObject:[NSNumber numberWithUnsignedInt:port] forKey:@"port"];
 }
 
-+ (void)checkLAN {
++ (void)checkLAN:(Reachability *)reach {
+    if (reach.currentReachabilityStatus !=  ReachableViaWiFi) {
+        [IMConf setIPAndPort:@"221.224.159.26" port:48009];
+        return;
+    }
     if ([IMConf isLAN]) {
         [IMConf setIPAndPort:@"10.22.1.47" port:8000];
     } else {
