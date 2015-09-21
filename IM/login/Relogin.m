@@ -178,7 +178,7 @@
         [IMConf checkLAN:APP_DELEGATE.reachability];
         m_loginProc = [[LoginProcedures alloc] init];
         m_loginProc.delegate = self;
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloging object:nil];
         if (![m_loginProc loginWithUserId:self.uid pwd:self.pwd timeout:30]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloginFail object:nil];
         }

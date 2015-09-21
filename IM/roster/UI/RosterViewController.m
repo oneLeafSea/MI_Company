@@ -258,9 +258,61 @@
         cell.signatureLabel.text = [NSString stringWithFormat:@"[离线]%@", item.sign];
         cell.maskView.hidden = NO;
     }
-    
+    [self setDevceTypeImage:cell uid:item.uid];
     cell.avatarImgView.image = [USER.avatarMgr getAvatarImageByUid:item.uid];
     return cell;
+}
+
+- (void)setDevceTypeImage:(RosterItermTableViewCell *)cell uid:(NSString *)uid {
+    NSArray *array = [USER.presenceMgr getPresenceMsgArrayByUid:uid];
+    if (array.count == 0) {
+        cell.deviceImageView.hidden = YES;
+        cell.device1ImageView.hidden = YES;
+        cell.device2ImageView.hidden = YES;
+    }
+    if (array.count == 1) {
+        cell.deviceImageView.hidden = NO;
+        cell.device1ImageView.hidden = YES;
+        cell.device2ImageView.hidden = YES;
+        PresenceMsg *notify = [array objectAtIndex:0];
+        cell.deviceImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+    }
+    
+    if (array.count == 2) {
+        cell.deviceImageView.hidden = NO;
+        cell.device1ImageView.hidden = NO;
+        cell.device2ImageView.hidden = YES;
+        PresenceMsg *notify = [array objectAtIndex:0];
+        cell.deviceImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+        notify = [array objectAtIndex:1];
+        cell.device1ImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+    }
+    
+    if (array.count == 3) {
+        cell.deviceImageView.hidden = NO;
+        cell.device1ImageView.hidden = NO;
+        cell.device2ImageView.hidden = NO;
+        PresenceMsg *notify = [array objectAtIndex:0];
+        cell.deviceImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+        notify = [array objectAtIndex:1];
+        cell.device1ImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+        notify = [array objectAtIndex:2];
+        cell.device2ImageView.image = [UIImage imageNamed:[self getImageNameByFromRes:notify.from_res]];
+    }
+}
+
+- (NSString *)getImageNameByFromRes:(NSString *)fromRes {
+    if ([fromRes isEqual:@"iphone"]) {
+        return @"roster_device_iphone";
+    }
+    if ([fromRes isEqual:@"Android"]) {
+        return @"roster_device_android";
+    }
+    
+    if ([fromRes isEqual:@"PC"]) {
+        return @"roster_device_pc";
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -344,13 +396,6 @@
     [self.navigationController presentViewController:navController animated:YES completion:nil];;
 }
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//}
 
 #pragma mark - RosterSectionHeaderViewDelegate
 - (void)RosterSectionHeaderViewTapped:(RosterSectionHeaderView *)headerView tag:(NSInteger) tag {

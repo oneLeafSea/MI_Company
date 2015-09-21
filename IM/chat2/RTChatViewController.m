@@ -43,6 +43,9 @@
 
 @property (nonatomic, strong) NSString    *curLastMsgId;
 
+
+@property (nonatomic, assign) BOOL        shouldSrollToBottom;
+
 @end
 
 @implementation RTChatViewController
@@ -78,6 +81,7 @@
     self.automaticallyScrollsToMostRecentMessage = NO;
     [self setAudioDirectory:USER.audioPath];
     [self registerNotification];
+    self.shouldSrollToBottom = YES;
     
     [USER.msgHistory getHistoryMessageWithTalkingId:self.talkingId chatMsgType:self.chatMsgType completion:^(BOOL finished, NSArray *chatMsgs) {
         NSArray *msgs = [APP_DELEGATE.user.msgMgr loadDbMsgsWithId:self.talkingId type:self.chatMsgType limit:20 offset:0];
@@ -104,6 +108,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (self.shouldSrollToBottom) {
+        [self scrollToBottomAnimated:NO];
+        self.shouldSrollToBottom = NO;
+    }
 }
 
 - (void)dealloc {

@@ -21,6 +21,9 @@
 
 @property(weak, nonatomic) RosterItem *item;
 @property(weak) id<RosterItermTableViewCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *device1ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *device2ImageView;
 
 @end
 
