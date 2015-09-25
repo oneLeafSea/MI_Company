@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18DC89791FFA4323EEF23A9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE0883B8B5AFA0950A7E67A /* libPods.a */; };
+		7927B97B4D4E0637349F800F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245AC84EDE0297E5E463C73 /* libPods.a */; };
 		7D005D2D1A91825D006CB54C /* FileBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D201A91825D006CB54C /* FileBlock.m */; };
 		7D005D2E1A91825D006CB54C /* FileBlockPorter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D221A91825D006CB54C /* FileBlockPorter.m */; };
 		7D005D2F1A91825D006CB54C /* FileBlocksMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005D241A91825D006CB54C /* FileBlocksMgr.m */; };
@@ -46,6 +46,8 @@
 		7D093C921A70CCD4002D43B9 /* ChatMessageControllerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C911A70CCD4002D43B9 /* ChatMessageControllerInfo.m */; };
 		7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */; };
 		7D093C981A710322002D43B9 /* RosterItemAddReqTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */; };
+		7D0C10C71BB3A4580094113C /* GroupChatJoinMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C10C61BB3A4580094113C /* GroupChatJoinMsg.m */; };
+		7D0C10CB1BB3E8D60094113C /* WorkReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */; };
 		7D0CFBEF1A77334700902285 /* Relogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBEE1A77334700902285 /* Relogin.m */; };
 		7D0CFBF21A77339200902285 /* LoginNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBF11A77339200902285 /* LoginNotification.m */; };
 		7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D945E1A4B96C600B6588D /* RosterGroup.m */; };
@@ -231,6 +233,7 @@
 		7D9499E21B968E76005C4B3C /* AvatarTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9499E11B968E76005C4B3C /* AvatarTb.m */; };
 		7D9499E51B9692CD005C4B3C /* AvatarSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9499E41B9692CD005C4B3C /* AvatarSql.m */; };
 		7D954BB41B7AE7DC00D18B17 /* UIColor+Hexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D954BB31B7AE7DC00D18B17 /* UIColor+Hexadecimal.m */; };
+		7D9BA0711BAFF0D600550A5A /* GroupLIstUpdateMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BA0701BAFF0D600550A5A /* GroupLIstUpdateMsg.m */; };
 		7DA8DEBF1ACA2EA8001D67D7 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */; };
 		7DA8DEC21ACA3B02001D67D7 /* call.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC11ACA39D2001D67D7 /* call.aif */; };
 		7DA8DEC31ACA3B0C001D67D7 /* answer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7DA8DEC01ACA39C9001D67D7 /* answer.aif */; };
@@ -419,6 +422,7 @@
 
 /* Begin PBXFileReference section */
 		3403732BF679527AE70C90E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7245AC84EDE0297E5E463C73 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D005D1F1A91825D006CB54C /* FileBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlock.h; sourceTree = "<group>"; };
 		7D005D201A91825D006CB54C /* FileBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBlock.m; sourceTree = "<group>"; };
 		7D005D211A91825D006CB54C /* FileBlockPorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBlockPorter.h; sourceTree = "<group>"; };
@@ -490,6 +494,10 @@
 		7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentRosterItemAddReqTableViewCell.m; sourceTree = "<group>"; };
 		7D093C961A710322002D43B9 /* RosterItemAddReqTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemAddReqTableViewController.h; sourceTree = "<group>"; };
 		7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddReqTableViewController.m; sourceTree = "<group>"; };
+		7D0C10C51BB3A4580094113C /* GroupChatJoinMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatJoinMsg.h; sourceTree = "<group>"; };
+		7D0C10C61BB3A4580094113C /* GroupChatJoinMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatJoinMsg.m; sourceTree = "<group>"; };
+		7D0C10C91BB3E8D60094113C /* WorkReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkReportViewController.h; sourceTree = "<group>"; };
+		7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkReportViewController.m; sourceTree = "<group>"; };
 		7D0CFBED1A77334700902285 /* Relogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Relogin.h; sourceTree = "<group>"; };
 		7D0CFBEE1A77334700902285 /* Relogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Relogin.m; sourceTree = "<group>"; };
 		7D0CFBF01A77339200902285 /* LoginNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNotification.h; sourceTree = "<group>"; };
@@ -841,6 +849,8 @@
 		7D9499E41B9692CD005C4B3C /* AvatarSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarSql.m; sourceTree = "<group>"; };
 		7D954BB21B7AE7DC00D18B17 /* UIColor+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hexadecimal.h"; sourceTree = "<group>"; };
 		7D954BB31B7AE7DC00D18B17 /* UIColor+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hexadecimal.m"; sourceTree = "<group>"; };
+		7D9BA06F1BAFF0D600550A5A /* GroupLIstUpdateMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupLIstUpdateMsg.h; sourceTree = "<group>"; };
+		7D9BA0701BAFF0D600550A5A /* GroupLIstUpdateMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupLIstUpdateMsg.m; sourceTree = "<group>"; };
 		7DA8DEBD1ACA2EA8001D67D7 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
 		7DA8DEBE1ACA2EA8001D67D7 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
 		7DA8DEC01ACA39C9001D67D7 /* answer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.aif; sourceTree = "<group>"; };
@@ -1187,7 +1197,6 @@
 		7DFEE9A41A4CF924009967E8 /* UserConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConstants.m; sourceTree = "<group>"; };
 		7DFEE9A61A4CFA38009967E8 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
 		7F18AC6CA82BC16FD93F65E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		FFE0883B8B5AFA0950A7E67A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1203,7 +1212,7 @@
 				7D3C06E51B4B930300D125DD /* VideoToolbox.framework in Frameworks */,
 				7D3C06DD1B4B921B00D125DD /* libWebRTC.a in Frameworks */,
 				7DB158DB1A42DDFA00287BBE /* libxml2.2.dylib in Frameworks */,
-				18DC89791FFA4323EEF23A9F /* libPods.a in Frameworks */,
+				7927B97B4D4E0637349F800F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1346,15 @@
 				7D08D0241A8D92F200F4C8E7 /* SpeakerButton.m */,
 			);
 			path = voicePanel;
+			sourceTree = "<group>";
+		};
+		7D0C10C81BB3E8A10094113C /* workReport */ = {
+			isa = PBXGroup;
+			children = (
+				7D0C10C91BB3E8D60094113C /* WorkReportViewController.h */,
+				7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */,
+			);
+			path = workReport;
 			sourceTree = "<group>";
 		};
 		7D0C8D281ABBEA490004F97A /* profile */ = {
@@ -1907,6 +1925,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D0C10C81BB3E8A10094113C /* workReport */,
 				7D53F0171B9D5A03008B47E7 /* about */,
 				7D76686D1B54A41E0072399B /* RTMessages */,
 				7D7669CE1B54B2360072399B /* chat2 */,
@@ -2550,6 +2569,10 @@
 				7DE2F03E1BA1606700AED700 /* GroupNotification.m */,
 				7D7FBD301BA68CE800C3369D /* GroupChatAcceptMsg.h */,
 				7D7FBD311BA68CE800C3369D /* GroupChatAcceptMsg.m */,
+				7D9BA06F1BAFF0D600550A5A /* GroupLIstUpdateMsg.h */,
+				7D9BA0701BAFF0D600550A5A /* GroupLIstUpdateMsg.m */,
+				7D0C10C51BB3A4580094113C /* GroupChatJoinMsg.h */,
+				7D0C10C61BB3A4580094113C /* GroupChatJoinMsg.m */,
 			);
 			path = groupchat;
 			sourceTree = "<group>";
@@ -2610,7 +2633,7 @@
 				7D3C06E41B4B930300D125DD /* VideoToolbox.framework */,
 				7D3C06DC1B4B921B00D125DD /* libWebRTC.a */,
 				7DB158DA1A42DDFA00287BBE /* libxml2.2.dylib */,
-				FFE0883B8B5AFA0950A7E67A /* libPods.a */,
+				7245AC84EDE0297E5E463C73 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2878,6 +2901,7 @@
 				7DFE24A11AA4193800C5DD29 /* AvatarMgr.m in Sources */,
 				7D08D0251A8D92F200F4C8E7 /* AudioPlayer.m in Sources */,
 				7DB158A51A42DD5600287BBE /* MessageParser.m in Sources */,
+				7D0C10C71BB3A4580094113C /* GroupChatJoinMsg.m in Sources */,
 				7DEA706F1AA99F7B002C2C68 /* MineSettingTableViewController.m in Sources */,
 				7D4D082D1AF9B7940031C035 /* AvatarContainerView.m in Sources */,
 				7D119B331AC23EB500AC6CAB /* NSDictionary+WebRtcUtilites.m in Sources */,
@@ -2893,6 +2917,7 @@
 				7D6D501E1B27D3210092965E /* UITableViewCell+Extenssion.m in Sources */,
 				7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */,
 				7D8A7BAB1B9548D4006657C6 /* SearchPeopleViewController.m in Sources */,
+				7D9BA0711BAFF0D600550A5A /* GroupLIstUpdateMsg.m in Sources */,
 				7D4D083B1AF9E4EC0031C035 /* MultiCallViewController.m in Sources */,
 				7DB158AE1A42DD5600287BBE /* session.m in Sources */,
 				7D87DAD21AB6976600AD57C6 /* ApnsMgr.m in Sources */,
@@ -3028,6 +3053,7 @@
 				7D005D721A91B9DF006CB54C /* fileBrowserViewController.m in Sources */,
 				7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */,
 				7D7668F31B54A41E0072399B /* AGEmojiKeyBoardView.m in Sources */,
+				7D0C10CB1BB3E8D60094113C /* WorkReportViewController.m in Sources */,
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
 				7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */,
 				7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */,

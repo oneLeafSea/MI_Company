@@ -17,6 +17,7 @@
 #import "RosterItemReqMsgTableViewController.h"
 #import "RTChatViewController.h"
 #import "DetailTableViewController.h"
+#import <MJRefresh.h>
 
 @interface OsViewController () <OsNavigationTableViewCellDelegate, OsOrgItemTableViewCellDelegate> {
     
@@ -44,24 +45,36 @@
     [m_tableView registerClass:[OsNavigationTableViewCell class] forCellReuseIdentifier:@"OsNavigationTableViewCell"];
 
     [m_indicatorView startAnimating];
-    m_tableView.hidden = YES;
-    [USER.osMgr syncOrgStructWithWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
-        if (finished) {
-            OsOrg *rootOrg = [USER.osMgr rootOrg];
-            if (!rootOrg) {
-                DDLogError(@"ERROR: get root org.");
-                return;
+    
+    m_tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [USER.osMgr syncOrgStructWithWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+            [m_tableView.header endRefreshing];
+            if (finished) {
+                OsOrg *rootOrg = [USER.osMgr rootOrg];
+                if (!rootOrg) {
+                    DDLogError(@"ERROR: get root org.");
+                    return;
+                }
+                m_navigationCellData = [[NSMutableArray alloc] initWithArray:@[rootOrg]];
+                [self getData];
+                [m_tableView reloadData];
+                
+            } else {
+                [m_indicatorView stopAnimating];
             }
-            m_navigationCellData = [[NSMutableArray alloc] initWithArray:@[rootOrg]];
-            [self getData];
-            m_tableView.hidden = NO;
-            [m_tableView reloadData];
-            
-        } else {
-            [m_indicatorView stopAnimating];
-            m_indicatorView.hidden = YES;
-        }
+        }];
     }];
+    OsOrg *rootOrg = [USER.osMgr rootOrg];
+    if (!rootOrg) {
+        DDLogError(@"ERROR: get root org.");
+        return;
+    }
+    m_navigationCellData = [[NSMutableArray alloc] initWithArray:@[rootOrg]];
+    [self getData];
+    [m_tableView reloadData];
+
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

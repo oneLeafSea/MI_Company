@@ -9,3 +9,6 @@
 #import "GroupNotification.h"
 
 NSString * const kGroupChatNotification = @"cn.com.rooten.groupChatNotification";
+NSString * const kGropuListUpdateNotification = @"cn.com.rooten.groupListUpdate";
+NSString * const kGroupListUpdateSuccess = @"cn.com.rooten.groupListUpdateSuccess";
+NSString * const kGroupJoinSuccess = @"cn.com.rooten.groupchatJoinSuccesss";

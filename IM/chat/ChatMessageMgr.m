@@ -397,6 +397,8 @@
 - (void)handleNewMsg:(NSNotification *)notification {
     __block ChatMessage *msg = notification.object;
     
+   
+    
     if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
         if (![m_msgTb insertMessage:msg]) {
             msg.status = ChatMessageStatusRecved;
@@ -470,6 +472,13 @@
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state == UIApplicationStateBackground) {
+            return;
+        }
+        if ([msg.from isEqualToString:USER.uid]) {
+            return;
+        }
         [RTSystemSoundPlayer rt_playMessageReceivedSound];
         [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
     });

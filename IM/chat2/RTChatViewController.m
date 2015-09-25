@@ -454,13 +454,9 @@
     [super registerMoreItems];
     [self.morePanelView registerItemWithTitle:@"拍照" image:[UIImage imageNamed:@"chatmsg_camera"] target:self action:@selector(takeAPicture)];
     [self.morePanelView registerItemWithTitle:@"照片" image:[UIImage imageNamed:@"chatmsg_pic"] target:self action:@selector(getPhotoFromImgLib)];
-//    [self.morePanelView registerItemWithTitle:@"通话" image:[UIImage imageNamed:@"chatmsg_phone"] target:self action:@selector(getPhotoFromImgLib)];
     if (self.chatMsgType == ChatMessageTypeNormal) {
         [self.morePanelView registerItemWithTitle:@"视频" image:[UIImage imageNamed:@"chatmsg_video"] target:self action:@selector(videoChat)];
     }
-    
-//    [self.morePanelView registerItemWithTitle:@"文件" image:[UIImage imageNamed:@"chatmsg_folder"] target:self action:@selector(getPhotoFromImgLib)];
-    
 }
 
 - (void) getPhotoFromImgLib {
@@ -627,7 +623,6 @@
 
 #pragma UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    DDLogCInfo(@"1");
     //This creates a filepath with the current date/time as the name to save the image
     NSString *imgName = [NSString stringWithFormat:@"%@.jpg", [NSUUID uuid]];
     NSString *fileSavePath = [USER.filePath stringByAppendingPathComponent:imgName];
@@ -635,7 +630,6 @@
     NSURL *orgUrl = [NSURL fileURLWithPath:fileSavePath];
     NSURL *thumbUrl = [NSURL fileURLWithPath:thumbFilePath];
     UIImage *Img = nil;
-    DDLogCInfo(@"2");
     //This checks to see if the image was edited, if it was it saves the edited version as a .jpg
     if ([info objectForKey:UIImagePickerControllerEditedImage]) {
         Img = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -644,12 +638,9 @@
         Img = [info objectForKey:UIImagePickerControllerOriginalImage];
         
     }
-    DDLogCInfo(@"3");
     [Img saveToPath:fileSavePath scale:1.0];
     [Img saveToPath:thumbFilePath sz:CGSizeMake(100.0f, 100.0f)];
-    DDLogCInfo(@"4");
     [picker dismissViewControllerAnimated:YES completion:^{
-        DDLogCInfo(@"5");
         __block RTPhotoMediaItem * item = [[RTPhotoMediaItem alloc] initWithMaskAsOutgoing:YES];
         item.orgUrl = orgUrl;
         item.thumbUrl = thumbUrl;
@@ -662,7 +653,6 @@
         [self finishSendingMessageAnimated:YES];
         [USER.msgMgr sendImageMesageWithImgPath:fileSavePath uuidName:imgName imgName:imgName  msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
             if (finished) {
-                DDLogCInfo(@"6");
                 item.status = RTPhotoMediaItemStatusSent;
                 photoMessage.status = RTMessageStatusSent;
             } else {
@@ -670,11 +660,9 @@
                 photoMessage.status = RTMessageStatusSendError;
             }
             [self finishSendingMessageAnimated:NO];
-            DDLogCInfo(@"7");
         }];
         
     }];
-    DDLogCInfo(@"8");
 }
 
 

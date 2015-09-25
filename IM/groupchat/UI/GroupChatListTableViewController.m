@@ -18,6 +18,8 @@
 #import "LogLevel.h"
 #import "MBProgressHUD.h"
 #import "UIView+toast.h"
+#import "GroupLIstUpdateMsg.h"
+#import "GroupNotification.h"
 
 @interface GroupChatListTableViewController () <MultiSelectViewControllerDelegate, UIAlertViewDelegate>
 @property(nonatomic, strong) NSArray *selectedArray;
@@ -33,15 +35,14 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupListUpdateSuccess object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGrpListUpdateSuccess:) name:kGroupListUpdateSuccess object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,12 +156,15 @@
         [USER.groupChatMgr createTempGroupWithGName:gname fname:USER.name token:USER.token signatrue:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(NSString *gid, BOOL finished) {
             
             if (finished) {
+                GroupLIstUpdateMsg *msg = [[GroupLIstUpdateMsg alloc] init];
+                msg.from = USER.uid;
+                msg.to = USER.uid;
+                [USER.session post:msg];
                 [USER.groupChatMgr getGroupListWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
                     if (finished) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.tableView reloadData];
                         });
-                        
                         [USER.groupChatMgr invitePeers:self.selectedArray toGid:gid gname:gname session:USER.session completion:^(BOOL finished) {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [MBProgressHUD hideHUDForView:self.view.window animated:YES];
@@ -190,6 +194,12 @@
         }];
         
     }
+}
+
+- (void)handleGrpListUpdateSuccess:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 @end

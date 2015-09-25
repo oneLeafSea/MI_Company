@@ -9,3 +9,6 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kGroupChatNotification;
+extern NSString * const kGropuListUpdateNotification ;
+extern NSString * const kGroupListUpdateSuccess;
+extern NSString * const kGroupJoinSuccess;

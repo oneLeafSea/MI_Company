@@ -9,6 +9,7 @@
 #import "GroupChatNotifyMsg.h"
 #import "LogLevel.h"
 #import "MessageConstants.h"
+#import "NSUUID+StringUUID.h"
 
 @implementation GroupChatNotifyMsg
 
@@ -28,7 +29,7 @@
     self.qid = [dict objectForKey:@"msgid"];
     if (self.qid == nil) {
         DDLogError(@"ERROR: GroupChatNotifyMsg do not have msgid key.");
-        return NO;
+        self.qid = [NSUUID uuid];
     }
     _from = [[dict objectForKey:@"from"] copy];
     _from_res = [[dict objectForKey:@"from_res"] copy];

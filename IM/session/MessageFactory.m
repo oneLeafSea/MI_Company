@@ -33,6 +33,8 @@
 #import "WebRtcNotifyMsg.h"
 #import "GroupChatNotifyMsg.h"
 #import "GroupNotification.h"
+#import "GroupLIstUpdateMsg.h"
+#import "GroupChatJoinMsg.h"
 
 @interface MessageFactory()
 @end
@@ -140,6 +142,17 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kGroupChatNotification object:msg];
             }
         }
+            break;
+        case IM_NOTIFY_GRP_LIST_UPDATE: {
+            GroupLIstUpdateMsg *msg = [[GroupLIstUpdateMsg alloc] init];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGropuListUpdateNotification object:msg];
+        }
+            break;
+        case IM_NOTIFY_GROUP_JOIN_SUCCESS: {
+            GroupChatJoinMsg *msg = [[GroupChatJoinMsg alloc] initWithData:data];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGroupJoinSuccess object:msg];
+        }
+            break;
         default:
             break;
     }

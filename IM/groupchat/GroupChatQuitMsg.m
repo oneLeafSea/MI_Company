@@ -35,7 +35,7 @@
 
 - (NSData *)pkgData {
     
-    NSDictionary *dict = @{kMsgQid   : self.qid,
+    NSDictionary *dict = @{@"msgid"   : self.qid,
                            @"type"   : @"leave",
                            @"gid"    : self.gid,
                            };

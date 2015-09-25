@@ -35,6 +35,8 @@
 #import "RecentGrpNotifyTableViewCell.h"
 #import "NSDate+Common.h"
 #import "GroupChatNotificaitonViewController.h"
+#import "CWStatusBarNotification.h"
+#import "GroupChatJoinMsg.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
@@ -45,6 +47,7 @@ static NSString *kChatMessageTypeNomal = @"0";
 }
 
 @property(nonatomic, strong) UISearchController *searchController;
+@property(nonatomic, strong) CWStatusBarNotification *grpNotification;
 
 @end
 
@@ -63,11 +66,13 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatListChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupJoinSuccess object:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     m_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.grpNotification = [CWStatusBarNotification new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRecvNewMessage:) name:kChatMessageRecvNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSendNewMessage:) name:kChatMessageSendNewMsg object:nil];
@@ -85,6 +90,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotReachable:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupListChangedNotification:) name:kGroupChatListChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupChatNotification:) name:kGroupChatNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupJoinNotification:) name:kGroupJoinSuccess object:nil];
     
     SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
     spVC.delegate = self;
@@ -458,6 +464,15 @@ static NSString *kChatMessageTypeNomal = @"0";
     }
 }
 
+- (void)handleGroupJoinNotification:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        GroupChatJoinMsg *joinMsg = notification.object;
+        OsItem *item = [USER.osMgr getItemInfoByUid:joinMsg.uid];
+        GroupChat *g = [USER.groupChatMgr getGrpChatByGid:joinMsg.gid];
+        [self.grpNotification displayNotificationWithMessage:[NSString stringWithFormat:@"%@加入%@群", item.name, g.gname] forDuration:4.0];
+    });
+}
+
 - (void)handleGroupChatNotification:(NSNotification *)notification {
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -471,8 +486,23 @@ static NSString *kChatMessageTypeNomal = @"0";
             [self initModelData];
             [self updateTabItem];
             [m_tableView reloadData];
+            [self showGroupNotification:msg fname:fromName];
         }
     });
+}
+
+- (void)showGroupNotification:(GroupChatNotifyMsg *)msg fname:(NSString *)fname {
+    NSString *content = nil;
+    if ([msg.notifytype isEqualToString:@"invent"]) {
+        content = [NSString stringWithFormat:@"%@邀请你加入%@群", fname, msg.gname];
+    } else if ([msg.notifytype isEqualToString:@"del"]) {
+        content = [NSString stringWithFormat:@"%@解散了%@群", fname, msg.gname];
+    } else if ([msg.notifytype isEqualToString:@"leave"]) {
+        content = [NSString stringWithFormat:@"%@退出了%@群", fname, msg.gname];
+    }
+    if (content != nil) {
+        [self.grpNotification displayNotificationWithMessage:content forDuration:4.0];
+    }
 }
 
 #pragma mark - handle avatar notification

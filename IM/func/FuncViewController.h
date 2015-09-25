@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RTViewController.h"
 
 
-@interface FuncViewController : RTViewController
+@interface FuncViewController : UITableViewController
 
 @end

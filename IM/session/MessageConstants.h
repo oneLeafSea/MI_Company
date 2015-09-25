@@ -34,11 +34,14 @@ typedef NS_ENUM(UInt32, IM) {
     IM_ROSTER_ITEM_DEL_REQUEST,
     IM_CHATROOM                  = 0x00031004,
     IM_CHATROOM_ACK              = 0x00031005,
+    IM_NOTIFY_GRP_LIST_UPDATE    = 0x00031006,       // 更新群组列表
     
     IM_NOTIFY_ROSTER_ADD         = 0x00040000,      // 加好友成功通知
     IM_NOTIFY_ROSTER_DEL,                            // 删除好友通知
     IM_NOTIFY_MESSAGE,
+    IM_NOTIFY_GROUP_JOIN_SUCCESS  = 0x40003,         // 通知加入群成功
     IM_NOTIFY_FC                 = 0x00040005       // 朋友圈
+    
 };
 
 typedef NS_ENUM(UInt32, PUSH) {

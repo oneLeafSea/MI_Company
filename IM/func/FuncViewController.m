@@ -12,10 +12,10 @@
 #import "FriendCircleViewController.h"
 #import "FuncFcTableViewCell.h"
 #import "AppDelegate.h"
+#import "WorkReportViewController.h"
 
 @interface FuncViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -33,21 +33,17 @@
 
 #pragma mark -- private method
 - (void) setupTableView {
-    self.tableView = [self createTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:240 / 255.0 alpha:1.0];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerClass:[FuncFcTableViewCell class] forCellReuseIdentifier:@"FuncFcTableViewCell"];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
 }
 
 
 #pragma mark -- tablview delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,6 +57,14 @@
         cell.badgeShow = USER.fcMgr.hasNewNotification;
         cell.imageView.image = [UIImage imageNamed:@"fc_log"];
         cell.textLabel.text = @"朋友圈";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
+    }
+    
+    if (indexPath.row == 2) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"defaultCell"];
+        cell.imageView.image = [UIImage imageNamed:@"workreport_icon"];
+        cell.textLabel.text = @"工作日志";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
@@ -82,6 +86,11 @@
         FriendCircleViewController *vc = [[FriendCircleViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
+    }
+    
+    if (indexPath.row == 2) {
+        WorkReportViewController *vc = [[WorkReportViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

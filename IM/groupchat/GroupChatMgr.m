@@ -49,6 +49,7 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kIMAckNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kGropuListUpdateNotification object:nil];
 }
 
 - (instancetype)init NS_UNAVAILABLE
@@ -65,6 +66,7 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAckMessage:) name:kIMAckNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupChatNotification:) name:kGroupChatNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGrpListUpdate:) name:kGropuListUpdateNotification object:nil];
         self.dbq = dbq;
         self.notifyTb = [[GroupChatNotificationTb alloc] initWithDbq:dbq];
         if (self.notifyTb == nil) {
@@ -393,7 +395,22 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
         IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:IM_CHATROOM_ACK time:[NSDate stringNow] err:nil];
         [USER.session post:ack];
     }
+    [USER.groupChatMgr getGroupListWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+        if (finished) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGroupListUpdateSuccess object:nil];
+        }
+    }];
     
+}
+
+- (void)handleGrpListUpdate:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [USER.groupChatMgr getGroupListWithToken:USER.token signature:USER.signature key:USER.key iv:USER.iv url:USER.imurl completion:^(BOOL finished) {
+           if (finished) {
+               [[NSNotificationCenter defaultCenter] postNotificationName:kGroupListUpdateSuccess object:nil];
+           }
+       }];
+    });
 }
 
 @end

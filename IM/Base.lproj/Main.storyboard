@@ -1128,7 +1128,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="KXv-Li-AHV" kind="relationship" relationship="rootViewController" id="P4u-uo-HqD"/>
+                        <segue destination="ryf-Qv-ql5" kind="relationship" relationship="rootViewController" id="0eD-6y-o4i"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kI8-Db-6gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1136,26 +1136,31 @@
             <point key="canvasLocation" x="-694" y="3234"/>
         </scene>
         <!--功能-->
-        <scene sceneID="GVL-Fk-JOf">
+        <scene sceneID="tz5-VN-04R">
             <objects>
-                <viewController id="KXv-Li-AHV" customClass="FuncViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PEJ-iX-DQK"/>
-                        <viewControllerLayoutGuide type="bottom" id="beH-3A-sHQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QWs-Ed-xvd">
+                <tableViewController id="ryf-Qv-ql5" customClass="FuncViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ibc-Dw-kzK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="功能" id="rAB-kE-AJT"/>
-                    <connections>
-                        <segue destination="t8d-J6-FQa" kind="show" identifier="toViewController" id="Gwd-R7-WZP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oaG-Rs-t9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6T0-bo-Pu7">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6T0-bo-Pu7" id="LuQ-9T-lkP">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ryf-Qv-ql5" id="ttO-Zc-qyA"/>
+                            <outlet property="delegate" destination="ryf-Qv-ql5" id="PX5-y3-h0y"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="功能" id="J1s-xh-KQP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hd9-jW-mFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50" y="3216"/>
+            <point key="canvasLocation" x="-23" y="3226"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Wvg-5P-onB">
@@ -3478,21 +3483,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TuB-Gy-zaW" rowHeight="44" style="IBUITableViewCellStyleDefault" id="rEY-cX-hYp">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rEY-cX-hYp" id="4Rq-Ef-wQ5">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="历史消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TuB-Gy-zaW">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wjn-Od-6c3">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -3500,7 +3490,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6Y-hm-oew">
-                                                    <rect key="frame" x="8" y="16" width="584" height="30"/>
+                                                    <rect key="frame" x="270" y="16" width="60" height="30"/>
                                                     <state key="normal" title="删除好友">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -3511,9 +3501,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="e6Y-hm-oew" firstAttribute="top" secondItem="ywz-OQ-WUw" secondAttribute="topMargin" constant="8" id="Tzs-Ae-ezb"/>
-                                                <constraint firstItem="e6Y-hm-oew" firstAttribute="leading" secondItem="ywz-OQ-WUw" secondAttribute="leadingMargin" id="UD6-fn-9c4"/>
-                                                <constraint firstItem="e6Y-hm-oew" firstAttribute="trailing" secondItem="ywz-OQ-WUw" secondAttribute="trailingMargin" id="bvP-eW-Wiu"/>
+                                                <constraint firstAttribute="centerX" secondItem="e6Y-hm-oew" secondAttribute="centerX" id="Op6-CU-igC"/>
+                                                <constraint firstAttribute="centerY" secondItem="e6Y-hm-oew" secondAttribute="centerY" constant="-0.75" id="ynN-5u-gYp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
