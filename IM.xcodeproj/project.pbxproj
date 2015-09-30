@@ -47,7 +47,6 @@
 		7D093C951A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C941A70FA00002D43B9 /* RecentRosterItemAddReqTableViewCell.m */; };
 		7D093C981A710322002D43B9 /* RosterItemAddReqTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */; };
 		7D0C10C71BB3A4580094113C /* GroupChatJoinMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C10C61BB3A4580094113C /* GroupChatJoinMsg.m */; };
-		7D0C10CB1BB3E8D60094113C /* WorkReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */; };
 		7D0CFBEF1A77334700902285 /* Relogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBEE1A77334700902285 /* Relogin.m */; };
 		7D0CFBF21A77339200902285 /* LoginNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0CFBF11A77339200902285 /* LoginNotification.m */; };
 		7D0D945F1A4B96C600B6588D /* RosterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D945E1A4B96C600B6588D /* RosterGroup.m */; };
@@ -89,6 +88,7 @@
 		7D3C06EB1B4B933E00D125DD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3C06EA1B4B933E00D125DD /* AVFoundation.framework */; };
 		7D3C06ED1B4B934600D125DD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3C06EC1B4B934600D125DD /* CoreMedia.framework */; };
 		7D3C06EF1B4B936A00D125DD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3C06EE1B4B936A00D125DD /* libicucore.dylib */; };
+		7D4011C61BB9435600B24452 /* PMMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4011C51BB9435600B24452 /* PMMgr.m */; };
 		7D433C711AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */; };
 		7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D111AC555F1008B5A8C /* NSData+WebRtcB64Additions.m */; };
 		7D433D171AC555F1008B5A8C /* webrtcbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D433D121AC555F1008B5A8C /* webrtcbase64.c */; };
@@ -111,6 +111,9 @@
 		7D54D68C1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54D68B1B3A49E700E81F8F /* FCNPImagePickerTableViewCell.m */; };
 		7D59E44B1A689AF300806018 /* ChatMessageTb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44A1A689AF200806018 /* ChatMessageTb.m */; };
 		7D59E44E1A689DA800806018 /* ChatMessageSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59E44D1A689DA800806018 /* ChatMessageSql.m */; };
+		7D5C03B91BBA55DE00264A60 /* PMNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C03B81BBA55DE00264A60 /* PMNotification.m */; };
+		7D5C03BD1BBA6AE500264A60 /* WorkReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C03BB1BBA6AE500264A60 /* WorkReportViewController.m */; };
+		7D5C03BE1BBA6AE500264A60 /* WorkReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D5C03BC1BBA6AE500264A60 /* WorkReportViewController.xib */; };
 		7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */; };
 		7D60EEB21A4C13EC003DA458 /* RosterGroupContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D60EEB11A4C13EC003DA458 /* RosterGroupContainer.m */; };
 		7D64B0281B574569000EFDC4 /* RTMorePanelItemMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B0271B574569000EFDC4 /* RTMorePanelItemMode.m */; };
@@ -496,8 +499,6 @@
 		7D093C971A710322002D43B9 /* RosterItemAddReqTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemAddReqTableViewController.m; sourceTree = "<group>"; };
 		7D0C10C51BB3A4580094113C /* GroupChatJoinMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChatJoinMsg.h; sourceTree = "<group>"; };
 		7D0C10C61BB3A4580094113C /* GroupChatJoinMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChatJoinMsg.m; sourceTree = "<group>"; };
-		7D0C10C91BB3E8D60094113C /* WorkReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkReportViewController.h; sourceTree = "<group>"; };
-		7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkReportViewController.m; sourceTree = "<group>"; };
 		7D0CFBED1A77334700902285 /* Relogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Relogin.h; sourceTree = "<group>"; };
 		7D0CFBEE1A77334700902285 /* Relogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Relogin.m; sourceTree = "<group>"; };
 		7D0CFBF01A77339200902285 /* LoginNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNotification.h; sourceTree = "<group>"; };
@@ -572,6 +573,8 @@
 		7D3C06EA1B4B933E00D125DD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7D3C06EC1B4B934600D125DD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		7D3C06EE1B4B936A00D125DD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		7D4011C41BB9435600B24452 /* PMMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMMgr.h; sourceTree = "<group>"; };
+		7D4011C51BB9435600B24452 /* PMMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMMgr.m; sourceTree = "<group>"; };
 		7D433C6F1AC4F2F1008B5A8C /* WebRtcVideoChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRtcVideoChatViewController.h; sourceTree = "<group>"; };
 		7D433C701AC4F2F1008B5A8C /* WebRtcVideoChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRtcVideoChatViewController.m; sourceTree = "<group>"; };
 		7D433D101AC555F1008B5A8C /* NSData+WebRtcB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+WebRtcB64Additions.h"; sourceTree = "<group>"; };
@@ -613,6 +616,11 @@
 		7D59E44A1A689AF200806018 /* ChatMessageTb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageTb.m; sourceTree = "<group>"; };
 		7D59E44C1A689DA800806018 /* ChatMessageSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageSql.h; sourceTree = "<group>"; };
 		7D59E44D1A689DA800806018 /* ChatMessageSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageSql.m; sourceTree = "<group>"; };
+		7D5C03B71BBA55DE00264A60 /* PMNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMNotification.h; sourceTree = "<group>"; };
+		7D5C03B81BBA55DE00264A60 /* PMNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMNotification.m; sourceTree = "<group>"; };
+		7D5C03BA1BBA6AE500264A60 /* WorkReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkReportViewController.h; sourceTree = "<group>"; };
+		7D5C03BB1BBA6AE500264A60 /* WorkReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkReportViewController.m; sourceTree = "<group>"; };
+		7D5C03BC1BBA6AE500264A60 /* WorkReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkReportViewController.xib; sourceTree = "<group>"; };
 		7D6010D01A5B7AAA006B189A /* RosterItemDelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemDelRequest.h; sourceTree = "<group>"; };
 		7D6010D11A5B7AAA006B189A /* RosterItemDelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemDelRequest.m; sourceTree = "<group>"; };
 		7D60EEB01A4C13EC003DA458 /* RosterGroupContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterGroupContainer.h; sourceTree = "<group>"; };
@@ -1351,8 +1359,9 @@
 		7D0C10C81BB3E8A10094113C /* workReport */ = {
 			isa = PBXGroup;
 			children = (
-				7D0C10C91BB3E8D60094113C /* WorkReportViewController.h */,
-				7D0C10CA1BB3E8D60094113C /* WorkReportViewController.m */,
+				7D5C03BA1BBA6AE500264A60 /* WorkReportViewController.h */,
+				7D5C03BB1BBA6AE500264A60 /* WorkReportViewController.m */,
+				7D5C03BC1BBA6AE500264A60 /* WorkReportViewController.xib */,
 			);
 			path = workReport;
 			sourceTree = "<group>";
@@ -1492,6 +1501,17 @@
 				7DB04C9E1AC3A53E0097A106 /* WebRtcMgr.m */,
 			);
 			path = webrtc;
+			sourceTree = "<group>";
+		};
+		7D4011C31BB9432500B24452 /* pushMessage */ = {
+			isa = PBXGroup;
+			children = (
+				7D4011C41BB9435600B24452 /* PMMgr.h */,
+				7D4011C51BB9435600B24452 /* PMMgr.m */,
+				7D5C03B71BBA55DE00264A60 /* PMNotification.h */,
+				7D5C03B81BBA55DE00264A60 /* PMNotification.m */,
+			);
+			path = pushMessage;
 			sourceTree = "<group>";
 		};
 		7D433C6E1AC4F2B3008B5A8C /* UI */ = {
@@ -1925,6 +1945,7 @@
 		7DB156B61A42DC0C00287BBE /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				7D4011C31BB9432500B24452 /* pushMessage */,
 				7D0C10C81BB3E8A10094113C /* workReport */,
 				7D53F0171B9D5A03008B47E7 /* about */,
 				7D76686D1B54A41E0072399B /* RTMessages */,
@@ -2766,6 +2787,7 @@
 				7D08D02B1A8D92F200F4C8E7 /* ChatMessageRecorderViewController.xib in Resources */,
 				7D7669051B54A41E0072399B /* RTMessagesToolbarContentView.xib in Resources */,
 				7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */,
+				7D5C03BE1BBA6AE500264A60 /* WorkReportViewController.xib in Resources */,
 				7D7FCDE71AA84A730023EF49 /* OsNavigationOrgCollectionCell.xib in Resources */,
 				7D08D0271A8D92F200F4C8E7 /* ChatMessagePlayerPanel.xib in Resources */,
 				7D4D083C1AF9E4EC0031C035 /* MultiCallViewController.xib in Resources */,
@@ -2842,6 +2864,7 @@
 				7DB1589F1A42DD5600287BBE /* RosterMgr.m in Sources */,
 				7D433D161AC555F1008B5A8C /* NSData+WebRtcB64Additions.m in Sources */,
 				7D07BB971AA59C6500E78877 /* GroupChatSettingTableViewController.m in Sources */,
+				7D5C03B91BBA55DE00264A60 /* PMNotification.m in Sources */,
 				7D53F01A1B9D5A18008B47E7 /* AboutTableViewController.m in Sources */,
 				7D1C602C1AA6E7E50035A2D2 /* OsItemsTb.m in Sources */,
 				7D7668E91B54A41E0072399B /* RTMessagesCollectionViewFlowLayout.m in Sources */,
@@ -2859,6 +2882,7 @@
 				7D08D02F1A8D92F200F4C8E7 /* ChatMessageVoicePanelViewController.m in Sources */,
 				7D6010D21A5B7AAA006B189A /* RosterItemDelRequest.m in Sources */,
 				7D3015AC1ABBBCA1007205BB /* MineSettingCommonTableViewController.m in Sources */,
+				7D4011C61BB9435600B24452 /* PMMgr.m in Sources */,
 				7D005D321A91825D006CB54C /* FileTransferTask.m in Sources */,
 				7D9499DF1B968E66005C4B3C /* AvatarVerTb.m in Sources */,
 				7DB092781A6649AF005268A7 /* ChatMessageNotification.m in Sources */,
@@ -3053,7 +3077,6 @@
 				7D005D721A91B9DF006CB54C /* fileBrowserViewController.m in Sources */,
 				7DB06F4F1A720FC300DD1943 /* RosterItemAddReqDetailTableViewController.m in Sources */,
 				7D7668F31B54A41E0072399B /* AGEmojiKeyBoardView.m in Sources */,
-				7D0C10CB1BB3E8D60094113C /* WorkReportViewController.m in Sources */,
 				7D0D949A1A4BDFBD00B6588D /* RosterConstants.m in Sources */,
 				7D6D50411B2831F10092965E /* FCICItemContentView.m in Sources */,
 				7D302CFE1A778646004C6BD5 /* ReloginTipView.m in Sources */,
@@ -3167,6 +3190,7 @@
 				7DFEE9A51A4CF924009967E8 /* UserConstants.m in Sources */,
 				7D08D02A1A8D92F200F4C8E7 /* ChatMessageRecorderViewController.m in Sources */,
 				7DFE24B11AA44C2900C5DD29 /* GroupChat.m in Sources */,
+				7D5C03BD1BBA6AE500264A60 /* WorkReportViewController.m in Sources */,
 				7DB31BF31A6CBDF40051E6CD /* RosterVerTb.m in Sources */,
 				7DDF931F1B1FDD4C0097C6BD /* CTAssetItemViewController.m in Sources */,
 				7DB1585A1A42DD5600287BBE /* JRreqFrbhParam.m in Sources */,

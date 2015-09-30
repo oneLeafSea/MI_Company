@@ -89,7 +89,7 @@
     }
     
     if (indexPath.row == 2) {
-        WorkReportViewController *vc = [[WorkReportViewController alloc] init];
+        WorkReportViewController *vc = [[WorkReportViewController alloc] initWithNibName:@"WorkReportViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

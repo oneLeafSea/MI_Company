@@ -482,6 +482,9 @@
         [RTSystemSoundPlayer rt_playMessageReceivedSound];
         [[RTSystemSoundPlayer sharedPlayer] playVibrateSound];
     });
+    if ([msg.from isEqualToString:USER.uid]) {
+        return;
+    }
     IMAck *ack = [[IMAck alloc] initWithMsgid:msg.qid ackType:msg.type time:[NSDate stringNow] err:nil];
     [m_session post:ack];
 }

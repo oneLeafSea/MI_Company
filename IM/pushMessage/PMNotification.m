@@ -1,13 +1,13 @@
 //
-//  WorkReportViewController.h
+//  PMNotification.m
 //  IM
 //
 //  Created by 郭志伟 on 15/9/29.
 //  Copyright (c) 2015年 rooten. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PMNotification.h"
 
-@interface WorkReportViewController : UIViewController
+@implementation PMNotification
 
 @end

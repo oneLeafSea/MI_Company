@@ -806,6 +806,11 @@
             [self finishReceivingMessage];
         });
     }
+    ChatMessageControllerInfo *info = [[ChatMessageControllerInfo alloc] init];
+    info.talkingId = [self.talkingId copy];
+    info.talkingName = [self.talkingname copy];
+    info.msgType = self.chatMsgType;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kChatMessageControllerWillDismiss object:info];
 
 }
 

@@ -2,17 +2,16 @@
 //  WorkReportViewController.m
 //  IM
 //
-//  Created by 郭志伟 on 15/9/24.
+//  Created by 郭志伟 on 15/9/29.
 //  Copyright (c) 2015年 rooten. All rights reserved.
 //
 
 #import "WorkReportViewController.h"
 
 #import <JTCalendar/JTCalendar.h>
-#import <Masonry/Masonry.h>
+#import "UIColor+Theme.h"
 
-@interface WorkReportViewController()<JTCalendarDelegate>
-{
+@interface WorkReportViewController ()<JTCalendarDelegate> {
     NSMutableDictionary *_eventsByDate;
     
     NSDate *_todayDate;
@@ -22,71 +21,90 @@
     NSDate *_dateSelected;
 }
 
-@property(nonatomic, strong) JTCalendarMenuView *calendarMenuView;
-@property(nonatomic, strong) JTHorizontalCalendarView *calendarContentView;
-@property(nonatomic, strong) JTCalendarManager *calendarManager;
+@property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
+@property (weak, nonatomic) IBOutlet JTHorizontalCalendarView *calendarContentView;
+
+@property (strong, nonatomic) JTCalendarManager *calendarManager;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarContentViewHeight;
+
+@property(nonatomic, strong) UITableView *tableView;
 
 @end
 
 @implementation WorkReportViewController
 
-- (instancetype) init {
-    if (self = [super init]) {
-        self.hidesBottomBarWhenPushed = YES;
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(!self){
+        return nil;
     }
+    
+    self.title = @"工作日志";
+    
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     
+    _calendarManager = [JTCalendarManager new];
+    _calendarManager.delegate = self;
+    
+    // Generate random events sort by date using a dateformatter for the demonstration
     [self createRandomEvents];
     
     // Create a min and max date for limit the calendar, optional
     [self createMinAndMaxDate];
     
-    _calendarManager = [JTCalendarManager new];
-    _calendarManager.delegate = self;
-    
-    _calendarMenuView = [[JTCalendarMenuView alloc] initWithFrame:CGRectZero];
-    _calendarContentView = [[JTHorizontalCalendarView alloc] initWithFrame:CGRectZero];
-    
     [_calendarManager setMenuView:_calendarMenuView];
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:_todayDate];
     
-    [self.view addSubview:_calendarMenuView];
-    [self.view addSubview:_calendarContentView];
-    [self setupConstraints];
-    
-   
+
 }
 
-- (void)setupConstraints {
-    [self.calendarMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.top.equalTo(self.view);
-        make.height.equalTo(@100);
-    }];
+- (void)setupTableView {
     
-    [self.calendarContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.top.equalTo(self.calendarMenuView.mas_bottom);
-        make.height.equalTo(@300);
-    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Buttons callback
+
+- (IBAction)didGoTodayTouch
+{
+    [_calendarManager setDate:_todayDate];
+}
+
+- (IBAction)didChangeModeTouch
+{
+    _calendarManager.settings.weekModeEnabled = !_calendarManager.settings.weekModeEnabled;
+    [_calendarManager reload];
+    
+    CGFloat newHeight = 300;
+    if(_calendarManager.settings.weekModeEnabled){
+        newHeight = 85.;
+    }
+    
+    self.calendarContentViewHeight.constant = newHeight;
+    [self.view layoutIfNeeded];
 }
 
 #pragma mark - CalendarManager delegate
 
+// Exemple of implementation of prepareDayView method
+// Used to customize the appearance of dayView
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(JTCalendarDayView *)dayView
 {
     // Today
     if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.circleView.hidden = NO;
-        dayView.circleView.backgroundColor = [UIColor blueColor];
+        dayView.circleView.backgroundColor = [UIColor themeColor];
         dayView.dotView.backgroundColor = [UIColor whiteColor];
         dayView.textLabel.textColor = [UIColor whiteColor];
     }
@@ -218,5 +236,6 @@
         [_eventsByDate[key] addObject:randomDate];
     }
 }
+
 
 @end

@@ -153,6 +153,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kGroupJoinSuccess object:msg];
         }
             break;
+            
+        case PUSH_MESSAGE: {
+            
+        }
+            break;
         default:
             break;
     }
