@@ -191,7 +191,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (NSString *)appVersion {
-    return @"1.0.0";
+    return @"1.0.1"; // 修改了多终端是消息错误的问题。
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {

@@ -133,6 +133,9 @@
     if (indexPath.row == 0) {
         OsNavigationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OsNavigationTableViewCell" forIndexPath:indexPath];
         cell.delgate = self;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.userInteractionEnabled = YES;
+//        cell.contentView.userInteractionEnabled = YES;
         [cell setCollectionData:m_navigationCellData];
         return cell;
     }
@@ -183,6 +186,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        return;
+    }
+    
     
     if (indexPath.row < m_curSubOrgs.count + 1) {
         NSInteger index = indexPath.row - 1;

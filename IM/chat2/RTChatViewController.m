@@ -750,6 +750,9 @@
 #pragma mark - handle notification
 - (void)handleNewMessageNotification:(NSNotification *) notification {
     __block ChatMessage *msg = notification.object;
+    if (self.chatMsgType != msg.chatMsgType) {
+        return;
+    }
     if (([msg.from isEqual:self.talkingId] && (msg.chatMsgType == ChatMessageTypeNormal)) || (msg.chatMsgType == ChatMessageTypeGroupChat && [msg.to isEqualToString:self.talkingId])) {
         if ([[msg.body objectForKey:@"type"] isEqualToString:@"text"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -770,42 +773,43 @@
                 [self scrollToBottomAnimated:YES];
             });
         }
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                RTPhotoMediaItem *item = [[RTPhotoMediaItem alloc] initWithMaskAsOutgoing:NO];
+                NSString *uuid = [msg.body objectForKey:@"uuid"];
+                NSString *orgUrlStr = [USER.fileDownloadSvcUrl stringByAppendingPathComponent:uuid];
+                NSString *thumbUrlStr = [USER.imgThumbServerUrl stringByAppendingString:uuid];
+                
+                item.orgUrl = [NSURL URLWithString:orgUrlStr];
+                item.thumbUrl = [NSURL URLWithString:thumbUrlStr];
+                item.status = RTPhotoMediaItemStatusRecved;
+                RTMessage *photoMessage = [RTMessage messageWithSenderId:msg.from
+                                                             displayName:[msg.body objectForKey:@"fromname"]
+                                                                   media:item];
+                photoMessage.status = RTMessageStatusRecved;
+                [self.data.messages addObject:photoMessage];
+                [self finishReceivingMessageAnimated:YES];
+                [self scrollToBottomAnimated:YES];
+            });
+        }
+        
+        if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *d = [msg.body objectForKey:@"duration"];
+                
+                RTAudioMediaItem *item = [[RTAudioMediaItem alloc] initWithMaskAsOutgoing:NO];
+                NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
+                item.audioUrl = audioPath;
+                item.duration = [d doubleValue];
+                item.status = RTAudioMediaItemStatusRecved;
+                RTMessage *audioMsg = [RTMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:item];
+                [self.data.messages addObject:audioMsg];
+                [self finishReceivingMessage];
+            });
+        }
     }
     
-    if ([[msg.body objectForKey:@"type"] isEqualToString:@"image"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            RTPhotoMediaItem *item = [[RTPhotoMediaItem alloc] initWithMaskAsOutgoing:NO];
-            NSString *uuid = [msg.body objectForKey:@"uuid"];
-            NSString *orgUrlStr = [USER.fileDownloadSvcUrl stringByAppendingPathComponent:uuid];
-            NSString *thumbUrlStr = [USER.imgThumbServerUrl stringByAppendingString:uuid];
-            
-            item.orgUrl = [NSURL URLWithString:orgUrlStr];
-            item.thumbUrl = [NSURL URLWithString:thumbUrlStr];
-            item.status = RTPhotoMediaItemStatusRecved;
-            RTMessage *photoMessage = [RTMessage messageWithSenderId:msg.from
-                                                         displayName:[msg.body objectForKey:@"fromname"]
-                                                               media:item];
-            photoMessage.status = RTMessageStatusRecved;
-            [self.data.messages addObject:photoMessage];
-            [self finishReceivingMessageAnimated:YES];
-            [self scrollToBottomAnimated:YES];
-        });
-    }
     
-    if ([[msg.body objectForKey:@"type"] isEqualToString:@"voice"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *d = [msg.body objectForKey:@"duration"];
-            
-            RTAudioMediaItem *item = [[RTAudioMediaItem alloc] initWithMaskAsOutgoing:NO];
-            NSString *audioPath = [USER.audioPath stringByAppendingPathComponent:[msg.body objectForKey:@"uuid"]];
-            item.audioUrl = audioPath;
-            item.duration = [d doubleValue];
-            item.status = RTAudioMediaItemStatusRecved;
-            RTMessage *audioMsg = [RTMessage messageWithSenderId:msg.from displayName:[msg.body objectForKey:@"fromname"] media:item];
-            [self.data.messages addObject:audioMsg];
-            [self finishReceivingMessage];
-        });
-    }
     ChatMessageControllerInfo *info = [[ChatMessageControllerInfo alloc] init];
     info.talkingId = [self.talkingId copy];
     info.talkingName = [self.talkingname copy];

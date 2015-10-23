@@ -76,7 +76,7 @@ import Foundation
     }
     
     public func writeData(data: NSData, type: UInt32) {
-        var combineData = NSMutableData();
+        let combineData = NSMutableData();
         var bigEndianType = type.bigEndian
         combineData.appendBytes(&bigEndianType, length: sizeof(UInt32))
         combineData.appendData(data)
@@ -84,15 +84,19 @@ import Foundation
     }
     
     public func writeDict(dict: NSDictionary, type: UInt32) {
-        var dictData = NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(0), error: nil)
-        if let d = dictData {
-            self.writeData(d, type: type)
+//        var dictData = NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(0), error: nil)
+        do {
+            let dictData = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(rawValue: 0))
+            self.writeData(dictData, type: type)
+        } catch _ {
+            print("error in parse json.");
         }
+        
     }
     
     public func sendHb() {
         var zero: UInt32 = 0
-        var data = NSData(bytes: &zero, length: sizeof(UInt32))
+        let data = NSData(bytes: &zero, length: sizeof(UInt32))
         self.dequeueWrite(data)
     }
     
@@ -112,7 +116,7 @@ import Foundation
                     break
                 }
                 let writeBuffer = UnsafePointer<UInt8>(data.bytes + total)
-                var len = self.outputStream?.write(writeBuffer, maxLength: data.length-total);
+                let len = self.outputStream?.write(writeBuffer, maxLength: data.length-total);
                 if len == nil || len! < 0 {
                     break
                 } else {
@@ -126,7 +130,7 @@ import Foundation
     }
     
     private func buildWriteData(data: NSData) -> NSData {
-        var data4Sending = NSMutableData();
+        let data4Sending = NSMutableData();
         var dataSz: UInt32 = UInt32(data.length).bigEndian;
         data4Sending.appendBytes(&dataSz, length: sizeof(UInt32));
         data4Sending.appendData(data)
@@ -145,15 +149,15 @@ import Foundation
         inputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
         outputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
         let settings: Dictionary<NSObject, NSObject> = [kCFStreamSSLValidatesCertificateChain: NSNumber(bool:false), kCFStreamSSLPeerName: kCFNull]
-        inputStream!.setProperty(settings, forKey: kCFStreamPropertySSLSettings as! String)
-        outputStream!.setProperty(settings, forKey: kCFStreamPropertySSLSettings as! String)
+        inputStream!.setProperty(settings, forKey: kCFStreamPropertySSLSettings as String)
+        outputStream!.setProperty(settings, forKey: kCFStreamPropertySSLSettings as String)
         isRunLoop = true
         inputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
         outputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
         inputStream!.open()
         outputStream!.open()
         while(isRunLoop) {
-            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture() as! NSDate)
+            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture() )
         }
     }
     
@@ -164,10 +168,10 @@ import Foundation
                 self.processInputStream()
             }
         } else if eventCode == NSStreamEvent.ErrorOccurred {
-            println("有错误发生")
+            print("有错误发生")
             self.disconnectStream(aStream.streamError)
         } else if eventCode == NSStreamEvent.EndEncountered {
-            println("接受到关闭信号")
+            print("接受到关闭信号")
             self.disconnectStream(nil)
         } else if eventCode == NSStreamEvent.OpenCompleted {
             self.processStreamOpen(aStream)
@@ -177,10 +181,10 @@ import Foundation
     
     private func processInputStream() {
         let buf = NSMutableData(capacity: BUFFER_MAX)
-        var buffer = UnsafeMutablePointer<UInt8>(buf!.bytes)
+        let buffer = UnsafeMutablePointer<UInt8>(buf!.bytes)
         let length = inputStream!.read(buffer, maxLength: BUFFER_MAX)
         if length > 0 {
-            println("接受到\(length)字节的数据")
+            print("接受到\(length)字节的数据")
             var process = false
             if inputQueue.count == 0 {
                 process = true
@@ -197,7 +201,7 @@ import Foundation
             let data = inputQueue[0]
             var work = data
             if fragBuffer != nil {
-                var combine = NSMutableData(data: fragBuffer!)
+                let combine = NSMutableData(data: fragBuffer!)
                 combine.appendData(data)
                 work = combine
                 fragBuffer = nil
@@ -221,7 +225,7 @@ import Foundation
         let bytes = UnsafePointer<UInt32>(buffer)
         let dataLen = CFSwapInt32BigToHost(bytes[0])
         if dataLen == 0 {
-            println("接受到心跳")
+            print("接受到心跳")
             return
         }
         
@@ -230,9 +234,9 @@ import Foundation
             return
         }
         
-        var codeBuffer = UnsafePointer<UInt8>(buffer + 4)
+        let codeBuffer = UnsafePointer<UInt8>(buffer + 4)
         
-        var data = NSData(bytes: codeBuffer, length: Int(dataLen))
+        let data = NSData(bytes: codeBuffer, length: Int(dataLen))
         dispatch_async(queue, { () -> Void in
             self.delegate?.sessionDidReceiveData(self, data: data)
         })

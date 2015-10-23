@@ -173,8 +173,8 @@ NSString *kGroupChatListChangedNotification = @"cn.com.rooten.im.groupChatListCh
     __block JRSession *session = [[JRSession alloc] initWithUrl:[NSURL URLWithString:url]];
     JRReqMethod *m = [[JRReqMethod alloc] initWithService:@"SVC_IM"];
     JRReqParam *param = [[JRReqParam alloc] initWithQid:QID_IM_GET_GROUP_OFFLINE_MSG token:token key:key iv:iv];
-    ChatMessage *msg = [USER.msgMgr getLastGrpChatMsgWithGid:gid];
-    [param.params setObject:(msg ? msg.time : @"") forKey:gid];
+//    ChatMessage *msg = [USER.msgMgr getLastGrpChatMsgWithGid:gid];
+//    [param.params setObject:(msg ? msg.time : @"") forKey:gid];
     __block JRReqest *req = [[JRReqest alloc] initWithMethod:m  param:param];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [session request:req success:^(JRReqest *request, JRResponse *resp) {
