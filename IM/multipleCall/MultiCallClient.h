@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, MultiCallClientState) {
 
 - (instancetype)initWithDelegate:(id<MultiCallClientDelegate>)delegate
                       roomServer:(NSURL *)url
-                          iceUrl:(NSString *)iceUrl
+                         stunUrl:(NSString *)stunUrl
+                         turnUrl:(NSString *)turnUrl
                            token:(NSString *)token
                              key:(NSString *)key
                               iv:(NSString *)iv
@@ -35,10 +36,12 @@ typedef NS_ENUM(NSInteger, MultiCallClientState) {
 
 
 @property(nonatomic, readonly) BOOL invited;
-@property(nonatomic, readonly) NSString *iceUrl;
+//@property(nonatomic, readonly) NSString *iceUrl;
 @property(nonatomic, readonly) NSString *token;
 @property(nonatomic, readonly) NSString *key;
 @property(nonatomic, readonly) NSString *iv;
+@property(nonatomic, readonly) NSString *stunUrl;
+@property(nonatomic, readonly) NSString *turnUrl;
 @property(nonatomic, weak) id<MultiCallClientDelegate> delegate;
 
 @property(nonatomic, readonly) NSString *uid;

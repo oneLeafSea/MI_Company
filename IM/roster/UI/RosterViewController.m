@@ -54,6 +54,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloging object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationReloginFail object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -72,6 +73,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloging:) name:kNotificationReloging object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginSucess:) name:kNotificationReloginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReloginFail:) name:kNotificationReloginFail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotReachable:) name:kReachabilityChangedNotification object:nil];
     
     SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
     spVC.delegate = self;
@@ -440,6 +442,19 @@
         reloginTipView.indicatorView.hidden = YES;
         self.navigationItem.titleView = reloginTipView;
     });
+}
+
+- (void)handleNotReachable:(NSNotification *)notification {
+    Reachability* noteObject = notification.object;
+    if (noteObject.currentReachabilityStatus == NotReachable) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ReloginTipView *reloginTipView = [[[NSBundle mainBundle] loadNibNamed:@"ReloginTipView" owner:self options:nil] objectAtIndex:0];
+            reloginTipView.connErrLbl.hidden = NO;
+            reloginTipView.textLabel.hidden = YES;
+            reloginTipView.indicatorView.hidden = YES;
+            self.navigationItem.titleView = reloginTipView;
+        });
+    }
 }
 
 

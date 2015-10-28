@@ -73,6 +73,8 @@
 @property(readonly) NSString *avatarCheckUrl;
 @property(readonly) NSString *rssUrl;
 @property(readonly) NSString *iceUrl;
+@property(nonatomic, readonly) NSString *stunUrl;
+@property(nonatomic, readonly) NSString *turnUrl;
 @property(readonly) NSString *fcImgServerUrl;
 @property(readonly) NSString *fcImgThumbServerUrl;
 @property(readonly) NSString *fcImgUploadUrl;

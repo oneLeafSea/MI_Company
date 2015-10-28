@@ -58,6 +58,7 @@
         NSAssert(NO, @"Reachablitiy errror!");
     }
     
+    
     [SDImageCache sharedImageCache].maxCacheAge = 60 * 60 * 24 * 30; // 一个月
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
@@ -68,10 +69,14 @@
     [self initLogger];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    self.relogin = [[Relogin alloc] init];
+    
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKickNotification:) name:kNotificationKick object:nil];
     [self setupApns];
+    
+    if ([self.reachability currentReachabilityStatus] == NotReachable) {
+        return YES;
+    }
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *uid = [ud objectForKey:@"userId"];
@@ -191,7 +196,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (NSString *)appVersion {
-    return @"1.0.1"; // 修改了多终端是消息错误的问题。
+//    return @"1.0.1"; // 修改了多终端是消息错误的问题，修复重连的问题。
+    return @"1.0.2";   // 修改了webrtc更改了turn服务器
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {

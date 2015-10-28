@@ -303,6 +303,19 @@
     return url;
 }
 
+
+- (NSString *)stunUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_STUN"];
+    return url;
+}
+
+- (NSString *)turnUrl {
+    NSDictionary *services = [self.cfg objectForKey:@"services"];
+    NSString *url = [services objectForKey:@"SVC_TURN"];
+    return url;
+}
+
 - (NSString *)fcImgServerUrl {
     NSDictionary *services = [self.cfg objectForKey:@"services"];
     NSString *url = [services objectForKey:@"SVC_FILE_DOWN_LARGE"];

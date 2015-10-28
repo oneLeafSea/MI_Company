@@ -83,6 +83,10 @@
 - (IBAction)login:(id)sender {
     [self.userTextField resignFirstResponder];
     [self.pwdTextField resignFirstResponder];
+    if ([APP_DELEGATE.reachability currentReachabilityStatus] == NotReachable) {
+        [Utils alertWithTip:@"请打开网络！"];
+        return;
+    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"请稍候";
     m_loginProc = [[LoginProcedures alloc] init];

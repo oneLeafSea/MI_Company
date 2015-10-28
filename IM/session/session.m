@@ -222,6 +222,7 @@ typedef NSMutableDictionary RequestMap;
             [self.delegate session:self connected:NO timeout:NO error:err];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kSessionTimeout object:self];
+        [self postSessionDied:err];
         return;
     }
     

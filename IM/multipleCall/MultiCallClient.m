@@ -34,7 +34,8 @@
 
 - (instancetype)initWithDelegate:(id<MultiCallClientDelegate>)delegate
                       roomServer:(NSURL *)url
-                          iceUrl:(NSString *)iceUrl
+                         stunUrl:(NSString *)stunUrl
+                         turnUrl:(NSString *)turnUrl
                            token:(NSString *)token
                              key:(NSString *)key
                               iv:(NSString *)iv
@@ -42,7 +43,8 @@
                          invited:(BOOL)invited {
     if (self = [super init]) {
         _serverHost = url;
-        _iceUrl = iceUrl;
+        _stunUrl = [stunUrl copy];
+        _turnUrl = [turnUrl copy];
         _uid = uid;
         _delegate = delegate;
         _factory = [[RTCPeerConnectionFactory alloc] init];
@@ -132,19 +134,17 @@
 
 
 - (RTCICEServer *)defaultSTUNServer {
-    NSURL *defaultSTUNServerURL = [NSURL URLWithString:self.iceUrl];
+    NSURL *defaultSTUNServerURL = [NSURL URLWithString:self.stunUrl];
     return [[RTCICEServer alloc] initWithURI:defaultSTUNServerURL
                                     username:@""
                                     password:@""];
 }
 
 - (RTCICEServer *)defaultTurnServer {
-    NSString *ip = [self.iceUrl componentsSeparatedByString:@":"][1];
-    NSString *turnUrl = [NSString stringWithFormat:@"turn:%@", ip];
-    NSURL *defaultSTUNServerURL = [NSURL URLWithString:turnUrl];
-    return [[RTCICEServer alloc] initWithURI:defaultSTUNServerURL
-                                    username:@""
-                                    password:@""];
+    NSURL *defaultTurnServerURL = [NSURL URLWithString:self.turnUrl];
+    return [[RTCICEServer alloc] initWithURI:defaultTurnServerURL
+                                    username:@"Rooten"
+                                    password:@"0qhMWkIaFhKrTQzS"];
 }
 
 - (void) setState:(MultiCallClientState)state {

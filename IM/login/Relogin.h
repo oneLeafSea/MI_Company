@@ -11,6 +11,8 @@
 
 @interface Relogin : NSObject
 
++ (instancetype)instance;
+
 @property (nonatomic, strong) NSString *uid;
 @property (nonatomic, strong) NSString *pwd;
 

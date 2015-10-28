@@ -94,7 +94,7 @@
     [tapGestureRecognizer setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    self.client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:self.uid invited:NO];
+    self.client = [[WebRtcClient alloc] initWithDelegate:self roomServer:self.serverUrl stunUrl:USER.stunUrl turnUrl:USER.turnUrl token:USER.token key:USER.key iv:USER.iv uid:self.uid invited:NO];
     _rid = [NSUUID uuid];
     WebRtcNotifyMsg *msg = [[WebRtcNotifyMsg alloc] initWithFrom:_uid to:self.talkingUid rid:self.rid];
     [self.client createRoomWithId:_rid Completion:^(BOOL finished) {

@@ -54,7 +54,7 @@
     _avatarContainerView = [AvatarContainerView instanceFromNib];
     _avatarContainerView.frame = CGRectMake(0, 132, self.view.frame.size.width, 60);
     [self.view addSubview:_avatarContainerView];
-    self.cli = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:USER.rssUrl] iceUrl:USER.iceUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:self.invited];
+    self.cli = [[MultiCallClient alloc] initWithDelegate:self roomServer:[NSURL URLWithString:USER.rssUrl] stunUrl:USER.stunUrl turnUrl:USER.turnUrl token:USER.token key:USER.key iv:USER.iv uid:USER.uid invited:self.invited];
     if (self.invited) {
         [self.cli joinRoomId:self.roomId];
     } else {

@@ -16,6 +16,8 @@
 #import "IMConf.h"
 #import "AppDelegate.h"
 
+static Relogin *_relogininstance = nil;
+
 @interface Relogin() <LoginProceduresDelegate> {
     LoginProcedures *m_loginProc;
    
@@ -27,6 +29,14 @@
 
 
 @implementation Relogin
+
++ (instancetype)instance {
+    static dispatch_once_t pred = 0;
+    dispatch_once(&pred, ^{
+        _relogininstance = [[Relogin alloc] init];
+    });
+    return _relogininstance;
+}
 
 - (instancetype)init
 {
@@ -70,6 +80,7 @@
     DDLogInfo(@"receive  session died in relogin.");
     if (APP_DELEGATE.reachability.currentReachabilityStatus == NotReachable) {
         DDLogInfo(@"not reachable.");
+        return;
     } else {
         if (!APP_DELEGATE.user.session.isConnected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReloging object:nil];
@@ -102,6 +113,11 @@
 - (void) handleReachablityNotify: (NSNotification *) notification {
     DDLogInfo(@"receive a reachablitnotify.");
     if (self.logining) {
+        return;
+    }
+    
+    if ([APP_DELEGATE.reachability currentReachabilityStatus] == NotReachable) {
+        self.logining = NO;
         return;
     }
 

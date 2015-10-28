@@ -27,6 +27,7 @@
 #import "NSString+URL.h"
 #import "NSDate+Common.h"
 #import "NSUUID+StringUUID.h"
+#import "IMConf.h"
 
 #import <SDWebImage/SDWebImageDownloader.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -58,6 +59,7 @@
     m_stop = NO;
     _userId = userId;
     _pwd = pwd;
+    [IMConf checkLAN:APP_DELEGATE.reachability];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *IP = [ud objectForKey:@"IP"];
     NSNumber *port = [ud objectForKey:@"port"];
@@ -150,6 +152,7 @@
                 AppDelegate *dgt = [UIApplication sharedApplication].delegate;
                 dgt.user = [[User alloc] initWithLoginresp:loginResp session:m_sess];
                 dgt.user.pwd = [self.pwd copy];
+                dgt.relogin = [Relogin instance];
                 dgt.relogin.uid = [dgt.user.uid copy];
                 dgt.relogin.pwd = dgt.user.pwd;
                 if ([self.delegate respondsToSelector:@selector(loginProcedures:login:error:)]) {
