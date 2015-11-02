@@ -74,7 +74,10 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate> {
         _uid = uid;
         _delegate = delegate;
         _factory = [[RTCPeerConnectionFactory alloc] init];
-        _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
+//        _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
+        
+        _iceServers = [NSMutableArray arrayWithArray:[self stunServers]];
+        [_iceServers addObjectsFromArray:[self turnUrlServers]];
         _candidateQueue = [[NSMutableArray alloc] init];
         _invited = invited;
         _token = token;
@@ -544,27 +547,6 @@ didSetSessionDescriptionWithError:(NSError *)error {
             return;
         }
         DDLogInfo(@"设置 sdp 成功。");
-//        if (self.invited) {
-//            if (self.peerConnection.localDescription) {
-//                WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
-//                answerMsg.sessionDescription = _peerConnection.localDescription;
-//                [m_channel sendData:[answerMsg JSONData]];
-//                _ready = YES;
-//                [self drainMessageQueueIfReady];
-//            } else {
-//                [self.peerConnection createAnswerWithDelegate:self constraints:[self defaultAnswerConstraints]];
-//            }
-//        } else {
-//            if (self.peerConnection.remoteDescription) {
-//                _ready = YES;
-//                [self drainMessageQueueIfReady];
-//            } else {
-//                WebRtcSessionDescriptionMessage *offerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
-//                offerMsg.sessionDescription = _peerConnection.localDescription;
-//                NSLog(@"type: %@", offerMsg.sessionDescription.type);
-//                [m_channel sendData:[offerMsg JSONData]];
-//            }
-//        }
         if (self.invited) {
             if (self.peerConnection.localDescription) {
                 WebRtcSessionDescriptionMessage *answerMsg = [[WebRtcSessionDescriptionMessage alloc] initWithFrom:_uid fromRes:kDeviceType to:_talkingUid toRes:m_toRes msgId:[NSUUID uuid] topic:@"message" content:nil];
@@ -605,6 +587,33 @@ didSetSessionDescriptionWithError:(NSError *)error {
     return [[RTCICEServer alloc] initWithURI:defaultSTUNServerURL
                                     username:@""
                                     password:@""];
+}
+
+
+- (NSArray *)stunServers {
+    __block NSMutableArray *iceServer = [[NSMutableArray alloc] initWithCapacity:5];
+    NSArray *stunUrls = [self.stunUrl componentsSeparatedByString:@";"];
+    [stunUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSURL *url = [NSURL URLWithString:obj];
+        RTCICEServer *svr =  [[RTCICEServer alloc] initWithURI:url
+                                 username:@""
+                                 password:@""];
+        [iceServer addObject:svr];
+    }];
+    return iceServer;
+}
+
+- (NSArray *)turnUrlServers {
+    __block NSMutableArray *iceServer = [[NSMutableArray alloc] initWithCapacity:5];
+    NSArray *stunUrls = [self.turnUrl componentsSeparatedByString:@";"];
+    [stunUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSURL *url = [NSURL URLWithString:obj];
+        RTCICEServer *svr =  [[RTCICEServer alloc] initWithURI:url
+                                                      username:@"Rooten"
+                                                      password:@"0qhMWkIaFhKrTQzS"];
+        [iceServer addObject:svr];
+    }];
+    return iceServer;
 }
 
 - (RTCICEServer *)defaultTurnServer {

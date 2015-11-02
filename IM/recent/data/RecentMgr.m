@@ -12,6 +12,8 @@
 #import "RecentMsgItem.h"
 #import "MessageConstants.h"
 #import "NSDate+Common.h"
+#import "ChatMessageNotification.h"
+#import "LogLevel.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
@@ -38,11 +40,16 @@ static NSString *kChatMessageTypeNomal = @"0";
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatMessageRecvNewMsg object:nil];
+}
+
 - (BOOL)setup {
     m_recentTb = [[RecentTb alloc] initWithDbq:m_dbq];
     if (!m_recentTb) {
         return NO;
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRecvNewMessage:) name:kChatMessageRecvNewMsg object:nil];
     return YES;
 }
 
@@ -242,6 +249,17 @@ static NSString *kChatMessageTypeNomal = @"0";
 
 - (void)reset {
     
+}
+
+- (void)handleRecvNewMessage:(NSNotification *)notification {
+    ChatMessage *msg = notification.object;
+    if (!msg) {
+        return;
+    }
+    
+    if (![self updateRevcChatMsg:msg]) {
+        DDLogWarn(@"WARN: update recv msg to recent tabel.");
+    }
 }
 
 @end

@@ -367,7 +367,7 @@
     localNotif.alertTitle = NSLocalizedString(@"Item Due", nil);
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
+    localNotif.applicationIconBadgeNumber += 1;
     
     NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"测试" forKey:@"title"];
     localNotif.userInfo = infoDict;
@@ -389,7 +389,7 @@
     localNotif.alertAction = @"查看消息";
     
     localNotif.soundName = @"msn.aiff";
-    localNotif.applicationIconBadgeNumber++;
+    localNotif.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }

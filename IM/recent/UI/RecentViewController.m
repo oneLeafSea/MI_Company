@@ -340,9 +340,9 @@ static NSString *kChatMessageTypeNomal = @"0";
         return;
     }
     
-    if (![APP_DELEGATE.user.recentMsg updateRevcChatMsg:msg]) {
-        DDLogWarn(@"WARN: update recv msg to recent tabel.");
-    }
+//    if (![APP_DELEGATE.user.recentMsg updateRevcChatMsg:msg]) {
+//        DDLogWarn(@"WARN: update recv msg to recent tabel.");
+//    }
     [self initModelData];
     __block NSInteger sum = [APP_DELEGATE.user.recentMsg getMsgBadgeSum];
     dispatch_async(dispatch_get_main_queue(), ^{

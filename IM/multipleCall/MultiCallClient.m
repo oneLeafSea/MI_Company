@@ -48,7 +48,9 @@
         _uid = uid;
         _delegate = delegate;
         _factory = [[RTCPeerConnectionFactory alloc] init];
-        _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
+//        _iceServers = [NSMutableArray arrayWithObjects:[self defaultSTUNServer], [self defaultTurnServer], nil];
+        _iceServers = [NSMutableArray arrayWithArray:[self stunServers]];
+        [_iceServers addObjectsFromArray:[self turnUrlServers]];
         _invited = invited;
         _token = token;
         _iv = iv;
@@ -145,6 +147,32 @@
     return [[RTCICEServer alloc] initWithURI:defaultTurnServerURL
                                     username:@"Rooten"
                                     password:@"0qhMWkIaFhKrTQzS"];
+}
+
+- (NSArray *)stunServers {
+    __block NSMutableArray *iceServer = [[NSMutableArray alloc] initWithCapacity:5];
+    NSArray *stunUrls = [self.stunUrl componentsSeparatedByString:@";"];
+    [stunUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSURL *url = [NSURL URLWithString:obj];
+        RTCICEServer *svr =  [[RTCICEServer alloc] initWithURI:url
+                                                      username:@""
+                                                      password:@""];
+        [iceServer addObject:svr];
+    }];
+    return iceServer;
+}
+
+- (NSArray *)turnUrlServers {
+    __block NSMutableArray *iceServer = [[NSMutableArray alloc] initWithCapacity:5];
+    NSArray *stunUrls = [self.turnUrl componentsSeparatedByString:@";"];
+    [stunUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSURL *url = [NSURL URLWithString:obj];
+        RTCICEServer *svr =  [[RTCICEServer alloc] initWithURI:url
+                                                      username:@"Rooten"
+                                                      password:@"0qhMWkIaFhKrTQzS"];
+        [iceServer addObject:svr];
+    }];
+    return iceServer;
 }
 
 - (void) setState:(MultiCallClientState)state {

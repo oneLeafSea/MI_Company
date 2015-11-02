@@ -11,9 +11,11 @@
 #import "OsNavigationRootCollectionCell.h"
 #import "OsNavigationSelOrgCollectionCell.h"
 #import "OsOrg.h"
+#import <Masonry.h>
 
-@interface OsNavigationTableViewCell()
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface OsNavigationTableViewCell()<UICollectionViewDataSource, UICollectionViewDelegate>
+//@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property(strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *collectionData;
 @end
 
@@ -25,8 +27,28 @@
     if (self) {
         // Initialization code
         self = [[NSBundle mainBundle] loadNibNamed:@"OsNavigationTableViewCell" owner:self options:nil][0];
-//        _collectionView.frame = self.bounds;
-//        [self.contentView addSubview:_collectionView];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.itemSize = CGSizeMake(130.0, 170.0);
+        self.collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:layout];
+        
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
+        self.collectionView.backgroundColor = [UIColor whiteColor];
+        [self.collectionView registerNib:[UINib nibWithNibName:@"OsNavigationOrgCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationOrgCollectionCell"];
+        [self.collectionView registerNib:[UINib nibWithNibName:@"OsNavigationRootCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationRootCollectionCell"];
+        [self.collectionView registerNib:[UINib nibWithNibName:@"OsNavigationSelOrgCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationSelOrgCollectionCell"];
+        if ([[UIDevice currentDevice].systemVersion floatValue] < 9) {
+            [self addSubview:self.collectionView];
+            [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self);
+            }];
+        } else {
+            [self.contentView addSubview:self.collectionView];
+            [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.contentView);
+            }];
+        }
     }
     return self;
 }
@@ -50,15 +72,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.itemSize = CGSizeMake(130.0, 170.0);
-    [self.collectionView setCollectionViewLayout:flowLayout];
-    
-    // Register the colleciton cell
-    [_collectionView registerNib:[UINib nibWithNibName:@"OsNavigationOrgCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationOrgCollectionCell"];
-    [_collectionView registerNib:[UINib nibWithNibName:@"OsNavigationRootCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationRootCollectionCell"];
-    [_collectionView registerNib:[UINib nibWithNibName:@"OsNavigationSelOrgCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"OsNavigationSelOrgCollectionCell"];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -93,18 +108,18 @@
 {
     OsOrg *org = [_collectionData objectAtIndex:indexPath.row];
     if (indexPath.row == 0) {
-        OsNavigationRootCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationRootCollectionCell" forIndexPath:indexPath];
+        OsNavigationRootCollectionCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationRootCollectionCell" forIndexPath:indexPath];
         cell.titleLbl.text = org.jgmc;
         return cell;
     }
     
     if (indexPath.row == _collectionData.count - 1) {
-        OsNavigationSelOrgCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationSelOrgCollectionCell" forIndexPath:indexPath];
+        OsNavigationSelOrgCollectionCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationSelOrgCollectionCell" forIndexPath:indexPath];
         cell.titleLbl.text = org.jgmc;
         return cell;
     }
     
-    OsNavigationOrgCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationOrgCollectionCell" forIndexPath:indexPath];
+    OsNavigationOrgCollectionCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"OsNavigationOrgCollectionCell" forIndexPath:indexPath];
     cell.titleLbl.text = org.jgmc;
     return cell;
 }
