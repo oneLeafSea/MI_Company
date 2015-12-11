@@ -67,6 +67,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatListChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupChatNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kGroupJoinSuccess object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -91,6 +92,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupListChangedNotification:) name:kGroupChatListChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupChatNotification:) name:kGroupChatNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGroupJoinNotification:) name:kGroupJoinSuccess object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     SearchPeopleViewController *spVC = [[SearchPeopleViewController alloc] initWithOsItemArray:USER.osMgr.items];
     spVC.delegate = self;
@@ -340,9 +342,9 @@ static NSString *kChatMessageTypeNomal = @"0";
         return;
     }
     
-//    if (![APP_DELEGATE.user.recentMsg updateRevcChatMsg:msg]) {
-//        DDLogWarn(@"WARN: update recv msg to recent tabel.");
-//    }
+    if (![APP_DELEGATE.user.recentMsg updateRevcChatMsg:msg]) {
+        DDLogWarn(@"WARN: update recv msg to recent tabel.");
+    }
     [self initModelData];
     __block NSInteger sum = [APP_DELEGATE.user.recentMsg getMsgBadgeSum];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -504,6 +506,10 @@ static NSString *kChatMessageTypeNomal = @"0";
         [self.grpNotification displayNotificationWithMessage:content forDuration:4.0];
     }
 }
+
+//- (void)handleAppWillEnterForeground {
+//    [m_tableView reloadData];
+//}
 
 #pragma mark - handle avatar notification
 - (void)handleAvatarDownloaded:(NSNotification *)notification {

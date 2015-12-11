@@ -38,6 +38,8 @@
 
 - (BOOL) exsitmsgType:(UInt32) type;
 
+- (BOOL) exsitMsgId:(NSString *)msgId;
+
 - (BOOL) updateRosterItemAddReqBadge:(NSString *)badge msgtype:(NSUInteger) msgtype;
 - (NSInteger) getFirstBadgeWithMsgType:(NSInteger) msgtype;
 

@@ -58,7 +58,17 @@ static NSString *kChatMessageTypeNomal = @"0";
 }
 
 
+- (BOOL) isExsitMsg:(NSString *)msgId {
+    return YES;
+}
+
+
 - (BOOL) updateRevcChatMsg:(ChatMessage *) msg {
+    
+    if ([m_recentTb exsitMsgId:msg.qid]) {
+        return YES;
+    }
+    
     RecentMsgItem *item = [self cnvtRecentMsgItemWithChatMsg:msg];
     BOOL ret = YES;
     

@@ -221,6 +221,19 @@
     return ret;
 }
 
+
+- (BOOL) exsitMsgId:(NSString *)msgId {
+    __block BOOL ret = YES;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *rs = [db executeQuery:kSQlRecentExistMsgId, msgId];
+        if (!rs.next) {
+            ret = NO;
+        }
+        [rs close];
+    }];
+    return ret;
+}
+
 - (BOOL) updateRosterItemAddReqBadge:(NSString *)badge msgtype:(NSUInteger) msgtype {
     __block BOOL ret = YES;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {

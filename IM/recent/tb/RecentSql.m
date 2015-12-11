@@ -63,6 +63,8 @@ NSString *kSQLRecentUpdateWithType = @"UPDATE `tb_recent` SET "
                                             " WHERE "
                                             "`msgtype` = ?";
 
+NSString *kSQlRecentExistMsgId = @"SELECT * FROM `tb_recent` WHERE `msgid` = ?";
+
 
 NSString *kSQLRecentGetChatMsgBage = @"SELECT `badge` FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND `msgtype` = 196609 AND `ext` = ?;";
 

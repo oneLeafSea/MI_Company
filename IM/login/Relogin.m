@@ -112,10 +112,10 @@ static Relogin *_relogininstance = nil;
 
 - (void) handleReachablityNotify: (NSNotification *) notification {
     DDLogInfo(@"receive a reachablitnotify.");
-    if (self.logining) {
-        return;
-    }
-    
+//    if (self.logining) {
+//        return;
+//    }
+//    
     if ([APP_DELEGATE.reachability currentReachabilityStatus] == NotReachable) {
         self.logining = NO;
         return;

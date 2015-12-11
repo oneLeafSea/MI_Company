@@ -40,3 +40,5 @@ extern NSString *kSQLRecentUpdateRosterItemAddReqBadge;
 extern NSString *kSQLRecentGetFirstBageWithMsgType;
 
 extern NSString *kSQLRecentGrpNotifyBageUpdate;
+
+extern NSString *kSQlRecentExistMsgId;
