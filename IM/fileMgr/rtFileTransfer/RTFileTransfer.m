@@ -13,6 +13,8 @@
 #import "NSDate+Common.h"
 #import "Encrypt.h"
 #import "NSString+URL.h"
+#import "LogLevel.h"
+
 
 @implementation RTFileTransfer
 
@@ -39,8 +41,9 @@
         NSAssert(0, @"multipartFormRequestWithMethod error.");
     }
     
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    NSString *qid = [fileName stringByDeletingPathExtension];
+    NSString *data = [NSString stringWithFormat:@"%@|%@|%@", qid, fileName, [[NSDate Now] formatWith:@"yyyy-MM-dd HH:mm:ss"]];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[data dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     [request setValue:[token URLEncodedString] forHTTPHeaderField:@"rc-token"];
     [request setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
     [request setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
@@ -94,9 +97,9 @@
     if (err) {
         NSAssert(0, @"multipartFormRequestWithMethod error.");
     }
-    
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    NSString *qid = [fileName stringByDeletingPathExtension];
+    NSString *d = [NSString stringWithFormat:@"%@|%@|%@", qid, fileName, [[NSDate Now] formatWith:@"yyyy-MM-dd HH:mm:ss"]];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[d dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     [request setValue:[token URLEncodedString] forHTTPHeaderField:@"rc-token"];
     [request setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
     [request setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
@@ -142,11 +145,13 @@
     NSString *filePath = [fileDir stringByAppendingPathComponent:fileName];
     NSString *fileTmpPath = [filePath stringByAppendingString:@".tmp"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    NSString *qid = [fileName stringByDeletingPathExtension];
+    NSString *d = [NSString stringWithFormat:@"%@|%@|%@", qid, fileName, [[NSDate Now] formatWith:@"yyyy-MM-dd HH:mm:ss"]];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[d dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     [request setValue:[token URLEncodedString] forHTTPHeaderField:@"rc-token"];
     [request setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
     [request setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
+    [request setValue:[fileName URLEncodedString] forHTTPHeaderField:@"rc-fn"];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setOutputStream:[NSOutputStream outputStreamToFileAtPath:fileTmpPath append:NO]];
@@ -169,6 +174,7 @@
             completion(YES);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DDLogError(@"下载头像出错。");
         completion(NO);
     }];
     

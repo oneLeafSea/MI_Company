@@ -190,8 +190,9 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 - (NSString *)appVersion {
 //    return @"1.0.1"; // 修改了多终端是消息错误的问题，修复重连的问题。
 //    return @"1.0.2";   // 修改了webrtc更改了turn服务器
-    return @"1.0.3";    // 修改离线消息不能提示的问题，修改通讯录不能点击的问题
-    return @"1.0.4";     // 修改消息提示不显示的问题，修改重连的问题
+//    return @"1.0.3";    // 修改离线消息不能提示的问题，修改通讯录不能点击的问题
+//    return @"1.0.4";     // 修改消息提示不显示的问题，修改重连的问题
+    return @"1.0.5";       // 适配文件服务器校验的问题。
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {

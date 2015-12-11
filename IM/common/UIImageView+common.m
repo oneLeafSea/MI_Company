@@ -27,10 +27,12 @@
 
 - (void)rt_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)image {
     SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString* fileName = [[url relativeString] lastPathComponent];
+    NSString *qid = fileName.stringByDeletingPathExtension;
+    NSString *data = [NSString stringWithFormat:@"%@|%@|%@", qid, fileName, [[NSDate Now] formatWith:@"yyyy-MM-dd HH:mm:ss"]];
     NSString *key = USER.key;
     NSString *iv = USER.iv;
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[data dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     [manager setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
     [manager setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
     [manager setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];
@@ -39,10 +41,12 @@
 
 - (void)rt_setImageWithURL:(NSURL *)url {
     SDWebImageDownloader *manager = [SDWebImageDownloader sharedDownloader];
-    NSString *qid = [NSString stringWithFormat:@"%@|%@", [NSUUID uuid], [[NSDate Now] formatWith:nil]];
+    NSString* fileName = [[url relativeString] lastPathComponent];
+    NSString *qid = [fileName stringByDeletingPathExtension];
+    NSString *data = [NSString stringWithFormat:@"%@|%@|%@", qid, fileName, [[NSDate Now] formatWith:@"yyyy-MM-dd HH:mm:ss"]];
     NSString *key = USER.key;
     NSString *iv = USER.iv;
-    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[qid dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    NSString *sign = [Encrypt encodeWithKey:key iv:iv data:[data dataUsingEncoding:NSUTF8StringEncoding] error:nil];
     [manager setValue:[USER.token URLEncodedString] forHTTPHeaderField:@"rc-token"];
     [manager setValue:[qid URLEncodedString] forHTTPHeaderField:@"rc-qid"];
     [manager setValue:[sign URLEncodedString] forHTTPHeaderField:@"rc-signature"];

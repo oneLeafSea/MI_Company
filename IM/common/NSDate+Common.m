@@ -24,6 +24,7 @@
     return dateStr;
 }
 
+
 + (instancetype)dateWithFormater:(NSString *) formater stringTime:(NSString *)stringTime {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:formater];

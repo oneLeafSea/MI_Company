@@ -27,7 +27,7 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
 - (NSData *)JSONData {
     NSDictionary *json = @{
                            kRTCICECandidateTypeKey : kRTCICECandidateTypeValue,
-                           kRTCICECandidateMLineIndexKey : [NSString stringWithFormat:@"%d", self.sdpMLineIndex],
+                           kRTCICECandidateMLineIndexKey : [NSString stringWithFormat:@"%ld", (long)self.sdpMLineIndex],
                            kRTCICECandidateMidKey : self.sdpMid,
                            kRTCICECandidateSdpKey : self.sdp
                            };

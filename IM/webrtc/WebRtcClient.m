@@ -524,9 +524,80 @@ didCreateSessionDescription:(RTCSessionDescription *)sdp
             [_delegate WebRtcClient:self didError:sdpError];
             return;
         }
+        RTCSessionDescription *preferSdp = [self cnvToVP9Desc:sdp];
         [_peerConnection setLocalDescriptionWithDelegate:self
-                                      sessionDescription:sdp];
+                                      sessionDescription:preferSdp];
     });
+}
+
+- (RTCSessionDescription *)cnvToVP9Desc:(RTCSessionDescription *)sdp {
+//    NSLog(@"%@", sdp.description);
+    NSArray *array = [sdp.description componentsSeparatedByString:@"\r\n"];
+    __block NSInteger mlineIndex = NSNotFound;
+    __block NSString *codecRtpmap = nil;
+    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *strLine = obj;
+        if ([strLine hasPrefix:@"m=video"]) {
+            mlineIndex = idx;
+            return;
+        }
+        if ([strLine hasPrefix:@"a=rtpmap:"] && [strLine containsString:@"VP9"]) {
+            codecRtpmap = strLine;
+            return;
+        }
+    }];
+    if (mlineIndex == NSNotFound || codecRtpmap == nil) {
+        return sdp;
+    }
+    
+    NSLog(@"codecRtpmap:%@", codecRtpmap);
+    
+    NSArray *rtpArray = [codecRtpmap componentsSeparatedByString:@" "];
+    if (rtpArray.count < 2) {
+        return sdp;
+    }
+    NSString *strRtpmap = rtpArray[0];
+    NSArray *codeArray = [strRtpmap componentsSeparatedByString:@":"];
+    if (codeArray.count < 2) {
+        return sdp;
+    }
+    NSString *strCode = codeArray[1];
+    NSString *mStr = [array objectAtIndex:mlineIndex];
+    NSArray *mArray = [mStr componentsSeparatedByString:@" "];
+    if (mArray.count < 4) {
+        return sdp;
+    }
+    NSMutableArray *resArray = [[NSMutableArray alloc] init];
+    [resArray addObject:mArray[0]];
+    [resArray addObject:mArray[1]];
+    [resArray addObject:mArray[2]];
+    [resArray addObject:strCode];
+    [mArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx < 3) {
+            return;
+        }
+        
+        if (![strCode isEqualToString:obj]) {
+            [resArray addObject:obj];
+        }
+    }];
+    NSMutableString *newLine = [[NSMutableString alloc] init];
+    [resArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == resArray.count - 1) {
+            [newLine appendFormat:@"%@", obj];
+            return;
+        }
+        [newLine appendFormat:@"%@ ", obj];
+    }];
+    
+    NSLog(@"newLine:%@", newLine);
+    
+    NSMutableString *newStrSdp = [NSMutableString stringWithString:sdp.description];
+    NSString *strRet = [newStrSdp stringByReplacingOccurrencesOfString:[array objectAtIndex:mlineIndex] withString:newLine];
+    RTCSessionDescription *newSdp = [[RTCSessionDescription alloc] initWithType:sdp.type sdp:strRet];
+//    NSLog(@"%@", strRet);
+    return newSdp;
+    
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection

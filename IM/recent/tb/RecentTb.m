@@ -172,6 +172,17 @@
     return ret;
 }
 
+//- (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *)fromOrTo chatmsgType:(UInt32)chatMsgtype ext:(NSString *)ext {
+//    __block BOOL ret = YES;
+//    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+//        ret = [db executeUpdate:kSQLRecentChatMsgBadgeUpdate, badge, fromOrTo, fromOrTo, [NSString stringWithFormat:@"%d", (unsigned int)chatMsgtype]];
+//        if (!ret) {
+//            *rollback = YES;
+//        }
+//    }];
+//    return ret;
+//}
+
 - (BOOL) updateRecentGrpNtifyBadge:(NSString *)badge {
     __block BOOL ret = YES;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
