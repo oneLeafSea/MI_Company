@@ -14,6 +14,7 @@
 #import "NSDate+Common.h"
 #import "ChatMessageNotification.h"
 #import "LogLevel.h"
+#import "AppDelegate.h"
 
 static NSString *kChatMessageTypeNomal = @"0";
 
@@ -73,7 +74,7 @@ static NSString *kChatMessageTypeNomal = @"0";
     BOOL ret = YES;
     
     if ([item.ext isEqualToString:kChatMessageTypeNomal]) {
-        if ([m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE ext:item.ext]) {
+        if ([m_recentTb exsitMsgFromOrTo:item.from to:item.to msgtype:IM_MESSAGE ext:item.ext]/*[m_recentTb exsitMsgFromOrTo:item.from msgtype:IM_MESSAGE ext:item.ext]*/) {
             NSInteger badge = [m_recentTb getChatMsgBadgeWithFromOrTo:item.from chatMsgType:item.ext];
             if (badge <= 0) {
                 item.badge = @"1";
@@ -81,8 +82,11 @@ static NSString *kChatMessageTypeNomal = @"0";
                 badge++;
                 item.badge = [NSString stringWithFormat:@"%ld", (long)badge];
             }
-            
-            ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.from];
+            if ([USER.uid isEqualToString:msg.from]) {
+                ret = [m_recentTb updateItem:item msgtype:msg.type from:msg.from to:msg.to];
+            } else {
+                ret = [m_recentTb updateItem:item msgtype:msg.type fromOrTo:item.from];
+            }
         } else {
             ret = [m_recentTb insertItem:item];
         }

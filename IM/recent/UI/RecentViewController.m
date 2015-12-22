@@ -338,10 +338,6 @@ static NSString *kChatMessageTypeNomal = @"0";
         return;
     }
     
-    if ([msg.from isEqualToString:USER.uid]) {
-        return;
-    }
-    
     if (![APP_DELEGATE.user.recentMsg updateRevcChatMsg:msg]) {
         DDLogWarn(@"WARN: update recv msg to recent tabel.");
     }

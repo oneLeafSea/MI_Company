@@ -21,14 +21,18 @@
 - (BOOL) exsitMsgFrom:(NSString *)from msgtype:(UInt32) type;
 
 - (BOOL) exsitMsgFromOrTo:(NSString *)fromTo msgtype:(UInt32)type ext:(NSString *)ext ;
+- (BOOL) exsitMsgFromOrTo:(NSString *)from to:(NSString *)to msgtype:(UInt32)type ext:(NSString *)ext;
 
 - (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type fromOrTo:(NSString *)fromOrTo;
+- (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type from:(NSString *)from to:(NSString *)to;
 
 - (BOOL) updateItem:(RecentMsgItem *) item msgtyp:(UInt32)type;
 
 - (NSInteger) getChatMsgBadgeWithFromOrTo:(NSString *)fromOrTo chatMsgType:(NSString *)chatMsgType;
 
 - (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *) fromOrTo chatmsgType:(UInt32) chatMsgtype;
+
+- (BOOL) updateChatMsgBadge:(NSString *)badge from:(NSString *)from to:(NSString *)to chatmsgType:(UInt32)chatMsgtype;
 
 //- (BOOL) updateChatMsgBadge:(NSString *)badge fromOrTo:(NSString *)fromOrTo chatmsgType:(UInt32)chatMsgtype ext:(NSString *)ext;
 

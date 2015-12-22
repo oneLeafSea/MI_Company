@@ -18,16 +18,21 @@ extern NSString *kSQLRecentInsert;
 extern NSString *kSQLRecentExsitFrom;
 
 extern NSString *kSQLRecentExsitFromOrTo;
+extern NSString *kSQLRecentExsitFromAndTo;
 
 extern NSString *kSQLRecentExsitFromOrToWithExt;
+extern NSString *kSQLRecentExsitFromOrToWithExt2;
 
 extern NSString *kSQLRecentUpdateFromOrTo;
+extern NSString *kSQLRecentUpdateFromOrTo2;
 
 extern NSString *kSQLRecentUpdateWithType;
 
 extern NSString *kSQLRecentGetChatMsgBage;
 
 extern NSString *kSQLRecentChatMsgBadgeUpdate;
+
+extern NSString *kSQLRecentChatMsgBadgeUpdate2;
 
 extern NSString *kSQLRecentMsgBadgeSum;
 

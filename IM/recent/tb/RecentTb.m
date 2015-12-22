@@ -126,6 +126,29 @@
     return ret;
 }
 
+- (BOOL) exsitMsgFromOrTo:(NSString *)from to:(NSString *)to msgtype:(UInt32)type ext:(NSString *)ext {
+    __block BOOL ret = NO;
+    if (ext == nil) {
+        [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *rs = [db executeQuery:kSQLRecentExsitFromOrTo, from, to, [NSNumber numberWithUnsignedInt:type]];
+            if (rs.next) {
+                ret = YES;
+            }
+            [rs close];
+        }];
+    } else {
+        [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *rs = [db executeQuery:kSQLRecentExsitFromOrToWithExt2, from, to, to, from, [NSNumber numberWithUnsignedInt:type], ext];
+            if (rs.next) {
+                ret = YES;
+            }
+            [rs close];
+        }];
+    }
+    
+    return ret;
+}
+
 - (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type fromOrTo:(NSString *)fromOrTo {
     __block BOOL ret = NO;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
@@ -133,6 +156,16 @@
     }];
     return ret;
 }
+
+
+- (BOOL) updateItem:(RecentMsgItem *)item msgtype:(UInt32)type from:(NSString *)from to:(NSString *)to {
+    __block BOOL ret = NO;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLRecentUpdateFromOrTo2, item.msgid, item.from, item.to, [NSNumber numberWithUnsignedInteger:item.msgtype], item.content, item.time, item.badge, item.ext, from, to, to, from, item.ext];
+    }];
+    return ret;
+}
+
 
 - (BOOL) updateItem:(RecentMsgItem *) item msgtyp:(UInt32)type {
     __block BOOL ret = NO;
@@ -165,6 +198,17 @@
     __block BOOL ret = YES;
     [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
         ret = [db executeUpdate:kSQLRecentChatMsgBadgeUpdate, badge, fromOrTo, fromOrTo, [NSString stringWithFormat:@"%d", (unsigned int)chatMsgtype]];
+        if (!ret) {
+            *rollback = YES;
+        }
+    }];
+    return ret;
+}
+
+- (BOOL) updateChatMsgBadge:(NSString *)badge from:(NSString *)from to:(NSString *)to chatmsgType:(UInt32)chatMsgtype {
+    __block BOOL ret = YES;
+    [m_dbq inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        ret = [db executeUpdate:kSQLRecentChatMsgBadgeUpdate2, badge, from, to, [NSString stringWithFormat:@"%d", (unsigned int)chatMsgtype]];
         if (!ret) {
             *rollback = YES;
         }

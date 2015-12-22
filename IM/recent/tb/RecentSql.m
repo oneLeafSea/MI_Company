@@ -37,6 +37,9 @@ NSString *kSQLRecentExsitFrom = @"SELECT * FROM `tb_recent` WHERE `from` = ? AND
 NSString *kSQLRecentExsitFromOrTo = @"SELECT * FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND `msgtype` = ?;";
 
 NSString *kSQLRecentExsitFromOrToWithExt = @"SELECT * FROM `tb_recent` WHERE (`from` = ? OR `to` = ?) AND (`msgtype` = ?) AND (`ext` = ?);";
+NSString *kSQLRecentExsitFromOrToWithExt2 = @"SELECT * FROM `tb_recent` WHERE ((`from` = ? AND `to` = ?) OR (`from` = ? AND `to` = ?)) AND (`msgtype` = ?) AND (`ext` = ?);";
+
+NSString *kSQLRecentExsitFromAndTo = @"SELECT * FROM `tb_recent` WHERE ((`from` = ? AND `to` = ?) OR (`from` = ? AND `to` = ?)) AND `msgtype` = ?;";
 
 
 NSString *kSQLRecentUpdateFromOrTo = @"UPDATE `tb_recent` SET "
@@ -50,6 +53,20 @@ NSString *kSQLRecentUpdateFromOrTo = @"UPDATE `tb_recent` SET "
                                         "`ext` = ?"
                                         " WHERE "
                                         "(`from` = ? OR `to` = ?) AND `ext` = ?;";
+
+NSString *kSQLRecentUpdateFromOrTo2 = @"UPDATE `tb_recent` SET "
+                                        "`msgid` = ?,"
+                                        "`from` = ?,"
+                                        "`to` = ?,"
+                                        "`msgtype` = ?,"
+                                        "`content` = ?, "
+                                        "`time` = ?,"
+                                        "`badge` = ?,"
+                                        "`ext` = ?"
+                                        " WHERE "
+                                        "((`from` = ? AND `to` = ?) OR (`from` = ? AND `to` = ?)) AND `ext` = ?;";
+
+
 
 NSString *kSQLRecentUpdateWithType = @"UPDATE `tb_recent` SET "
                                             "`msgid` = ?,"
@@ -72,6 +89,11 @@ NSString *kSQLRecentChatMsgBadgeUpdate = @"UPDATE `tb_recent` SET "
                                           "`badge` = ?"
                                           " WHERE "
                                           "(`from` = ? OR `to` = ?) AND `msgtype` = 196609 AND ext = ?;";
+
+NSString *kSQLRecentChatMsgBadgeUpdate2 = @"UPDATE `tb_recent` SET "
+                                          "`badge` = ?"
+                                          " WHERE "
+                                          "`from` = ? AND `to` = ? AND `msgtype` = 196609 AND ext = ?;";
 
 NSString *kSQLRecentGrpNotifyBageUpdate = @"UPDATE `tb_recent` SET "
                                             "`badge` = ?"

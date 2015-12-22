@@ -64,7 +64,7 @@
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltQ-T6-cMe">
                                         <rect key="frame" x="0.0" y="34" width="600" height="1"/>
-                                        <color key="backgroundColor" white="0.814484627016129" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.90980392156862744" green="0.92549019607843142" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="8xa-Ya-rZO"/>
                                         </constraints>
