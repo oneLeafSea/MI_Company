@@ -123,6 +123,9 @@
 
 
 - (IBAction)hangupBtnTapped:(id)sender {
+    [self.talkingUids enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [USER.webRtcMgr sendCloseSignalWithTalkingId:obj roomId:self.roomId];
+    }];
     [self close];
 }
 
