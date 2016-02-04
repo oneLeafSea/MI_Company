@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBarItem.title = @"我";
+    self.tabBarItem.image = [UIImage imageNamed:@"mine_un"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 

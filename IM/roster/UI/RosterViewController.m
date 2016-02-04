@@ -66,6 +66,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBarItem.title = @"联系人0";
+    self.tabBarItem.image = [UIImage imageNamed:@"roster_un"];
     m_table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self initData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRosterGrpChanged) name:kRosterChanged object:nil];

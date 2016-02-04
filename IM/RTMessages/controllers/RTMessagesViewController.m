@@ -400,13 +400,15 @@ static void * kRTMessagesKeyValueObservingContext = &kRTMessagesKeyValueObservin
 
 - (void)finishSendingMessage
 {
-    [self finishSendingMessageAnimated:YES];
+    [self finishSendingMessageAnimated:YES emptyTxtView:YES];
 }
 
-- (void)finishSendingMessageAnimated:(BOOL)animated {
+- (void)finishSendingMessageAnimated:(BOOL)animated emptyTxtView:(BOOL)empty{
     
     UITextView *textView = self.inputToolbar.contentView.textView;
-    textView.text = nil;
+    if (empty) {
+        textView.text = nil;
+    }
     [textView.undoManager removeAllActions];
     
 //    [self.inputToolbar toggleSendButtonEnabled];

@@ -43,7 +43,6 @@
 
 @property (nonatomic, strong) NSString    *curLastMsgId;
 
-
 @property (nonatomic, assign) BOOL        shouldSrollToBottom;
 
 @end
@@ -234,9 +233,9 @@
     [self.data.messages addObject:message];
     [APP_DELEGATE.user.msgMgr sendTextMesage:text msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id arguments) {
         message.status = finished ? RTMessageStatusSent : RTMessageStatusSendError;
-        [self finishSendingMessageAnimated:YES];
+        [self finishSendingMessageAnimated:YES emptyTxtView:YES];
     }];
-    [self finishSendingMessageAnimated:YES];
+    [self finishSendingMessageAnimated:YES emptyTxtView:YES];
 }
 
 
@@ -557,7 +556,7 @@
                                                           media:item];
                 msg.status = RTMessageStatusSending;
                 [self.data.messages addObject:msg];
-                [self finishSendingMessageAnimated:YES];
+                [self finishSendingMessageAnimated:YES emptyTxtView:NO];
                 [USER.msgMgr sendImageMesageWithImgPath:imgInfo[@"imgPath"] uuidName:imgInfo[@"uuid"] imgName:imgInfo[@"imgName"]  msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
                     if (finished) {
                         item.status = RTPhotoMediaItemStatusSent;
@@ -566,7 +565,7 @@
                         item.status = RTPhotoMediaItemStatusSendError;
                         msg.status = RTMessageStatusSendError;
                     }
-                    [self finishSendingMessageAnimated:NO];
+                    [self finishSendingMessageAnimated:NO emptyTxtView:NO];
                 }];
             }
         }
@@ -650,7 +649,7 @@
                                                            media:item];
         photoMessage.status = RTMessageStatusSending;
         [self.data.messages addObject:photoMessage];
-        [self finishSendingMessageAnimated:YES];
+        [self finishSendingMessageAnimated:YES emptyTxtView:NO];
         [USER.msgMgr sendImageMesageWithImgPath:fileSavePath uuidName:imgName imgName:imgName  msgType:self.chatMsgType to:self.talkingId completion:^(BOOL finished, id argument) {
             if (finished) {
                 item.status = RTPhotoMediaItemStatusSent;
@@ -659,7 +658,7 @@
                 item.status = RTPhotoMediaItemStatusSendError;
                 photoMessage.status = RTMessageStatusSendError;
             }
-            [self finishSendingMessageAnimated:NO];
+            [self finishSendingMessageAnimated:NO emptyTxtView:NO];
         }];
         
     }];
@@ -732,7 +731,7 @@
     audioMediaItem.duration = duration;
     audioMediaItem.audioUrl = path;
     [self.data.messages addObject:audioMessage];
-    [self finishSendingMessageAnimated:YES];
+    [self finishSendingMessageAnimated:YES emptyTxtView:NO];
     
     [USER.msgMgr sendVoiceMesageWithMsgType:self.chatMsgType to:self.talkingId duration:duration audioPath:path completion:^(BOOL finished, id arguments) {
         if (finished) {
@@ -743,7 +742,7 @@
             audioMediaItem.status = RTAudioMediaItemStatusSendError;
             audioMessage.status = RTMessageStatusSendError;
         }
-        [self finishSendingMessageAnimated:NO];
+        [self finishSendingMessageAnimated:NO emptyTxtView:NO];
     }];
 }
 

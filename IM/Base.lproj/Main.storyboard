@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I7I-CW-JVN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I7I-CW-JVN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -431,7 +431,7 @@
         <scene sceneID="rFU-Xh-yM3">
             <objects>
                 <navigationController id="Tej-YK-ig8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="联系人" image="roster_un" id="e90-6k-yPp"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="联系人" image="roster_un" id="e90-6k-yPp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rWQ-1Y-Dyp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -682,7 +682,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roster_device_pc" translatesAutoresizingMaskIntoConstraints="NO" id="LSn-Xv-S2I" userLabel="device2">
-                                                    <rect key="frame" x="547" y="22.5" width="15" height="15"/>
+                                                    <rect key="frame" x="547" y="22" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="lN8-Ds-lZ2"/>
                                                         <constraint firstAttribute="width" constant="15" id="pD5-qs-j8e"/>
@@ -828,7 +828,7 @@
         <scene sceneID="K2t-A4-MSc">
             <objects>
                 <navigationController id="bls-E9-6ed" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="mine_un" id="6ut-aN-ll1"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="我" image="mine_un" id="6ut-aN-ll1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CkL-ja-hoA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1162,7 +1162,7 @@
         <scene sceneID="wsU-jP-qaU">
             <objects>
                 <navigationController id="4Ze-9q-Z21" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="功能" image="function_un" id="jPY-Vh-nGy"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="功能" image="function_un" id="jPY-Vh-nGy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FjL-9K-xr5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -69,7 +69,7 @@
 
 - (void)finishSendingMessage;
 
-- (void)finishSendingMessageAnimated:(BOOL)animated;
+- (void)finishSendingMessageAnimated:(BOOL)animated emptyTxtView:(BOOL)empty;
 
 - (void)finishReceivingMessage;
 

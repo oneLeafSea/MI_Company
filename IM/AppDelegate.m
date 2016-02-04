@@ -194,7 +194,9 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 //    return @"1.0.4";     // 修改消息提示不显示的问题，修改重连的问题
 //    return @"1.0.5";       // 适配文件服务器校验的问题。
 //    return @"1.0.6";    // 修改消息界面出现覆盖成同一个消息的问题。
-    return @"1.0.7";     // 修复多人聊天的时候拨号时、挂断时不发送关闭信号。
+//    return @"1.0.7";     // 修复多人聊天的时候拨号时、挂断时不发送关闭信号。
+//    return @"1.0.8";     // 修改通讯录出现非法数据的情况
+    return @"1.0.9";  // 修复加好友的问题
 }
 
 - (void)loginProceduresWaitingSvrTime:(LoginProcedures *)proc {

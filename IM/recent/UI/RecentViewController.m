@@ -74,6 +74,8 @@ static NSString *kChatMessageTypeNomal = @"0";
     [super viewDidLoad];
     m_tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.grpNotification = [CWStatusBarNotification new];
+    self.tabBarItem.title = @"消息";
+    self.tabBarItem.image = [UIImage imageNamed:@"recent_un"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRecvNewMessage:) name:kChatMessageRecvNewMsg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSendNewMessage:) name:kChatMessageSendNewMsg object:nil];
@@ -240,6 +242,7 @@ static NSString *kChatMessageTypeNomal = @"0";
             rosterReqCell.badgeText = nil;
         }
         cell = rosterReqCell;
+        
     }
     
     if (item.msgtype == IM_CHATROOM) {
@@ -257,9 +260,6 @@ static NSString *kChatMessageTypeNomal = @"0";
             notifyCell.badgeText = nil;
         }
         cell = notifyCell;
-    } else {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"unkown cell"];
-        DDLogError(@"unkown cell");
     }
     
     return cell;

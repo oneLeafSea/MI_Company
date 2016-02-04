@@ -74,6 +74,9 @@
     }
     
     for (MultiSelectItem *item in self.items) {
+        if ([item.name isKindOfClass:[NSNull class]]) {
+            continue;
+        }
         NSString *firstLetter = [self firstLetterOfString:item.name];
         [self.dict[firstLetter] addObject:item]; //对应的字母数组添加元素。
     }
