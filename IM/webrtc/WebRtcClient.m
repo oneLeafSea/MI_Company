@@ -696,7 +696,7 @@ didSetSessionDescriptionWithError:(NSError *)error {
 
 - (RTCMediaConstraints *)defaultPeerConnectionConstraints {
     NSArray *optionalConstraints = @[
-                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"false"]
+                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"true"]
                                      ];
     RTCMediaConstraints* constraints =
     [[RTCMediaConstraints alloc]

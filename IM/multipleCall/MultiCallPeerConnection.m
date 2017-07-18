@@ -131,7 +131,7 @@ static NSString *kDeviceType = @"iphone";
 
 - (RTCMediaConstraints *)defaultPeerConnectionConstraints {
     NSArray *optionalConstraints = @[
-                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"false"]
+                                     [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"true"]
                                      ];
     RTCMediaConstraints* constraints =
     [[RTCMediaConstraints alloc]

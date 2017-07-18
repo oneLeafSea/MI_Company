@@ -79,7 +79,6 @@
 		7D302D001A778658004C6BD5 /* ReloginTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D302CFF1A778658004C6BD5 /* ReloginTipView.xib */; };
 		7D302D031A778E14004C6BD5 /* KickNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D302D021A778E14004C6BD5 /* KickNotification.m */; };
 		7D31B09B1ACB8526004D7158 /* WebRtcCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D31B09A1ACB8526004D7158 /* WebRtcCallViewController.m */; };
-		7D3C06DD1B4B921B00D125DD /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3C06DC1B4B921B00D125DD /* libWebRTC.a */; };
 		7D3C06E01B4B92A700D125DD /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C06DF1B4B92A700D125DD /* RTCSessionDescription+JSON.m */; };
 		7D3C06E31B4B92C800D125DD /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C06E21B4B92C800D125DD /* RTCICEServer+JSON.m */; };
 		7D3C06E51B4B930300D125DD /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3C06E41B4B930300D125DD /* VideoToolbox.framework */; };
@@ -411,6 +410,7 @@
 		7DFEE9A21A4CF819009967E8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A11A4CF819009967E8 /* User.m */; };
 		7DFEE9A51A4CF924009967E8 /* UserConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A41A4CF924009967E8 /* UserConstants.m */; };
 		7DFEE9A71A4CFA38009967E8 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFEE9A61A4CFA38009967E8 /* UserTests.m */; };
+		DC6A94661C8D3AB700D2CE83 /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A94651C8D3AB700D2CE83 /* libWebRTC.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1205,6 +1205,7 @@
 		7DFEE9A41A4CF924009967E8 /* UserConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConstants.m; sourceTree = "<group>"; };
 		7DFEE9A61A4CFA38009967E8 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
 		7F18AC6CA82BC16FD93F65E1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DC6A94651C8D3AB700D2CE83 /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWebRTC.a; path = ../libs/libWebRTC.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1212,13 +1213,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6A94661C8D3AB700D2CE83 /* libWebRTC.a in Frameworks */,
 				7D3C06EF1B4B936A00D125DD /* libicucore.dylib in Frameworks */,
 				7D3C06ED1B4B934600D125DD /* CoreMedia.framework in Frameworks */,
 				7D3C06EB1B4B933E00D125DD /* AVFoundation.framework in Frameworks */,
 				7D3C06E91B4B933300D125DD /* CoreGraphics.framework in Frameworks */,
 				7D3C06E71B4B931100D125DD /* GLKit.framework in Frameworks */,
 				7D3C06E51B4B930300D125DD /* VideoToolbox.framework in Frameworks */,
-				7D3C06DD1B4B921B00D125DD /* libWebRTC.a in Frameworks */,
 				7DB158DB1A42DDFA00287BBE /* libxml2.2.dylib in Frameworks */,
 				7927B97B4D4E0637349F800F /* libPods.a in Frameworks */,
 			);
@@ -1771,9 +1772,9 @@
 				7D7668C21B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.m */,
 				7D7668C31B54A41E0072399B /* RTMessagesCollectionViewCellOutgoing.xib */,
 				7D7668C41B54A41E0072399B /* RTMessagesComposerTextView.h */,
+				7D7668C71B54A41E0072399B /* RTMessagesInputToolbar.m */,
 				7D7668C51B54A41E0072399B /* RTMessagesComposerTextView.m */,
 				7D7668C61B54A41E0072399B /* RTMessagesInputToolbar.h */,
-				7D7668C71B54A41E0072399B /* RTMessagesInputToolbar.m */,
 				7D7668C81B54A41E0072399B /* RTMessagesLabel.h */,
 				7D7668C91B54A41E0072399B /* RTMessagesLabel.m */,
 				7D7668CA1B54A41E0072399B /* RTMessagesLoadEarlierHeaderView.h */,
@@ -2646,6 +2647,7 @@
 		A6CC3A83494766F6ACC78E45 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC6A94651C8D3AB700D2CE83 /* libWebRTC.a */,
 				7D3C06EE1B4B936A00D125DD /* libicucore.dylib */,
 				7D3C06EC1B4B934600D125DD /* CoreMedia.framework */,
 				7D3C06EA1B4B933E00D125DD /* AVFoundation.framework */,
@@ -3343,14 +3345,14 @@
 					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
 					"\"${PODS_ROOT}/Headers/Public/mongo-c-driver\"",
 					/usr/include/libxml2,
-					/Users/gzw/workspace/libs/include,
+					"/Users/rooten-mac/workspace/IOS/libs/include",
 				);
 				INFOPLIST_FILE = IM/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
+					"/Users/rooten-mac/workspace/IOS/libs",
 					"$(inherited)",
-					/Users/gzw/workspace/libs,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3380,14 +3382,14 @@
 					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
 					"\"${PODS_ROOT}/Headers/Public/mongo-c-driver\"",
 					/usr/include/libxml2,
-					/Users/gzw/workspace/libs/include,
+					"/Users/rooten-mac/workspace/IOS/libs/include",
 				);
 				INFOPLIST_FILE = IM/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
+					"/Users/rooten-mac/workspace/IOS/libs",
 					"$(inherited)",
-					/Users/gzw/workspace/libs,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

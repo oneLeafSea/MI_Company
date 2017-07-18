@@ -127,6 +127,7 @@
             }
             NSString *xh = [rs objectForColumnName:@"xh"];
             OsOrg *o = [[OsOrg alloc] initWithJgbm:jgbm jgmc:jgmc jgjc:jgjc sjjgbm:sjjgbm xh:xh];
+            NSLog(@"---OsOrg-%@%@%@%@%@----->",jgbm,jgmc,jgjc,sjjgbm,xh);
             [orgs addObject:o];
         }
         [rs close];

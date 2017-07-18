@@ -786,6 +786,7 @@
                                                              displayName:[msg.body objectForKey:@"fromname"]
                                                                    media:item];
                 photoMessage.status = RTMessageStatusRecved;
+                NSLog(@"-----photoMessage%@--------",photoMessage);
                 [self.data.messages addObject:photoMessage];
                 [self finishReceivingMessageAnimated:YES];
                 [self scrollToBottomAnimated:YES];
